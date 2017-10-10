@@ -18,6 +18,8 @@
 		DE17CEEB1F85BB9100CA83A9 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE17CEEA1F85BB9100CA83A9 /* Item.swift */; };
 		DE17CEED1F85C98900CA83A9 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE17CEEC1F85C98900CA83A9 /* DataService.swift */; };
 		DE17CEF01F85CB2300CA83A9 /* BuildingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE17CEEF1F85CB2300CA83A9 /* BuildingCell.swift */; };
+		DE81C4A51F8C558500674274 /* RoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE81C4A41F8C558500674274 /* RoomVC.swift */; };
+		DE81C4A91F8C568400674274 /* RoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE81C4A81F8C568400674274 /* RoomCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		DE17CEEA1F85BB9100CA83A9 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		DE17CEEC1F85C98900CA83A9 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		DE17CEEF1F85CB2300CA83A9 /* BuildingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCell.swift; sourceTree = "<group>"; };
+		DE81C4A41F8C558500674274 /* RoomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomVC.swift; sourceTree = "<group>"; };
+		DE81C4A81F8C568400674274 /* RoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				DE17CED01F85BA7200CA83A9 /* HomeVC.swift */,
+				DE81C4A41F8C558500674274 /* RoomVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -102,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				DE17CEEF1F85CB2300CA83A9 /* BuildingCell.swift */,
+				DE81C4A81F8C568400674274 /* RoomCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -187,12 +193,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE17CED71F85BA7200CA83A9 /* Roomly.xcdatamodeld in Sources */,
+				DE81C4A51F8C558500674274 /* RoomVC.swift in Sources */,
 				DE17CEED1F85C98900CA83A9 /* DataService.swift in Sources */,
 				DE17CED11F85BA7200CA83A9 /* HomeVC.swift in Sources */,
 				DE17CEF01F85CB2300CA83A9 /* BuildingCell.swift in Sources */,
 				DE17CECF1F85BA7200CA83A9 /* AppDelegate.swift in Sources */,
 				DE17CEE71F85BB7B00CA83A9 /* Building.swift in Sources */,
 				DE17CEEB1F85BB9100CA83A9 /* Item.swift in Sources */,
+				DE81C4A91F8C568400674274 /* RoomCell.swift in Sources */,
 				DE17CEE91F85BB8700CA83A9 /* Room.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

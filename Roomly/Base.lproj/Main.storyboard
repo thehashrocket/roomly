@@ -67,7 +67,7 @@
                             <constraint firstItem="cwC-mN-Xqi" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Jkd-mL-eMP"/>
                             <constraint firstItem="cwC-mN-Xqi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OTd-W1-dgS"/>
                             <constraint firstItem="S1p-EF-LiW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VoD-ri-DrB"/>
-                            <constraint firstItem="S1p-EF-LiW" firstAttribute="top" secondItem="cwC-mN-Xqi" secondAttribute="bottom" constant="31.5" id="eQH-Or-oRV"/>
+                            <constraint firstItem="S1p-EF-LiW" firstAttribute="top" secondItem="cwC-mN-Xqi" secondAttribute="bottom" constant="31" id="eQH-Or-oRV"/>
                             <constraint firstItem="S1p-EF-LiW" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="g7r-Ec-yMe"/>
                             <constraint firstItem="cwC-mN-Xqi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="ypC-aY-1Tj"/>
                         </constraints>
@@ -76,17 +76,17 @@
                     <navigationItem key="navigationItem" title="Roomly" id="ofH-lr-hI4"/>
                     <connections>
                         <outlet property="buildingTable" destination="S1p-EF-LiW" id="cwl-ha-eSd"/>
-                        <segue destination="5WK-ow-VBi" kind="show" id="MJx-Ph-ctf"/>
+                        <segue destination="5WK-ow-VBi" kind="show" identifier="RoomVC" id="fBe-6f-TsH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="372" y="33.733133433283363"/>
         </scene>
-        <!--View Controller-->
+        <!--RoomVC-->
         <scene sceneID="aeJ-GC-jUw">
             <objects>
-                <viewController id="5WK-ow-VBi" sceneMemberID="viewController">
+                <viewController id="5WK-ow-VBi" customClass="RoomVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Ca-Qu-TpD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -97,20 +97,61 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QNb-N0-ZeL">
+                                <rect key="frame" x="0.0" y="141" width="375" height="526"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4Jm-kI-FrJ">
+                                    <size key="itemSize" width="115" height="115"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RoomCell" id="Wct-f8-tgI" customClass="RoomCell" customModule="Roomly" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4xe-nF-tUX">
+                                                    <rect key="frame" x="0.0" y="0.0" width="115" height="125"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="4xe-nF-tUX" firstAttribute="leading" secondItem="Wct-f8-tgI" secondAttribute="leading" id="Au7-XX-32o"/>
+                                            <constraint firstAttribute="bottom" secondItem="4xe-nF-tUX" secondAttribute="bottom" id="iyR-kd-AHK"/>
+                                            <constraint firstItem="4xe-nF-tUX" firstAttribute="top" secondItem="Wct-f8-tgI" secondAttribute="top" id="nS8-9D-iso"/>
+                                            <constraint firstAttribute="trailing" secondItem="4xe-nF-tUX" secondAttribute="trailing" id="uyu-qA-uFu"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="roomImage" destination="4xe-nF-tUX" id="dAd-aP-gsQ"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="QNb-N0-ZeL" firstAttribute="leading" secondItem="UiW-L2-RNr" secondAttribute="leading" id="8Z0-Vr-kBB"/>
                             <constraint firstItem="2aw-id-hxm" firstAttribute="top" secondItem="UiW-L2-RNr" secondAttribute="top" constant="25" id="IYi-Fu-i6p"/>
+                            <constraint firstItem="QNb-N0-ZeL" firstAttribute="trailing" secondItem="UiW-L2-RNr" secondAttribute="trailing" id="JZ3-EA-w7e"/>
                             <constraint firstItem="2aw-id-hxm" firstAttribute="trailing" secondItem="UiW-L2-RNr" secondAttribute="trailing" id="PLE-9t-eva"/>
+                            <constraint firstItem="QNb-N0-ZeL" firstAttribute="top" secondItem="2aw-id-hxm" secondAttribute="bottom" constant="31" id="Swd-Wd-cVp"/>
+                            <constraint firstItem="QNb-N0-ZeL" firstAttribute="bottom" secondItem="UiW-L2-RNr" secondAttribute="bottom" id="aSq-Zl-6Ao"/>
                             <constraint firstItem="2aw-id-hxm" firstAttribute="leading" secondItem="UiW-L2-RNr" secondAttribute="leading" id="jQa-qd-6Hn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UiW-L2-RNr"/>
                     </view>
+                    <connections>
+                        <outlet property="roomsCollection" destination="QNb-N0-ZeL" id="6rE-AU-PBN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aKf-sl-do8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1190" y="34"/>
+            <point key="canvasLocation" x="1189.5999999999999" y="33.733133433283363"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nKH-Gp-RnM">

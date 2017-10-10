@@ -9,6 +9,19 @@
 import UIKit
 
 class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        buildingTable.dataSource = self
+        buildingTable.delegate = self
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    @IBOutlet weak var buildingTable: UITableView!
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataService.instance.getBuildings().count
     }
@@ -23,19 +36,19 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    
-    @IBOutlet weak var buildingTable: UITableView!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        buildingTable.dataSource = self
-        buildingTable.delegate = self
-        // Do any additional setup after loading the view, typically from a nib.
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let building = DataService.instance.getBuildings()[indexPath.row]
+        performSegue(withIdentifier: "RoomVC", sender: building)
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("in segue")
+        if let roomVC = segue.destination as? RoomVC {
+            print (sender)
+            assert(sender as? Building != nil)
+            roomVC.initRooms(building: sender as! Building)
+        }
     }
 
 

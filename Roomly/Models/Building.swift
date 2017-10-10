@@ -9,11 +9,13 @@
 import Foundation
 
 struct Building {
+    private(set) public var id: String!
     private(set) public var title: String!
     private(set) public var imageName: String!
     private(set) public var rooms: Array<Room>
     
-    init(title: String, imageName: String, rooms: Array<Room>) {
+    init(id: String, title: String, imageName: String, rooms: Array<Room>) {
+        self.id = id
         self.title = title
         self.imageName = imageName
         self.rooms = rooms
