@@ -63,7 +63,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="S1p-EF-LiW" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="9je-Df-Wo5"/>
+                            <constraint firstItem="S1p-EF-LiW" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="CVO-7g-3r2"/>
                             <constraint firstItem="cwC-mN-Xqi" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Jkd-mL-eMP"/>
                             <constraint firstItem="cwC-mN-Xqi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OTd-W1-dgS"/>
                             <constraint firstItem="S1p-EF-LiW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VoD-ri-DrB"/>
@@ -73,7 +73,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Roomly" id="ofH-lr-hI4"/>
+                    <navigationItem key="navigationItem" title="Roomly" id="ofH-lr-hI4">
+                        <barButtonItem key="rightBarButtonItem" title="Login" id="HeZ-Nw-p0y"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="buildingTable" destination="S1p-EF-LiW" id="cwl-ha-eSd"/>
                         <segue destination="5WK-ow-VBi" kind="show" identifier="RoomVC" id="fBe-6f-TsH"/>
@@ -82,6 +84,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="372" y="33.733133433283363"/>
+        </scene>
+        <!--LoginVC-->
+        <scene sceneID="t3s-6r-tke">
+            <objects>
+                <viewController id="LR0-gl-fMt" customClass="LoginVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ofx-F8-VGS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rid-Qh-INV">
+                                <rect key="frame" x="133" y="427" width="108" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Facebook Login"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="tQf-Ak-oSc"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LLw-Iv-DCl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="372" y="774"/>
         </scene>
         <!--RoomVC-->
         <scene sceneID="aeJ-GC-jUw">
@@ -115,7 +139,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4xe-nF-tUX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="115" height="125"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
                                                 </imageView>
                                             </subviews>
                                         </view>

@@ -20,6 +20,8 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    // Outlets
+    
     @IBOutlet weak var buildingTable: UITableView!
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
