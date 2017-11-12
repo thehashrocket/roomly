@@ -14,4 +14,5 @@ target 'Roomly' do
   pod 'FirebaseUI/Facebook'
   pod 'FirebaseUI/Phone'
   pod 'Firebase/Database'
+
 end

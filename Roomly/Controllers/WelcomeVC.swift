@@ -17,7 +17,7 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authUI: FUIAuth? //only set internally but get externally
     fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,8 +35,7 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
             
             if (user != nil) {
                 print("ia m here")
-                let vc = HomeVC() //your view controller
-                self.present(vc, animated: true, completion: nil)
+                self.performSegue(withIdentifier: "roomlyVC", sender: nil)
             }
         }
         
@@ -85,7 +84,7 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
             print("Login error: \((detailedError as! NSError).localizedDescription)");
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -96,16 +95,16 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
         performSegue(withIdentifier: "loginVC", sender: nil)
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 }
 
 

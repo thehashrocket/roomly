@@ -23,8 +23,7 @@
 		DE17CEF01F85CB2300CA83A9 /* BuildingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE17CEEF1F85CB2300CA83A9 /* BuildingCell.swift */; };
 		DE81C4A51F8C558500674274 /* RoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE81C4A41F8C558500674274 /* RoomVC.swift */; };
 		DE81C4A91F8C568400674274 /* RoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE81C4A81F8C568400674274 /* RoomCell.swift */; };
-		DE88D2F81FB74E18000BB9C8 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE88D2F71FB74E18000BB9C8 /* WelcomeVC.swift */; };
-		DE88D2FB1FB7CAC5000BB9C8 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE88D2FA1FB7CAC5000BB9C8 /* GradientView.swift */; };
+		DEB48F7F1FB8A58900379811 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB48F7E1FB8A58900379811 /* WelcomeVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,9 +47,7 @@
 		DE17CEEF1F85CB2300CA83A9 /* BuildingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCell.swift; sourceTree = "<group>"; };
 		DE81C4A41F8C558500674274 /* RoomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomVC.swift; sourceTree = "<group>"; };
 		DE81C4A81F8C568400674274 /* RoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCell.swift; sourceTree = "<group>"; };
-		DE88D2F71FB74E18000BB9C8 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
-		DE88D2F91FB79CDD000BB9C8 /* Roomly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Roomly.entitlements; sourceTree = "<group>"; };
-		DE88D2FA1FB7CAC5000BB9C8 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		DEB48F7E1FB8A58900379811 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +101,6 @@
 		DE17CECD1F85BA7200CA83A9 /* Roomly */ = {
 			isa = PBXGroup;
 			children = (
-				DE88D2F91FB79CDD000BB9C8 /* Roomly.entitlements */,
 				DE17CEEE1F85C99300CA83A9 /* Services */,
 				DE17CEE51F85BA9E00CA83A9 /* Views */,
 				DE17CEE41F85BA9800CA83A9 /* Models */,
@@ -125,7 +121,7 @@
 			children = (
 				DE17CED01F85BA7200CA83A9 /* HomeVC.swift */,
 				DE81C4A41F8C558500674274 /* RoomVC.swift */,
-				DE88D2F71FB74E18000BB9C8 /* WelcomeVC.swift */,
+				DEB48F7E1FB8A58900379811 /* WelcomeVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -145,7 +141,6 @@
 			children = (
 				DE17CEEF1F85CB2300CA83A9 /* BuildingCell.swift */,
 				DE81C4A81F8C568400674274 /* RoomCell.swift */,
-				DE88D2FA1FB7CAC5000BB9C8 /* GradientView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,14 +189,6 @@
 					DE17CECA1F85BA7200CA83A9 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.Keychain = {
-								enabled = 1;
-							};
-							com.apple.Push = {
-								enabled = 1;
-							};
-						};
 					};
 				};
 			};
@@ -293,14 +280,13 @@
 				DE0A257A1FB6B3DA005CC671 /* LoginVC.swift in Sources */,
 				DE17CED71F85BA7200CA83A9 /* Roomly.xcdatamodeld in Sources */,
 				DE81C4A51F8C558500674274 /* RoomVC.swift in Sources */,
-				DE88D2F81FB74E18000BB9C8 /* WelcomeVC.swift in Sources */,
+				DEB48F7F1FB8A58900379811 /* WelcomeVC.swift in Sources */,
 				DE17CEED1F85C98900CA83A9 /* DataService.swift in Sources */,
 				DE17CED11F85BA7200CA83A9 /* HomeVC.swift in Sources */,
 				DE17CEF01F85CB2300CA83A9 /* BuildingCell.swift in Sources */,
 				DE17CECF1F85BA7200CA83A9 /* AppDelegate.swift in Sources */,
 				DE17CEE71F85BB7B00CA83A9 /* Building.swift in Sources */,
 				DE17CEEB1F85BB9100CA83A9 /* Item.swift in Sources */,
-				DE88D2FB1FB7CAC5000BB9C8 /* GradientView.swift in Sources */,
 				DE81C4A91F8C568400674274 /* RoomCell.swift in Sources */,
 				DE17CEE91F85BB8700CA83A9 /* Room.swift in Sources */,
 			);
@@ -440,16 +426,11 @@
 			baseConfigurationReference = 5395318FED6D1547B8F91888 /* Pods-Roomly.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Roomly/Roomly.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7QKXT44X7G;
 				INFOPLIST_FILE = Roomly/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.chaoselevators.roomly;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaoselevators.Roomly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -460,15 +441,11 @@
 			baseConfigurationReference = 67341E8D92CC63FA411AE33C /* Pods-Roomly.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Roomly/Roomly.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7QKXT44X7G;
 				INFOPLIST_FILE = Roomly/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.chaoselevators.roomly;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaoselevators.Roomly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
