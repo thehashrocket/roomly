@@ -27,26 +27,20 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
         self.authUI?.delegate = self
         self.authUI?.providers = [FUIFacebookAuth(),FUIPhoneAuth(authUI: self.authUI!),]
         
-//        do {
-//            try self.auth?.signOut()
-//        } catch {
-//
-//        }
-        
         self.authStateListenerHandle = self.auth?.addStateDidChangeListener { (auth, user) in
             guard user != nil else {
                 self.loginAction(sender: self)
                 return
             }
             
-            guard user == nil else {
-               self.performSegue(withIdentifier: "roomlyVC", sender: nil)
-                return
-            }
-            
-            if (user != nil) {
-                self.performSegue(withIdentifier: "roomlyVC", sender: nil)
-            }
+//            guard user == nil else {
+//               self.performSegue(withIdentifier: "roomlyVC", sender: nil)
+//                return
+//            }
+//
+//            if (user != nil) {
+//                self.performSegue(withIdentifier: "roomlyVC", sender: nil)
+//            }
         }
         
         if Auth.auth().currentUser != nil {
@@ -58,17 +52,17 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
         }
     }
     
-    @IBOutlet weak var logoutPressed: UIButton!
+    @IBAction func goHome(_ sender: Any) {
+        self.performSegue(withIdentifier: "roomlyVC", sender: self)
+    }
     
-    @IBAction func logoutReallyPressed(_ sender: Any) {
+    @IBAction func logOut(_ sender: Any) {
         do {
             try self.auth?.signOut()
         } catch {
             
         }
     }
-    
-    
     
     @IBAction func loginAction(sender: AnyObject) {
         // Present the default login view controller provided by authUI
