@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//import Firebase
 
 class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -14,6 +15,13 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         super.viewDidLoad()
         buildingTable.dataSource = self
         buildingTable.delegate = self
+        
+//        var ref: DatabaseReference!
+//        ref = Database.database().reference()
+        
+//        let building = Building(id: "1", title: "cool building", imageName: "apple.jpg", rooms: [])
+        
+//        ref.child("buildings").child(building.id).setValue(["id": building.id, "title": building.title, "imageName": building.imageName])
     }
     
     override func didReceiveMemoryWarning() {
