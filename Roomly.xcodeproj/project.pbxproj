@@ -24,6 +24,7 @@
 		DE81C4A51F8C558500674274 /* RoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE81C4A41F8C558500674274 /* RoomVC.swift */; };
 		DE81C4A91F8C568400674274 /* RoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE81C4A81F8C568400674274 /* RoomCell.swift */; };
 		DE88D2F81FB74E18000BB9C8 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE88D2F71FB74E18000BB9C8 /* WelcomeVC.swift */; };
+		DE88D2FB1FB7CAC5000BB9C8 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE88D2FA1FB7CAC5000BB9C8 /* GradientView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		DE81C4A81F8C568400674274 /* RoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCell.swift; sourceTree = "<group>"; };
 		DE88D2F71FB74E18000BB9C8 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		DE88D2F91FB79CDD000BB9C8 /* Roomly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Roomly.entitlements; sourceTree = "<group>"; };
+		DE88D2FA1FB7CAC5000BB9C8 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 			children = (
 				DE17CEEF1F85CB2300CA83A9 /* BuildingCell.swift */,
 				DE81C4A81F8C568400674274 /* RoomCell.swift */,
+				DE88D2FA1FB7CAC5000BB9C8 /* GradientView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				DE17CECF1F85BA7200CA83A9 /* AppDelegate.swift in Sources */,
 				DE17CEE71F85BB7B00CA83A9 /* Building.swift in Sources */,
 				DE17CEEB1F85BB9100CA83A9 /* Item.swift in Sources */,
+				DE88D2FB1FB7CAC5000BB9C8 /* GradientView.swift in Sources */,
 				DE81C4A91F8C568400674274 /* RoomCell.swift in Sources */,
 				DE17CEE91F85BB8700CA83A9 /* Room.swift in Sources */,
 			);

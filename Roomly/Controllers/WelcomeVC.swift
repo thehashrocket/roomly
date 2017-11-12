@@ -32,8 +32,33 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
                 self.loginAction(sender: self)
                 return
             }
+            
+            if (user != nil) {
+                print("ia m here")
+                self.performSegue(withIdentifier: "roomlyVC", sender: nil)
+            }
+        }
+        
+        if Auth.auth().currentUser != nil {
+            // User is signed in.
+            print("there is a user")
+        } else {
+            // No user is signed in.
+            print("no user signed in.")
         }
     }
+    
+    @IBOutlet weak var logoutPressed: UIButton!
+    
+    @IBAction func logoutReallyPressed(_ sender: Any) {
+        do {
+            try self.auth?.signOut()
+        } catch {
+            
+        }
+    }
+    
+    
     
     @IBAction func loginAction(sender: AnyObject) {
         // Present the default login view controller provided by authUI

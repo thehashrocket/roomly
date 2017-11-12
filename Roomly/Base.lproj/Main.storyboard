@@ -178,7 +178,7 @@
         <scene sceneID="BZU-JV-o0n">
             <objects>
                 <viewController storyboardIdentifier="Welcome" title="Welcome" id="Daa-FQ-Ibc" customClass="WelcomeVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="YEZ-M5-jCe">
+                    <view key="view" contentMode="scaleToFill" id="YEZ-M5-jCe" customClass="GradientView" customModule="Roomly" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -189,9 +189,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1eh-Fe-oAc">
+                                <rect key="frame" x="140" y="316" width="95" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutReallyPressed:" destination="Daa-FQ-Ibc" eventType="touchUpInside" id="OoU-KD-Y2n"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="8Oq-sV-DMS"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="topColor">
+                                <color key="value" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
+                                <color key="value" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <navigationItem key="navigationItem" id="eJi-5l-Bw1">
                         <barButtonItem key="rightBarButtonItem" title="Login" id="I5a-ql-9ly">
@@ -201,12 +220,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="logoutPressed" destination="1eh-Fe-oAc" id="c0u-Bj-Ppx"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="roomlyVC" id="K43-xS-cQT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a4Y-99-qns" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1254" y="34"/>
+            <point key="canvasLocation" x="-1255.2" y="33.733133433283363"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
