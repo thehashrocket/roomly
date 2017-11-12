@@ -7,8 +7,18 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    var ref: DatabaseReference!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if Auth.auth().currentUser != nil {
+            present(WelcomeVC(), animated: true, completion: nil)
+        }
+        ref = Database.database().reference()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +50,7 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let building = DataService.instance.getBuildings()[indexPath.row]
-        performSegue(withIdentifier: "RoomVC", sender: building)
+        // performSegue(withIdentifier: "RoomVC", sender: building)
         
     }
     

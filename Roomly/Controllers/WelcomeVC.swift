@@ -35,7 +35,7 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
             
             if (user != nil) {
                 print("ia m here")
-                self.performSegue(withIdentifier: "roomlyVC", sender: nil)
+                self.performSegue(withIdentifier: "roomlyVC", sender: self)
             }
         }
         
