@@ -35,7 +35,8 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
             
             if (user != nil) {
                 print("ia m here")
-                self.performSegue(withIdentifier: "roomlyVC", sender: self)
+                let vc = HomeVC() //your view controller
+                self.present(vc, animated: true, completion: nil)
             }
         }
         
