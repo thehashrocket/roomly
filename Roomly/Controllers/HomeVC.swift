@@ -15,13 +15,6 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         super.viewDidLoad()
         buildingTable.dataSource = self
         buildingTable.delegate = self
-        
-//        var ref: DatabaseReference!
-//        ref = Database.database().reference()
-        
-//        let building = Building(id: "1", title: "cool building", imageName: "apple.jpg", rooms: [])
-        
-//        ref.child("buildings").child(building.id).setValue(["id": building.id, "title": building.title, "imageName": building.imageName])
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,6 +24,10 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // Outlets
     
     @IBOutlet weak var buildingTable: UITableView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataService.instance.getBuildings().count
@@ -55,6 +52,9 @@ class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("in segue")
         if let roomVC = segue.destination as? RoomVC {
+            let barBtn = UIBarButtonItem()
+            barBtn.title = ""
+            navigationItem.backBarButtonItem = barBtn
             print (sender)
             assert(sender as? Building != nil)
             roomVC.initRooms(building: sender as! Building)

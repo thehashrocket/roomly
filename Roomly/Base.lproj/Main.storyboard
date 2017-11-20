@@ -8,23 +8,28 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--Roomly-->
+        <!--Buildings-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Buildings" id="BYZ-38-t0r" customClass="HomeVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BUILDING OR HOUSES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwC-mN-Xqi">
-                                <rect key="frame" x="0.0" y="45" width="375" height="20.5"/>
+                                <rect key="frame" x="0.0" y="25" width="375" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="135" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="S1p-EF-LiW">
-                                <rect key="frame" x="0.0" y="97" width="375" height="570"/>
+                                <rect key="frame" x="0.0" y="77" width="375" height="526"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BuildingCell" id="YmW-PQ-ye5" customClass="BuildingCell" customModule="Roomly" customModuleProvider="target">
@@ -73,9 +78,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Roomly" id="ofH-lr-hI4">
-                        <barButtonItem key="rightBarButtonItem" title="Login" id="HeZ-Nw-p0y"/>
+                    <navigationItem key="navigationItem" title="Buildings" id="yhj-o0-GGj">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="YPQ-s1-OVf"/>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="buildingTable" destination="S1p-EF-LiW" id="cwl-ha-eSd"/>
                         <segue destination="5WK-ow-VBi" kind="show" identifier="RoomVC" id="fBe-6f-TsH"/>
@@ -107,22 +113,22 @@
             </objects>
             <point key="canvasLocation" x="372" y="774"/>
         </scene>
-        <!--RoomVC-->
+        <!--Rooms-->
         <scene sceneID="aeJ-GC-jUw">
             <objects>
-                <viewController id="5WK-ow-VBi" customClass="RoomVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Rooms" id="5WK-ow-VBi" customClass="RoomVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Ca-Qu-TpD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aw-id-hxm">
-                                <rect key="frame" x="0.0" y="45" width="375" height="21"/>
+                                <rect key="frame" x="0.0" y="25" width="375" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QNb-N0-ZeL">
-                                <rect key="frame" x="0.0" y="97" width="375" height="570"/>
+                                <rect key="frame" x="0.0" y="77" width="375" height="526"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4Jm-kI-FrJ">
                                     <size key="itemSize" width="115" height="115"/>
@@ -169,6 +175,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UiW-L2-RNr"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Rooms" id="0Ya-vW-yLe">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Wit-8j-zns"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="roomsCollection" destination="QNb-N0-ZeL" id="6rE-AU-PBN"/>
                     </connections>
@@ -182,37 +192,81 @@
             <objects>
                 <viewController id="GFn-GF-21E" customClass="WelcomeVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Gc2-ig-x96">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I am Here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1J4-mq-zgB">
-                                <rect key="frame" x="59" y="174" width="123" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFl-W9-jIw">
-                                <rect key="frame" x="59" y="249" width="195" height="54"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Go Home"/>
-                                <connections>
-                                    <action selector="goHome:" destination="GFn-GF-21E" eventType="touchUpInside" id="ihs-CT-kbK"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qI9-MT-gw7">
-                                <rect key="frame" x="111" y="337" width="91" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Log out"/>
-                                <connections>
-                                    <action selector="logOut:" destination="GFn-GF-21E" eventType="touchUpInside" id="mCM-bG-flf"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9L-qe-hdq" customClass="GradientView" customModule="Roomly" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFl-W9-jIw" customClass="RoundedButton" customModule="Roomly" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="171.5" width="359" height="60"/>
+                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="gRd-Cf-Qr9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                        <state key="normal" title="Go Home">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="goHome:" destination="GFn-GF-21E" eventType="touchUpInside" id="ihs-CT-kbK"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qI9-MT-gw7" customClass="RoundedButton" customModule="Roomly" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="371.5" width="359" height="60"/>
+                                        <color key="backgroundColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="Ba7-lP-1H9"/>
+                                        </constraints>
+                                        <state key="normal" title="Log out">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="logOut:" destination="GFn-GF-21E" eventType="touchUpInside" id="mCM-bG-flf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="qI9-MT-gw7" secondAttribute="trailing" constant="8" id="Gc4-0J-GRv"/>
+                                    <constraint firstItem="hFl-W9-jIw" firstAttribute="leading" secondItem="p9L-qe-hdq" secondAttribute="leading" constant="8" id="Hwy-nj-ENj"/>
+                                    <constraint firstItem="qI9-MT-gw7" firstAttribute="centerY" secondItem="p9L-qe-hdq" secondAttribute="centerY" constant="100" id="TSg-iU-4du"/>
+                                    <constraint firstItem="hFl-W9-jIw" firstAttribute="centerY" secondItem="p9L-qe-hdq" secondAttribute="centerY" constant="-100" id="X7H-s6-6Hk"/>
+                                    <constraint firstAttribute="trailing" secondItem="hFl-W9-jIw" secondAttribute="trailing" constant="8" id="jMS-RH-Vbr"/>
+                                    <constraint firstItem="qI9-MT-gw7" firstAttribute="leading" secondItem="p9L-qe-hdq" secondAttribute="leading" constant="8" id="spb-p0-RNL"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="topColor">
+                                        <color key="value" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
+                                        <color key="value" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="p9L-qe-hdq" firstAttribute="top" secondItem="Gc2-ig-x96" secondAttribute="top" id="FU3-QT-KGF"/>
+                            <constraint firstItem="p9L-qe-hdq" firstAttribute="trailing" secondItem="IsG-CB-DvO" secondAttribute="trailing" id="jVx-hQ-HhC"/>
+                            <constraint firstItem="p9L-qe-hdq" firstAttribute="bottom" secondItem="IsG-CB-DvO" secondAttribute="bottom" id="vAT-8f-8ww"/>
+                            <constraint firstItem="p9L-qe-hdq" firstAttribute="leading" secondItem="IsG-CB-DvO" secondAttribute="leading" id="xWo-1D-Udb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="IsG-CB-DvO"/>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
                     <connections>
+                        <outlet property="goHomeBtn" destination="hFl-W9-jIw" id="RTJ-eu-cAb"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="roomlyVC" id="hsr-H6-eyI"/>
                     </connections>
                 </viewController>
@@ -220,15 +274,15 @@
             </objects>
             <point key="canvasLocation" x="-1378.4000000000001" y="33.733133433283363"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Roomly-->
         <scene sceneID="nKH-Gp-RnM">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aLg-v0-0T5" sceneMemberID="viewController">
+                <navigationController title="Roomly" automaticallyAdjustsScrollViewInsets="NO" id="aLg-v0-0T5" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="byI-wJ-i3u">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" backIndicatorImage="icons8-back-50" id="byI-wJ-i3u">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="1" green="0.31589259458156871" blue="0.18010711756079989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -240,6 +294,9 @@
             <point key="canvasLocation" x="-510" y="34"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icons8-back-50" width="50" height="50"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hsr-H6-eyI"/>
     </inferredMetricsTieBreakers>

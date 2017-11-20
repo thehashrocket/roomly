@@ -14,6 +14,10 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     private(set) public var rooms = [Room]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         roomsCollection.dataSource = self

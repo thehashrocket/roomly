@@ -12,7 +12,12 @@ import FirebaseAuthUI
 import FirebaseFacebookAuthUI
 import FirebasePhoneAuthUI
 
+
+
 class WelcomeVC: UIViewController, FUIAuthDelegate {
+    
+    // Outlets
+    @IBOutlet weak var goHomeBtn: UIButton!
     
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authUI: FUIAuth? //only set internally but get externally
@@ -25,22 +30,17 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
         self.auth = Auth.auth()
         self.authUI = FUIAuth.defaultAuthUI()
         self.authUI?.delegate = self
-        self.authUI?.providers = [FUIFacebookAuth(),FUIPhoneAuth(authUI: self.authUI!),]
+        self.authUI?.providers = [FUIPhoneAuth(authUI: self.authUI!),]
+        
+        let barBtn = UIBarButtonItem()
+        barBtn.title = ""
+        navigationItem.backBarButtonItem = barBtn
         
         self.authStateListenerHandle = self.auth?.addStateDidChangeListener { (auth, user) in
             guard user != nil else {
                 self.loginAction(sender: self)
                 return
             }
-            
-//            guard user == nil else {
-//               self.performSegue(withIdentifier: "roomlyVC", sender: nil)
-//                return
-//            }
-//
-//            if (user != nil) {
-//                self.performSegue(withIdentifier: "roomlyVC", sender: nil)
-//            }
         }
         
         if Auth.auth().currentUser != nil {
@@ -99,16 +99,6 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
         performSegue(withIdentifier: "loginVC", sender: nil)
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
 }
 
 
