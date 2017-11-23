@@ -30,38 +30,11 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 // User is signed in.
                 print("start login success: " + (UserDataService.instance.email) )
                 
-                let key = self.ref.child("posts").childByAutoId().key
-                let userID = Auth.auth().currentUser?.uid
-                
-                let post = ["uid": userID,
-                            "author": "username",
-                            "title": "title",
-                            "body": "body"]
-                
-                let childUpdates = ["/posts/\(key)": post,
-                                    "/user-posts/\(userID)/\(key)/": post]
-                self.ref.updateChildValues(childUpdates)
-                
-                
-                
-//                self.ref.child("users").child("123456").setValue(["username": "test@test.com"])
-                
-//                self.ref.child("buildings").child(userID!).setValue([
-//                    "username": UserDataService.instance.email,
-//                    "uid": UserDataService.instance.id
-//                    ])
-                
             } else {
                 // TODO: Segue to WelcomeVC here.
                 print("No user is signed in.")
             }
         }
-        
-        
-        
-//        ref = Database.database().reference()
-//
-//        self.ref.child("users").child(user.uid).setValue(["username": username])
     
     }
     
@@ -96,6 +69,13 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         performSegue(withIdentifier: "RoomVC", sender: building)
         
     }
+    
+    @IBAction func addBuildingPressed(_ sender: Any) {
+        let addBuilding = AddBuildingVC()
+        addBuilding.modalPresentationStyle = .custom
+        present(addBuilding, animated: true, completion: nil)
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("in segue")

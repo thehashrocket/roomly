@@ -57,7 +57,7 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
         if let user = Auth.auth().currentUser {
             user.getIDTokenForcingRefresh(true, completion: { (token, error) in
                 if (token != nil) {
-                    UserDataService.instance.setUserData(id: (user.uid), email: (user.email!), token: token!)
+                    UserDataService.instance.setUserData(uid: (user.uid), email: (user.email!), token: token!)
                     // User is signed in.
                     print("user is signed in")
                 }

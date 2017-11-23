@@ -12,19 +12,20 @@ class UserDataService {
     
     static let instance = UserDataService()
     
-    public private(set) var id = ""
+    public private(set) var uid = ""
     public private(set) var email = ""
     public private(set) var token = ""
     
-    func setUserData(id: String, email: String, token: String) {
-        self.id = id
+    func setUserData(uid: String, email: String, token: String) {
+        self.uid = uid
         self.email = email
         self.token = token
     }
     
     func logoutUser() {
-        id = ""
+        uid = ""
         email = ""
+        token = ""
     }
     
 }

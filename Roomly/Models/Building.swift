@@ -9,15 +9,23 @@
 import Foundation
 
 struct Building {
-    private(set) public var id: String!
-    private(set) public var title: String!
-    private(set) public var imageName: String!
-    private(set) public var rooms: Array<Room>
+    private(set) public var id: NSString!
+    private(set) public var buildingName: NSString!
+    private(set) public var street: NSString!
+    private(set) public var city: NSString!
+    private(set) public var state: NSString!
+    private(set) public var zip: NSString!
+    private(set) public var uid: NSString!
+    private(set) public var imageName: NSString!
     
-    init(id: String, title: String, imageName: String, rooms: Array<Room>) {
-        self.id = id
-        self.title = title
-        self.imageName = imageName
-        self.rooms = rooms
+    init(id: String, buildingName: String, street: String, city: String, state: String, zip: String, uid: String, imageName: String) {
+        self.id = id as NSString
+        self.buildingName = buildingName as NSString
+        self.city = city as NSString
+        self.state = state as NSString
+        self.street = street as NSString
+        self.uid = uid as NSString as NSString
+        self.zip = zip as NSString
+        self.imageName = imageName as NSString
     }
 }

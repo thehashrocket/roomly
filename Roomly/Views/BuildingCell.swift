@@ -14,8 +14,8 @@ class BuildingCell: UITableViewCell {
     @IBOutlet weak var buildingTitle: UILabel!
     
     func updateViews(building: Building) {
-        buildingImage.image = UIImage(named: building.imageName)
-        buildingTitle.text = building.title
+//        buildingImage.image = UIImage(named: building.imageName)
+        buildingTitle.text = building.buildingName as! String
     }
     
 }

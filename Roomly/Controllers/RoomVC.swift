@@ -32,8 +32,8 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
 
     func initRooms(building: Building) {
-        rooms = DataService.instance.getRooms(forBuildingId: building.id)
-        navigationItem.title = building.title
+        rooms = DataService.instance.getRooms(forBuildingId: building.id as String)
+        navigationItem.title = building.buildingName as! String
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

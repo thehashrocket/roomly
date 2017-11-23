@@ -12,9 +12,9 @@ class DataService {
     static let instance = DataService()
     
     private let buildings = [
-        Building(id: "1", title: "House 1", imageName: "house1.png", rooms: []),
-        Building(id: "2", title: "House 2", imageName: "house2.png", rooms: []),
-        Building(id: "3", title: "House 3", imageName: "house3.png", rooms: []),
+        Building(id: "1", buildingName: "House 1", street: "street 1", city: "cityName", state: "stateName", zip: "55555", uid: "123456", imageName: "house1.png"),
+        Building(id: "1", buildingName: "House 2", street: "street 1", city: "cityName", state: "stateName", zip: "55555", uid: "123456", imageName: "house2.png"),
+        Building(id: "1", buildingName: "House 3", street: "street 1", city: "cityName", state: "stateName", zip: "55555", uid: "123456", imageName: "house3.png"),
     ]
     
     private let rooms = [
