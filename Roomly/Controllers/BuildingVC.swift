@@ -7,14 +7,62 @@
 //
 
 import UIKit
-//import Firebase
+import Firebase
+import FirebaseAuth
+import FirebaseDatabase
 
-class HomeVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    var ref: DatabaseReference!
+    
+    fileprivate(set) var auth:Auth?
+    fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         buildingTable.dataSource = self
         buildingTable.delegate = self
+        
+        self.ref = Database.database().reference()
+        
+        Auth.auth().addStateDidChangeListener() { auth, user in
+            if user != nil {
+                // User is signed in.
+                print("start login success: " + (UserDataService.instance.email) )
+                
+                let key = self.ref.child("posts").childByAutoId().key
+                let userID = Auth.auth().currentUser?.uid
+                
+                let post = ["uid": userID,
+                            "author": "username",
+                            "title": "title",
+                            "body": "body"]
+                
+                let childUpdates = ["/posts/\(key)": post,
+                                    "/user-posts/\(userID)/\(key)/": post]
+                self.ref.updateChildValues(childUpdates)
+                
+                
+                
+//                self.ref.child("users").child("123456").setValue(["username": "test@test.com"])
+                
+//                self.ref.child("buildings").child(userID!).setValue([
+//                    "username": UserDataService.instance.email,
+//                    "uid": UserDataService.instance.id
+//                    ])
+                
+            } else {
+                // TODO: Segue to WelcomeVC here.
+                print("No user is signed in.")
+            }
+        }
+        
+        
+        
+//        ref = Database.database().reference()
+//
+//        self.ref.child("users").child(user.uid).setValue(["username": username])
+    
     }
     
     override func didReceiveMemoryWarning() {

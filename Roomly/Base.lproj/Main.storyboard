@@ -17,7 +17,7 @@
         <!--Buildings-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Buildings" id="BYZ-38-t0r" customClass="HomeVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Buildings" id="BYZ-38-t0r" customClass="BuildingVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -292,7 +292,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggV-wN-xnT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1380" y="34"/>
+            <point key="canvasLocation" x="-1674" y="34"/>
         </scene>
     </scenes>
     <resources>

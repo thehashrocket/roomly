@@ -16,6 +16,11 @@ import FirebasePhoneAuthUI
 
 class WelcomeVC: UIViewController, FUIAuthDelegate {
     
+    // Variables
+    var uid = ""
+    var email = ""
+    var token = ""
+    
     // Outlets
     @IBOutlet weak var goHomeBtn: UIButton!
     
@@ -37,15 +42,39 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
         navigationItem.backBarButtonItem = barBtn
         
         self.authStateListenerHandle = self.auth?.addStateDidChangeListener { (auth, user) in
-            guard user != nil else {
+            
+            let user = Auth.auth().currentUser
+            
+            if user != nil {
+            
+            } else {
+                // No user is signed in.
+                print("No user is signed in.")
                 self.loginAction(sender: self)
-                return
             }
         }
         
-        if Auth.auth().currentUser != nil {
-            // User is signed in.
-            print("there is a user")
+        if let user = Auth.auth().currentUser {
+            user.getIDTokenForcingRefresh(true, completion: { (token, error) in
+                if (token != nil) {
+                    UserDataService.instance.setUserData(id: (user.uid), email: (user.email!), token: token!)
+                    // User is signed in.
+                    print("user is signed in")
+                }
+                
+                if let error = error {
+                    print(error)
+                }
+
+                
+            })
+//            user.getIDToken(completion: { (token, error) in
+//            })
+            
+            // The user's ID, unique to the Firebase project.
+            // Do NOT use this value to authenticate with your backend server,
+            // if you have one. Use getTokenWithCompletion:completion: instead.
+            
         } else {
             // No user is signed in.
             print("no user signed in.")
