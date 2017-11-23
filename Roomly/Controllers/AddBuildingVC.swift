@@ -21,9 +21,12 @@ class AddBuildingVC: UIViewController {
     @IBOutlet weak var cityTxt: UITextField!
     @IBOutlet weak var stateTxt: UITextField!
     @IBOutlet weak var zipTxt: UITextField!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        spinner.isHidden = true
         self.ref = Database.database().reference()
         // Do any additional setup after loading the view.
     }
@@ -43,9 +46,13 @@ class AddBuildingVC: UIViewController {
     }
     
     @IBAction func submitPressed(_ sender: Any) {
-        let key = self.ref.child("buildings").childByAutoId().key
+        spinner.startAnimating()
+        spinner.isHidden = false
+        
         
         guard let userID = Auth.auth().currentUser?.uid else { return }
+        
+        let key = self.ref.child("buildings").child(userID).childByAutoId().key
         
         guard let name = buildingNameTxt.text , buildingNameTxt.text != "" else {
             return
@@ -77,8 +84,11 @@ class AddBuildingVC: UIViewController {
             "id" : building.id
         ]
         
-        let childUpdates = ["/buildings/\(key)": post]
+        let childUpdates = ["/buildings/\(userID)/\(key)": post]
         self.ref.updateChildValues(childUpdates)
+        spinner.stopAnimating()
+        spinner.isHidden = true
+        self.dismiss(animated: true, completion: nil)
     }
     
 

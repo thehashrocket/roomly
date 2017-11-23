@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="buildingNameTxt" destination="MKa-cd-Xz3" id="NIS-Pn-LFP"/>
                 <outlet property="cityTxt" destination="s7I-Me-EIV" id="zrY-aN-WNX"/>
+                <outlet property="spinner" destination="xgG-lU-JSO" id="7GA-9c-Nsb"/>
                 <outlet property="stateTxt" destination="nbg-2O-c5x" id="e4E-1n-c5d"/>
                 <outlet property="streetTxt" destination="m7k-zL-h7D" id="XfT-qo-4Uc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -113,11 +114,16 @@
                                 <constraint firstItem="2U6-fw-Vtc" firstAttribute="leading" secondItem="GLn-cB-Iva" secondAttribute="leading" constant="8" id="xWQ-US-V0d"/>
                             </constraints>
                         </view>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="xgG-lU-JSO">
+                            <rect key="frame" x="169.5" y="295.5" width="37" height="37"/>
+                        </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.097683005136986301" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="GLn-cB-Iva" firstAttribute="leading" secondItem="Nz4-84-Dma" secondAttribute="leading" constant="30" id="3tr-9J-hFO"/>
+                        <constraint firstItem="xgG-lU-JSO" firstAttribute="centerY" secondItem="Nz4-84-Dma" secondAttribute="centerY" constant="-10" id="JVx-vk-k9g"/>
                         <constraint firstAttribute="trailing" secondItem="GLn-cB-Iva" secondAttribute="trailing" constant="30" id="Rki-mJ-sQG"/>
+                        <constraint firstItem="xgG-lU-JSO" firstAttribute="centerX" secondItem="Nz4-84-Dma" secondAttribute="centerX" id="qJ0-HV-5l9"/>
                         <constraint firstItem="GLn-cB-Iva" firstAttribute="centerY" secondItem="Nz4-84-Dma" secondAttribute="centerY" id="uRQ-ZJ-zfp"/>
                     </constraints>
                 </view>
