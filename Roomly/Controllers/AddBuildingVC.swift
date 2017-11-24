@@ -70,9 +70,9 @@ class AddBuildingVC: UIViewController {
             return
         }
         
+        let number = arc4random_uniform(2)
         
-        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, zip: zip, uid: userID, imageName: "house1.jpg")
-        
+        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, zip: zip, uid: userID, imageName: "house\(number).jpg")
         
         let post = [
             "buildingName" : building.buildingName,
@@ -81,7 +81,8 @@ class AddBuildingVC: UIViewController {
             "state" : building.state,
             "zip" : building.zip,
             "uid" : building.uid,
-            "id" : building.id
+            "id" : building.id,
+            "imageName": building.imageName
         ]
         
         let childUpdates = ["/buildings/\(userID)/\(key)": post]

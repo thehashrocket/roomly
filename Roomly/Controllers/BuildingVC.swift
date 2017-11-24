@@ -30,12 +30,51 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 // User is signed in.
                 print("start login success: " + (UserDataService.instance.email) )
                 
+                guard let userID = Auth.auth().currentUser?.uid else { return }
+                
+                self.ref.child("buildings").child(userID).observe(DataEventType.value, with: { (snapshot) in
+                    let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+                    
+                    DataService.instance.resetBuildings()
+                    
+                    postDict.forEach({ (arg) in
+                        
+                        
+                        let (key, value) = arg
+                        
+                        print("i am here")
+                        print(value)
+                        
+                        let dataChange = value as! [String: AnyObject]
+                        
+                        let id = dataChange["id"] as! String
+                        let buildingName = dataChange["buildingName"] as! String
+                        let street = dataChange["street"] as! String
+                        let city = dataChange["city"] as! String
+                        let state = dataChange["state"] as! String
+                        let zip = dataChange["zip"] as! String
+                        let imageName = dataChange["imageName"] as! String
+                        let uid = dataChange["uid"] as! String
+                        
+                        print("i am here now")
+                        print(dataChange)
+                        
+                        var building = Building(id: id, buildingName: buildingName, street: street, city: city, state: state, zip: zip, uid: uid, imageName: imageName)
+
+                        DataService.instance.setBuilding(building: building)
+                        
+                        self.buildingTable.reloadData()
+                        
+                    })
+                }, withCancel: { (error) in
+                    print(error)
+                })
+                
             } else {
                 // TODO: Segue to WelcomeVC here.
                 print("No user is signed in.")
             }
         }
-    
     }
     
     override func didReceiveMemoryWarning() {

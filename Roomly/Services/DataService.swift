@@ -11,10 +11,10 @@ import Foundation
 class DataService {
     static let instance = DataService()
     
-    private let buildings = [
-        Building(id: "1", buildingName: "House 1", street: "street 1", city: "cityName", state: "stateName", zip: "55555", uid: "123456", imageName: "house1.png"),
-        Building(id: "1", buildingName: "House 2", street: "street 1", city: "cityName", state: "stateName", zip: "55555", uid: "123456", imageName: "house2.png"),
-        Building(id: "1", buildingName: "House 3", street: "street 1", city: "cityName", state: "stateName", zip: "55555", uid: "123456", imageName: "house3.png"),
+    private var buildings = [
+        Building(id: "1", buildingName: "House 1", street: "street 1", city: "cityName", state: "stateName", zip: "55555", uid: "123456", imageName: "house1.jpg"),
+        Building(id: "1", buildingName: "House 2", street: "street 1", city: "cityName", state: "stateName", zip: "55555", uid: "123456", imageName: "house2.jpg"),
+        Building(id: "1", buildingName: "House 3", street: "street 1", city: "cityName", state: "stateName", zip: "55555", uid: "123456", imageName: "house3.jpg"),
     ]
     
     private let rooms = [
@@ -35,5 +35,13 @@ class DataService {
     
     func getRooms(forBuildingId buildingID: String) -> [Room] {
         return rooms.filter({ $0.buildingId == buildingID})
+    }
+    
+    func resetBuildings() {
+        buildings = []
+    }
+    
+    func setBuilding(building: Building) {
+        buildings.append(building)
     }
 }
