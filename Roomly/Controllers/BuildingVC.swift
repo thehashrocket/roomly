@@ -28,7 +28,6 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
                 // User is signed in.
-                print("start login success: " + (UserDataService.instance.email) )
                 
                 guard let userID = Auth.auth().currentUser?.uid else { return }
                 
@@ -38,13 +37,8 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                     DataService.instance.resetBuildings()
                     
                     postDict.forEach({ (arg) in
-                        
-                        
-                        let (key, value) = arg
-                        
-                        print("i am here")
-                        print(value)
-                        
+
+                        let (_, value) = arg
                         let dataChange = value as! [String: AnyObject]
                         
                         let id = dataChange["id"] as! String
@@ -56,15 +50,11 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                         let imageName = dataChange["imageName"] as! String
                         let uid = dataChange["uid"] as! String
                         
-                        print("i am here now")
-                        print(dataChange)
-                        
-                        var building = Building(id: id, buildingName: buildingName, street: street, city: city, state: state, zip: zip, uid: uid, imageName: imageName)
+                        let building = Building(id: id, buildingName: buildingName, street: street, city: city, state: state, zip: zip, uid: uid, imageName: imageName)
 
                         DataService.instance.setBuilding(building: building)
                         
                         self.buildingTable.reloadData()
-                        
                     })
                 }, withCancel: { (error) in
                     print(error)
@@ -106,7 +96,6 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let building = DataService.instance.getBuildings()[indexPath.row]
         performSegue(withIdentifier: "RoomVC", sender: building)
-        
     }
     
     @IBAction func addBuildingPressed(_ sender: Any) {
@@ -115,19 +104,15 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         present(addBuilding, animated: true, completion: nil)
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("in segue")
         if let roomVC = segue.destination as? RoomVC {
             let barBtn = UIBarButtonItem()
             barBtn.title = ""
             navigationItem.backBarButtonItem = barBtn
-            print (sender)
             assert(sender as? Building != nil)
             roomVC.initRooms(building: sender as! Building)
         }
     }
-
-
 }
 
