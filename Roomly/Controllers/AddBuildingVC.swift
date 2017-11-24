@@ -11,9 +11,11 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-class AddBuildingVC: UIViewController {
+class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var ref: DatabaseReference!
+    var imagesDirectoryPath:String!
+    var saved_image = ""
     
     // Outlets
     @IBOutlet weak var buildingNameTxt: UITextField!
@@ -22,6 +24,7 @@ class AddBuildingVC: UIViewController {
     @IBOutlet weak var stateTxt: UITextField!
     @IBOutlet weak var zipTxt: UITextField!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var imagePicked: UIImageView!
     
     
     override func viewDidLoad() {
@@ -29,6 +32,14 @@ class AddBuildingVC: UIViewController {
         spinner.isHidden = true
         self.ref = Database.database().reference()
         // Do any additional setup after loading the view.
+
+        if !FileManager.default.fileExists(atPath: IMAGE_DIRECTORY_PATH) {
+            do {
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: IMAGE_DIRECTORY_PATH), withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,7 +83,7 @@ class AddBuildingVC: UIViewController {
         
         let number = arc4random_uniform(2)
         
-        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, zip: zip, uid: userID, imageName: "house\(number).jpg")
+        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, zip: zip, uid: userID, imageName: self.saved_image)
         
         let post = [
             "buildingName" : building.buildingName,
@@ -92,5 +103,50 @@ class AddBuildingVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-
+    @IBAction func openCameraButton(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            var imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary;
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        self.saved_image = saveImageToDocumentDirectory(pickedImage!)
+        print(self.saved_image)
+        imagePicked.image = pickedImage
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func saveImageToDocumentDirectory(_ chosenImage: UIImage) -> String {
+        
+        let formatter = DateFormatter()
+        // initially set the format based on your datepicker date
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let date = formatter.string(from: NSDate() as Date).replacingOccurrences(of: " ", with: "_")
+        
+        let filename = date.appending(".jpg")
+        let filepath = IMAGE_DIRECTORY_PATH + "/".appending(filename)
+        let url = NSURL.fileURL(withPath: filepath)
+        do {
+            try UIImageJPEGRepresentation(chosenImage, 1.0)?.write(to: url, options: .atomic)
+            print("file_path " + filepath)
+            return String.init("\(filename)")
+            
+        } catch {
+            print(error)
+            print("file cant not be save at path \(filepath), with error : \(error)");
+            return filepath
+        }
+    }
+    
 }

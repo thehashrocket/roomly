@@ -26,6 +26,7 @@
 		DE81C4A91F8C568400674274 /* RoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE81C4A81F8C568400674274 /* RoomCell.swift */; };
 		DE8B0CF21FC72A4700AF32BA /* AddBuildingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8B0CF01FC72A4700AF32BA /* AddBuildingVC.swift */; };
 		DE8B0CF31FC72A4700AF32BA /* AddBuildingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE8B0CF11FC72A4700AF32BA /* AddBuildingVC.xib */; };
+		DE8B0CF71FC7E7FB00AF32BA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8B0CF61FC7E7FB00AF32BA /* Constants.swift */; };
 		DEB48F7F1FB8A58900379811 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB48F7E1FB8A58900379811 /* WelcomeVC.swift */; };
 		DEBB7B001FC250A700427CDD /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBB7AFF1FC250A700427CDD /* GradientView.swift */; };
 		DEBB7B021FC27DE800427CDD /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBB7B011FC27DE800427CDD /* RoundedButton.swift */; };
@@ -55,6 +56,7 @@
 		DE81C4A81F8C568400674274 /* RoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCell.swift; sourceTree = "<group>"; };
 		DE8B0CF01FC72A4700AF32BA /* AddBuildingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBuildingVC.swift; sourceTree = "<group>"; };
 		DE8B0CF11FC72A4700AF32BA /* AddBuildingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddBuildingVC.xib; sourceTree = "<group>"; };
+		DE8B0CF61FC7E7FB00AF32BA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DEB48F7E1FB8A58900379811 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		DEBB7AFF1FC250A700427CDD /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		DEBB7B011FC27DE800427CDD /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 		DE17CECD1F85BA7200CA83A9 /* Roomly */ = {
 			isa = PBXGroup;
 			children = (
+				DE8B0CF51FC7E7E600AF32BA /* Utilities */,
 				DE8B0CF41FC72A5000AF32BA /* XIBs */,
 				DE17CEEE1F85C99300CA83A9 /* Services */,
 				DE17CEE51F85BA9E00CA83A9 /* Views */,
@@ -174,6 +177,14 @@
 				DE8B0CF11FC72A4700AF32BA /* AddBuildingVC.xib */,
 			);
 			path = XIBs;
+			sourceTree = "<group>";
+		};
+		DE8B0CF51FC7E7E600AF32BA /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				DE8B0CF61FC7E7FB00AF32BA /* Constants.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE0A257A1FB6B3DA005CC671 /* LoginVC.swift in Sources */,
+				DE8B0CF71FC7E7FB00AF32BA /* Constants.swift in Sources */,
 				DE17CED71F85BA7200CA83A9 /* Roomly.xcdatamodeld in Sources */,
 				DE81C4A51F8C558500674274 /* RoomVC.swift in Sources */,
 				DEB48F7F1FB8A58900379811 /* WelcomeVC.swift in Sources */,
