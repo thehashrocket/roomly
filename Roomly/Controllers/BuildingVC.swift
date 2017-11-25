@@ -95,6 +95,7 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let building = DataService.instance.getBuildings()[indexPath.row]
+        DataService.instance.setSelectedBuilding(building: building)
         performSegue(withIdentifier: "RoomVC", sender: building)
     }
     
@@ -105,7 +106,6 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("in segue")
         if let roomVC = segue.destination as? RoomVC {
             let barBtn = UIBarButtonItem()
             barBtn.title = ""

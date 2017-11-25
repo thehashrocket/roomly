@@ -100,8 +100,8 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIr-WN-Tgw">
-                                    <rect key="frame" x="126" y="270.5" width="46" height="30"/>
-                                    <state key="normal" title="Button"/>
+                                    <rect key="frame" x="106" y="270.5" width="86" height="30"/>
+                                    <state key="normal" title="Add A Photo"/>
                                     <connections>
                                         <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="ccj-pv-yFh"/>
                                     </connections>

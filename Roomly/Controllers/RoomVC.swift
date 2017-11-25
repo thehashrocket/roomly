@@ -14,6 +14,8 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     private(set) public var rooms = [Room]()
     
+    var selected_building = "" as NSString
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -22,7 +24,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         super.viewDidLoad()
         roomsCollection.dataSource = self
         roomsCollection.delegate = self
-        // Do any additional setup after loading the view.
+        selected_building = DataService.instance.getSelectedBuilding()
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,8 +34,8 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
 
     func initRooms(building: Building) {
-        rooms = DataService.instance.getRooms(forBuildingId: building.id as String)
-        navigationItem.title = building.buildingName as! String
+        rooms = DataService.instance.getRooms(forBuildingId: building.id as NSString)
+        navigationItem.title = building.buildingName! as String
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -48,5 +50,16 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         }
         return RoomCell()
     }
+    
+    // Actions
+    @IBAction func addRoomPressed(_ sender: Any) {
+        let addRoom = AddRoomVC()
+        addRoom.modalPresentationStyle = .custom
+        present(addRoom, animated: true, completion: nil)
+    }
+    
+    @IBAction func editBuildingPressed(_ sender: Any) {
+    }
+    
 
 }

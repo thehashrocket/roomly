@@ -18,23 +18,27 @@ class DataService {
     ]
     
     private let rooms = [
-        Room(id: "1", title: "Bedroom 1", imageName: "bedroom1.jpg", buildingId: "1", items: []),
-        Room(id: "2", title: "Living Room 2", imageName: "livingroom1.jpg", buildingId: "1", items: []),
-        Room(id: "3", title: "Bathroom 3", imageName: "bathroom1.jpg", buildingId: "1", items: []),
-        Room(id: "3", title: "Bedroom 1", imageName: "bedroom2.jpg", buildingId: "2", items: []),
-        Room(id: "4", title: "Living Room 2", imageName: "livingroom2.jpg", buildingId: "2", items: []),
-        Room(id: "5", title: "Bathroom 3", imageName: "bathroom2.jpg", buildingId: "2", items: []),
-        Room(id: "6", title: "Bedroom 1", imageName: "bedroom3.jpg", buildingId: "3", items: []),
-        Room(id: "7", title: "Living Room 2", imageName: "livingroom3.jpg", buildingId: "3", items: []),
-        Room(id: "8", title: "Bathroom 3", imageName: "bathroom3.jpg", buildingId: "3", items: [])
+        Room(id: "1", roomName: "Bedroom 1", roomDescription: "", imageName: "bedroom1.jpg", buildingId: "1", uid: "123456"),
+        Room(id: "2", roomName: "Living Room 2", roomDescription: "", imageName: "livingroom1.jpg", buildingId: "1", uid: "123456"),
     ]
+    
+    private var selected_building = "" as NSString
+    private var selected_room = "" as NSString
     
     func getBuildings() -> [Building] {
         return buildings
     }
     
-    func getRooms(forBuildingId buildingID: String) -> [Room] {
+    func getRooms(forBuildingId buildingID: NSString) -> [Room] {
         return rooms.filter({ $0.buildingId == buildingID})
+    }
+    
+    func getSelectedBuilding() -> NSString {
+        return selected_building
+    }
+    
+    func getSelectedRoom() -> NSString {
+        return selected_room
     }
     
     func resetBuildings() {
@@ -43,5 +47,13 @@ class DataService {
     
     func setBuilding(building: Building) {
         buildings.append(building)
+    }
+    
+    func setSelectedBuilding(building: Building) {
+        selected_building = building.uid
+    }
+    
+    func setSelectedRoom(room: Room) {
+        selected_room = room.uid
     }
 }

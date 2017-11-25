@@ -13,7 +13,7 @@ class RoomCell: UICollectionViewCell {
     @IBOutlet weak var roomImage: UIImageView!
     
     func updateViews(room: Room) {
-        roomImage.image = UIImage(named: room.imageName)
+        roomImage.image = UIImage(named: room.imageName as String)
     }
     
 }
