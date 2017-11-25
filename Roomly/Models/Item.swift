@@ -9,11 +9,20 @@
 import Foundation
 
 struct Item {
-    private(set) public var title: String!
-    private(set) public var imageName: String!
+    private(set) public var id: NSString!
+    private(set) public var itemName: NSString!
+    private(set) public var itemDescription: NSString!
+    private(set) public var imageName: NSString!
+    private(set) public var roomId: NSString!
+    private(set) public var uid: NSString!
     
-    init(title: String, imageName: String) {
-        self.title = title
-        self.imageName = imageName
+    
+    init(id: String, itemName: String, itemDescription: String, imageName: String, roomId: String, uid: String) {
+        self.id = id as NSString
+        self.itemName = itemName as NSString
+        self.itemDescription = itemDescription as NSString
+        self.imageName = imageName as NSString
+        self.roomId = roomId as NSString
+        self.uid = uid as NSString
     }
 }

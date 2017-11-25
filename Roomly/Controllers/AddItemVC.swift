@@ -1,8 +1,8 @@
 //
-//  AddRoomVC.swift
+//  AddItem.swift
 //  Roomly
 //
-//  Created by Jason Shultz on 11/24/17.
+//  Created by Jason Shultz on 11/25/17.
 //  Copyright © 2017 Chaos Elevators, Inc. All rights reserved.
 //
 
@@ -11,25 +11,25 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var ref: DatabaseReference!
     var imagesDirectoryPath:String!
     var saved_image = ""
-    var selected_building = "" as NSString
-    var roomNameText = ""
-    var roomDescriptionText = ""
+    var selected_room = "" as NSString
+    var itemNameText = ""
+    var itemDescriptionText = ""
     
     // Outlets
-    @IBOutlet weak var roomName: UITextField!
-    @IBOutlet weak var roomDescription: UITextField!
+    @IBOutlet weak var itemName: UITextField!
+    @IBOutlet weak var itemDescription: UITextField!
     @IBOutlet weak var imagePicked: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        selected_building = DataService.instance.getSelectedBuilding()
+        selected_room = DataService.instance.getSelectedRoom()
         spinner.isHidden = true
         self.ref = Database.database().reference()
         // Do any additional setup after loading the view.
@@ -60,48 +60,48 @@ class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         }
     }
     
+    @IBAction func closePicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelPicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func submitPicked(_ sender: Any) {
         spinner.startAnimating()
         spinner.isHidden = false
         
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
-        let key = self.ref.child("rooms").child(userID).childByAutoId().key
+        let key = self.ref.child("items").child(userID).childByAutoId().key
         
-        if roomName.text != "" {
-            self.roomNameText = self.roomName.text!
+        if itemName.text != "" {
+            self.itemNameText = self.itemName.text!
         }
         
-        if roomDescription.text != "" {
-            self.roomDescriptionText = self.roomDescription.text!
+        if itemDescription.text != "" {
+            self.itemDescriptionText = self.itemDescription.text!
         }
         
-        let room = Room(id: key, roomName: roomNameText, roomDescription: roomDescriptionText, imageName: self.saved_image, buildingId: selected_building as String, uid: userID)
+        let item = Item(id: key, itemName: itemNameText, itemDescription: itemDescriptionText, imageName: self.saved_image, roomId: selected_room as String, uid: userID)
         
         let post = [
-            "roomName" : room.roomName,
-            "roomDescription" : room.roomDescription,
-            "imageName": room.imageName,
-            "buildingId" : room.buildingId,
-            "uid" : room.uid,
-            "id" : room.id,
-        ]
+            "itemName" : item.itemName,
+            "itemDescription" : item.itemDescription,
+            "imageName": item.imageName,
+            "roomId" : item.roomId,
+            "uid" : item.uid,
+            "id" : item.id,
+            ]
         
-        let childUpdates = ["/rooms/\(userID)/\(selected_building)/\(key)": post]
+        let childUpdates = ["/items/\(userID)/\(selected_room)/\(key)": post]
         self.ref.updateChildValues(childUpdates)
         spinner.stopAnimating()
         spinner.isHidden = true
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func closePressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    @IBAction func cancelPicked(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
@@ -137,6 +137,6 @@ class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
             return filepath
         }
     }
-
+    
 
 }

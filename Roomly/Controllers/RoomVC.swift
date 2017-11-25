@@ -31,6 +31,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         super.viewDidLoad()
         roomsCollection.dataSource = self
         roomsCollection.delegate = self
+        rooms = DataService.instance.getRooms()
         
         self.ref = Database.database().reference()
         
@@ -64,7 +65,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         
                         DataService.instance.setRoom(room: room)
                         
-                        self.rooms = DataService.instance.getRooms(forBuildingId: self.selected_building)
+                        self.rooms = DataService.instance.getRoomsForBuilding(forBuildingId: self.selected_building)
                         
                         self.roomsCollection.reloadData()
                     })
@@ -87,7 +88,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
 
     func initRooms(building: Building) {
-        rooms = DataService.instance.getRooms(forBuildingId: building.id as NSString)
+        rooms = DataService.instance.getRoomsForBuilding(forBuildingId: building.id as NSString)
         
         navigationItem.title = building.buildingName! as String
     }
@@ -103,6 +104,24 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             return cell
         }
         return RoomCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("indexPath \(indexPath)")
+        print("indexPath.row \(indexPath.row)")
+        let room = rooms[indexPath.row]
+        DataService.instance.setSelectedRoom(room: room)
+        performSegue(withIdentifier: "ItemVC", sender: room)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let itemVC = segue.destination as? ItemVC {
+            let barBtn = UIBarButtonItem()
+            barBtn.title = ""
+            navigationItem.backBarButtonItem = barBtn
+            assert(sender as? Room != nil)
+            itemVC.initItems(room: sender as! Room)
+        }
     }
     
     // Actions

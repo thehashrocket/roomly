@@ -81,8 +81,6 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             return
         }
         
-        let number = arc4random_uniform(2)
-        
         let building = Building(id: key, buildingName: name, street: street, city: city, state: state, zip: zip, uid: userID, imageName: self.saved_image)
         
         let post = [
