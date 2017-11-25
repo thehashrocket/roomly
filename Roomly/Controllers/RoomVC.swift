@@ -7,14 +7,21 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseDatabase
 
 class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    var ref: DatabaseReference!
+    let selected_building = DataService.instance.getSelectedBuilding()
+    
+    fileprivate(set) var auth:Auth?
+    fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
     
     @IBOutlet weak var roomsCollection: UICollectionView!
     
     private(set) public var rooms = [Room]()
-    
-    var selected_building = "" as NSString
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -24,7 +31,53 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         super.viewDidLoad()
         roomsCollection.dataSource = self
         roomsCollection.delegate = self
-        selected_building = DataService.instance.getSelectedBuilding()
+        
+        self.ref = Database.database().reference()
+        
+        Auth.auth().addStateDidChangeListener() { auth, user in
+            if user != nil {
+                // User is signed in.
+                print("here")
+                
+                guard let userID = Auth.auth().currentUser?.uid else { return }
+                
+                self.ref.child("rooms").child(userID).child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
+                    let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+                    print("now here")
+                    DataService.instance.resetRooms()
+                    
+                    postDict.forEach({ (arg) in
+                        
+                        
+                        let (_, value) = arg
+                        let dataChange = value as! [String: AnyObject]
+                        print(dataChange["roomName"]);
+                        
+                        let id = dataChange["id"] as! String
+                        let roomName = dataChange["roomName"] as! String
+                        let roomDescription = dataChange["roomDescription"] as! String
+                        let imageName = dataChange["imageName"] as! String
+                        let buildingId = dataChange["buildingId"] as! String
+                        let uid = dataChange["uid"] as! String
+                        
+                        let room = Room(id: id, roomName: roomName, roomDescription: roomDescription, imageName: imageName, buildingId: buildingId, uid: uid)
+                        
+                        DataService.instance.setRoom(room: room)
+                        
+                        self.rooms = DataService.instance.getRooms(forBuildingId: self.selected_building)
+                        
+                        self.roomsCollection.reloadData()
+                    })
+                }, withCancel: { (error) in
+                    print(error)
+                })
+                
+            } else {
+                // TODO: Segue to WelcomeVC here.
+                print("No user is signed in.")
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +88,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 
     func initRooms(building: Building) {
         rooms = DataService.instance.getRooms(forBuildingId: building.id as NSString)
+        
         navigationItem.title = building.buildingName! as String
     }
     

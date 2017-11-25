@@ -17,7 +17,7 @@ class DataService {
         Building(id: "1", buildingName: "House 3", street: "street 1", city: "cityName", state: "stateName", zip: "55555", uid: "123456", imageName: "house3.jpg"),
     ]
     
-    private let rooms = [
+    private var rooms = [
         Room(id: "1", roomName: "Bedroom 1", roomDescription: "", imageName: "bedroom1.jpg", buildingId: "1", uid: "123456"),
         Room(id: "2", roomName: "Living Room 2", roomDescription: "", imageName: "livingroom1.jpg", buildingId: "1", uid: "123456"),
     ]
@@ -45,8 +45,16 @@ class DataService {
         buildings = []
     }
     
+    func resetRooms() {
+        rooms = []
+    }
+    
     func setBuilding(building: Building) {
         buildings.append(building)
+    }
+    
+    func setRoom(room: Room) {
+        rooms.append(room)
     }
     
     func setSelectedBuilding(building: Building) {

@@ -79,7 +79,7 @@ class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         
         let number = arc4random_uniform(2)
         
-        let room = Room(id: key as NSString, roomName: roomNameText, roomDescription: roomDescriptionText, imageName: self.saved_image, buildingId: selected_building as String, uid: userID)
+        let room = Room(id: key, roomName: roomNameText, roomDescription: roomDescriptionText, imageName: self.saved_image, buildingId: selected_building as String, uid: userID)
         
         let post = [
             "roomName" : room.roomName,
