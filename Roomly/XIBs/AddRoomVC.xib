@@ -16,7 +16,6 @@
                 <outlet property="roomDescription" destination="iir-BQ-SpK" id="i2x-zG-bLe"/>
                 <outlet property="roomName" destination="gbE-BH-XX2" id="NIh-G3-2ll"/>
                 <outlet property="spinner" destination="C18-Qx-eAv" id="YoC-3Q-chV"/>
-                <outlet property="submitPicked" destination="Fg8-VD-NmS" id="YlD-if-9Vy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

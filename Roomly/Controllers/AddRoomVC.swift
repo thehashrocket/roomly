@@ -52,6 +52,13 @@ class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     // Actions
     
     @IBAction func openCameraButton(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary;
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+        }
     }
     
     @IBAction func submitPicked(_ sender: Any) {
@@ -83,7 +90,7 @@ class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
             "id" : room.id,
         ]
         
-        let childUpdates = ["/buildings/\(userID)/\(key)": post]
+        let childUpdates = ["/rooms/\(userID)/\(selected_building)/\(key)": post]
         self.ref.updateChildValues(childUpdates)
         spinner.stopAnimating()
         spinner.isHidden = true
@@ -102,7 +109,6 @@ class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         self.saved_image = saveImageToDocumentDirectory(pickedImage!)
-        print(self.saved_image)
         imagePicked.image = pickedImage
         dismiss(animated: true, completion: nil)
     }

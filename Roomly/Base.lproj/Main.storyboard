@@ -198,8 +198,6 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
                     <connections>
-                        <outlet property="addRoomPressed" destination="KIf-hO-7TM" id="xJX-M9-Cu8"/>
-                        <outlet property="editBuildingPressed" destination="laZ-lQ-z8F" id="KTK-SI-6wM"/>
                         <outlet property="roomsCollection" destination="QNb-N0-ZeL" id="6rE-AU-PBN"/>
                     </connections>
                 </viewController>

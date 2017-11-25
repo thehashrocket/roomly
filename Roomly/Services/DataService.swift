@@ -50,7 +50,7 @@ class DataService {
     }
     
     func setSelectedBuilding(building: Building) {
-        selected_building = building.uid
+        selected_building = building.id
     }
     
     func setSelectedRoom(room: Room) {
