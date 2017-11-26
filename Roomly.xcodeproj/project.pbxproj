@@ -14,6 +14,8 @@
 		DE0E6B911FC9DF690066E071 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E6B901FC9DF690066E071 /* ItemCell.swift */; };
 		DE0E6B941FCA05940066E071 /* AddItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E6B921FCA05940066E071 /* AddItemVC.swift */; };
 		DE0E6B951FCA05940066E071 /* AddItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE0E6B931FCA05940066E071 /* AddItemVC.xib */; };
+		DE0E6B981FCA8E680066E071 /* EditRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E6B961FCA8E680066E071 /* EditRoomVC.swift */; };
+		DE0E6B991FCA8E680066E071 /* EditRoomVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE0E6B971FCA8E680066E071 /* EditRoomVC.xib */; };
 		DE17CECF1F85BA7200CA83A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE17CECE1F85BA7200CA83A9 /* AppDelegate.swift */; };
 		DE17CED11F85BA7200CA83A9 /* BuildingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE17CED01F85BA7200CA83A9 /* BuildingVC.swift */; };
 		DE17CED41F85BA7200CA83A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE17CED21F85BA7200CA83A9 /* Main.storyboard */; };
@@ -51,6 +53,8 @@
 		DE0E6B901FC9DF690066E071 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		DE0E6B921FCA05940066E071 /* AddItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemVC.swift; sourceTree = "<group>"; };
 		DE0E6B931FCA05940066E071 /* AddItemVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddItemVC.xib; sourceTree = "<group>"; };
+		DE0E6B961FCA8E680066E071 /* EditRoomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoomVC.swift; sourceTree = "<group>"; };
+		DE0E6B971FCA8E680066E071 /* EditRoomVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditRoomVC.xib; sourceTree = "<group>"; };
 		DE17CECB1F85BA7200CA83A9 /* Roomly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Roomly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE17CECE1F85BA7200CA83A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE17CED01F85BA7200CA83A9 /* BuildingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingVC.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 				DE8B0CF81FC8BAC200AF32BA /* AddRoomVC.swift */,
 				DE17CED01F85BA7200CA83A9 /* BuildingVC.swift */,
 				DE8B0CFC1FC8BB1100AF32BA /* EditBuildingVC.swift */,
+				DE0E6B961FCA8E680066E071 /* EditRoomVC.swift */,
 				DE0E6B8E1FC9C5980066E071 /* ItemVC.swift */,
 				DE81C4A41F8C558500674274 /* RoomVC.swift */,
 				DEB48F7E1FB8A58900379811 /* WelcomeVC.swift */,
@@ -201,6 +206,7 @@
 				DE0E6B931FCA05940066E071 /* AddItemVC.xib */,
 				DE8B0CF91FC8BAC200AF32BA /* AddRoomVC.xib */,
 				DE8B0CFD1FC8BB1100AF32BA /* EditBuildingVC.xib */,
+				DE0E6B971FCA8E680066E071 /* EditRoomVC.xib */,
 			);
 			path = XIBs;
 			sourceTree = "<group>";
@@ -277,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE17CEDC1F85BA7200CA83A9 /* LaunchScreen.storyboard in Resources */,
+				DE0E6B991FCA8E680066E071 /* EditRoomVC.xib in Resources */,
 				DE0A25781FB6ACDE005CC671 /* GoogleService-Info.plist in Resources */,
 				DE17CED91F85BA7200CA83A9 /* Assets.xcassets in Resources */,
 				DE8B0CF31FC72A4700AF32BA /* AddBuildingVC.xib in Resources */,
@@ -365,6 +372,7 @@
 				DE8B0CF21FC72A4700AF32BA /* AddBuildingVC.swift in Sources */,
 				DE0E6B8F1FC9C5980066E071 /* ItemVC.swift in Sources */,
 				DE17CEE91F85BB8700CA83A9 /* Room.swift in Sources */,
+				DE0E6B981FCA8E680066E071 /* EditRoomVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

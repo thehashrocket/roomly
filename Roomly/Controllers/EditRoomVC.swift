@@ -1,8 +1,8 @@
 //
-//  EditBuildingVC.swift
+//  EditRoomVC.swift
 //  Roomly
 //
-//  Created by Jason Shultz on 11/24/17.
+//  Created by Jason Shultz on 11/25/17.
 //  Copyright © 2017 Chaos Elevators, Inc. All rights reserved.
 //
 
@@ -11,74 +11,67 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-class EditBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // Variables
     var ref: DatabaseReference!
     var imagesDirectoryPath:String!
     var saved_image = ""
     var selected_building = "" as NSString
+    var selected_room = "" as NSString
+    var roomNameText = ""
+    var roomDescriptionText = ""
+    
     
     // Outlets
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var roomNameTxt: UITextField!
+    @IBOutlet weak var roomDescriptionTxt: UITextField!
     @IBOutlet weak var imagePicked: UIImageView!
-    @IBOutlet weak var buildingNAme: UITextField!
-    @IBOutlet weak var streetTxt: UITextField!
-    @IBOutlet weak var cityTxt: UITextField!
-    @IBOutlet weak var stateTxt: UITextField!
-    @IBOutlet weak var zipTxt: UITextField!
+    
     
     // Actions
-    @IBAction func closePressed(_ sender: Any) {
+    @IBAction func closePicked(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func cancelPressed(_ sender: Any) {
+    @IBAction func cancelPicked(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func submitPressed(_ sender: Any) {
+    @IBAction func submitPicked(_ sender: Any) {
         spinner.startAnimating()
         spinner.isHidden = false
         
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
-        let key = self.selected_building as String
+        let key = self.selected_room as String
         
-        guard let name = buildingNAme.text , buildingNAme.text != "" else {
-            return
-        }
-        guard let street = streetTxt.text , streetTxt.text != "" else {
-            return
-        }
-        guard let city = cityTxt.text , cityTxt.text != "" else {
-            return
-        }
-        guard let state = stateTxt.text , stateTxt.text != "" else {
-            return
-        }
-        guard let zip = zipTxt.text , zipTxt.text != "" else {
+        guard let roomNameText = roomNameTxt.text , roomNameTxt.text != "" else {
             return
         }
         
-        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, zip: zip, uid: userID, imageName: self.saved_image)
+        guard let roomDescriptionText = roomDescriptionTxt.text , roomDescriptionTxt.text != "" else {
+            return
+        }
+        
+        let room = Room(id: key, roomName: roomNameText, roomDescription: roomDescriptionText, imageName: self.saved_image, buildingId: selected_building as String, uid: userID)
         
         let post = [
-            "buildingName" : building.buildingName,
-            "street" : building.street,
-            "city" : building.city,
-            "state" : building.state,
-            "zip" : building.zip,
-            "uid" : building.uid,
-            "id" : building.id,
-            "imageName": building.imageName
-        ]
+            "roomName" : room.roomName,
+            "roomDescription" : room.roomDescription,
+            "imageName": room.imageName,
+            "buildingId" : room.buildingId,
+            "uid" : room.uid,
+            "id" : room.id,
+            ]
         
-        let childUpdates = ["/buildings/\(userID)/\(key)": post]
+        let childUpdates = ["/rooms/\(userID)/\(selected_building)/\(key)": post]
         self.ref.updateChildValues(childUpdates)
         spinner.stopAnimating()
         spinner.isHidden = true
         self.dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func openCameraButton(_ sender: Any) {
@@ -91,30 +84,34 @@ class EditBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        spinner.stopAnimating()
-        spinner.isHidden = true
-        
         selected_building = DataService.instance.getSelectedBuilding()
-
+        selected_room = DataService.instance.getSelectedRoom()
+        spinner.isHidden = true
         self.ref = Database.database().reference()
+        
         // Do any additional setup after loading the view.
+        
+        if !FileManager.default.fileExists(atPath: IMAGE_DIRECTORY_PATH) {
+            do {
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: IMAGE_DIRECTORY_PATH), withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
         
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
                 // User is signed in.
-                
                 let userID = Auth.auth().currentUser?.uid
-                self.ref.child("buildings").child(userID!).child(self.selected_building as String).observeSingleEvent(of: .value, with: { (snapshot) in
+                self.ref.child("rooms").child(userID!).child(self.selected_building as String).child(self.selected_room as String).observeSingleEvent(of: .value, with: { (snapshot) in
                     // Get user value
                     let value = snapshot.value as? NSDictionary
                     
-                    self.buildingNAme.text = value?["buildingName"] as! String
-                    self.streetTxt.text = value?["street"] as! String
-                    self.cityTxt.text = value?["city"] as! String
-                    self.stateTxt.text = value?["state"] as! String
-                    self.zipTxt.text = value?["zip"] as! String
+                    self.roomNameTxt.text = value?["roomName"] as! String
+                    self.roomDescriptionTxt.text = value?["roomDescription"] as! String
                     self.saved_image = value?["imageName"] as! String
                     
                     let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
@@ -132,13 +129,7 @@ class EditBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
         
-        if !FileManager.default.fileExists(atPath: IMAGE_DIRECTORY_PATH) {
-            do {
-                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: IMAGE_DIRECTORY_PATH), withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                print(error)
-            }
-        }
+        
     }
 
     override func didReceiveMemoryWarning() {

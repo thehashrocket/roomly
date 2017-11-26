@@ -111,4 +111,11 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         present(addItem, animated: true, completion: nil)
     }
     
+    @IBAction func editPressed(_ sender: Any) {
+        let editRoom = EditRoomVC()
+        editRoom.modalPresentationStyle = .custom
+        present(editRoom, animated: true, completion: nil)
+    }
+    
+    
 }

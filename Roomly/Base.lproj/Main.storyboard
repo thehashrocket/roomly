@@ -267,11 +267,18 @@
                         <viewLayoutGuide key="safeArea" id="4C6-f3-WZR"/>
                     </view>
                     <navigationItem key="navigationItem" title="Items" id="UgJ-cv-ksi">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="LU6-Ev-zn9">
-                            <connections>
-                                <action selector="addItemPressed:" destination="6hm-XM-mCi" id="cqk-8r-4xa"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="LU6-Ev-zn9">
+                                <connections>
+                                    <action selector="addItemPressed:" destination="6hm-XM-mCi" id="cqk-8r-4xa"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="edit" id="pso-bj-Gf1">
+                                <connections>
+                                    <action selector="editPressed:" destination="6hm-XM-mCi" id="yfM-0c-Mbd"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="itemsCollection" destination="eJP-CD-6cS" id="mRv-aQ-ZqM"/>
