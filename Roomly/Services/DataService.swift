@@ -80,10 +80,24 @@ class DataService {
     func setSelectedBuilding(building: Building) {
         selected_building = building.id
     }
+    
     func setSelectedItem(item: Item) {
         selected_item = item.id
     }
+    
     func setSelectedRoom(room: Room) {
         selected_room = room.id
+    }
+    
+    func updateItem(new_item: Item) {
+        
+        if let index = items.index(where: { $0.id == new_item.id }) {
+            items.remove(at: index)
+            items.append(new_item)
+        }
+        
+        items.forEach { (item) in
+            print(item.itemName)
+        }
     }
 }

@@ -94,6 +94,9 @@ class EditItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         self.ref.updateChildValues(childUpdates)
         spinner.stopAnimating()
         spinner.isHidden = true
+        
+        DataService.instance.updateItem(new_item: item)
+        
         self.dismiss(animated: true, completion: nil)
     }
     

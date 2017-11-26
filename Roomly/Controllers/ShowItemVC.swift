@@ -29,6 +29,10 @@ class ShowItemVC: UIViewController {
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
 
+    override func viewDidAppear(_ animated: Bool) {
+        print("i ran")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ref = Database.database().reference()
@@ -40,8 +44,8 @@ class ShowItemVC: UIViewController {
                 let room = DataService.instance.getSelectedRoom() as String
                 print(self.selected_room)
                 print(self.selected_item)
-                self.ref.child("items").child(userID!).child(room).child(item).observeSingleEvent(of: .value, with: { (snapshot) in
-                    // Get user value
+                
+                self.ref.child("items").child(userID!).child(room).child(item).observe(DataEventType.value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary
                     
                     self.itemName.text = value?["itemName"] as! String
@@ -54,8 +58,7 @@ class ShowItemVC: UIViewController {
                     let image    = UIImage(contentsOfFile: imageURL.path)
                     
                     self.imagePicked.image = image
-                    
-                }) { (error) in
+                }){ (error) in
                     print(error.localizedDescription)
                 }
                 
