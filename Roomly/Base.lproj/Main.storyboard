@@ -18,7 +18,7 @@
         <!--Buildings-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Buildings" id="BYZ-38-t0r" customClass="BuildingVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BuildingVC" title="Buildings" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="BuildingVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -80,7 +80,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Buildings" id="yhj-o0-GGj">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="YPQ-s1-OVf"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="tEv-iJ-5QP">
                             <connections>
                                 <action selector="addBuildingPressed:" destination="BYZ-38-t0r" id="xaV-N1-2Nr"/>

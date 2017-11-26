@@ -81,6 +81,15 @@
                                         <action selector="cancelPressed:" destination="-1" eventType="touchUpInside" id="p5M-e0-0dx"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BC2-Ij-43c">
+                                    <rect key="frame" x="135" y="549" width="45" height="30"/>
+                                    <state key="normal" title="Delete">
+                                        <color key="titleColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="deletePressed:" destination="-1" eventType="touchUpInside" id="hQE-72-JL0"/>
+                                    </connections>
+                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Building" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gdd-Rt-VCE">
                                     <rect key="frame" x="8" y="8" width="95.5" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -114,6 +123,7 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="BC2-Ij-43c" firstAttribute="centerX" secondItem="hzn-B9-n70" secondAttribute="centerX" id="20S-uS-pEz"/>
                                 <constraint firstAttribute="trailing" secondItem="cNR-fC-wzV" secondAttribute="trailing" constant="30" id="Cyv-Ud-RNM"/>
                                 <constraint firstItem="Gdd-Rt-VCE" firstAttribute="top" secondItem="hzn-B9-n70" secondAttribute="top" constant="8" id="E1Q-aT-vLv"/>
                                 <constraint firstAttribute="bottom" secondItem="HEk-0O-Jq7" secondAttribute="bottom" constant="8" id="Iu4-2G-CMs"/>
@@ -129,6 +139,7 @@
                                 <constraint firstItem="Iwp-Pn-peY" firstAttribute="top" secondItem="Gdd-Rt-VCE" secondAttribute="bottom" constant="20" id="dvp-tz-xma"/>
                                 <constraint firstItem="Iwp-Pn-peY" firstAttribute="leading" secondItem="hzn-B9-n70" secondAttribute="leading" constant="8" id="gFB-mb-8kd"/>
                                 <constraint firstAttribute="trailing" secondItem="9t2-sU-5xl" secondAttribute="trailing" constant="8" id="hSs-Ic-Qhl"/>
+                                <constraint firstAttribute="bottom" secondItem="BC2-Ij-43c" secondAttribute="bottom" constant="8" id="pB8-xB-6Km"/>
                                 <constraint firstItem="Iwp-Pn-peY" firstAttribute="top" secondItem="Gdd-Rt-VCE" secondAttribute="bottom" constant="19.5" id="sXq-DX-PTk"/>
                                 <constraint firstItem="cNR-fC-wzV" firstAttribute="top" secondItem="CmH-xr-Itb" secondAttribute="bottom" constant="20" id="vSh-ja-y6N"/>
                                 <constraint firstItem="wTs-GU-9SS" firstAttribute="top" secondItem="cNR-fC-wzV" secondAttribute="bottom" constant="30" id="wc2-zo-L4T"/>

@@ -91,6 +91,15 @@ class EditBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    @IBAction func deletePressed(_ sender: Any) {
+        let userID = Auth.auth().currentUser?.uid
+        self.ref = Database.database().reference()
+        self.ref.child("buildings").child(userID!).child(self.selected_building as String).removeValue()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "BuildingVC") as! BuildingVC    // VC1 refers to destinationVC source file and "VC1" refers to destinationVC Storyboard ID
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         spinner.stopAnimating()
