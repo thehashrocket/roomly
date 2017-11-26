@@ -104,6 +104,7 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         addBuilding.modalPresentationStyle = .custom
         present(addBuilding, animated: true, completion: nil)
     }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let roomVC = segue.destination as? RoomVC {

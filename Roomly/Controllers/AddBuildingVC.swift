@@ -120,7 +120,6 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
-        
     }
     
     func saveImageToDocumentDirectory(_ chosenImage: UIImage) -> String {

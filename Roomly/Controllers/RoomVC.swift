@@ -126,7 +126,9 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     @IBAction func editBuildingPressed(_ sender: Any) {
+        let editBuilding = EditBuildingVC()
+        editBuilding.modalPresentationStyle = .custom
+        present(editBuilding, animated: true, completion: nil)
     }
-    
 
 }

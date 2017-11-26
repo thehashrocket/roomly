@@ -128,17 +128,10 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     }
     
     func addTextField() {
-//        view.addSubview(textField)
-//        stackView.addSubview(textField)
-//        purchaseDate.translatesAutoresizingMaskIntoConstraints = false
-//        purchaseDate.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40.0).isActive = true
-//        purchaseDate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40.0).isActive = true
-//        purchaseDate.topAnchor.constraint(equalTo: view.topAnchor, constant: 40.0).isActive = true
         purchaseDate.placeholder = "Select date"
         purchaseDate.borderStyle = .roundedRect
         purchaseDate.inputView = datePicker
         purchaseDate.inputAccessoryView = toolBar
-        
     }
     
     func createDatePicker() {
