@@ -118,11 +118,22 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E2y-Q7-9ve">
                                     <rect key="frame" x="30" y="290" width="255" height="191"/>
                                 </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdj-oM-Y7G">
+                                    <rect key="frame" x="134.5" y="549" width="45" height="30"/>
+                                    <state key="normal" title="Delete">
+                                        <color key="titleColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="deletePressed:" destination="-1" eventType="touchUpInside" id="8GO-s9-Ksl"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="H8p-xc-5mU" firstAttribute="leading" secondItem="uws-1D-R8U" secondAttribute="leading" constant="8" id="7OX-Y8-CJ4"/>
                                 <constraint firstAttribute="trailing" secondItem="C3j-Ez-Z7K" secondAttribute="trailing" constant="8" id="BXK-fx-7FE"/>
+                                <constraint firstItem="Mdj-oM-Y7G" firstAttribute="centerX" secondItem="uws-1D-R8U" secondAttribute="centerX" id="EQ2-TC-aHq"/>
+                                <constraint firstAttribute="bottom" secondItem="Mdj-oM-Y7G" secondAttribute="bottom" constant="8" id="EVT-tD-OR3"/>
                                 <constraint firstItem="QxP-8V-Gr1" firstAttribute="top" secondItem="uws-1D-R8U" secondAttribute="top" constant="8" id="FLu-QG-xZb"/>
                                 <constraint firstItem="E2y-Q7-9ve" firstAttribute="leading" secondItem="uws-1D-R8U" secondAttribute="leading" constant="30" id="La7-hM-NEr"/>
                                 <constraint firstAttribute="trailing" secondItem="of2-Lx-OxT" secondAttribute="trailing" constant="8" id="OmK-J5-gfU"/>

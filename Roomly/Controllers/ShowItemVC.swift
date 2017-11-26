@@ -48,16 +48,25 @@ class ShowItemVC: UIViewController {
                 self.ref.child("items").child(userID!).child(room).child(item).observe(DataEventType.value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary
                     
-                    self.itemName.text = value?["itemName"] as! String
-                    self.itemDescription.text = value?["itemDescription"] as! String
-                    self.purchaseAmount.text = value?["purchaseAmount"] as! String
-                    self.purchaseDate.text = value?["purchaseDate"] as! String
-                    self.saved_image = value?["imageName"] as! String
+                    self.itemName.text = value?["itemName"] as? String
+                    self.itemDescription.text = value?["itemDescription"] as? String
+                    self.purchaseAmount.text = value?["purchaseAmount"] as? String
+                    self.purchaseDate.text = value?["purchaseDate"] as? String
+                    if ((value?["imageName"]) != nil) {
+                        self.saved_image = (value?["imageName"] as? String)!
+                    } else {
+                        self.saved_image = ""
+                    }
                     
-                    let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
-                    let image    = UIImage(contentsOfFile: imageURL.path)
+                    if (self.saved_image != "") {
+                        let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
+                        let image    = UIImage(contentsOfFile: imageURL.path)
+                        self.imagePicked.image = image
+                    }
                     
-                    self.imagePicked.image = image
+                    
+                    
+                    
                 }){ (error) in
                     print(error.localizedDescription)
                 }

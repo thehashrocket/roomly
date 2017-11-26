@@ -77,6 +77,7 @@ class EditBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavig
         let childUpdates = ["/buildings/\(userID)/\(key)": post]
         self.ref.updateChildValues(childUpdates)
         spinner.stopAnimating()
+        spinner.hidesWhenStopped = true
         spinner.isHidden = true
         self.dismiss(animated: true, completion: nil)
     }

@@ -87,6 +87,15 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="loE-nd-go9">
                                     <rect key="frame" x="30" y="198.5" width="255" height="320.5"/>
                                 </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eva-Z2-iUq">
+                                    <rect key="frame" x="134.5" y="549" width="45" height="30"/>
+                                    <state key="normal" title="Delete">
+                                        <color key="titleColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="deletePressed:" destination="-1" eventType="touchUpInside" id="W2O-qd-pJY"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -95,6 +104,7 @@
                                 <constraint firstItem="nCX-1q-QO9" firstAttribute="top" secondItem="ywp-Ug-qZc" secondAttribute="top" constant="8" id="3vr-Og-1Ly"/>
                                 <constraint firstAttribute="trailing" secondItem="Fvk-cx-gUd" secondAttribute="trailing" constant="8" id="4rH-by-ppt"/>
                                 <constraint firstItem="IwL-tz-z7F" firstAttribute="top" secondItem="ywp-Ug-qZc" secondAttribute="top" constant="8" id="96S-8Y-tK9"/>
+                                <constraint firstItem="eva-Z2-iUq" firstAttribute="centerX" secondItem="ywp-Ug-qZc" secondAttribute="centerX" id="Ao2-YM-L3d"/>
                                 <constraint firstItem="nCX-1q-QO9" firstAttribute="leading" secondItem="ywp-Ug-qZc" secondAttribute="leading" constant="8" id="DKT-h4-Q4T"/>
                                 <constraint firstItem="loE-nd-go9" firstAttribute="top" secondItem="bTk-P6-ueK" secondAttribute="bottom" constant="30" id="Kvc-QG-sN5"/>
                                 <constraint firstItem="Fvk-cx-gUd" firstAttribute="top" secondItem="loE-nd-go9" secondAttribute="bottom" constant="30" id="MqA-34-mJn"/>
@@ -102,6 +112,7 @@
                                 <constraint firstAttribute="trailing" secondItem="IwL-tz-z7F" secondAttribute="trailing" constant="8" id="NWA-i8-FI1"/>
                                 <constraint firstItem="IwL-tz-z7F" firstAttribute="top" secondItem="ywp-Ug-qZc" secondAttribute="top" constant="8" id="QdZ-C0-7m7"/>
                                 <constraint firstAttribute="trailing" secondItem="loE-nd-go9" secondAttribute="trailing" constant="30" id="Tp8-WN-VZO"/>
+                                <constraint firstAttribute="bottom" secondItem="eva-Z2-iUq" secondAttribute="bottom" constant="8" id="Upt-zE-UNw"/>
                                 <constraint firstAttribute="trailing" secondItem="ldM-G4-LHv" secondAttribute="trailing" constant="8" id="VFX-dC-xMl"/>
                                 <constraint firstAttribute="bottom" secondItem="xBm-iT-2cm" secondAttribute="bottom" constant="8" id="YpI-CU-kvY"/>
                                 <constraint firstAttribute="bottom" secondItem="Fvk-cx-gUd" secondAttribute="bottom" constant="8" id="iBD-TO-83U"/>

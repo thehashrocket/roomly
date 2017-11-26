@@ -100,6 +100,19 @@ class EditItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func deletePressed(_ sender: Any) {
+        let userID = Auth.auth().currentUser?.uid
+        self.ref = Database.database().reference()
+        self.ref.child("items").child(userID!).child(self.selected_room as String).child(self.selected_item as String).removeValue()
+        //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //        let vc = storyboard.instantiateViewController(withIdentifier: "BuildingVC") as! BuildingVC    // VC1 refers to destinationVC source file and "VC1" refers to destinationVC Storyboard ID
+        //        self.present(vc, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let VC1 = storyboard.instantiateViewController(withIdentifier: "BuildingVC") as! BuildingVC
+        let navController = UINavigationController(rootViewController: VC1) // Creating a navigation controller with VC1 at the root of the navigation stack.
+        self.present(navController, animated:true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
