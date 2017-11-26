@@ -13,6 +13,7 @@ import FirebaseDatabase
 
 class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    // Variables
     var ref: DatabaseReference!
     let selected_room = DataService.instance.getSelectedRoom()
     
@@ -23,6 +24,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     // Outlets
     @IBOutlet weak var itemsCollection: UICollectionView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
@@ -52,6 +54,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 guard let userID = Auth.auth().currentUser?.uid else { return }
                 
                 self.ref.child("items").child(userID).child(self.selected_room as String).observe(DataEventType.value, with: { (snapshot) in
+                    self.spinner.startAnimating()
                     let postDict = snapshot.value as? [String : AnyObject] ?? [:]
                     DataService.instance.resetItems()
                     
@@ -81,6 +84,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         self.items = DataService.instance.getItemsForRoom(forRoomId: self.selected_room)
                         
                         self.itemsCollection.reloadData()
+                        self.spinner.stopAnimating()
                     })
                 }, withCancel: { (error) in
                     print(error)

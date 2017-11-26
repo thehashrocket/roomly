@@ -13,8 +13,8 @@ import FirebaseDatabase
 
 class ShowItemVC: UIViewController {
     
+    // Variables
     var ref: DatabaseReference!
-    
     var selected_item = ""
     var selected_room = ""
     var saved_image = ""
@@ -25,6 +25,7 @@ class ShowItemVC: UIViewController {
     @IBOutlet weak var purchaseAmount: UITextField!
     @IBOutlet weak var purchaseDate: UITextField!
     @IBOutlet weak var imagePicked: UIImageView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
@@ -46,6 +47,7 @@ class ShowItemVC: UIViewController {
                 print(self.selected_item)
                 
                 self.ref.child("items").child(userID!).child(room).child(item).observe(DataEventType.value, with: { (snapshot) in
+                    self.spinner.startAnimating()
                     let value = snapshot.value as? NSDictionary
                     
                     self.itemName.text = value?["itemName"] as? String
@@ -64,9 +66,7 @@ class ShowItemVC: UIViewController {
                         self.imagePicked.image = image
                     }
                     
-                    
-                    
-                    
+                    self.spinner.stopAnimating()
                 }){ (error) in
                     print(error.localizedDescription)
                 }

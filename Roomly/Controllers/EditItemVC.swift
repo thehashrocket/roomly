@@ -39,7 +39,7 @@ class EditItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     // Actions
     @IBAction func openCameraButton(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            var imagePicker = UIImagePickerController()
+            let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary;
             imagePicker.allowsEditing = true
@@ -110,6 +110,7 @@ class EditItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC1 = storyboard.instantiateViewController(withIdentifier: "BuildingVC") as! BuildingVC
         let navController = UINavigationController(rootViewController: VC1) // Creating a navigation controller with VC1 at the root of the navigation stack.
+
         self.present(navController, animated:true, completion: nil)
     }
     
@@ -144,10 +145,10 @@ class EditItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                     // Get user value
                     let value = snapshot.value as? NSDictionary
                     
-                    self.itemNameTxt.text = value?["itemName"] as! String
-                    self.itemDescriptionTxt.text = value?["itemDescription"] as! String
-                    self.purchaseAmountTxt.text = value?["purchaseAmount"] as! String
-                    self.purchaseDateTxt.text = value?["purchaseDate"] as! String
+                    self.itemNameTxt.text = value?["itemName"] as? String
+                    self.itemDescriptionTxt.text = value?["itemDescription"] as? String
+                    self.purchaseAmountTxt.text = value?["purchaseAmount"] as? String
+                    self.purchaseDateTxt.text = value?["purchaseDate"] as? String
                     self.saved_image = value?["imageName"] as! String
                     
                     let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)

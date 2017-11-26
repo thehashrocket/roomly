@@ -23,6 +23,11 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         buildingTable.dataSource = self
         buildingTable.delegate = self
         
+        UINavigationBar.appearance().barTintColor = .blue
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().isTranslucent = false
+        
         self.ref = Database.database().reference()
         
         Auth.auth().addStateDidChangeListener() { auth, user in
@@ -32,6 +37,8 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 guard let userID = Auth.auth().currentUser?.uid else { return }
                 
                 self.ref.child("buildings").child(userID).observe(DataEventType.value, with: { (snapshot) in
+                    self.spinner.startAnimating()
+                    
                     let postDict = snapshot.value as? [String : AnyObject] ?? [:]
                     
                     DataService.instance.resetBuildings()
@@ -55,6 +62,7 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                         DataService.instance.setBuilding(building: building)
                         
                         self.buildingTable.reloadData()
+                        self.spinner.stopAnimating()
                     })
                 }, withCancel: { (error) in
                     print(error)
@@ -74,6 +82,7 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // Outlets
     
     @IBOutlet weak var buildingTable: UITableView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)

@@ -23,6 +23,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="4Gn-NR-iBB">
+                                <rect key="frame" x="169" y="283" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BUILDING OR HOUSES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwC-mN-Xqi">
                                 <rect key="frame" x="0.0" y="25" width="375" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -72,6 +76,8 @@
                             <constraint firstItem="S1p-EF-LiW" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="CVO-7g-3r2"/>
                             <constraint firstItem="cwC-mN-Xqi" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Jkd-mL-eMP"/>
                             <constraint firstItem="cwC-mN-Xqi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OTd-W1-dgS"/>
+                            <constraint firstItem="4Gn-NR-iBB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Pjq-KC-tmb"/>
+                            <constraint firstItem="4Gn-NR-iBB" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="QxD-Sq-lSU"/>
                             <constraint firstItem="S1p-EF-LiW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VoD-ri-DrB"/>
                             <constraint firstItem="S1p-EF-LiW" firstAttribute="top" secondItem="cwC-mN-Xqi" secondAttribute="bottom" constant="31" id="eQH-Or-oRV"/>
                             <constraint firstItem="S1p-EF-LiW" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="g7r-Ec-yMe"/>
@@ -89,6 +95,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="buildingTable" destination="S1p-EF-LiW" id="cwl-ha-eSd"/>
+                        <outlet property="spinner" destination="4Gn-NR-iBB" id="eNU-Ml-yPk"/>
                         <segue destination="5WK-ow-VBi" kind="show" identifier="RoomVC" id="fBe-6f-TsH"/>
                     </connections>
                 </viewController>
@@ -126,6 +133,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="7LT-u3-2G6">
+                                <rect key="frame" x="169" y="283" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aw-id-hxm">
                                 <rect key="frame" x="0.0" y="25" width="375" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -175,8 +186,10 @@
                             <constraint firstItem="QNb-N0-ZeL" firstAttribute="trailing" secondItem="UiW-L2-RNr" secondAttribute="trailing" id="JZ3-EA-w7e"/>
                             <constraint firstItem="2aw-id-hxm" firstAttribute="trailing" secondItem="UiW-L2-RNr" secondAttribute="trailing" id="PLE-9t-eva"/>
                             <constraint firstItem="QNb-N0-ZeL" firstAttribute="top" secondItem="2aw-id-hxm" secondAttribute="bottom" constant="31" id="Swd-Wd-cVp"/>
+                            <constraint firstItem="7LT-u3-2G6" firstAttribute="centerX" secondItem="7Ca-Qu-TpD" secondAttribute="centerX" id="UJl-Hp-rSi"/>
                             <constraint firstItem="QNb-N0-ZeL" firstAttribute="bottom" secondItem="UiW-L2-RNr" secondAttribute="bottom" id="aSq-Zl-6Ao"/>
                             <constraint firstItem="2aw-id-hxm" firstAttribute="leading" secondItem="UiW-L2-RNr" secondAttribute="leading" id="jQa-qd-6Hn"/>
+                            <constraint firstItem="7LT-u3-2G6" firstAttribute="centerY" secondItem="7Ca-Qu-TpD" secondAttribute="centerY" id="s2P-Mo-7zb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UiW-L2-RNr"/>
                     </view>
@@ -198,6 +211,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="roomsCollection" destination="QNb-N0-ZeL" id="6rE-AU-PBN"/>
+                        <outlet property="spinner" destination="7LT-u3-2G6" id="1up-i1-pAN"/>
                         <segue destination="6hm-XM-mCi" kind="show" identifier="ItemVC" id="gXI-Dz-Dfl"/>
                     </connections>
                 </viewController>
@@ -213,6 +227,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Stb-ui-PuK">
+                                <rect key="frame" x="169" y="283" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ITEMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="az6-07-vhn">
                                 <rect key="frame" x="16" y="25" width="50" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -256,12 +274,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Stb-ui-PuK" firstAttribute="centerX" secondItem="xdo-HU-h2U" secondAttribute="centerX" id="8rB-EF-YaO"/>
+                            <constraint firstItem="Stb-ui-PuK" firstAttribute="centerY" secondItem="xdo-HU-h2U" secondAttribute="centerY" id="9hH-qb-kAO"/>
+                            <constraint firstAttribute="trailing" secondItem="az6-07-vhn" secondAttribute="trailing" constant="309" id="J73-RI-gur"/>
                             <constraint firstItem="eJP-CD-6cS" firstAttribute="leading" secondItem="4C6-f3-WZR" secondAttribute="leading" id="J9y-Lb-UpT"/>
                             <constraint firstItem="eJP-CD-6cS" firstAttribute="trailing" secondItem="4C6-f3-WZR" secondAttribute="trailing" id="LbN-rJ-tiR"/>
                             <constraint firstItem="eJP-CD-6cS" firstAttribute="top" secondItem="az6-07-vhn" secondAttribute="bottom" constant="31" id="a5H-Ie-maI"/>
                             <constraint firstItem="eJP-CD-6cS" firstAttribute="bottom" secondItem="4C6-f3-WZR" secondAttribute="bottom" id="dFW-OP-6Lb"/>
                             <constraint firstItem="az6-07-vhn" firstAttribute="top" secondItem="4C6-f3-WZR" secondAttribute="top" constant="25" id="pwZ-vr-XOS"/>
-                            <constraint firstItem="az6-07-vhn" firstAttribute="leading" secondItem="4C6-f3-WZR" secondAttribute="leading" constant="16" id="ux2-2w-No8"/>
+                            <constraint firstItem="az6-07-vhn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4C6-f3-WZR" secondAttribute="leading" id="ux2-2w-No8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4C6-f3-WZR"/>
                     </view>
@@ -281,6 +302,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="itemsCollection" destination="eJP-CD-6cS" id="mRv-aQ-ZqM"/>
+                        <outlet property="spinner" destination="Stb-ui-PuK" id="dzV-x3-Xsw"/>
                         <segue destination="T9X-IR-T23" kind="show" identifier="ShowItemVC" id="dz3-Td-iw0"/>
                     </connections>
                 </viewController>
@@ -296,6 +318,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lLv-YA-JRp">
+                                <rect key="frame" x="169" y="283" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tOQ-Up-NxL">
                                 <rect key="frame" x="8" y="346" width="359" height="249"/>
                             </imageView>
@@ -388,6 +415,7 @@
                         <outlet property="itemName" destination="rer-eo-5VB" id="7V8-nh-UJ3"/>
                         <outlet property="purchaseAmount" destination="y2q-v6-WB0" id="0We-T6-4Eg"/>
                         <outlet property="purchaseDate" destination="0eM-Ju-IrI" id="dcA-lc-T2Y"/>
+                        <outlet property="spinner" destination="lLv-YA-JRp" id="w8I-px-ohY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qIx-UA-ZE5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -490,7 +518,14 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" backIndicatorImage="icons8-back-50" id="byI-wJ-i3u">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

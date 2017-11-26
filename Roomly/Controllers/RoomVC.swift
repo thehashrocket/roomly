@@ -13,13 +13,16 @@ import FirebaseDatabase
 
 class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    // Variables
     var ref: DatabaseReference!
     let selected_building = DataService.instance.getSelectedBuilding()
     
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
     
+    // Outlets
     @IBOutlet weak var roomsCollection: UICollectionView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     private(set) public var rooms = [Room]()
     
@@ -84,6 +87,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         guard let userID = Auth.auth().currentUser?.uid else { return }
         print("self.selected_building \(self.selected_building)")
         self.ref.child("rooms").child(userID).child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
+            self.spinner.startAnimating()
             let postDict = snapshot.value as? [String : AnyObject] ?? [:]
             DataService.instance.resetRooms()
             
@@ -102,6 +106,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 DataService.instance.setRoom(room: room)
                 self.rooms = DataService.instance.getRoomsForBuilding(forBuildingId: self.selected_building)
                 self.roomsCollection.reloadData()
+                self.spinner.stopAnimating()
             })
         }, withCancel: { (error) in
             print(error)
