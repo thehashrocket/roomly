@@ -17,6 +17,8 @@
 		DE0E6B981FCA8E680066E071 /* EditRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E6B961FCA8E680066E071 /* EditRoomVC.swift */; };
 		DE0E6B991FCA8E680066E071 /* EditRoomVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE0E6B971FCA8E680066E071 /* EditRoomVC.xib */; };
 		DE0E6B9B1FCA9E5F0066E071 /* ShowItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E6B9A1FCA9E5F0066E071 /* ShowItemVC.swift */; };
+		DE0E6B9E1FCAB0860066E071 /* EditItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E6B9C1FCAB0860066E071 /* EditItemVC.swift */; };
+		DE0E6B9F1FCAB0860066E071 /* EditItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE0E6B9D1FCAB0860066E071 /* EditItemVC.xib */; };
 		DE17CECF1F85BA7200CA83A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE17CECE1F85BA7200CA83A9 /* AppDelegate.swift */; };
 		DE17CED11F85BA7200CA83A9 /* BuildingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE17CED01F85BA7200CA83A9 /* BuildingVC.swift */; };
 		DE17CED41F85BA7200CA83A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE17CED21F85BA7200CA83A9 /* Main.storyboard */; };
@@ -57,6 +59,8 @@
 		DE0E6B961FCA8E680066E071 /* EditRoomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoomVC.swift; sourceTree = "<group>"; };
 		DE0E6B971FCA8E680066E071 /* EditRoomVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditRoomVC.xib; sourceTree = "<group>"; };
 		DE0E6B9A1FCA9E5F0066E071 /* ShowItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowItemVC.swift; sourceTree = "<group>"; };
+		DE0E6B9C1FCAB0860066E071 /* EditItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemVC.swift; sourceTree = "<group>"; };
+		DE0E6B9D1FCAB0860066E071 /* EditItemVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditItemVC.xib; sourceTree = "<group>"; };
 		DE17CECB1F85BA7200CA83A9 /* Roomly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Roomly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE17CECE1F85BA7200CA83A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE17CED01F85BA7200CA83A9 /* BuildingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingVC.swift; sourceTree = "<group>"; };
@@ -162,11 +166,12 @@
 				DE8B0CF81FC8BAC200AF32BA /* AddRoomVC.swift */,
 				DE17CED01F85BA7200CA83A9 /* BuildingVC.swift */,
 				DE8B0CFC1FC8BB1100AF32BA /* EditBuildingVC.swift */,
+				DE0E6B9C1FCAB0860066E071 /* EditItemVC.swift */,
 				DE0E6B961FCA8E680066E071 /* EditRoomVC.swift */,
 				DE0E6B8E1FC9C5980066E071 /* ItemVC.swift */,
 				DE81C4A41F8C558500674274 /* RoomVC.swift */,
-				DEB48F7E1FB8A58900379811 /* WelcomeVC.swift */,
 				DE0E6B9A1FCA9E5F0066E071 /* ShowItemVC.swift */,
+				DEB48F7E1FB8A58900379811 /* WelcomeVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -185,9 +190,9 @@
 			isa = PBXGroup;
 			children = (
 				DE17CEEF1F85CB2300CA83A9 /* BuildingCell.swift */,
-				DE81C4A81F8C568400674274 /* RoomCell.swift */,
 				DEBB7AFF1FC250A700427CDD /* GradientView.swift */,
 				DE0E6B901FC9DF690066E071 /* ItemCell.swift */,
+				DE81C4A81F8C568400674274 /* RoomCell.swift */,
 				DEBB7B011FC27DE800427CDD /* RoundedButton.swift */,
 			);
 			path = Views;
@@ -209,6 +214,7 @@
 				DE0E6B931FCA05940066E071 /* AddItemVC.xib */,
 				DE8B0CF91FC8BAC200AF32BA /* AddRoomVC.xib */,
 				DE8B0CFD1FC8BB1100AF32BA /* EditBuildingVC.xib */,
+				DE0E6B9D1FCAB0860066E071 /* EditItemVC.xib */,
 				DE0E6B971FCA8E680066E071 /* EditRoomVC.xib */,
 			);
 			path = XIBs;
@@ -294,6 +300,7 @@
 				DE17CED41F85BA7200CA83A9 /* Main.storyboard in Resources */,
 				DE8B0CFF1FC8BB1100AF32BA /* EditBuildingVC.xib in Resources */,
 				DE8B0CFB1FC8BAC200AF32BA /* AddRoomVC.xib in Resources */,
+				DE0E6B9F1FCAB0860066E071 /* EditItemVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +384,7 @@
 				DE0E6B8F1FC9C5980066E071 /* ItemVC.swift in Sources */,
 				DE17CEE91F85BB8700CA83A9 /* Room.swift in Sources */,
 				DE0E6B981FCA8E680066E071 /* EditRoomVC.swift in Sources */,
+				DE0E6B9E1FCAB0860066E071 /* EditItemVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

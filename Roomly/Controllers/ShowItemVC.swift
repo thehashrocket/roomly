@@ -71,4 +71,12 @@ class ShowItemVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // Actions
+    @IBAction func editItemPressed(_ sender: Any) {
+        let editItem = EditItemVC()
+        editItem.modalPresentationStyle = .custom
+        present(editItem, animated: true, completion: nil)
+    }
+    
 }

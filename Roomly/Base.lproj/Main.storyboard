@@ -377,7 +377,11 @@
                         <viewLayoutGuide key="safeArea" id="tZl-sZ-HKH"/>
                     </view>
                     <navigationItem key="navigationItem" title="Show Item" id="GCd-Kt-jbc">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="2hh-M1-NiJ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="2hh-M1-NiJ">
+                            <connections>
+                                <action selector="editItemPressed:" destination="T9X-IR-T23" id="4EV-JU-kpc"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="imagePicked" destination="tOQ-Up-NxL" id="9Yz-E1-WaS"/>

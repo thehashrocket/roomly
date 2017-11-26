@@ -1,8 +1,8 @@
 //
-//  AddItem.swift
+//  EditItemVC.swift
 //  Roomly
 //
-//  Created by Jason Shultz on 11/25/17.
+//  Created by Jason Shultz on 11/26/17.
 //  Copyright © 2017 Chaos Elevators, Inc. All rights reserved.
 //
 
@@ -11,12 +11,14 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // Variables
     var ref: DatabaseReference!
     var imagesDirectoryPath:String!
     var saved_image = ""
+    var selected_building = "" as NSString
+    var selected_item = "" as NSString
     var selected_room = "" as NSString
     var itemNameText = ""
     var itemDescriptionText = ""
@@ -27,84 +29,51 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     var textField = UITextField()
     
     // Outlets
-    @IBOutlet weak var itemName: UITextField!
-    @IBOutlet weak var itemDescription: UITextField!
+    @IBOutlet weak var itemNameTxt: UITextField!
+    @IBOutlet weak var itemDescriptionTxt: UITextField!
+    @IBOutlet weak var purchaseAmountTxt: UITextField!
+    @IBOutlet weak var purchaseDateTxt: UITextField!
     @IBOutlet weak var imagePicked: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    @IBOutlet weak var purchaseDate: UITextField!
-    @IBOutlet weak var purchaseAmount: UITextField!
-    @IBOutlet weak var stackView: UIStackView!
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        selected_room = DataService.instance.getSelectedRoom()
-        spinner.isHidden = true
-        spinner.stopAnimating()
-        
-        self.ref = Database.database().reference()
-        
-        // Do any additional setup after loading the view.
-        
-        if !FileManager.default.fileExists(atPath: IMAGE_DIRECTORY_PATH) {
-            do {
-                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: IMAGE_DIRECTORY_PATH), withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                print(error)
-            }
-        }
-        
-        createDatePicker()
-        createToolBar()
-        addTextField()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     // Actions
-    
     @IBAction func openCameraButton(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let imagePicker = UIImagePickerController()
+            var imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary;
             imagePicker.allowsEditing = true
             self.present(imagePicker, animated: true, completion: nil)
         }
     }
-    
-    @IBAction func closePicked(_ sender: Any) {
+    @IBAction func closePressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func cancelPicked(_ sender: Any) {
+    @IBAction func cancelPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    @IBAction func submitPicked(_ sender: Any) {
+    @IBAction func submitPressed(_ sender: Any) {
         spinner.startAnimating()
         spinner.isHidden = false
         
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
-        let key = self.ref.child("items").child(userID).childByAutoId().key
+        let key = self.selected_item as String
         
-        guard let itemNameText = itemName.text , itemName.text != "" else {
+        guard let itemNameText = itemNameTxt.text , itemNameTxt.text != "" else {
             return
         }
         
-        guard let itemDescriptionText = itemDescription.text , itemDescription.text != "" else {
+        guard let itemDescriptionText = itemDescriptionTxt.text , itemDescriptionTxt.text != "" else {
             return
         }
         
-        guard let purchaseAmountText = purchaseAmount.text , purchaseAmount.text != "" else {
+        guard let purchaseAmountText = purchaseAmountTxt.text , purchaseAmountTxt.text != "" else {
             return
         }
         
-        guard let purchaseDateText = purchaseDate.text , purchaseDate.text != "" else {
+        guard let purchaseDateText = purchaseDateTxt.text , purchaseDateTxt.text != "" else {
             return
         }
         
@@ -128,11 +97,70 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         self.dismiss(animated: true, completion: nil)
     }
     
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        selected_building = DataService.instance.getSelectedBuilding()
+        selected_item = DataService.instance.getSelectedItem()
+        selected_room = DataService.instance.getSelectedRoom()
+        spinner.isHidden = true
+        self.ref = Database.database().reference()
+        
+        // Do any additional setup after loading the view.
+        
+        if !FileManager.default.fileExists(atPath: IMAGE_DIRECTORY_PATH) {
+            do {
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: IMAGE_DIRECTORY_PATH), withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
+        
+        createDatePicker()
+        createToolBar()
+        addTextField()
+        
+        Auth.auth().addStateDidChangeListener() { auth, user in
+            if user != nil {
+                // User is signed in.
+                let userID = Auth.auth().currentUser?.uid
+                self.ref.child("items").child(userID!).child(self.selected_room as String).child(self.selected_item as String).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    let value = snapshot.value as? NSDictionary
+                    
+                    self.itemNameTxt.text = value?["itemName"] as! String
+                    self.itemDescriptionTxt.text = value?["itemDescription"] as! String
+                    self.purchaseAmountTxt.text = value?["purchaseAmount"] as! String
+                    self.purchaseDateTxt.text = value?["purchaseDate"] as! String
+                    self.saved_image = value?["imageName"] as! String
+                    
+                    let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
+                    let image    = UIImage(contentsOfFile: imageURL.path)
+                    
+                    self.imagePicked.image = image
+                    
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
+                
+            } else {
+                // TODO: Segue to WelcomeVC here.
+                print("No user is signed in.")
+            }
+        }
+        
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     func addTextField() {
-        purchaseDate.placeholder = "Select date"
-        purchaseDate.borderStyle = .roundedRect
-        purchaseDate.inputView = datePicker
-        purchaseDate.inputAccessoryView = toolBar
+        purchaseDateTxt.placeholder = "Select date"
+        purchaseDateTxt.borderStyle = .roundedRect
+        purchaseDateTxt.inputView = datePicker
+        purchaseDateTxt.inputAccessoryView = toolBar
     }
     
     func createDatePicker() {
@@ -144,7 +172,7 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
-        purchaseDate.text = dateFormatter.string(from: datePicker.date)
+        purchaseDateTxt.text = dateFormatter.string(from: datePicker.date)
     }
     
     func createToolBar() {
@@ -159,7 +187,6 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         let labelButton = UIBarButtonItem(customView:label)
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        
         toolBar.setItems([todayButton,flexibleSpace,labelButton,flexibleSpace,doneButton], animated: true)
     }
     
@@ -168,13 +195,13 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         
-        purchaseDate.text = dateFormatter.string(from: Date()) // 2
+        purchaseDateTxt.text = dateFormatter.string(from: Date()) // 2
         
-        purchaseDate.resignFirstResponder()
+        purchaseDateTxt.resignFirstResponder()
     }
     
     @objc func doneButtonPressed(sender: UIBarButtonItem) {
-        purchaseDate.resignFirstResponder()
+        purchaseDateTxt.resignFirstResponder()
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -206,8 +233,5 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
             return filepath
         }
     }
-    
-    
-    
 
 }
