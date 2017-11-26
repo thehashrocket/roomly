@@ -38,13 +38,11 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
                 // User is signed in.
-                print("here")
                 
                 guard let userID = Auth.auth().currentUser?.uid else { return }
                 
                 self.ref.child("rooms").child(userID).child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
                     let postDict = snapshot.value as? [String : AnyObject] ?? [:]
-                    print("now here")
                     DataService.instance.resetRooms()
                     
                     postDict.forEach({ (arg) in
@@ -52,7 +50,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         
                         let (_, value) = arg
                         let dataChange = value as! [String: AnyObject]
-                        print(dataChange["roomName"]);
                         
                         let id = dataChange["id"] as! String
                         let roomName = dataChange["roomName"] as! String
@@ -107,8 +104,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("indexPath \(indexPath)")
-        print("indexPath.row \(indexPath.row)")
         let room = rooms[indexPath.row]
         DataService.instance.setSelectedRoom(room: room)
         performSegue(withIdentifier: "ItemVC", sender: room)

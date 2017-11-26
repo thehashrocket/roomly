@@ -114,7 +114,6 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         self.saved_image = saveImageToDocumentDirectory(pickedImage!)
-        print(self.saved_image)
         imagePicked.image = pickedImage
         dismiss(animated: true, completion: nil)
     }
@@ -137,7 +136,6 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         let url = NSURL.fileURL(withPath: filepath)
         do {
             try UIImageJPEGRepresentation(chosenImage, 1.0)?.write(to: url, options: .atomic)
-            print("file_path " + filepath)
             return String.init("\(filename)")
             
         } catch {

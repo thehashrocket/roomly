@@ -48,28 +48,33 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
                 // User is signed in.
-                print("here")
                 
                 guard let userID = Auth.auth().currentUser?.uid else { return }
                 
                 self.ref.child("items").child(userID).child(self.selected_room as String).observe(DataEventType.value, with: { (snapshot) in
                     let postDict = snapshot.value as? [String : AnyObject] ?? [:]
-                    print("now here")
                     DataService.instance.resetItems()
                     
                     postDict.forEach({ (arg) in
                         let (_, value) = arg
                         let dataChange = value as! [String: AnyObject]
-                        print(dataChange["itemName"]);
                         
                         let id = dataChange["id"] as! String
                         let itemName = dataChange["itemName"] as! String
                         let itemDescription = dataChange["itemDescription"] as! String
                         let imageName = dataChange["imageName"] as! String
+                        let purchaseAmount = ""
+                        if let val = dataChange["purchaseAmount"] {
+                            let purchaseAmount = dataChange["purchaseAmount"] as! String
+                        }
+                        var purchaseDate = ""
+                        if let val = dataChange["purchaseDate"] {
+                            let purchaseDate = dataChange["purchaseDate"] as! String
+                        }
                         let roomId = dataChange["roomId"] as! String
                         let uid = dataChange["uid"] as! String
                         
-                        let item = Item(id: id, itemName: itemName, itemDescription: itemDescription, imageName: imageName, roomId: roomId, uid: uid)
+                        let item = Item(id: id, itemName: itemName, itemDescription: itemDescription, imageName: imageName, purchaseAmount: purchaseAmount, purchaseDate: purchaseDate, roomId: roomId, uid: uid)
                         
                         DataService.instance.setItem(item: item)
                         

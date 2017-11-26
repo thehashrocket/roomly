@@ -19,19 +19,23 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     var selected_room = "" as NSString
     var itemNameText = ""
     var itemDescriptionText = ""
+    var purchaseDateText = ""
+    var purchaseAmountText = ""
     
     // Outlets
     @IBOutlet weak var itemName: UITextField!
     @IBOutlet weak var itemDescription: UITextField!
     @IBOutlet weak var imagePicked: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var purchaseDate: UITextField!
+    @IBOutlet weak var purchaseAmount: UITextField!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         selected_room = DataService.instance.getSelectedRoom()
         spinner.isHidden = true
         self.ref = Database.database().reference()
+        
         // Do any additional setup after loading the view.
         
         if !FileManager.default.fileExists(atPath: IMAGE_DIRECTORY_PATH) {
@@ -84,12 +88,22 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
             self.itemDescriptionText = self.itemDescription.text!
         }
         
-        let item = Item(id: key, itemName: itemNameText, itemDescription: itemDescriptionText, imageName: self.saved_image, roomId: selected_room as String, uid: userID)
+        if purchaseAmount.text != "" {
+            self.purchaseAmountText = self.purchaseAmount.text!
+        }
+        
+        if purchaseDate.text != "" {
+            self.purchaseDateText = self.purchaseDate.text!
+        }
+        
+        let item = Item(id: key, itemName: itemNameText, itemDescription: itemDescriptionText, imageName: self.saved_image, purchaseAmount: purchaseAmountText, purchaseDate: purchaseDateText as String, roomId: selected_room as String, uid: userID)
         
         let post = [
             "itemName" : item.itemName,
             "itemDescription" : item.itemDescription,
             "imageName": item.imageName,
+            "purchaseAmount" : item.purchaseAmount,
+            "purchaseDate" : item.purchaseDate,
             "roomId" : item.roomId,
             "uid" : item.uid,
             "id" : item.id,
@@ -102,6 +116,13 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         self.dismiss(animated: true, completion: nil)
     }
     
+//    @objc func datePickerChanged(datePicker: UIDatePicker){
+//        datePicker.datePickerMode = .date
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "MMM dd, yyyy"
+//        let purchase_date = dateFormatter.string(from: datePicker.date)
+//        self.purchaseDate.text = purchase_date
+//    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
@@ -120,15 +141,12 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         let formatter = DateFormatter()
         // initially set the format based on your datepicker date
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
         let date = formatter.string(from: NSDate() as Date).replacingOccurrences(of: " ", with: "_")
-        
         let filename = date.appending(".jpg")
         let filepath = IMAGE_DIRECTORY_PATH + "/".appending(filename)
         let url = NSURL.fileURL(withPath: filepath)
         do {
             try UIImageJPEGRepresentation(chosenImage, 1.0)?.write(to: url, options: .atomic)
-            print("file_path " + filepath)
             return String.init("\(filename)")
             
         } catch {
@@ -137,6 +155,8 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
             return filepath
         }
     }
+    
+    
     
 
 }

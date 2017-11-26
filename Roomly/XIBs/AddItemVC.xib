@@ -14,6 +14,8 @@
                 <outlet property="imagePicked" destination="qfw-XR-rni" id="EIy-6B-zlj"/>
                 <outlet property="itemDescription" destination="Tus-a0-lJH" id="a1Y-6R-zDJ"/>
                 <outlet property="itemName" destination="7D9-WL-VtL" id="Ekg-CL-CQl"/>
+                <outlet property="purchaseAmount" destination="M4M-YL-cC3" id="vcw-yA-R2C"/>
+                <outlet property="purchaseDate" destination="4SH-Sx-oHQ" id="oY5-hY-yci"/>
                 <outlet property="spinner" destination="Eb2-l0-SUG" id="IMO-Pe-WpX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -30,7 +32,7 @@
                             <rect key="frame" x="30" y="50" width="315" height="587"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="L7O-1f-SyN">
-                                    <rect key="frame" x="8" y="56" width="299" height="75"/>
+                                    <rect key="frame" x="8" y="56" width="299" height="165"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7D9-WL-VtL">
                                             <rect key="frame" x="0.0" y="0.0" width="299" height="30"/>
@@ -46,6 +48,18 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="LyW-Cm-d5Y"/>
                                             </constraints>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Purchase Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M4M-YL-cC3">
+                                            <rect key="frame" x="0.0" y="90" width="299" height="30"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Purchase Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4SH-Sx-oHQ">
+                                            <rect key="frame" x="0.0" y="135" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -72,7 +86,7 @@
                                         <action selector="cancelPicked:" destination="-1" eventType="touchUpInside" id="7G8-as-CE7"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add A Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9v-wE-3Q0">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add A Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9v-wE-3Q0">
                                     <rect key="frame" x="8" y="8" width="95" height="20.5"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20.5" id="dA3-2h-spq"/>
@@ -89,16 +103,19 @@
                                         <constraint firstAttribute="height" constant="28" id="VVn-Ef-Xim"/>
                                     </constraints>
                                     <state key="normal" image="closeButton"/>
+                                    <connections>
+                                        <action selector="closePicked:" destination="-1" eventType="touchUpInside" id="msh-Ib-kwE"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCE-Or-XRD">
-                                    <rect key="frame" x="114.5" y="173.5" width="86" height="30"/>
+                                    <rect key="frame" x="114.5" y="243.5" width="86" height="30"/>
                                     <state key="normal" title="Add A Photo"/>
                                     <connections>
                                         <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="vR6-3j-2R6"/>
                                     </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qfw-XR-rni">
-                                    <rect key="frame" x="30" y="200" width="255" height="281"/>
+                                    <rect key="frame" x="30" y="290" width="255" height="191"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -106,7 +123,7 @@
                                 <constraint firstItem="VTn-d1-pYe" firstAttribute="top" secondItem="h9U-20-l5p" secondAttribute="top" constant="8" id="2iy-aJ-OBd"/>
                                 <constraint firstItem="CQR-du-nDz" firstAttribute="top" secondItem="qfw-XR-rni" secondAttribute="bottom" constant="68" id="49p-Wc-X7a"/>
                                 <constraint firstAttribute="bottom" secondItem="C1w-c4-089" secondAttribute="bottom" constant="8" id="5AG-D4-jKE"/>
-                                <constraint firstItem="DCE-Or-XRD" firstAttribute="centerY" secondItem="h9U-20-l5p" secondAttribute="centerY" constant="-105" id="9B5-pz-TAK"/>
+                                <constraint firstItem="DCE-Or-XRD" firstAttribute="centerY" secondItem="h9U-20-l5p" secondAttribute="centerY" constant="-35" id="9B5-pz-TAK"/>
                                 <constraint firstItem="DCE-Or-XRD" firstAttribute="centerX" secondItem="h9U-20-l5p" secondAttribute="centerX" id="9By-oh-HVa"/>
                                 <constraint firstAttribute="trailing" secondItem="L7O-1f-SyN" secondAttribute="trailing" constant="8" id="D5K-aX-K7s"/>
                                 <constraint firstItem="qfw-XR-rni" firstAttribute="top" secondItem="L7O-1f-SyN" secondAttribute="bottom" constant="69" id="FdM-1g-SZ2"/>

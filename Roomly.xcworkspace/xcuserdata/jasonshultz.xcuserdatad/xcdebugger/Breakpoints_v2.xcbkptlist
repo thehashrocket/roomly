@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Roomly/Controllers/BuildingVC.swift"
-            timestampString = "533327098.502491"
+            timestampString = "533351521.505518"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Roomly/Controllers/BuildingVC.swift"
-            timestampString = "533327098.502557"
+            timestampString = "533351521.505588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "62"
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Roomly/Controllers/RoomVC.swift"
-            timestampString = "533344921.735599"
+            timestampString = "533351521.505646"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,107 +106,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Roomly/Controllers/RoomVC.swift"
-            timestampString = "533344921.735686"
+            timestampString = "533351521.50572"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "initRooms(building:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Roomly/Controllers/AddItemVC.swift"
-            timestampString = "533344921.735763"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Roomly/Controllers/AddItemVC.swift"
-            timestampString = "533344921.735816"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "AddItemVC"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Roomly.AddItemVC.spinner.getter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIActivityIndicatorView&gt;"
-                  moduleName = "Roomly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Controllers/AddItemVC.swift"
-                  timestampString = "533343027.292128"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "79">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Roomly.AddItemVC.spinner.setter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIActivityIndicatorView&gt;"
-                  moduleName = "Roomly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Controllers/AddItemVC.swift"
-                  timestampString = "533343027.294387"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "86">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Roomly.AddItemVC.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; Roomly.AddItemVC"
-                  moduleName = "Roomly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Controllers/AddItemVC.swift"
-                  timestampString = "533343027.296391"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "1478">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Roomly.AddItemVC.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;Roomly.AddItemVC&gt;"
-                  moduleName = "Roomly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Controllers/AddItemVC.swift"
-                  timestampString = "533343027.298373"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "1388">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

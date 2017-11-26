@@ -128,7 +128,6 @@ class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         let url = NSURL.fileURL(withPath: filepath)
         do {
             try UIImageJPEGRepresentation(chosenImage, 1.0)?.write(to: url, options: .atomic)
-            print("file_path " + filepath)
             return String.init("\(filename)")
             
         } catch {
