@@ -21,6 +21,9 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     var itemDescriptionText = ""
     var purchaseDateText = ""
     var purchaseAmountText = ""
+    var datePicker = UIDatePicker()
+    var toolBar = UIToolbar()
+    var textField = UITextField()
     
     // Outlets
     @IBOutlet weak var itemName: UITextField!
@@ -29,6 +32,8 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var purchaseDate: UITextField!
     @IBOutlet weak var purchaseAmount: UITextField!
+    @IBOutlet weak var stackView: UIStackView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +50,10 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
                 print(error)
             }
         }
+        
+        createDatePicker()
+        createToolBar()
+        addTextField()
     }
 
     override func didReceiveMemoryWarning() {
@@ -116,13 +125,61 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         self.dismiss(animated: true, completion: nil)
     }
     
-//    @objc func datePickerChanged(datePicker: UIDatePicker){
-//        datePicker.datePickerMode = .date
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "MMM dd, yyyy"
-//        let purchase_date = dateFormatter.string(from: datePicker.date)
-//        self.purchaseDate.text = purchase_date
-//    }
+    func addTextField() {
+//        view.addSubview(textField)
+//        stackView.addSubview(textField)
+//        purchaseDate.translatesAutoresizingMaskIntoConstraints = false
+//        purchaseDate.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40.0).isActive = true
+//        purchaseDate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40.0).isActive = true
+//        purchaseDate.topAnchor.constraint(equalTo: view.topAnchor, constant: 40.0).isActive = true
+        purchaseDate.placeholder = "Select date"
+        purchaseDate.borderStyle = .roundedRect
+        purchaseDate.inputView = datePicker
+        purchaseDate.inputAccessoryView = toolBar
+        
+    }
+    
+    func createDatePicker() {
+        datePicker.datePickerMode = .date
+        datePicker.addTarget(self, action: #selector(self.datePickerValueChanged(datePicker:)), for: .valueChanged)
+    }
+    
+    @objc func datePickerValueChanged(datePicker: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        purchaseDate.text = dateFormatter.string(from: datePicker.date)
+    }
+    
+    func createToolBar() {
+        toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
+        
+        let todayButton = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(todayButtonPressed(sender:)))
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed(sender:)))
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width/3, height: 40))
+        label.text = "Choose your Date"
+        let labelButton = UIBarButtonItem(customView:label)
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        
+        toolBar.setItems([todayButton,flexibleSpace,labelButton,flexibleSpace,doneButton], animated: true)
+    }
+    
+    @objc func todayButtonPressed(sender: UIBarButtonItem) {
+        let dateFormatter = DateFormatter() // 1
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        
+        purchaseDate.text = dateFormatter.string(from: Date()) // 2
+        
+        purchaseDate.resignFirstResponder()
+    }
+    
+    @objc func doneButtonPressed(sender: UIBarButtonItem) {
+        purchaseDate.resignFirstResponder()
+    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
@@ -133,11 +190,9 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
-        
     }
     
     func saveImageToDocumentDirectory(_ chosenImage: UIImage) -> String {
-        
         let formatter = DateFormatter()
         // initially set the format based on your datepicker date
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

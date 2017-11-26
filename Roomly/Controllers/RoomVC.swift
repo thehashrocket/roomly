@@ -31,44 +31,13 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         super.viewDidLoad()
         roomsCollection.dataSource = self
         roomsCollection.delegate = self
-        rooms = DataService.instance.getRooms()
-        
-        self.ref = Database.database().reference()
+//        rooms = DataService.instance.getRooms()
         
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
                 // User is signed in.
                 
-                guard let userID = Auth.auth().currentUser?.uid else { return }
-                
-                self.ref.child("rooms").child(userID).child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
-                    let postDict = snapshot.value as? [String : AnyObject] ?? [:]
-                    DataService.instance.resetRooms()
-                    
-                    postDict.forEach({ (arg) in
-                        
-                        
-                        let (_, value) = arg
-                        let dataChange = value as! [String: AnyObject]
-                        
-                        let id = dataChange["id"] as! String
-                        let roomName = dataChange["roomName"] as! String
-                        let roomDescription = dataChange["roomDescription"] as! String
-                        let imageName = dataChange["imageName"] as! String
-                        let buildingId = dataChange["buildingId"] as! String
-                        let uid = dataChange["uid"] as! String
-                        
-                        let room = Room(id: id, roomName: roomName, roomDescription: roomDescription, imageName: imageName, buildingId: buildingId, uid: uid)
-                        
-                        DataService.instance.setRoom(room: room)
-                        
-                        self.rooms = DataService.instance.getRoomsForBuilding(forBuildingId: self.selected_building)
-                        
-                        self.roomsCollection.reloadData()
-                    })
-                }, withCancel: { (error) in
-                    print(error)
-                })
+                self.getRooms()
                 
             } else {
                 // TODO: Segue to WelcomeVC here.
@@ -85,9 +54,10 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
 
     func initRooms(building: Building) {
-        rooms = DataService.instance.getRoomsForBuilding(forBuildingId: building.id as NSString)
-        
+        print("building.id \(building.id)")
+//        rooms = DataService.instance.getRoomsForBuilding(forBuildingId: building.id as NSString)
         navigationItem.title = building.buildingName! as String
+        self.getRooms()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -107,6 +77,35 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         let room = rooms[indexPath.row]
         DataService.instance.setSelectedRoom(room: room)
         performSegue(withIdentifier: "ItemVC", sender: room)
+    }
+    
+    func getRooms() {
+        self.ref = Database.database().reference()
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        print("self.selected_building \(self.selected_building)")
+        self.ref.child("rooms").child(userID).child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
+            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+            DataService.instance.resetRooms()
+            
+            postDict.forEach({ (arg) in
+                let (_, value) = arg
+                let dataChange = value as! [String: AnyObject]
+                
+                let id = dataChange["id"] as! String
+                let roomName = dataChange["roomName"] as! String
+                let roomDescription = dataChange["roomDescription"] as! String
+                let imageName = dataChange["imageName"] as! String
+                let buildingId = dataChange["buildingId"] as! String
+                let uid = dataChange["uid"] as! String
+                let room = Room(id: id, roomName: roomName, roomDescription: roomDescription, imageName: imageName, buildingId: buildingId, uid: uid)
+                
+                DataService.instance.setRoom(room: room)
+                self.rooms = DataService.instance.getRoomsForBuilding(forBuildingId: self.selected_building)
+                self.roomsCollection.reloadData()
+            })
+        }, withCancel: { (error) in
+            print(error)
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

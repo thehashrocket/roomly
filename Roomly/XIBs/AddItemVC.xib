@@ -17,6 +17,7 @@
                 <outlet property="purchaseAmount" destination="M4M-YL-cC3" id="vcw-yA-R2C"/>
                 <outlet property="purchaseDate" destination="4SH-Sx-oHQ" id="oY5-hY-yci"/>
                 <outlet property="spinner" destination="Eb2-l0-SUG" id="IMO-Pe-WpX"/>
+                <outlet property="stackView" destination="L7O-1f-SyN" id="aOf-3i-4JT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
