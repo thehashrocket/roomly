@@ -79,7 +79,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IfN-rZ-xOD">
-                                    <rect key="frame" x="106.5" y="170.5" width="86" height="30"/>
+                                    <rect key="frame" x="106.5" y="130.5" width="86" height="30"/>
                                     <state key="normal" title="Add A Photo"/>
                                     <connections>
                                         <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="nsY-S2-0I4"/>
@@ -102,7 +102,7 @@
                                 <constraint firstAttribute="trailingMargin" secondItem="85y-Sq-PmQ" secondAttribute="trailing" constant="30" id="fjQ-T1-Qgo"/>
                                 <constraint firstAttribute="bottomMargin" secondItem="HDI-M0-dEU" secondAttribute="bottom" constant="8" id="gKh-vS-asn"/>
                                 <constraint firstAttribute="bottomMargin" secondItem="Fg8-VD-NmS" secondAttribute="bottom" constant="8" id="gkj-FJ-S70"/>
-                                <constraint firstItem="IfN-rZ-xOD" firstAttribute="centerY" secondItem="mzY-Fu-y0R" secondAttribute="centerY" constant="-100" id="h1C-MQ-q6r"/>
+                                <constraint firstItem="IfN-rZ-xOD" firstAttribute="centerY" secondItem="mzY-Fu-y0R" secondAttribute="centerY" constant="-140" id="h1C-MQ-q6r"/>
                                 <constraint firstAttribute="trailing" secondItem="QwP-zp-RYi" secondAttribute="trailing" constant="8" id="kiW-RW-iQ9"/>
                                 <constraint firstAttribute="trailing" secondItem="5pi-rI-xGw" secondAttribute="trailing" constant="8" id="oK2-kB-vwx"/>
                                 <constraint firstAttribute="bottom" secondItem="85y-Sq-PmQ" secondAttribute="bottom" constant="106" id="tab-CR-d38"/>

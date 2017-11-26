@@ -39,6 +39,8 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         super.viewDidLoad()
         selected_room = DataService.instance.getSelectedRoom()
         spinner.isHidden = true
+        spinner.stopAnimating()
+        
         self.ref = Database.database().reference()
         
         // Do any additional setup after loading the view.
@@ -89,20 +91,20 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         
         let key = self.ref.child("items").child(userID).childByAutoId().key
         
-        if itemName.text != "" {
-            self.itemNameText = self.itemName.text!
+        guard let itemNameText = itemName.text , itemName.text != "" else {
+            return
         }
         
-        if itemDescription.text != "" {
-            self.itemDescriptionText = self.itemDescription.text!
+        guard let itemDescriptionText = itemDescription.text , itemDescription.text != "" else {
+            return
         }
         
-        if purchaseAmount.text != "" {
-            self.purchaseAmountText = self.purchaseAmount.text!
+        guard let purchaseAmountText = purchaseAmount.text , purchaseAmount.text != "" else {
+            return
         }
         
-        if purchaseDate.text != "" {
-            self.purchaseDateText = self.purchaseDate.text!
+        guard let purchaseDateText = purchaseDate.text , purchaseDate.text != "" else {
+            return
         }
         
         let item = Item(id: key, itemName: itemNameText, itemDescription: itemDescriptionText, imageName: self.saved_image, purchaseAmount: purchaseAmountText, purchaseDate: purchaseDateText as String, roomId: selected_room as String, uid: userID)

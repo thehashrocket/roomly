@@ -100,7 +100,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIr-WN-Tgw">
-                                    <rect key="frame" x="106" y="270.5" width="86" height="30"/>
+                                    <rect key="frame" x="106" y="265.5" width="86" height="30"/>
                                     <state key="normal" title="Add A Photo"/>
                                     <connections>
                                         <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="ccj-pv-yFh"/>
@@ -127,7 +127,7 @@
                                 <constraint firstAttribute="trailingMargin" secondItem="hTA-SZ-kkK" secondAttribute="trailing" constant="8" id="fQQ-HZ-h6f"/>
                                 <constraint firstAttribute="trailing" secondItem="tYE-aI-5hq" secondAttribute="trailing" constant="8" id="hSz-zE-ZxX"/>
                                 <constraint firstAttribute="bottomMargin" secondItem="hTA-SZ-kkK" secondAttribute="bottom" constant="8" id="hqy-Jz-hZD"/>
-                                <constraint firstItem="NIr-WN-Tgw" firstAttribute="centerY" secondItem="GLn-cB-Iva" secondAttribute="centerY" id="k5K-yf-LAJ"/>
+                                <constraint firstItem="NIr-WN-Tgw" firstAttribute="centerY" secondItem="GLn-cB-Iva" secondAttribute="centerY" constant="-5" id="k5K-yf-LAJ"/>
                                 <constraint firstItem="ug3-bB-KiH" firstAttribute="leading" secondItem="GLn-cB-Iva" secondAttribute="leadingMargin" constant="8" id="rNG-Ct-imA"/>
                             </constraints>
                         </view>

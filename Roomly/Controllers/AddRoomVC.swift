@@ -68,12 +68,12 @@ class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         
         let key = self.ref.child("rooms").child(userID).childByAutoId().key
         
-        if roomName.text != "" {
-            self.roomNameText = self.roomName.text!
+        guard let roomNameText = roomName.text , roomName.text != "" else {
+            return
         }
         
-        if roomDescription.text != "" {
-            self.roomDescriptionText = self.roomDescription.text!
+        guard let roomDescriptionText = roomDescription.text , roomDescription.text != "" else {
+            return
         }
         
         let room = Room(id: key, roomName: roomNameText, roomDescription: roomDescriptionText, imageName: self.saved_image, buildingId: selected_building as String, uid: userID)

@@ -109,7 +109,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCE-Or-XRD">
-                                    <rect key="frame" x="114.5" y="243.5" width="86" height="30"/>
+                                    <rect key="frame" x="114.5" y="228.5" width="86" height="30"/>
                                     <state key="normal" title="Add A Photo"/>
                                     <connections>
                                         <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="vR6-3j-2R6"/>
@@ -124,7 +124,7 @@
                                 <constraint firstItem="VTn-d1-pYe" firstAttribute="top" secondItem="h9U-20-l5p" secondAttribute="top" constant="8" id="2iy-aJ-OBd"/>
                                 <constraint firstItem="CQR-du-nDz" firstAttribute="top" secondItem="qfw-XR-rni" secondAttribute="bottom" constant="68" id="49p-Wc-X7a"/>
                                 <constraint firstAttribute="bottom" secondItem="C1w-c4-089" secondAttribute="bottom" constant="8" id="5AG-D4-jKE"/>
-                                <constraint firstItem="DCE-Or-XRD" firstAttribute="centerY" secondItem="h9U-20-l5p" secondAttribute="centerY" constant="-35" id="9B5-pz-TAK"/>
+                                <constraint firstItem="DCE-Or-XRD" firstAttribute="centerY" secondItem="h9U-20-l5p" secondAttribute="centerY" constant="-50" id="9B5-pz-TAK"/>
                                 <constraint firstItem="DCE-Or-XRD" firstAttribute="centerX" secondItem="h9U-20-l5p" secondAttribute="centerX" id="9By-oh-HVa"/>
                                 <constraint firstAttribute="trailing" secondItem="L7O-1f-SyN" secondAttribute="trailing" constant="8" id="D5K-aX-K7s"/>
                                 <constraint firstItem="qfw-XR-rni" firstAttribute="top" secondItem="L7O-1f-SyN" secondAttribute="bottom" constant="69" id="FdM-1g-SZ2"/>
