@@ -98,9 +98,24 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         // Dispose of any resources that can be recreated.
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = items[indexPath.row]
+        DataService.instance.setSelectedItem(item: item)
+        performSegue(withIdentifier: "ShowItemVC", sender: item)
+    }
+    
     func initItems(room: Room) {
         items = DataService.instance.getItemsForRoom(forRoomId: room.id)
         navigationItem.title = room.roomName! as String
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let showItemVC = segue.destination as? ShowItemVC {
+            let barBtn = UIBarButtonItem()
+            barBtn.title = ""
+            navigationItem.backBarButtonItem = barBtn
+            assert(sender as? Item != nil)
+        }
     }
     
     // Actions

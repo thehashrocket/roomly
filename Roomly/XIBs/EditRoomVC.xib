@@ -30,7 +30,7 @@
                             <rect key="frame" x="30" y="50" width="315" height="587"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ldM-G4-LHv">
-                                    <rect key="frame" x="8" y="48.5" width="299" height="75"/>
+                                    <rect key="frame" x="8" y="48" width="299" height="75"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ulK-NK-drp">
                                             <rect key="frame" x="0.0" y="0.0" width="299" height="30"/>
@@ -60,8 +60,8 @@
                                         <action selector="cancelPicked:" destination="-1" eventType="touchUpInside" id="tdW-2h-poV"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add A Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCX-1q-QO9">
-                                    <rect key="frame" x="8" y="8" width="95" height="20.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit A Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCX-1q-QO9">
+                                    <rect key="frame" x="8" y="8" width="93.5" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
