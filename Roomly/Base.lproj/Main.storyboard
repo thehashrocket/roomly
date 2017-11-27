@@ -459,6 +459,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="mNQ-aB-3Hy"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                         <state key="normal" title="Log out">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
