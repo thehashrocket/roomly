@@ -37,13 +37,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="282" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iir-BQ-SpK">
                                             <rect key="frame" x="0.0" y="45" width="282" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textField>
                                     </subviews>
                                 </stackView>
@@ -85,8 +85,8 @@
                                         <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="nsY-S2-0I4"/>
                                     </connections>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="85y-Sq-PmQ">
-                                    <rect key="frame" x="38" y="200" width="223" height="265"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="85y-Sq-PmQ">
+                                    <rect key="frame" x="38" y="169" width="223" height="349"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -97,7 +97,7 @@
                                 <constraint firstItem="13j-62-7p4" firstAttribute="leading" secondItem="mzY-Fu-y0R" secondAttribute="leading" constant="8" id="JS4-WN-uGo"/>
                                 <constraint firstItem="5pi-rI-xGw" firstAttribute="top" secondItem="mzY-Fu-y0R" secondAttribute="top" constant="8" id="Oav-gB-4AD"/>
                                 <constraint firstItem="QwP-zp-RYi" firstAttribute="top" secondItem="13j-62-7p4" secondAttribute="bottom" constant="20" id="WnV-69-avd"/>
-                                <constraint firstItem="85y-Sq-PmQ" firstAttribute="top" secondItem="QwP-zp-RYi" secondAttribute="bottom" constant="77" id="ZBU-wa-4GE"/>
+                                <constraint firstItem="85y-Sq-PmQ" firstAttribute="top" secondItem="QwP-zp-RYi" secondAttribute="bottom" constant="46" id="ZBU-wa-4GE"/>
                                 <constraint firstItem="13j-62-7p4" firstAttribute="top" secondItem="mzY-Fu-y0R" secondAttribute="top" constant="8" id="caT-3g-DMV"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="85y-Sq-PmQ" secondAttribute="trailing" constant="30" id="fjQ-T1-Qgo"/>
                                 <constraint firstAttribute="bottomMargin" secondItem="HDI-M0-dEU" secondAttribute="bottom" constant="8" id="gKh-vS-asn"/>
@@ -105,7 +105,7 @@
                                 <constraint firstItem="IfN-rZ-xOD" firstAttribute="centerY" secondItem="mzY-Fu-y0R" secondAttribute="centerY" constant="-140" id="h1C-MQ-q6r"/>
                                 <constraint firstAttribute="trailing" secondItem="QwP-zp-RYi" secondAttribute="trailing" constant="8" id="kiW-RW-iQ9"/>
                                 <constraint firstAttribute="trailing" secondItem="5pi-rI-xGw" secondAttribute="trailing" constant="8" id="oK2-kB-vwx"/>
-                                <constraint firstAttribute="bottom" secondItem="85y-Sq-PmQ" secondAttribute="bottom" constant="106" id="tab-CR-d38"/>
+                                <constraint firstAttribute="bottom" secondItem="85y-Sq-PmQ" secondAttribute="bottom" constant="53" id="tab-CR-d38"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="Fg8-VD-NmS" secondAttribute="trailing" constant="8" id="utD-fQ-ljb"/>
                                 <constraint firstItem="QwP-zp-RYi" firstAttribute="leading" secondItem="mzY-Fu-y0R" secondAttribute="leading" constant="9" id="zXR-2I-vua"/>
                             </constraints>
@@ -134,6 +134,7 @@
                 <constraint firstItem="D0a-LF-6Ao" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="zYh-pO-96H"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="109.5" y="54.5"/>
         </view>
     </objects>
     <resources>

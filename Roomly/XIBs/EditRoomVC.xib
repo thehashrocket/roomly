@@ -36,13 +36,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gMe-pt-dov">
                                             <rect key="frame" x="0.0" y="45" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textField>
                                     </subviews>
                                 </stackView>
@@ -84,8 +84,8 @@
                                         <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="5Uf-cV-2Gf"/>
                                     </connections>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="loE-nd-go9">
-                                    <rect key="frame" x="30" y="198.5" width="255" height="320.5"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="loE-nd-go9">
+                                    <rect key="frame" x="30" y="177" width="255" height="366"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eva-Z2-iUq">
                                     <rect key="frame" x="134.5" y="549" width="45" height="30"/>
@@ -106,8 +106,8 @@
                                 <constraint firstItem="IwL-tz-z7F" firstAttribute="top" secondItem="ywp-Ug-qZc" secondAttribute="top" constant="8" id="96S-8Y-tK9"/>
                                 <constraint firstItem="eva-Z2-iUq" firstAttribute="centerX" secondItem="ywp-Ug-qZc" secondAttribute="centerX" id="Ao2-YM-L3d"/>
                                 <constraint firstItem="nCX-1q-QO9" firstAttribute="leading" secondItem="ywp-Ug-qZc" secondAttribute="leading" constant="8" id="DKT-h4-Q4T"/>
-                                <constraint firstItem="loE-nd-go9" firstAttribute="top" secondItem="bTk-P6-ueK" secondAttribute="bottom" constant="30" id="Kvc-QG-sN5"/>
-                                <constraint firstItem="Fvk-cx-gUd" firstAttribute="top" secondItem="loE-nd-go9" secondAttribute="bottom" constant="30" id="MqA-34-mJn"/>
+                                <constraint firstItem="loE-nd-go9" firstAttribute="top" secondItem="bTk-P6-ueK" secondAttribute="bottom" constant="8.5" id="Kvc-QG-sN5"/>
+                                <constraint firstItem="Fvk-cx-gUd" firstAttribute="top" secondItem="loE-nd-go9" secondAttribute="bottom" constant="6" id="MqA-34-mJn"/>
                                 <constraint firstAttribute="trailing" secondItem="IwL-tz-z7F" secondAttribute="trailing" constant="8" id="NRi-3I-TGR"/>
                                 <constraint firstAttribute="trailing" secondItem="IwL-tz-z7F" secondAttribute="trailing" constant="8" id="NWA-i8-FI1"/>
                                 <constraint firstItem="IwL-tz-z7F" firstAttribute="top" secondItem="ywp-Ug-qZc" secondAttribute="top" constant="8" id="QdZ-C0-7m7"/>
@@ -148,6 +148,7 @@
                 <constraint firstItem="2ob-Gu-ig5" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="zzp-gh-DX7"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="109.5" y="54.5"/>
         </view>
     </objects>
     <resources>

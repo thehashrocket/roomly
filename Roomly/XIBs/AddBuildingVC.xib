@@ -40,31 +40,31 @@
                                             <rect key="frame" x="0.0" y="0.0" width="282" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Street" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m7k-zL-h7D">
                                             <rect key="frame" x="0.0" y="45" width="282" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" textContentType="address-line1"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s7I-Me-EIV">
                                             <rect key="frame" x="0.0" y="90" width="282" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="address-level2"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nbg-2O-c5x">
                                             <rect key="frame" x="0.0" y="135" width="282" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" textContentType="address-level1"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gz2-fA-p7X">
                                             <rect key="frame" x="0.0" y="180" width="282" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="postal-code"/>
                                         </textField>
                                     </subviews>
                                 </stackView>
@@ -106,19 +106,19 @@
                                         <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="ccj-pv-yFh"/>
                                     </connections>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6LR-QY-2CE">
-                                    <rect key="frame" x="38" y="335.5" width="223" height="129.5"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6LR-QY-2CE">
+                                    <rect key="frame" x="38" y="304" width="223" height="213"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="6LR-QY-2CE" secondAttribute="bottom" constant="106" id="0T6-Mw-1K0"/>
+                                <constraint firstAttribute="bottom" secondItem="6LR-QY-2CE" secondAttribute="bottom" constant="54" id="0T6-Mw-1K0"/>
                                 <constraint firstItem="2U6-fw-Vtc" firstAttribute="top" secondItem="GLn-cB-Iva" secondAttribute="top" constant="8" id="1LJ-7f-dzN"/>
                                 <constraint firstAttribute="trailing" secondItem="jVy-fc-ajv" secondAttribute="trailing" constant="8" id="1vx-2G-ooo"/>
                                 <constraint firstItem="tYE-aI-5hq" firstAttribute="leading" secondItem="GLn-cB-Iva" secondAttribute="leading" constant="9" id="649-aV-ITj"/>
                                 <constraint firstItem="jVy-fc-ajv" firstAttribute="top" secondItem="GLn-cB-Iva" secondAttribute="top" constant="8" id="B2V-vV-DlC"/>
                                 <constraint firstItem="NIr-WN-Tgw" firstAttribute="centerX" secondItem="GLn-cB-Iva" secondAttribute="centerX" id="FBc-ql-0PT"/>
-                                <constraint firstItem="6LR-QY-2CE" firstAttribute="top" secondItem="tYE-aI-5hq" secondAttribute="bottom" constant="77" id="GXg-V9-2y6"/>
+                                <constraint firstItem="6LR-QY-2CE" firstAttribute="top" secondItem="tYE-aI-5hq" secondAttribute="bottom" constant="45.5" id="GXg-V9-2y6"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="6LR-QY-2CE" secondAttribute="trailing" constant="30" id="Lcm-Pn-QfD"/>
                                 <constraint firstItem="2U6-fw-Vtc" firstAttribute="leading" secondItem="GLn-cB-Iva" secondAttribute="leading" constant="8" id="Qg2-iL-xzz"/>
                                 <constraint firstItem="6LR-QY-2CE" firstAttribute="leading" secondItem="GLn-cB-Iva" secondAttribute="leadingMargin" constant="30" id="X5o-W0-gu9"/>

@@ -39,31 +39,31 @@
                                             <rect key="frame" x="0.0" y="0.0" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Street" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N6P-jB-DeR">
                                             <rect key="frame" x="0.0" y="45" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" textContentType="street-address"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7k-Rv-h9B">
                                             <rect key="frame" x="0.0" y="90" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" textContentType="address-level2"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Buo-U5-w4I">
                                             <rect key="frame" x="0.0" y="135" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" textContentType="address-level1"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w3j-CU-JcY">
                                             <rect key="frame" x="0.0" y="180" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="postal-code"/>
                                         </textField>
                                     </subviews>
                                 </stackView>
@@ -108,14 +108,14 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmH-xr-Itb">
-                                    <rect key="frame" x="109" y="285.5" width="97" height="30"/>
+                                    <rect key="frame" x="109" y="285" width="97" height="30"/>
                                     <state key="normal" title="Choose Photo"/>
                                     <connections>
                                         <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="p0U-eX-gc3"/>
                                     </connections>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cNR-fC-wzV">
-                                    <rect key="frame" x="30" y="335.5" width="255" height="183.5"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cNR-fC-wzV">
+                                    <rect key="frame" x="30" y="323" width="255" height="219"/>
                                 </imageView>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gat-UK-Ze6">
                                     <rect key="frame" x="139" y="275" width="37" height="37"/>
@@ -141,9 +141,9 @@
                                 <constraint firstAttribute="trailing" secondItem="9t2-sU-5xl" secondAttribute="trailing" constant="8" id="hSs-Ic-Qhl"/>
                                 <constraint firstAttribute="bottom" secondItem="BC2-Ij-43c" secondAttribute="bottom" constant="8" id="pB8-xB-6Km"/>
                                 <constraint firstItem="Iwp-Pn-peY" firstAttribute="top" secondItem="Gdd-Rt-VCE" secondAttribute="bottom" constant="19.5" id="sXq-DX-PTk"/>
-                                <constraint firstItem="cNR-fC-wzV" firstAttribute="top" secondItem="CmH-xr-Itb" secondAttribute="bottom" constant="20" id="vSh-ja-y6N"/>
-                                <constraint firstItem="wTs-GU-9SS" firstAttribute="top" secondItem="cNR-fC-wzV" secondAttribute="bottom" constant="30" id="wc2-zo-L4T"/>
-                                <constraint firstItem="cNR-fC-wzV" firstAttribute="top" secondItem="Iwp-Pn-peY" secondAttribute="bottom" constant="77" id="wgv-Vi-1LZ"/>
+                                <constraint firstItem="cNR-fC-wzV" firstAttribute="top" secondItem="CmH-xr-Itb" secondAttribute="bottom" constant="8" id="vSh-ja-y6N"/>
+                                <constraint firstItem="wTs-GU-9SS" firstAttribute="top" secondItem="cNR-fC-wzV" secondAttribute="bottom" constant="7" id="wc2-zo-L4T"/>
+                                <constraint firstItem="cNR-fC-wzV" firstAttribute="top" secondItem="Iwp-Pn-peY" secondAttribute="bottom" constant="65" id="wgv-Vi-1LZ"/>
                                 <constraint firstItem="cNR-fC-wzV" firstAttribute="leading" secondItem="hzn-B9-n70" secondAttribute="leading" constant="30" id="zn2-on-2wa"/>
                             </constraints>
                         </view>
@@ -170,6 +170,7 @@
                 <constraint firstItem="dCQ-Sa-huD" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="iI6-SG-FX4"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="75.5" y="54.5"/>
         </view>
     </objects>
     <resources>

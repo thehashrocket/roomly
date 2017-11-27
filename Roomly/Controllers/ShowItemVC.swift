@@ -20,10 +20,10 @@ class ShowItemVC: UIViewController {
     var saved_image = ""
 
     // Outlets
-    @IBOutlet weak var itemName: UITextField!
-    @IBOutlet weak var itemDescription: UITextField!
-    @IBOutlet weak var purchaseAmount: UITextField!
-    @IBOutlet weak var purchaseDate: UITextField!
+    @IBOutlet weak var itemNameText: UILabel!
+    @IBOutlet weak var itemDescriptionText: UILabel!
+    @IBOutlet weak var PurchaseAmountText: UILabel!
+    @IBOutlet weak var PurchaseDateText: UILabel!
     @IBOutlet weak var imagePicked: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
@@ -50,10 +50,10 @@ class ShowItemVC: UIViewController {
                     self.spinner.startAnimating()
                     let value = snapshot.value as? NSDictionary
                     
-                    self.itemName.text = value?["itemName"] as? String
-                    self.itemDescription.text = value?["itemDescription"] as? String
-                    self.purchaseAmount.text = value?["purchaseAmount"] as? String
-                    self.purchaseDate.text = value?["purchaseDate"] as? String
+                    self.itemNameText.text = value?["itemName"] as? String
+                    self.itemDescriptionText.text = value?["itemDescription"] as? String
+                    self.PurchaseAmountText.text = value?["purchaseAmount"] as? String
+                    self.PurchaseDateText.text = value?["purchaseDate"] as? String
                     if ((value?["imageName"]) != nil) {
                         self.saved_image = (value?["imageName"] as? String)!
                     } else {
