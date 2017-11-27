@@ -71,6 +71,7 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             } else {
                 // TODO: Segue to WelcomeVC here.
                 print("No user is signed in.")
+                self.performSegue(withIdentifier: "welcomeVC", sender: nil)
             }
         }
     }

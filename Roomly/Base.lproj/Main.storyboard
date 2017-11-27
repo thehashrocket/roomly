@@ -98,6 +98,7 @@
                         <outlet property="buildingTable" destination="S1p-EF-LiW" id="cwl-ha-eSd"/>
                         <outlet property="spinner" destination="4Gn-NR-iBB" id="eNU-Ml-yPk"/>
                         <segue destination="5WK-ow-VBi" kind="show" identifier="RoomVC" id="fBe-6f-TsH"/>
+                        <segue destination="GFn-GF-21E" kind="show" identifier="welcomeVC" id="Q4r-9B-7AJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -487,6 +488,26 @@
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gf7-3J-y90" customClass="RoundedButton" customModule="Roomly" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="399" width="359" height="60"/>
+                                        <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="adO-da-zi6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="goHome:" destination="GFn-GF-21E" eventType="touchUpInside" id="CE3-ZL-dSZ"/>
+                                            <action selector="loginBtnPressed:" destination="GFn-GF-21E" eventType="touchUpInside" id="WuF-R0-mY5"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -497,10 +518,13 @@
                                     <constraint firstItem="hFl-W9-jIw" firstAttribute="leading" secondItem="p9L-qe-hdq" secondAttribute="leading" constant="8" id="Orr-Ne-v0Y"/>
                                     <constraint firstItem="qI9-MT-gw7" firstAttribute="leading" secondItem="p9L-qe-hdq" secondAttribute="leading" constant="8" id="VUc-qY-1Kd"/>
                                     <constraint firstAttribute="trailing" secondItem="qI9-MT-gw7" secondAttribute="trailing" constant="8" id="Xgc-yb-FXl"/>
+                                    <constraint firstItem="hFl-W9-jIw" firstAttribute="top" secondItem="gf7-3J-y90" secondAttribute="bottom" constant="8" id="ZVS-8g-Zl9"/>
                                     <constraint firstItem="IOq-B4-fwP" firstAttribute="top" secondItem="p9L-qe-hdq" secondAttribute="topMargin" constant="8" id="bUm-EI-OWZ"/>
                                     <constraint firstItem="MSq-8v-jSM" firstAttribute="leading" secondItem="p9L-qe-hdq" secondAttribute="leading" constant="50" id="kbt-cr-nA1"/>
                                     <constraint firstAttribute="bottom" secondItem="qI9-MT-gw7" secondAttribute="bottom" constant="8" id="mOp-9h-Irj"/>
+                                    <constraint firstAttribute="trailing" secondItem="gf7-3J-y90" secondAttribute="trailing" constant="8" id="od6-rk-LU1"/>
                                     <constraint firstItem="IOq-B4-fwP" firstAttribute="centerX" secondItem="p9L-qe-hdq" secondAttribute="centerX" id="yds-IX-Iqw"/>
+                                    <constraint firstItem="gf7-3J-y90" firstAttribute="leading" secondItem="p9L-qe-hdq" secondAttribute="leading" constant="8" id="zCm-Dm-Umc"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="topColor">
@@ -525,6 +549,8 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="goHomeBtn" destination="hFl-W9-jIw" id="RTJ-eu-cAb"/>
+                        <outlet property="logOutBtn" destination="qI9-MT-gw7" id="Yi1-CE-Wfj"/>
+                        <outlet property="loginBtn" destination="gf7-3J-y90" id="MqW-1I-XCn"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="roomlyVC" id="hsr-H6-eyI"/>
                     </connections>
                 </viewController>
@@ -562,4 +588,7 @@
     <resources>
         <image name="icons8-back-50" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Q4r-9B-7AJ"/>
+    </inferredMetricsTieBreakers>
 </document>

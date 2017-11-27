@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuthUI
-import FirebaseFacebookAuthUI
+//import FirebaseFacebookAuthUI
 import FirebasePhoneAuthUI
 
 
@@ -23,6 +23,9 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
     
     // Outlets
     @IBOutlet weak var goHomeBtn: UIButton!
+    @IBOutlet weak var logOutBtn: RoundedButton!
+    @IBOutlet weak var loginBtn: RoundedButton!
+    
     
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authUI: FUIAuth? //only set internally but get externally
@@ -30,12 +33,11 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view, typically from a nib.
         self.auth = Auth.auth()
         self.authUI = FUIAuth.defaultAuthUI()
         self.authUI?.delegate = self
-        self.authUI?.providers = [FUIPhoneAuth(authUI: self.authUI!),]
+//        self.authUI?.providers = [FUIPhoneAuth(authUI: self.authUI!),]
         
         let barBtn = UIBarButtonItem()
         barBtn.title = ""
@@ -46,10 +48,15 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
             let user = Auth.auth().currentUser
             
             if user != nil {
-            
+                self.loginBtn.isHidden = true
+                self.logOutBtn.isHidden = false
+                self.goHomeBtn.isHidden = false
             } else {
                 // No user is signed in.
                 print("No user is signed in.")
+                self.goHomeBtn.isHidden = true
+                self.logOutBtn.isHidden = true
+                self.loginBtn.isHidden = false
                 self.loginAction(sender: self)
             }
         }
@@ -59,6 +66,9 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
                 if (token != nil) {
                     UserDataService.instance.setUserData(uid: (user.uid), email: (user.email!), token: token!)
                     // User is signed in.
+                    self.loginBtn.isHidden = true
+                    self.goHomeBtn.isHidden = false
+                    self.logOutBtn.isHidden = false
                     print("user is signed in")
                 }
                 
@@ -68,17 +78,15 @@ class WelcomeVC: UIViewController, FUIAuthDelegate {
 
                 
             })
-//            user.getIDToken(completion: { (token, error) in
-//            })
-            
-            // The user's ID, unique to the Firebase project.
-            // Do NOT use this value to authenticate with your backend server,
-            // if you have one. Use getTokenWithCompletion:completion: instead.
             
         } else {
             // No user is signed in.
             print("no user signed in.")
         }
+    }
+    // Actions
+    @IBAction func loginBtnPressed(_ sender: Any) {
+        loginAction(sender: "nil" as AnyObject)
     }
     
     @IBAction func goHome(_ sender: Any) {
