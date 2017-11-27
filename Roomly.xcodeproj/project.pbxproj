@@ -88,6 +88,7 @@
 		DEB48F7E1FB8A58900379811 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		DEBB7AFF1FC250A700427CDD /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		DEBB7B011FC27DE800427CDD /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		DEF11B721FCBAFDE004D538A /* Roomly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Roomly.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +142,7 @@
 		DE17CECD1F85BA7200CA83A9 /* Roomly */ = {
 			isa = PBXGroup;
 			children = (
+				DEF11B721FCBAFDE004D538A /* Roomly.entitlements */,
 				DE8B0CF51FC7E7E600AF32BA /* Utilities */,
 				DE8B0CF41FC72A5000AF32BA /* XIBs */,
 				DE17CEEE1F85C99300CA83A9 /* Services */,
@@ -265,6 +267,11 @@
 					DE17CECA1F85BA7200CA83A9 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -523,6 +530,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Roomly/Roomly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7QKXT44X7G;
 				INFOPLIST_FILE = Roomly/Info.plist;
@@ -540,6 +548,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Roomly/Roomly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7QKXT44X7G;
 				INFOPLIST_FILE = Roomly/Info.plist;

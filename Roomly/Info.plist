@@ -26,9 +26,7 @@
 	<array>
 		<dict>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>134148744015044</string>
-			</array>
+			<array/>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
