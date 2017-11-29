@@ -14,66 +14,89 @@ import FirebaseDatabase
 class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var ref: DatabaseReference!
+    var handle: AuthStateDidChangeListenerHandle?
     
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
+
+    override func viewWillAppear(_ animated: Bool) {
+        
+        handle = Auth.auth().addStateDidChangeListener() { auth, user in
+            
+            if let user = user {
+                print(user.uid)
+                // User is signed in.
+                self.loginBtn.title = "Logout"
+                self.buildingTable.reloadData()
+            } else {
+                DataService.instance.resetBuildings()
+                self.buildingTable.reloadData()
+                self.loginBtn.title = "Login"
+                print("No user is signed in.")
+            }
+        }
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         buildingTable.dataSource = self
         buildingTable.delegate = self
         
-        UINavigationBar.appearance().barTintColor = .blue
-        UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().isTranslucent = false
-        
-        self.ref = Database.database().reference()
-        
-        Auth.auth().addStateDidChangeListener() { auth, user in
-            if user != nil {
-                // User is signed in.
-                
-                guard let userID = Auth.auth().currentUser?.uid else { return }
-                
-                self.ref.child("buildings").child(userID).observe(DataEventType.value, with: { (snapshot) in
-                    self.spinner.startAnimating()
-                    
-                    let postDict = snapshot.value as? [String : AnyObject] ?? [:]
-                    
-                    DataService.instance.resetBuildings()
-                    
-                    postDict.forEach({ (arg) in
+        self.auth = Auth.auth()
 
-                        let (_, value) = arg
-                        let dataChange = value as! [String: AnyObject]
-                        
-                        let id = dataChange["id"] as! String
-                        let buildingName = dataChange["buildingName"] as! String
-                        let street = dataChange["street"] as! String
-                        let city = dataChange["city"] as! String
-                        let state = dataChange["state"] as! String
-                        let zip = dataChange["zip"] as! String
-                        let imageName = dataChange["imageName"] as! String
-                        let uid = dataChange["uid"] as! String
-                        
-                        let building = Building(id: id, buildingName: buildingName, street: street, city: city, state: state, zip: zip, uid: uid, imageName: imageName)
-
-                        DataService.instance.setBuilding(building: building)
-                        
-                        self.buildingTable.reloadData()
-                        self.spinner.stopAnimating()
-                    })
-                }, withCancel: { (error) in
-                    print(error)
+        if Auth.auth().currentUser != nil {
+            UINavigationBar.appearance().barTintColor = .blue
+            UINavigationBar.appearance().tintColor = .white
+            UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+            UINavigationBar.appearance().isTranslucent = false
+            
+            self.ref = Database.database().reference()
+            
+            guard let userID = Auth.auth().currentUser?.uid else { return }
+            self.ref.child("buildings").child(userID).observe(DataEventType.value, with: { (snapshot) in
+                self.spinner.startAnimating()
+                
+                let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+                
+                DataService.instance.resetBuildings()
+                
+                postDict.forEach({ (arg) in
+                    
+                    let (_, value) = arg
+                    let dataChange = value as! [String: AnyObject]
+                    
+                    let id = dataChange["id"] as! String
+                    let buildingName = dataChange["buildingName"] as! String
+                    let street = dataChange["street"] as! String
+                    let city = dataChange["city"] as! String
+                    let state = dataChange["state"] as! String
+                    let zip = dataChange["zip"] as! String
+                    let imageName = dataChange["imageName"] as! String
+                    let uid = dataChange["uid"] as! String
+                    
+                    let building = Building(id: id, buildingName: buildingName, street: street, city: city, state: state, zip: zip, uid: uid, imageName: imageName)
+                    
+                    DataService.instance.setBuilding(building: building)
+                    
+                    self.buildingTable.reloadData()
+                    self.spinner.stopAnimating()
                 })
-                
-            } else {
-                // TODO: Segue to WelcomeVC here.
-                print("No user is signed in.")
-                self.performSegue(withIdentifier: "welcomeVC", sender: nil)
-            }
+            }, withCancel: { (error) in
+                print(error)
+            })
         }
+        
+        self.buildingTable.reloadData()
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // [START remove_auth_listener]
+        Auth.auth().removeStateDidChangeListener(handle!)
+        // [END remove_auth_listener]
     }
     
     override func didReceiveMemoryWarning() {
@@ -82,12 +105,10 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // Outlets
     
+    @IBOutlet weak var aboutBtn: UIBarButtonItem!
+    @IBOutlet weak var loginBtn: UIBarButtonItem!
     @IBOutlet weak var buildingTable: UITableView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataService.instance.getBuildings().count
@@ -114,7 +135,20 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         addBuilding.modalPresentationStyle = .custom
         present(addBuilding, animated: true, completion: nil)
     }
-
+    
+    @IBAction func loginBtnPressed(_ sender: Any) {
+        if Auth.auth().currentUser != nil {
+            do {
+                try self.auth?.signOut()
+                performSegue(withIdentifier: "loginTabController", sender: nil)
+            } catch {
+                
+            }
+        } else {
+            performSegue(withIdentifier: "loginTabController", sender: nil)
+        }
+        
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let roomVC = segue.destination as? RoomVC {

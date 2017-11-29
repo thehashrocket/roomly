@@ -14,8 +14,11 @@ import FirebaseDatabase
 class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     // Variables
+    var handle: AuthStateDidChangeListenerHandle?
+    var saved_house_image = ""
     var ref: DatabaseReference!
     let selected_building = DataService.instance.getSelectedBuilding()
+    
     
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
@@ -23,10 +26,24 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     // Outlets
     @IBOutlet weak var roomsCollection: UICollectionView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var houseImage: UIImageView!
     
     private(set) public var rooms = [Room]()
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        handle = Auth.auth().addStateDidChangeListener() { auth, user in
+            
+            if user != nil {
+                // User is signed in.
+                self.roomsCollection.reloadData()
+            } else {
+                DataService.instance.resetBuildings()
+                self.roomsCollection.reloadData()
+                print("No user is signed in.")
+            }
+        }
+        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -38,23 +55,40 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
+                guard let userID = Auth.auth().currentUser?.uid else { return }
+                
+                self.ref.child("buildings").child(userID).child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
+                    
+                    let value = snapshot.value as? NSDictionary
+                    
+                    if ((value?["imageName"]) != nil) {
+                        self.saved_house_image = (value?["imageName"] as? String)!
+                    } else {
+                        self.saved_house_image = ""
+                    }
+                    
+                    if (self.saved_house_image != "") {
+                        let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
+                        let image    = UIImage(contentsOfFile: imageURL.path)
+                        self.houseImage.image = image
+                    }
+                    
+                })
+
                 // User is signed in.
-                
                 self.getRooms()
-                
             } else {
                 // TODO: Segue to WelcomeVC here.
                 print("No user is signed in.")
             }
         }
-        
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     func initRooms(building: Building) {
         print("building.id \(building.id)")

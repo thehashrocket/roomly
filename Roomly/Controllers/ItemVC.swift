@@ -15,7 +15,10 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     // Variables
     var ref: DatabaseReference!
+    let selected_building = DataService.instance.getSelectedBuilding()
     let selected_room = DataService.instance.getSelectedRoom()
+    var handle: AuthStateDidChangeListenerHandle?
+    var saved_room_image = ""
     
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
@@ -25,6 +28,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     // Outlets
     @IBOutlet weak var itemsCollection: UICollectionView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var roomImage: UIImageView!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
@@ -37,6 +41,23 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             return cell
         }
         return ItemCell()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        handle = Auth.auth().addStateDidChangeListener() { auth, user in
+            
+            if user != nil {
+                // User is signed in.
+                self.itemsCollection.reloadData()
+            } else {
+                DataService.instance.resetBuildings()
+                self.itemsCollection.reloadData()
+                print("No user is signed in.")
+            }
+        }
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
 
@@ -52,6 +73,26 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 // User is signed in.
                 
                 guard let userID = Auth.auth().currentUser?.uid else { return }
+                // Get the Room in the building so we can get the image of the room.
+                self.ref.child("rooms").child(userID).child(self.selected_building as String).child(self.selected_room as String).observe(DataEventType.value, with: { (snapshot) in
+                    
+                    let value = snapshot.value as? NSDictionary
+                    
+                    if ((value?["imageName"]) != nil) {
+                        self.saved_room_image = (value?["imageName"] as? String)!
+                    } else {
+                        self.saved_room_image = ""
+                    }
+                    
+                    print("room id \(self.saved_room_image)")
+                    
+                    if (self.saved_room_image != "") {
+                        let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
+                        let image    = UIImage(contentsOfFile: imageURL.path)
+                        self.roomImage.image = image
+                    }
+                    
+                })
                 
                 self.ref.child("items").child(userID).child(self.selected_room as String).observe(DataEventType.value, with: { (snapshot) in
                     self.spinner.startAnimating()
