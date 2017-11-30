@@ -43,6 +43,9 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="Bac-WF-0wy"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tus-a0-lJH">
                                             <rect key="frame" x="0.0" y="45" width="299" height="30"/>
@@ -52,18 +55,27 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="XKO-UL-37h"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Purchase Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M4M-YL-cC3">
                                             <rect key="frame" x="0.0" y="90" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="g7n-8R-F5K"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Purchase Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4SH-Sx-oHQ">
                                             <rect key="frame" x="0.0" y="135" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="PWy-zf-sf6"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -156,7 +168,7 @@
                     <viewLayoutGuide key="safeArea" id="yaG-oM-3Ej"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="4S0-gb-tKi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1Wg-tD-Xt5"/>
                 <constraint firstItem="4S0-gb-tKi" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Rq5-T9-y04"/>

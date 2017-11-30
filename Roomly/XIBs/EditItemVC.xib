@@ -42,6 +42,9 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="wgp-Q2-8wG"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="waB-85-5Un">
                                             <rect key="frame" x="0.0" y="45" width="299" height="30"/>
@@ -51,18 +54,27 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="r7h-GH-Dx1"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Purchase Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wgG-dU-GBp">
                                             <rect key="frame" x="0.0" y="90" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="cfT-6t-Wbb"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Purchase Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="auo-zP-RdG">
                                             <rect key="frame" x="0.0" y="135" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="b78-2a-HZ0"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -165,7 +177,7 @@
                     <viewLayoutGuide key="safeArea" id="kRY-j4-W6F"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Vwb-iT-lcF" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="9Ln-Y7-5Vh"/>
                 <constraint firstItem="Vwb-iT-lcF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NUg-Sf-00u"/>

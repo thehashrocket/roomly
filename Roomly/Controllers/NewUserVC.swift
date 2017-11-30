@@ -17,6 +17,9 @@ class NewUserVC: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +33,10 @@ class NewUserVC: UIViewController {
     }
     
     // Actions
+    @IBAction func textField(_ sender: AnyObject) {
+        self.view.endEditing(true);
+    }
+    
     @IBAction func createAccountPressed(_ sender: Any) {
         spinner.startAnimating()
         guard let email = emailTextField.text, emailTextField.text != "" else {return}
@@ -50,8 +57,11 @@ class NewUserVC: UIViewController {
         } else {
             self.errorLabel.text = "Passwords did not match. Please try again."
         }
-        
-        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
 

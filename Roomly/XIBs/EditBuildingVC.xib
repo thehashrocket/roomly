@@ -40,30 +40,45 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="uXg-WL-edV"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Street" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N6P-jB-DeR">
                                             <rect key="frame" x="0.0" y="45" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="street-address"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="aQl-mm-3ES"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7k-Rv-h9B">
                                             <rect key="frame" x="0.0" y="90" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="address-level2"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="RT8-So-jfo"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Buo-U5-w4I">
                                             <rect key="frame" x="0.0" y="135" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="address-level1"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="0QY-IN-hCT"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w3j-CU-JcY">
                                             <rect key="frame" x="0.0" y="180" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES" textContentType="postal-code"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="nfW-bb-7GI"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                 </stackView>
@@ -162,7 +177,7 @@
                     <viewLayoutGuide key="safeArea" id="5Nu-ck-rjv"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="dCQ-Sa-huD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="EhY-H5-wXb"/>
                 <constraint firstItem="dCQ-Sa-huD" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Zhv-OQ-CNQ"/>

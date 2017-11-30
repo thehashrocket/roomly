@@ -38,12 +38,18 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="mYv-Cs-v7l"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iir-BQ-SpK">
                                             <rect key="frame" x="0.0" y="45" width="282" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="w97-AC-Xjs"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                 </stackView>
@@ -126,7 +132,7 @@
                     <viewLayoutGuide key="safeArea" id="mAy-RH-XH3"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="D0a-LF-6Ao" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="5Rl-DQ-9h0"/>
                 <constraint firstItem="D0a-LF-6Ao" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="FTd-go-Msx"/>

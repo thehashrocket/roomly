@@ -29,6 +29,10 @@ class EditBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var zipTxt: UITextField!
     
     // Actions
+    @IBAction func textField(_ sender: AnyObject) {
+        self.view.endEditing(true);
+    }
+    
     @IBAction func closePressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -106,6 +110,10 @@ class EditBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.present(navController, animated:true, completion: nil)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         spinner.stopAnimating()
@@ -159,6 +167,11 @@ class EditBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

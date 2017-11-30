@@ -37,6 +37,10 @@ class EditItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     // Actions
+    @IBAction func textField(_ sender: AnyObject) {
+        self.view.endEditing(true);
+    }
+    
     @IBAction func openCameraButton(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let imagePicker = UIImagePickerController()
@@ -113,6 +117,9 @@ class EditItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
 
         self.present(navController, animated:true, completion: nil)
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     override func viewDidLoad() {
         
@@ -171,6 +178,11 @@ class EditItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     func addTextField() {

@@ -31,6 +31,10 @@ class EditRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     
     // Actions
+    @IBAction func textField(_ sender: AnyObject) {
+        self.view.endEditing(true);
+    }
+    
     @IBAction func closePicked(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -95,6 +99,10 @@ class EditRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         self.present(navController, animated:true, completion: nil)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         selected_building = DataService.instance.getSelectedBuilding()
@@ -145,6 +153,11 @@ class EditRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

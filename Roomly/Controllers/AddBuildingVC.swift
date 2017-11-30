@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     var ref: DatabaseReference!
     var imagesDirectoryPath:String!
@@ -30,6 +30,7 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     override func viewDidLoad() {
         super.viewDidLoad()
         spinner.isHidden = true
+
         self.ref = Database.database().reference()
         // Do any additional setup after loading the view.
 
@@ -40,6 +41,11 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                 print(error)
             }
         }
+//        self.buildingNameTxt.delegate = self
+//        self.streetTxt.delegate = self
+//        self.cityTxt.delegate = self
+//        self.stateTxt.delegate = self
+//        self.zipTxt.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,6 +54,11 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     }
     
     // Actions
+    
+    @IBAction func textField(_ sender: AnyObject) {
+        self.view.endEditing(true);
+    }
+    
     @IBAction func dismissPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -109,6 +120,15 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             imagePicker.allowsEditing = true
             self.present(imagePicker, animated: true, completion: nil)
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

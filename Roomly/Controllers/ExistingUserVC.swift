@@ -12,6 +12,10 @@ class ExistingUserVC: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +45,10 @@ class ExistingUserVC: UIViewController {
     
     
     // Actions
+    @IBAction func textField(_ sender: AnyObject) {
+        self.view.endEditing(true);
+    }
+    
     @IBAction func submitBtnPressed(_ sender: Any) {
         self.spinner.startAnimating()
         guard let email = emailField.text, emailField.text != "" else {return}
@@ -68,6 +76,11 @@ class ExistingUserVC: UIViewController {
                 self.errorLabel.text = error?.localizedDescription
             }
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
 

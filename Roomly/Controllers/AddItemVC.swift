@@ -64,7 +64,15 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     // Actions
+    
+    @IBAction func textField(_ sender: AnyObject) {
+        self.view.endEditing(true);
+    }
     
     @IBAction func openCameraButton(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
@@ -126,6 +134,11 @@ class AddItemVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         spinner.stopAnimating()
         spinner.isHidden = true
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     func addTextField() {
