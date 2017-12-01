@@ -43,8 +43,6 @@ class ShowItemVC: UIViewController {
                 let userID = Auth.auth().currentUser?.uid
                 let item = DataService.instance.getSelectedItem() as String
                 let room = DataService.instance.getSelectedRoom() as String
-                print(self.selected_room)
-                print(self.selected_item)
                 
                 self.ref.child("items").child(userID!).child(room).child(item).observe(DataEventType.value, with: { (snapshot) in
                     self.spinner.startAnimating()
@@ -65,9 +63,10 @@ class ShowItemVC: UIViewController {
                         let image    = UIImage(contentsOfFile: imageURL.path)
                         self.imagePicked.image = image
                     }
-                    
+                    self.navigationItem.title = value?["itemName"] as? String
                     self.spinner.stopAnimating()
                 }){ (error) in
+                    self.spinner.stopAnimating()
                     print(error.localizedDescription)
                 }
                 

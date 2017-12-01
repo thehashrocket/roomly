@@ -125,8 +125,9 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         self.items = DataService.instance.getItemsForRoom(forRoomId: self.selected_room)
                         
                         self.itemsCollection.reloadData()
-                        self.spinner.stopAnimating()
+                        
                     })
+                    self.spinner.stopAnimating()
                 }, withCancel: { (error) in
                     print(error)
                 })

@@ -14,11 +14,13 @@ class BuildingCell: UITableViewCell {
     @IBOutlet weak var buildingTitle: UILabel!
     
     func updateViews(building: Building) {
+        if (building.imageName != "") {
+            let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(building.imageName as String)
+            let image    = UIImage(contentsOfFile: imageURL.path)
+            
+            buildingImage.image = image
+        }
         
-        let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(building.imageName as String)
-        let image    = UIImage(contentsOfFile: imageURL.path)
-        
-        buildingImage.image = image
         buildingTitle.text = building.buildingName as! String
     }
     

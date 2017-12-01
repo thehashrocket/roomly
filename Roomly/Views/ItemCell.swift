@@ -13,10 +13,11 @@ class ItemCell: UICollectionViewCell {
     @IBOutlet weak var itemImage: UIImageView!
     
     func updateViews(item: Item) {
-        let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(item.imageName as String)
-        let image    = UIImage(contentsOfFile: imageURL.path)
-        
-        itemImage.image = image
+        if (item.imageName != "") {
+            let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(item.imageName as String)
+            let image    = UIImage(contentsOfFile: imageURL.path)
+            itemImage.image = image
+        }
     }
     
 }

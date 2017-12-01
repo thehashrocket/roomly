@@ -13,10 +13,14 @@ class RoomCell: UICollectionViewCell {
     @IBOutlet weak var roomImage: UIImageView!
     
     func updateViews(room: Room) {
-        let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(room.imageName as String)
-        let image    = UIImage(contentsOfFile: imageURL.path)
         
-        roomImage.image = image
+        if (room.imageName != "") {
+            let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(room.imageName as String)
+            let image    = UIImage(contentsOfFile: imageURL.path)
+            roomImage.image = image
+        }
+        
+        
     }
     
 }

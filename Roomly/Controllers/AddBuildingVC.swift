@@ -41,11 +41,6 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                 print(error)
             }
         }
-//        self.buildingNameTxt.delegate = self
-//        self.streetTxt.delegate = self
-//        self.cityTxt.delegate = self
-//        self.stateTxt.delegate = self
-//        self.zipTxt.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
