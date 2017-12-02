@@ -64,8 +64,9 @@ class EditBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavig
         guard let zip = zipTxt.text , zipTxt.text != "" else {
             return
         }
+        let files = NSDictionary()
         
-        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, zip: zip, uid: userID, imageName: self.saved_image)
+        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, zip: zip, uid: userID, imageName: self.saved_image, images: files)
         
         let post = [
             "buildingName" : building.buildingName,
@@ -75,8 +76,9 @@ class EditBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavig
             "zip" : building.zip,
             "uid" : building.uid,
             "id" : building.id,
-            "imageName": building.imageName
-        ]
+            "imageName": building.imageName,
+            "files": files
+            ] as [String : Any]
         
         let childUpdates = ["/buildings/\(userID)/\(key)": post]
         self.ref.updateChildValues(childUpdates)
@@ -140,15 +142,17 @@ class EditBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavig
                     self.zipTxt.text = value?["zip"] as! String
                     self.saved_image = value?["imageName"] as! String
                     
-                    let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
-                    let image    = UIImage(contentsOfFile: imageURL.path)
+                    let building_id = value?["id"] as! String
+                    let user_id = userID as! String
+                    let destination = "buildings/\(user_id)/\(building_id)/"
                     
-                    self.imagePicked.image = image
+                    CloudStorage.instance.loadTopImage(destination: destination, saved_image: self.saved_image, completion: { (image) in
+                        self.imagePicked.image = image
+                    })
                     
                 }) { (error) in
                     print(error.localizedDescription)
                 }
-                
             } else {
                 // TODO: Segue to WelcomeVC here.
                 print("No user is signed in.")

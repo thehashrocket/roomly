@@ -47,6 +47,8 @@
 		DE8B0D011FC8C57000AF32BA /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8B0D001FC8C57000AF32BA /* Photos.swift */; };
 		DEBB7B001FC250A700427CDD /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBB7AFF1FC250A700427CDD /* GradientView.swift */; };
 		DEBB7B021FC27DE800427CDD /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBB7B011FC27DE800427CDD /* RoundedButton.swift */; };
+		DECA78C31FD25EDD000BE029 /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA78C21FD25EDD000BE029 /* CloudStorage.swift */; };
+		DECA78C51FD27DAC000BE029 /* CloudData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA78C41FD27DAC000BE029 /* CloudData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +96,8 @@
 		DE8B0D001FC8C57000AF32BA /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		DEBB7AFF1FC250A700427CDD /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		DEBB7B011FC27DE800427CDD /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		DECA78C21FD25EDD000BE029 /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
+		DECA78C41FD27DAC000BE029 /* CloudData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudData.swift; sourceTree = "<group>"; };
 		DEF11B721FCBAFDE004D538A /* Roomly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Roomly.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,6 +217,8 @@
 			children = (
 				DE17CEEC1F85C98900CA83A9 /* DataService.swift */,
 				DE35F2341FC6809F0025ADAC /* UserDataService.swift */,
+				DECA78C21FD25EDD000BE029 /* CloudStorage.swift */,
+				DECA78C41FD27DAC000BE029 /* CloudData.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -383,6 +389,7 @@
 				DE81C4A51F8C558500674274 /* RoomVC.swift in Sources */,
 				DE17CEED1F85C98900CA83A9 /* DataService.swift in Sources */,
 				DE17CED11F85BA7200CA83A9 /* BuildingVC.swift in Sources */,
+				DECA78C51FD27DAC000BE029 /* CloudData.swift in Sources */,
 				DE0E6B9B1FCA9E5F0066E071 /* ShowItemVC.swift in Sources */,
 				DE8B0D011FC8C57000AF32BA /* Photos.swift in Sources */,
 				DE35F2351FC6809F0025ADAC /* UserDataService.swift in Sources */,
@@ -390,6 +397,7 @@
 				DE17CECF1F85BA7200CA83A9 /* AppDelegate.swift in Sources */,
 				DE17CEE71F85BB7B00CA83A9 /* Building.swift in Sources */,
 				DE6D28711FCF89AD00545237 /* ViewControllerExtension.swift in Sources */,
+				DECA78C31FD25EDD000BE029 /* CloudStorage.swift in Sources */,
 				DE17CEEB1F85BB9100CA83A9 /* Item.swift in Sources */,
 				DE0E6B911FC9DF690066E071 /* ItemCell.swift in Sources */,
 				DEBB7B001FC250A700427CDD /* GradientView.swift in Sources */,

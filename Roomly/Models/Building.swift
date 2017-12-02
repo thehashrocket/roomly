@@ -17,8 +17,9 @@ struct Building {
     private(set) public var zip: NSString!
     private(set) public var uid: NSString!
     private(set) public var imageName: NSString!
+    private(set) public var images: NSDictionary
     
-    init(id: String, buildingName: String, street: String, city: String, state: String, zip: String, uid: String, imageName: String) {
+    init(id: String, buildingName: String, street: String, city: String, state: String, zip: String, uid: String, imageName: String, images: NSDictionary) {
         self.id = id as NSString
         self.buildingName = buildingName as NSString
         self.city = city as NSString
@@ -27,5 +28,6 @@ struct Building {
         self.uid = uid as NSString as NSString
         self.zip = zip as NSString
         self.imageName = imageName as NSString
+        self.images = images as NSDictionary
     }
 }

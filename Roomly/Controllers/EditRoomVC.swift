@@ -131,11 +131,15 @@ class EditRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                     self.roomNameTxt.text = value?["roomName"] as? String
                     self.roomDescriptionTxt.text = value?["roomDescription"] as? String
                     self.saved_image = value?["imageName"] as! String
+                    let room_id = value?["id"] as! String
                     
-                    let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
-                    let image    = UIImage(contentsOfFile: imageURL.path)
+                    let building_id = value?["id"] as! String
+                    let user_id = userID as! String
+                    let destination = "rooms/\(user_id)/\(building_id)/\(room_id)/"
                     
-                    self.imagePicked.image = image
+                    CloudStorage.instance.loadTopImage(destination: destination, saved_image: self.saved_image, completion: { (image) in
+                        self.imagePicked.image = image
+                    })
                     
                 }) { (error) in
                     print(error.localizedDescription)

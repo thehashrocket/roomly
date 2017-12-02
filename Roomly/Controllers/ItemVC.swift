@@ -77,19 +77,17 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.ref.child("rooms").child(userID).child(self.selected_building as String).child(self.selected_room as String).observe(DataEventType.value, with: { (snapshot) in
                     
                     let value = snapshot.value as? NSDictionary
-                    
-                    if ((value?["imageName"]) != nil) {
+
+                    if ((value) != nil) {
                         self.saved_room_image = (value?["imageName"] as? String)!
-                    } else {
-                        self.saved_room_image = ""
-                    }
-                    
-                    print("room id \(self.saved_room_image)")
-                    
-                    if (self.saved_room_image != "") {
-                        let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
-                        let image    = UIImage(contentsOfFile: imageURL.path)
-                        self.roomImage.image = image
+                        let building_id = (value?["buildingId"] as? String)!
+                        let room_id = (value?["id"] as? String)!
+
+                        let destination = "rooms/\(userID)/\(building_id)/\(room_id)/"
+                        
+                        CloudStorage.instance.loadTopImage(destination: destination, saved_image: self.saved_room_image, completion: { (image) in
+                            self.roomImage.image = image
+                        })
                     }
                     
                 })

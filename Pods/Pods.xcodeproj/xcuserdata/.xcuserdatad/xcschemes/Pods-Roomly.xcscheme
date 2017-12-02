@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'FFCF942A33E8948118D7CF20C25CD9E9'
+               BlueprintIdentifier = '7F0A4CEA63A7BCA838C290F8D74E3953'
                BlueprintName = 'Pods-Roomly'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods-Roomly.framework'>

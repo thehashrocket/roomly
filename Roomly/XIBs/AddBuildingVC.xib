@@ -118,7 +118,7 @@
                                     <rect key="frame" x="106" y="265.5" width="86" height="30"/>
                                     <state key="normal" title="Add A Photo"/>
                                     <connections>
-                                        <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="ccj-pv-yFh"/>
+                                        <action selector="addPhotoPressed:" destination="-1" eventType="touchUpInside" id="hfx-ef-Bdv"/>
                                     </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6LR-QY-2CE">

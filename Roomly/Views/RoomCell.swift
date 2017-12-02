@@ -14,13 +14,26 @@ class RoomCell: UICollectionViewCell {
     
     func updateViews(room: Room) {
         
-        if (room.imageName != "") {
-            let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(room.imageName as String)
-            let image    = UIImage(contentsOfFile: imageURL.path)
-            roomImage.image = image
+        let user_id = room.uid as String
+        let room_id  = room.id as String
+        let building_id = room.buildingId as String
+        
+        let destination = "rooms/\(user_id)/\(building_id)/\(room_id)/"
+        
+        CloudData.instance.getImages(destination: destination) { (fire_images) in
+            if (fire_images.count > 0) {
+                let image_key = fire_images[0]
+                let reference = "images/rooms/\(user_id)/\(building_id)/\(room_id)/\(image_key)"
+                CloudStorage.instance.downloadImage(reference: reference, completion: { (image) in
+                    self.roomImage.image = image
+                })
+            } else {
+                if (room.imageName != "") {
+                    let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(room.imageName as String)
+                    let image    = UIImage(contentsOfFile: imageURL.path)
+                    self.roomImage.image = image
+                }
+            }
         }
-        
-        
     }
-    
 }

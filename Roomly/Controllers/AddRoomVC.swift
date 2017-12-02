@@ -10,8 +10,10 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import ImagePicker
+import Lightbox
 
-class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+class AddRoomVC: UIViewController, ImagePickerDelegate  {
     
     var ref: DatabaseReference!
     var imagesDirectoryPath:String!
@@ -19,6 +21,7 @@ class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     var selected_building = "" as NSString
     var roomNameText = ""
     var roomDescriptionText = ""
+    var images: [UIImage] = []
     
     // Outlets
     @IBOutlet weak var roomName: UITextField!
@@ -38,6 +41,7 @@ class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
             do {
                 try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: IMAGE_DIRECTORY_PATH), withIntermediateDirectories: true, attributes: nil)
             } catch {
+                print("AddRoomVC: ")
                 print(error)
             }
         }
@@ -57,14 +61,12 @@ class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         self.view.endEditing(true);
     }
     
-    @IBAction func openCameraButton(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = .photoLibrary;
-            imagePicker.allowsEditing = true
-            self.present(imagePicker, animated: true, completion: nil)
-        }
+    @IBAction func dismissPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func submitPicked(_ sender: Any) {
@@ -96,6 +98,10 @@ class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         
         let childUpdates = ["/rooms/\(userID)/\(selected_building)/\(key)": post]
         self.ref.updateChildValues(childUpdates)
+        
+        self.images.forEach { (image) in
+            CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "rooms", second_key: room.buildingId as! String)
+        }
         spinner.stopAnimating()
         spinner.isHidden = true
         self.dismiss(animated: true, completion: nil)
@@ -105,49 +111,42 @@ class AddRoomVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    @IBAction func cancelPicked(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
-        self.saved_image = saveImageToDocumentDirectory(pickedImage!)
-        imagePicked.image = pickedImage
-        dismiss(animated: true, completion: nil)
+    @IBAction func addPhotoPressed(_ sender: Any) {
+        var config = Configuration()
+        config.doneButtonTitle = "Finish"
+        config.noImagesTitle = "Sorry! There are no images here!"
+        config.recordLocation = false
+        config.allowVideoSelection = true
+        
+        let imagePicker = ImagePickerController(configuration: config)
+        imagePicker.delegate = self
+        
+        present(imagePicker, animated: true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        guard images.count > 0 else { return }
         
-    }
-    
-    func saveImageToDocumentDirectory(_ chosenImage: UIImage) -> String {
-        
-        let formatter = DateFormatter()
-        // initially set the format based on your datepicker date
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        let date = formatter.string(from: NSDate() as Date).replacingOccurrences(of: " ", with: "_")
-        
-        let filename = date.appending(".jpg")
-        let filepath = IMAGE_DIRECTORY_PATH + "/".appending(filename)
-        let url = NSURL.fileURL(withPath: filepath)
-        do {
-            try UIImageJPEGRepresentation(chosenImage, 1.0)?.write(to: url, options: .atomic)
-            return String.init("\(filename)")
-            
-        } catch {
-            print(error)
-            print("file cant not be save at path \(filepath), with error : \(error)");
-            return filepath
+        let lightboxImages = images.map {
+            return LightboxImage(image: $0)
         }
+        
+        let lightbox = LightboxController(images: lightboxImages, startIndex: 0)
+        imagePicker.present(lightbox, animated: true, completion: nil)
     }
-
+    
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        self.images = images
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
 
 }

@@ -24,7 +24,6 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         handle = Auth.auth().addStateDidChangeListener() { auth, user in
             
             if let user = user {
-                print(user.uid)
                 // User is signed in.
                 self.loginBtn.title = "Logout"
                 self.buildingTable.reloadData()
@@ -75,8 +74,9 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                     let zip = dataChange["zip"] as! String
                     let imageName = dataChange["imageName"] as! String
                     let uid = dataChange["uid"] as! String
+                    let files = NSDictionary()
                     
-                    let building = Building(id: id, buildingName: buildingName, street: street, city: city, state: state, zip: zip, uid: uid, imageName: imageName)
+                    let building = Building(id: id, buildingName: buildingName, street: street, city: city, state: state, zip: zip, uid: uid, imageName: imageName, images: files)
                     
                     DataService.instance.setBuilding(building: building)
                     
@@ -84,6 +84,7 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                     self.spinner.stopAnimating()
                 })
             }, withCancel: { (error) in
+                print("BuildingVC: ")
                 print(error)
             })
         }

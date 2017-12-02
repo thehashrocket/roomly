@@ -61,16 +61,15 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                     
                     let value = snapshot.value as? NSDictionary
                     
-                    if ((value?["imageName"]) != nil) {
-                        self.saved_house_image = (value?["imageName"] as? String)!
-                    } else {
-                        self.saved_house_image = ""
-                    }
-                    
-                    if (self.saved_house_image != "") {
-                        let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
-                        let image    = UIImage(contentsOfFile: imageURL.path)
-                        self.houseImage.image = image
+                    if ((value) != nil) {
+                        let building_id = value?["id"] as! String
+                        let saved_image = value?["imageName"] as! String
+                        let user_id = userID as! String
+                        let destination = "buildings/\(user_id)/\(building_id)/"
+                        
+                        CloudStorage.instance.loadTopImage(destination: destination, saved_image: saved_image, completion: { (image) in
+                            self.houseImage.image = image
+                        })
                     }
                     
                 })
@@ -92,7 +91,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 
     func initRooms(building: Building) {
         print("building.id \(building.id)")
-//        rooms = DataService.instance.getRoomsForBuilding(forBuildingId: building.id as NSString)
         navigationItem.title = building.buildingName! as String
         self.getRooms()
     }
@@ -143,6 +141,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.spinner.stopAnimating()
             })
         }, withCancel: { (error) in
+            print("getRooms: ")
             print(error)
         })
     }

@@ -48,21 +48,26 @@ class ShowItemVC: UIViewController {
                     self.spinner.startAnimating()
                     let value = snapshot.value as? NSDictionary
                     
-                    self.itemNameText.text = value?["itemName"] as? String
-                    self.itemDescriptionText.text = value?["itemDescription"] as? String
-                    self.PurchaseAmountText.text = value?["purchaseAmount"] as? String
-                    self.PurchaseDateText.text = value?["purchaseDate"] as? String
-                    if ((value?["imageName"]) != nil) {
-                        self.saved_image = (value?["imageName"] as? String)!
-                    } else {
-                        self.saved_image = ""
+                    if ((value) != nil) {
+                        self.itemNameText.text = value?["itemName"] as? String
+                        self.itemDescriptionText.text = value?["itemDescription"] as? String
+                        self.PurchaseAmountText.text = value?["purchaseAmount"] as? String
+                        self.PurchaseDateText.text = value?["purchaseDate"] as? String
+                        if ((value?["imageName"]) != nil) {
+                            self.saved_image = (value?["imageName"] as? String)!
+                        } else {
+                            self.saved_image = ""
+                        }
+                        let room_id = value?["roomId"] as! String
+                        let item_id = value?["id"] as! String
+                        let user_id = value?["uid"] as! String
+                        let destination = "items/\(user_id)/\(room_id)/\(item_id)/"
+                        
+                        CloudStorage.instance.loadTopImage(destination: destination, saved_image: self.saved_image, completion: { (image) in
+                            self.imagePicked.image = image
+                        })
                     }
                     
-                    if (self.saved_image != "") {
-                        let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
-                        let image    = UIImage(contentsOfFile: imageURL.path)
-                        self.imagePicked.image = image
-                    }
                     self.navigationItem.title = value?["itemName"] as? String
                     self.spinner.stopAnimating()
                 }){ (error) in

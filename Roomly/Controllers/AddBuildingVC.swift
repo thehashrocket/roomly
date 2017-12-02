@@ -10,10 +10,15 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import ImagePicker
+import Lightbox
 
-class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate {
+
+    let storage = Storage.storage()
     
     var ref: DatabaseReference!
+    var images: [UIImage] = []
     var imagesDirectoryPath:String!
     var saved_image = ""
     
@@ -30,7 +35,6 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     override func viewDidLoad() {
         super.viewDidLoad()
         spinner.isHidden = true
-
         self.ref = Database.database().reference()
         // Do any additional setup after loading the view.
 
@@ -38,6 +42,7 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             do {
                 try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: IMAGE_DIRECTORY_PATH), withIntermediateDirectories: true, attributes: nil)
             } catch {
+                print("AddBuildingVC: ")
                 print(error)
             }
         }
@@ -66,7 +71,6 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         spinner.startAnimating()
         spinner.isHidden = false
         
-        
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
         let key = self.ref.child("buildings").child(userID).childByAutoId().key
@@ -87,7 +91,8 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             return
         }
         
-        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, zip: zip, uid: userID, imageName: self.saved_image)
+        var files = [String: NSString]()
+        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, zip: zip, uid: userID, imageName: self.saved_image, images: files as NSDictionary)
         
         let post = [
             "buildingName" : building.buildingName,
@@ -97,24 +102,20 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             "zip" : building.zip,
             "uid" : building.uid,
             "id" : building.id,
-            "imageName": building.imageName
-        ]
+            "imageName": building.imageName,
+            "images": files,
+            ] as [String : Any]
         
         let childUpdates = ["/buildings/\(userID)/\(key)": post]
         self.ref.updateChildValues(childUpdates)
+        
+        self.images.forEach { (image) in
+            CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "buildings")
+        }
+        
         spinner.stopAnimating()
         spinner.isHidden = true
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func openCameraButton(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            var imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = .photoLibrary;
-            imagePicker.allowsEditing = true
-            self.present(imagePicker, animated: true, completion: nil)
-        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -126,37 +127,36 @@ class AddBuildingVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         return false
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
-        self.saved_image = saveImageToDocumentDirectory(pickedImage!)
-        imagePicked.image = pickedImage
-        dismiss(animated: true, completion: nil)
+    @IBAction func addPhotoPressed(_ sender: Any) {
+        var config = Configuration()
+        config.doneButtonTitle = "Finish"
+        config.noImagesTitle = "Sorry! There are no images here!"
+        config.recordLocation = false
+        config.allowVideoSelection = true
+        
+        let imagePicker = ImagePickerController(configuration: config)
+        imagePicker.delegate = self
+        
+        present(imagePicker, animated: true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func saveImageToDocumentDirectory(_ chosenImage: UIImage) -> String {
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        guard images.count > 0 else { return }
         
-        let formatter = DateFormatter()
-        // initially set the format based on your datepicker date
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        let date = formatter.string(from: NSDate() as Date).replacingOccurrences(of: " ", with: "_")
-        
-        let filename = date.appending(".jpg")
-        let filepath = IMAGE_DIRECTORY_PATH + "/".appending(filename)
-        let url = NSURL.fileURL(withPath: filepath)
-        do {
-            try UIImageJPEGRepresentation(chosenImage, 1.0)?.write(to: url, options: .atomic)
-            return String.init("\(filename)")
-            
-        } catch {
-            print(error)
-            print("file cant not be save at path \(filepath), with error : \(error)");
-            return filepath
+        let lightboxImages = images.map {
+            return LightboxImage(image: $0)
         }
+        
+        let lightbox = LightboxController(images: lightboxImages, startIndex: 0)
+        imagePicker.present(lightbox, animated: true, completion: nil)
     }
     
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        self.images = images
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
 }
