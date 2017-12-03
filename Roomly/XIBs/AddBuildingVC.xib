@@ -14,7 +14,6 @@
             <connections>
                 <outlet property="buildingNameTxt" destination="MKa-cd-Xz3" id="NIS-Pn-LFP"/>
                 <outlet property="cityTxt" destination="s7I-Me-EIV" id="zrY-aN-WNX"/>
-                <outlet property="imagePicked" destination="6LR-QY-2CE" id="c44-9k-VO8"/>
                 <outlet property="spinner" destination="xgG-lU-JSO" id="7GA-9c-Nsb"/>
                 <outlet property="stateTxt" destination="nbg-2O-c5x" id="e4E-1n-c5d"/>
                 <outlet property="streetTxt" destination="m7k-zL-h7D" id="XfT-qo-4Uc"/>
@@ -115,34 +114,27 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIr-WN-Tgw">
-                                    <rect key="frame" x="106" y="265.5" width="86" height="30"/>
+                                    <rect key="frame" x="107" y="525" width="86" height="30"/>
                                     <state key="normal" title="Add A Photo"/>
                                     <connections>
                                         <action selector="addPhotoPressed:" destination="-1" eventType="touchUpInside" id="hfx-ef-Bdv"/>
                                     </connections>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6LR-QY-2CE">
-                                    <rect key="frame" x="38" y="304" width="223" height="213"/>
-                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="6LR-QY-2CE" secondAttribute="bottom" constant="54" id="0T6-Mw-1K0"/>
                                 <constraint firstItem="2U6-fw-Vtc" firstAttribute="top" secondItem="GLn-cB-Iva" secondAttribute="top" constant="8" id="1LJ-7f-dzN"/>
                                 <constraint firstAttribute="trailing" secondItem="jVy-fc-ajv" secondAttribute="trailing" constant="8" id="1vx-2G-ooo"/>
                                 <constraint firstItem="tYE-aI-5hq" firstAttribute="leading" secondItem="GLn-cB-Iva" secondAttribute="leading" constant="9" id="649-aV-ITj"/>
                                 <constraint firstItem="jVy-fc-ajv" firstAttribute="top" secondItem="GLn-cB-Iva" secondAttribute="top" constant="8" id="B2V-vV-DlC"/>
+                                <constraint firstAttribute="bottom" secondItem="NIr-WN-Tgw" secondAttribute="bottom" constant="16" id="Bp5-8V-dWR"/>
                                 <constraint firstItem="NIr-WN-Tgw" firstAttribute="centerX" secondItem="GLn-cB-Iva" secondAttribute="centerX" id="FBc-ql-0PT"/>
-                                <constraint firstItem="6LR-QY-2CE" firstAttribute="top" secondItem="tYE-aI-5hq" secondAttribute="bottom" constant="45.5" id="GXg-V9-2y6"/>
-                                <constraint firstAttribute="trailingMargin" secondItem="6LR-QY-2CE" secondAttribute="trailing" constant="30" id="Lcm-Pn-QfD"/>
                                 <constraint firstItem="2U6-fw-Vtc" firstAttribute="leading" secondItem="GLn-cB-Iva" secondAttribute="leading" constant="8" id="Qg2-iL-xzz"/>
-                                <constraint firstItem="6LR-QY-2CE" firstAttribute="leading" secondItem="GLn-cB-Iva" secondAttribute="leadingMargin" constant="30" id="X5o-W0-gu9"/>
                                 <constraint firstItem="tYE-aI-5hq" firstAttribute="top" secondItem="2U6-fw-Vtc" secondAttribute="bottom" constant="20" id="Zkm-NG-sK5"/>
                                 <constraint firstAttribute="bottomMargin" secondItem="ug3-bB-KiH" secondAttribute="bottom" constant="8" id="bIj-Hh-9mi"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="hTA-SZ-kkK" secondAttribute="trailing" constant="8" id="fQQ-HZ-h6f"/>
                                 <constraint firstAttribute="trailing" secondItem="tYE-aI-5hq" secondAttribute="trailing" constant="8" id="hSz-zE-ZxX"/>
                                 <constraint firstAttribute="bottomMargin" secondItem="hTA-SZ-kkK" secondAttribute="bottom" constant="8" id="hqy-Jz-hZD"/>
-                                <constraint firstItem="NIr-WN-Tgw" firstAttribute="centerY" secondItem="GLn-cB-Iva" secondAttribute="centerY" constant="-5" id="k5K-yf-LAJ"/>
                                 <constraint firstItem="ug3-bB-KiH" firstAttribute="leading" secondItem="GLn-cB-Iva" secondAttribute="leadingMargin" constant="8" id="rNG-Ct-imA"/>
                             </constraints>
                         </view>

@@ -15,8 +15,8 @@ target 'Roomly' do
   pod 'FirebaseUI/Facebook'
   pod 'FirebaseUI/Phone'
   pod 'Firebase/Database'
+  pod 'Hue'
   pod 'ImagePicker'
   pod 'Lightbox'
-  pod 'Hue'
 
 end
