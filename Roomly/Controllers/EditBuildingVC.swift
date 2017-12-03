@@ -13,7 +13,7 @@ import FirebaseDatabase
 import ImagePicker
 import Lightbox
 
-class EditBuildingVC: UIViewController, ImagePickerDelegate {
+class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Variables
     var ref: DatabaseReference!
@@ -21,6 +21,62 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate {
     var imagesDirectoryPath:String!
     var saved_image = ""
     var selected_building = "" as NSString
+    
+    let states = ["Alaska",
+                  "Alabama",
+                  "Arkansas",
+                  "American Samoa",
+                  "Arizona",
+                  "California",
+                  "Colorado",
+                  "Connecticut",
+                  "District of Columbia",
+                  "Delaware",
+                  "Florida",
+                  "Georgia",
+                  "Guam",
+                  "Hawaii",
+                  "Iowa",
+                  "Idaho",
+                  "Illinois",
+                  "Indiana",
+                  "Kansas",
+                  "Kentucky",
+                  "Louisiana",
+                  "Massachusetts",
+                  "Maryland",
+                  "Maine",
+                  "Michigan",
+                  "Minnesota",
+                  "Missouri",
+                  "Mississippi",
+                  "Montana",
+                  "North Carolina",
+                  "North Dakota",
+                  "Nebraska",
+                  "New Hampshire",
+                  "New Jersey",
+                  "New Mexico",
+                  "Nevada",
+                  "New York",
+                  "Ohio",
+                  "Oklahoma",
+                  "Oregon",
+                  "Pennsylvania",
+                  "Puerto Rico",
+                  "Rhode Island",
+                  "South Carolina",
+                  "South Dakota",
+                  "Tennessee",
+                  "Texas",
+                  "Utah",
+                  "Virginia",
+                  "Virgin Islands",
+                  "Vermont",
+                  "Washington",
+                  "Wisconsin",
+                  "West Virginia",
+                  "Wyoming"]
     
     // Outlets
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -129,6 +185,9 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate {
         super.viewDidLoad()
         spinner.stopAnimating()
         spinner.isHidden = true
+        let statePicker = UIPickerView()
+        stateTxt.inputView = statePicker
+        statePicker.delegate = self
         
         selected_building = DataService.instance.getSelectedBuilding()
 
@@ -175,6 +234,22 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate {
                 print(error)
             }
         }
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return states.count
+    }
+    
+    func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return states[row]
+    }
+    
+    func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        stateTxt.text = states[row]
     }
 
     override func didReceiveMemoryWarning() {
