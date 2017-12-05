@@ -70,13 +70,14 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                     let buildingName = dataChange["buildingName"] as! String
                     let street = dataChange["street"] as! String
                     let city = dataChange["city"] as! String
+                    let country = dataChange["country"] as! String
                     let state = dataChange["state"] as! String
                     let zip = dataChange["zip"] as! String
                     let imageName = dataChange["imageName"] as! String
                     let uid = dataChange["uid"] as! String
                     let files = NSDictionary()
                     
-                    let building = Building(id: id, buildingName: buildingName, street: street, city: city, state: state, zip: zip, uid: uid, imageName: imageName, images: files)
+                    let building = Building(id: id, buildingName: buildingName, street: street, city: city, state: state, country: country, zip: zip, uid: uid, imageName: imageName, images: files)
                     
                     DataService.instance.setBuilding(building: building)
                     

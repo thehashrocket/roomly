@@ -21,69 +21,17 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
     var imagesDirectoryPath:String!
     var saved_image = ""
     var selected_building = "" as NSString
-    
-    let states = ["Alaska",
-                  "Alabama",
-                  "Arkansas",
-                  "American Samoa",
-                  "Arizona",
-                  "California",
-                  "Colorado",
-                  "Connecticut",
-                  "District of Columbia",
-                  "Delaware",
-                  "Florida",
-                  "Georgia",
-                  "Guam",
-                  "Hawaii",
-                  "Iowa",
-                  "Idaho",
-                  "Illinois",
-                  "Indiana",
-                  "Kansas",
-                  "Kentucky",
-                  "Louisiana",
-                  "Massachusetts",
-                  "Maryland",
-                  "Maine",
-                  "Michigan",
-                  "Minnesota",
-                  "Missouri",
-                  "Mississippi",
-                  "Montana",
-                  "North Carolina",
-                  "North Dakota",
-                  "Nebraska",
-                  "New Hampshire",
-                  "New Jersey",
-                  "New Mexico",
-                  "Nevada",
-                  "New York",
-                  "Ohio",
-                  "Oklahoma",
-                  "Oregon",
-                  "Pennsylvania",
-                  "Puerto Rico",
-                  "Rhode Island",
-                  "South Carolina",
-                  "South Dakota",
-                  "Tennessee",
-                  "Texas",
-                  "Utah",
-                  "Virginia",
-                  "Virgin Islands",
-                  "Vermont",
-                  "Washington",
-                  "Wisconsin",
-                  "West Virginia",
-                  "Wyoming"]
+    var worldArray = [(city: String, country: String, state: String, geoId: String)]()
+    var citiesArray = [(String)]()
+    var statesArray = [(String)]()
+    var countriesArray = [(String)]()
     
     // Outlets
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    @IBOutlet weak var imagePicked: UIImageView!
     @IBOutlet weak var buildingNAme: UITextField!
     @IBOutlet weak var streetTxt: UITextField!
     @IBOutlet weak var cityTxt: UITextField!
+    @IBOutlet weak var countryTxt: UITextField!
     @IBOutlet weak var stateTxt: UITextField!
     @IBOutlet weak var zipTxt: UITextField!
     
@@ -120,17 +68,21 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
         guard let state = stateTxt.text , stateTxt.text != "" else {
             return
         }
+        guard let country = countryTxt.text , countryTxt.text != "" else {
+            return
+        }
         guard let zip = zipTxt.text , zipTxt.text != "" else {
             return
         }
         let files = NSDictionary()
         
-        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, zip: zip, uid: userID, imageName: self.saved_image, images: files)
+        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, country: country, zip: zip, uid: userID, imageName: self.saved_image, images: files)
         
         let post = [
             "buildingName" : building.buildingName,
             "street" : building.street,
             "city" : building.city,
+            "country" : building.country,
             "state" : building.state,
             "zip" : building.zip,
             "uid" : building.uid,
@@ -185,9 +137,38 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
         super.viewDidLoad()
         spinner.stopAnimating()
         spinner.isHidden = true
+        let cityPicker = UIPickerView()
+        let countryPicker = UIPickerView()
         let statePicker = UIPickerView()
+        cityTxt.inputView = cityPicker
         stateTxt.inputView = statePicker
+        countryTxt.inputView = countryPicker
+        cityPicker.delegate = self
+        countryPicker.delegate = self
         statePicker.delegate = self
+        
+        let textFile = readBundle(file: "world-cities")
+        let lineArray = textFile.components(separatedBy: "\n") // Separating Lines
+        for eachLA in lineArray {
+            let temp = eachLA.components(separatedBy: ",")
+            if (temp[0] != "") {
+                worldArray.append((temp[0], temp[1], temp[2], temp[3]))
+            }
+        }
+        
+        // Begin Filtering Countries
+        let countries = worldArray.map({$0.1})
+        let sortedCountries = countries.sorted(by: <)
+        countriesArray = DataService.instance.uniqueElementsFrom(array: sortedCountries)
+        
+        // Begin Filtering States
+        let states = worldArray.map({$0.2})
+        let sortedStates = states.sorted(by: <)
+        statesArray = DataService.instance.uniqueElementsFrom(array: sortedStates)
+        // End Filtering States
+        
+        // Filter Cities //
+        citiesArray = DataService.instance.filterWorldDataByState(data: worldArray, state: "")
         
         selected_building = DataService.instance.getSelectedBuilding()
 
@@ -206,6 +187,7 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
                     self.buildingNAme.text = value?["buildingName"] as! String
                     self.streetTxt.text = value?["street"] as! String
                     self.cityTxt.text = value?["city"] as! String
+                    self.countryTxt.text = value?["country"] as! String
                     self.stateTxt.text = value?["state"] as! String
                     self.zipTxt.text = value?["zip"] as! String
                     self.saved_image = value?["imageName"] as! String
@@ -214,9 +196,9 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
                     let user_id = userID as! String
                     let destination = "buildings/\(user_id)/\(building_id)/"
                     
-                    CloudStorage.instance.loadTopImage(destination: destination, saved_image: self.saved_image, completion: { (image) in
-                        self.imagePicked.image = image
-                    })
+//                    CloudStorage.instance.loadTopImage(destination: destination, saved_image: self.saved_image, completion: { (image) in
+//                        self.imagePicked.image = image
+//                    })
                     
                 }) { (error) in
                     print(error.localizedDescription)
@@ -241,15 +223,45 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return states.count
+        if cityTxt.isFirstResponder{
+            return citiesArray.count
+        } else if stateTxt.isFirstResponder{
+            return statesArray.count
+        } else {
+            return countriesArray.count
+        }
     }
     
     func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return states[row]
+        if cityTxt.isFirstResponder{
+            return citiesArray[row]
+        } else if stateTxt.isFirstResponder{
+            return statesArray[row]
+        } else {
+            return countriesArray[row]
+        }
     }
     
     func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        stateTxt.text = states[row]
+        if stateTxt.isFirstResponder{
+            self.citiesArray = DataService.instance.filterWorldDataByState(data: worldArray, state: statesArray[row])
+            stateTxt.text = statesArray[row]
+        } else if cityTxt.isFirstResponder {
+            cityTxt.text = citiesArray[row]
+        } else {
+            self.statesArray = DataService.instance.filterWorldDataByCountry(data: worldArray, country: countriesArray[row])
+            countryTxt.text = countriesArray[row]
+        }
+    }
+    
+    func readBundle(file:String) -> String
+    {
+        var res = ""
+        if let asset = NSDataAsset(name: file) ,
+            let string = String(data:asset.data, encoding: String.Encoding.utf8){
+            res = string
+        }
+        return res
     }
 
     override func didReceiveMemoryWarning() {

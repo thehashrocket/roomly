@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="buildingNameTxt" destination="MKa-cd-Xz3" id="NIS-Pn-LFP"/>
                 <outlet property="cityTxt" destination="s7I-Me-EIV" id="zrY-aN-WNX"/>
+                <outlet property="countryTxt" destination="pak-rf-I3z" id="e4m-Vz-r0C"/>
                 <outlet property="spinner" destination="xgG-lU-JSO" id="7GA-9c-Nsb"/>
                 <outlet property="stateTxt" destination="nbg-2O-c5x" id="e4E-1n-c5d"/>
                 <outlet property="streetTxt" destination="m7k-zL-h7D" id="XfT-qo-4Uc"/>
@@ -33,7 +34,7 @@
                             <rect key="frame" x="38" y="38" width="299" height="571"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="tYE-aI-5hq">
-                                    <rect key="frame" x="9" y="48.5" width="282" height="210"/>
+                                    <rect key="frame" x="9" y="48.5" width="282" height="255"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Building Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MKa-cd-Xz3">
                                             <rect key="frame" x="0.0" y="0.0" width="282" height="30"/>
@@ -53,14 +54,11 @@
                                                 <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="vXv-Om-icg"/>
                                             </connections>
                                         </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s7I-Me-EIV">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pak-rf-I3z">
                                             <rect key="frame" x="0.0" y="90" width="282" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES" textContentType="address-level2"/>
-                                            <connections>
-                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="mS7-FG-IZz"/>
-                                            </connections>
+                                            <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nbg-2O-c5x">
                                             <rect key="frame" x="0.0" y="135" width="282" height="30"/>
@@ -71,8 +69,17 @@
                                                 <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="vFe-3u-8Cm"/>
                                             </connections>
                                         </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gz2-fA-p7X">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s7I-Me-EIV">
                                             <rect key="frame" x="0.0" y="180" width="282" height="30"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES" textContentType="address-level2"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="mS7-FG-IZz"/>
+                                            </connections>
+                                        </textField>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gz2-fA-p7X">
+                                            <rect key="frame" x="0.0" y="225" width="282" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES" textContentType="postal-code"/>

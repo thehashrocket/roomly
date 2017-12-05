@@ -13,7 +13,7 @@
             <connections>
                 <outlet property="buildingNAme" destination="D08-LL-wlk" id="GDp-Wf-jGr"/>
                 <outlet property="cityTxt" destination="K7k-Rv-h9B" id="Yb6-jU-pig"/>
-                <outlet property="imagePicked" destination="cNR-fC-wzV" id="fkm-Ij-NSC"/>
+                <outlet property="countryTxt" destination="2yH-4G-BLK" id="DQr-g4-LIG"/>
                 <outlet property="spinner" destination="qiU-8y-cP2" id="Zmb-SD-6LV"/>
                 <outlet property="stateTxt" destination="Buo-U5-w4I" id="Diw-o6-J4x"/>
                 <outlet property="streetTxt" destination="N6P-jB-DeR" id="3aO-X8-j6k"/>
@@ -33,7 +33,7 @@
                             <rect key="frame" x="30" y="50" width="315" height="587"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Iwp-Pn-peY">
-                                    <rect key="frame" x="8" y="48" width="299" height="210"/>
+                                    <rect key="frame" x="8" y="48" width="299" height="300"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Building Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D08-LL-wlk">
                                             <rect key="frame" x="0.0" y="0.0" width="299" height="30"/>
@@ -53,14 +53,11 @@
                                                 <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="aQl-mm-3ES"/>
                                             </connections>
                                         </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7k-Rv-h9B">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2yH-4G-BLK">
                                             <rect key="frame" x="0.0" y="90" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="address-level2"/>
-                                            <connections>
-                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="RT8-So-jfo"/>
-                                            </connections>
+                                            <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Buo-U5-w4I">
                                             <rect key="frame" x="0.0" y="135" width="299" height="30"/>
@@ -71,8 +68,17 @@
                                                 <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="0QY-IN-hCT"/>
                                             </connections>
                                         </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w3j-CU-JcY">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7k-Rv-h9B">
                                             <rect key="frame" x="0.0" y="180" width="299" height="30"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="address-level2"/>
+                                            <connections>
+                                                <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="RT8-So-jfo"/>
+                                            </connections>
+                                        </textField>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w3j-CU-JcY">
+                                            <rect key="frame" x="0.0" y="225" width="299" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES" textContentType="postal-code"/>
@@ -80,6 +86,13 @@
                                                 <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="nfW-bb-7GI"/>
                                             </connections>
                                         </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmH-xr-Itb">
+                                            <rect key="frame" x="0.0" y="270" width="299" height="30"/>
+                                            <state key="normal" title="Choose Photo"/>
+                                            <connections>
+                                                <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="p0U-eX-gc3"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTs-GU-9SS">
@@ -122,16 +135,6 @@
                                         <action selector="closePressed:" destination="-1" eventType="touchUpInside" id="zoM-vp-tGd"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmH-xr-Itb">
-                                    <rect key="frame" x="109" y="285" width="97" height="30"/>
-                                    <state key="normal" title="Choose Photo"/>
-                                    <connections>
-                                        <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="p0U-eX-gc3"/>
-                                    </connections>
-                                </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cNR-fC-wzV">
-                                    <rect key="frame" x="30" y="323" width="255" height="219"/>
-                                </imageView>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gat-UK-Ze6">
                                     <rect key="frame" x="139" y="275" width="37" height="37"/>
                                 </activityIndicatorView>
@@ -139,14 +142,12 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="BC2-Ij-43c" firstAttribute="centerX" secondItem="hzn-B9-n70" secondAttribute="centerX" id="20S-uS-pEz"/>
-                                <constraint firstAttribute="trailing" secondItem="cNR-fC-wzV" secondAttribute="trailing" constant="30" id="Cyv-Ud-RNM"/>
                                 <constraint firstItem="Gdd-Rt-VCE" firstAttribute="top" secondItem="hzn-B9-n70" secondAttribute="top" constant="8" id="E1Q-aT-vLv"/>
                                 <constraint firstAttribute="bottom" secondItem="HEk-0O-Jq7" secondAttribute="bottom" constant="8" id="Iu4-2G-CMs"/>
                                 <constraint firstAttribute="trailing" secondItem="wTs-GU-9SS" secondAttribute="trailing" constant="8" id="K25-18-AEy"/>
                                 <constraint firstItem="Gdd-Rt-VCE" firstAttribute="leading" secondItem="hzn-B9-n70" secondAttribute="leading" constant="8" id="LD1-c9-TrW"/>
                                 <constraint firstAttribute="bottom" secondItem="wTs-GU-9SS" secondAttribute="bottom" constant="8" id="LOa-n4-VoO"/>
                                 <constraint firstAttribute="trailing" secondItem="Iwp-Pn-peY" secondAttribute="trailing" constant="8" id="Q6W-IE-llF"/>
-                                <constraint firstItem="CmH-xr-Itb" firstAttribute="centerX" secondItem="hzn-B9-n70" secondAttribute="centerX" id="QXi-k2-w4P"/>
                                 <constraint firstItem="gat-UK-Ze6" firstAttribute="centerY" secondItem="hzn-B9-n70" secondAttribute="centerY" id="XYd-hY-tT4"/>
                                 <constraint firstItem="9t2-sU-5xl" firstAttribute="top" secondItem="hzn-B9-n70" secondAttribute="top" constant="8" id="a7k-fD-IFB"/>
                                 <constraint firstItem="HEk-0O-Jq7" firstAttribute="leading" secondItem="hzn-B9-n70" secondAttribute="leading" constant="8" id="b35-ck-ev3"/>
@@ -156,10 +157,6 @@
                                 <constraint firstAttribute="trailing" secondItem="9t2-sU-5xl" secondAttribute="trailing" constant="8" id="hSs-Ic-Qhl"/>
                                 <constraint firstAttribute="bottom" secondItem="BC2-Ij-43c" secondAttribute="bottom" constant="8" id="pB8-xB-6Km"/>
                                 <constraint firstItem="Iwp-Pn-peY" firstAttribute="top" secondItem="Gdd-Rt-VCE" secondAttribute="bottom" constant="19.5" id="sXq-DX-PTk"/>
-                                <constraint firstItem="cNR-fC-wzV" firstAttribute="top" secondItem="CmH-xr-Itb" secondAttribute="bottom" constant="8" id="vSh-ja-y6N"/>
-                                <constraint firstItem="wTs-GU-9SS" firstAttribute="top" secondItem="cNR-fC-wzV" secondAttribute="bottom" constant="7" id="wc2-zo-L4T"/>
-                                <constraint firstItem="cNR-fC-wzV" firstAttribute="top" secondItem="Iwp-Pn-peY" secondAttribute="bottom" constant="65" id="wgv-Vi-1LZ"/>
-                                <constraint firstItem="cNR-fC-wzV" firstAttribute="leading" secondItem="hzn-B9-n70" secondAttribute="leading" constant="30" id="zn2-on-2wa"/>
                             </constraints>
                         </view>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="qiU-8y-cP2">

@@ -1101,7 +1101,7 @@ Cotoca,Bolivia,Santa Cruz,3918937
 Cochabamba,Bolivia,Cochabamba,3919968
 Cobija,Bolivia,Pando,3919998
 Camiri,Bolivia,Santa Cruz,3922414
-Kralendijk,"Bonaire, Saint Eustatius and Saba ",Bonaire,3513563
+Kralendijk,Bonaire Saint Eustatius and Saba,Bonaire,3513563
 Vitória do Mearim,Brazil,Maranhão,3384986
 Vitória de Santo Antão,Brazil,Pernambuco,3384987
 Viseu,Brazil,Pará,3385022
@@ -3854,7 +3854,7 @@ San Gil,Colombia,Santander,3669808
 San Carlos,Colombia,Córdoba,3669997
 San Carlos,Colombia,Antioquia,3669998
 San Benito Abad,Colombia,Sucre,3670038
-San Andrés,Colombia,"Archipiélago de San Andrés, Providencia y Santa Catalina",3670218
+San Andrés,Colombia,Archipiélago de San Andrés Providencia y Santa Catalina,3670218
 Sampués,Colombia,Sucre,3670280
 Salamina,Colombia,Caldas,3670370
 Sahagún,Colombia,Córdoba,3670419
@@ -6479,11 +6479,11 @@ Fuencarral-El Pardo,Spain,Madrid,8285534
 Villa de Vallecas,Spain,Madrid,8285535
 Natahoyo,Spain,Asturias,8629192
 Ziway,Ethiopia,Oromiya,325579
-Yirga ‘Alem,Ethiopia,"Southern Nations, Nationalities, and People's Region",325780
+Yirga ‘Alem,Ethiopia,Southern Nations Nationalities and People's Region,325780
 Yabēlo,Ethiopia,Oromiya,326036
 Werota,Ethiopia,Amhara,326206
 Wenjī,Ethiopia,Oromiya,326308
-Tippi,Ethiopia,"Southern Nations, Nationalities, and People's Region",327694
+Tippi,Ethiopia,Southern Nations Nationalities and People's Region,327694
 Shashemenē,Ethiopia,Oromiya,328689
 Shambu,Ethiopia,Oromiya,328709
 Shakīso,Ethiopia,Oromiya,328716
@@ -6498,11 +6498,11 @@ Mendī,Ethiopia,Oromiya,331038
 Mekele,Ethiopia,Tigray,331180
 Maych’ew,Ethiopia,Tigray,331416
 Korem,Ethiopia,Tigray,332746
-K’olīto,Ethiopia,"Southern Nations, Nationalities, and People's Region",332880
+K’olīto,Ethiopia,Southern Nations Nationalities and People's Region,332880
 Kibre Mengist,Ethiopia,Oromiya,333103
 Kemisē,Ethiopia,Amhara,333356
 Kombolcha,Ethiopia,Amhara,333373
-Jinka,Ethiopia,"Southern Nations, Nationalities, and People's Region",333750
+Jinka,Ethiopia,Southern Nations Nationalities and People's Region,333750
 Jīma,Ethiopia,Oromiya,333772
 Jijiga,Ethiopia,Somali,333795
 Inda Silasē,Ethiopia,Tigray,334227
@@ -6519,11 +6519,11 @@ Gebre Guracha,Ethiopia,Oromiya,337152
 Gambēla,Ethiopia,Gambela,337405
 Finote Selam,Ethiopia,Amhara,337712
 Fichē,Ethiopia,Oromiya,337771
-Felege Neway,Ethiopia,"Southern Nations, Nationalities, and People's Region",337853
+Felege Neway,Ethiopia,Southern Nations Nationalities and People's Region,337853
 Dubti,Ethiopia,Āfar,338554
 Dodola,Ethiopia,Oromiya,338726
 Dire Dawa,Ethiopia,Dire Dawa,338832
-Dīla,Ethiopia,"Southern Nations, Nationalities, and People's Region",338998
+Dīla,Ethiopia,Southern Nations Nationalities and People's Region,338998
 Desē,Ethiopia,Amhara,339219
 Dembī Dolo,Ethiopia,Oromiya,339448
 Bishoftu,Ethiopia,Oromiya,339666
@@ -6531,23 +6531,23 @@ Debre Tabor,Ethiopia,Amhara,339686
 Debre Mark’os,Ethiopia,Amhara,339708
 Debre Birhan,Ethiopia,Amhara,339734
 Debark’,Ethiopia,Amhara,339823
-Butajīra,Ethiopia,"Southern Nations, Nationalities, and People's Region",341297
+Butajīra,Ethiopia,Southern Nations Nationalities and People's Region,341297
 Burē,Ethiopia,Amhara,341397
-Bonga,Ethiopia,"Southern Nations, Nationalities, and People's Region",341742
-Bodītī,Ethiopia,"Southern Nations, Nationalities, and People's Region",341877
+Bonga,Ethiopia,Southern Nations Nationalities and People's Region,341742
+Bodītī,Ethiopia,Southern Nations Nationalities and People's Region,341877
 Bichena,Ethiopia,Amhara,342190
 Bedēsa,Ethiopia,Oromiya,342559
 Bedelē,Ethiopia,Oromiya,342567
 Batī,Ethiopia,Amhara,342641
-Bako,Ethiopia,"Southern Nations, Nationalities, and People's Region",342856
+Bako,Ethiopia,Southern Nations Nationalities and People's Region,342856
 Bahir Dar,Ethiopia,Amhara,342884
-Hawassa,Ethiopia,"Southern Nations, Nationalities, and People's Region",343137
+Hawassa,Ethiopia,Southern Nations Nationalities and People's Region,343137
 Āsosa,Ethiopia,Bīnshangul Gumuz,343292
 Āsbe Teferī,Ethiopia,Oromiya,343402
 Asaita,Ethiopia,Āfar,343409
 Āsasa,Ethiopia,Oromiya,343413
-Āreka,Ethiopia,"Southern Nations, Nationalities, and People's Region",343593
-Ārba Minch’,Ethiopia,"Southern Nations, Nationalities, and People's Region",343663
+Āreka,Ethiopia,Southern Nations Nationalities and People's Region,343593
+Ārba Minch’,Ethiopia,Southern Nations Nationalities and People's Region,343663
 Axum,Ethiopia,Tigray,344420
 Hagere Maryam,Ethiopia,Oromiya,344620
 Āgaro,Ethiopia,Oromiya,344661
@@ -19792,7 +19792,7 @@ Springdale,United States,Arkansas,4132093
 Texarkana,United States,Arkansas,4133367
 Van Buren,United States,Arkansas,4134716
 West Memphis,United States,Arkansas,4135865
-"Washington, D.C.",United States,"Washington, D.C.",4140963
+Washington D.C.,United States,Washington D.C.,4140963
 Bear,United States,Delaware,4141363
 Dover,United States,Delaware,4142290
 Middletown,United States,Delaware,4143637

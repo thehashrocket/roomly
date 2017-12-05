@@ -15,86 +15,64 @@ import Lightbox
 
 class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    let states = ["Alaska",
-                  "Alabama",
-                  "Arkansas",
-                  "American Samoa",
-                  "Arizona",
-                  "California",
-                  "Colorado",
-                  "Connecticut",
-                  "District of Columbia",
-                  "Delaware",
-                  "Florida",
-                  "Georgia",
-                  "Guam",
-                  "Hawaii",
-                  "Iowa",
-                  "Idaho",
-                  "Illinois",
-                  "Indiana",
-                  "Kansas",
-                  "Kentucky",
-                  "Louisiana",
-                  "Massachusetts",
-                  "Maryland",
-                  "Maine",
-                  "Michigan",
-                  "Minnesota",
-                  "Missouri",
-                  "Mississippi",
-                  "Montana",
-                  "North Carolina",
-                  "North Dakota",
-                  "Nebraska",
-                  "New Hampshire",
-                  "New Jersey",
-                  "New Mexico",
-                  "Nevada",
-                  "New York",
-                  "Ohio",
-                  "Oklahoma",
-                  "Oregon",
-                  "Pennsylvania",
-                  "Puerto Rico",
-                  "Rhode Island",
-                  "South Carolina",
-                  "South Dakota",
-                  "Tennessee",
-                  "Texas",
-                  "Utah",
-                  "Virginia",
-                  "Virgin Islands",
-                  "Vermont",
-                  "Washington",
-                  "Wisconsin",
-                  "West Virginia",
-                  "Wyoming"]
-    
+    // Variables
     let storage = Storage.storage()
-    
     var ref: DatabaseReference!
     var images: [UIImage] = []
     var imagesDirectoryPath:String!
     var saved_image = ""
+    var worldArray = [(city: String, country: String, state: String, geoId: String)]()
+    var citiesArray = [(String)]()
+    var statesArray = [(String)]()
+    var countriesArray = [(String)]()
 
+    
     // Outlets
     @IBOutlet weak var buildingNameTxt: UITextField!
     @IBOutlet weak var streetTxt: UITextField!
     @IBOutlet weak var cityTxt: UITextField!
     @IBOutlet weak var stateTxt: UITextField!
+    @IBOutlet weak var countryTxt: UITextField!
     @IBOutlet weak var zipTxt: UITextField!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         spinner.isHidden = true
+        let cityPicker = UIPickerView()
+        let countryPicker = UIPickerView()
         let statePicker = UIPickerView()
+        cityTxt.inputView = cityPicker
         stateTxt.inputView = statePicker
+        countryTxt.inputView = countryPicker
+        cityPicker.delegate = self
+        countryPicker.delegate = self
         statePicker.delegate = self
         
+        
+        let textFile = readBundle(file: "world-cities")
+        let lineArray = textFile.components(separatedBy: "\n") // Separating Lines
+        for eachLA in lineArray {
+            let temp = eachLA.components(separatedBy: ",")
+            if (temp[0] != "") {
+                worldArray.append((temp[0], temp[1], temp[2], temp[3]))
+            }
+        }
+        // Begin Filtering Countries
+        let countries = worldArray.map({$0.1})
+        let sortedCountries = countries.sorted(by: <)
+        countriesArray = DataService.instance.uniqueElementsFrom(array: sortedCountries)
+        
+        // Begin Filtering States
+        let states = worldArray.map({$0.2})
+        let sortedStates = states.sorted(by: <)
+        statesArray = DataService.instance.uniqueElementsFrom(array: sortedStates)
+        // End Filtering States
+        
+        // Filter Cities //
+        citiesArray = DataService.instance.filterWorldDataByState(data: worldArray, state: "")
+        
         self.ref = Database.database().reference()
-        // Do any additional setup after loading the view.
 
         if !FileManager.default.fileExists(atPath: IMAGE_DIRECTORY_PATH) {
             do {
@@ -104,7 +82,6 @@ class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate,
                 print(error)
             }
         }
-        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -112,16 +89,37 @@ class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate,
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return states.count
+        if cityTxt.isFirstResponder{
+            return citiesArray.count
+        } else if stateTxt.isFirstResponder{
+            return statesArray.count
+        } else {
+            return countriesArray.count
+        }
     }
     
     func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return states[row]
+        if cityTxt.isFirstResponder{
+            return citiesArray[row]
+        } else if stateTxt.isFirstResponder{
+            return statesArray[row]
+        } else {
+            return countriesArray[row]
+        }
     }
     
     func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        stateTxt.text = states[row]
+        if stateTxt.isFirstResponder{
+            self.citiesArray = DataService.instance.filterWorldDataByState(data: worldArray, state: statesArray[row])
+            stateTxt.text = statesArray[row]
+        } else if cityTxt.isFirstResponder {
+            cityTxt.text = citiesArray[row]
+        } else {
+            self.statesArray = DataService.instance.filterWorldDataByCountry(data: worldArray, country: countriesArray[row])
+            countryTxt.text = countriesArray[row]
+        }
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -162,18 +160,22 @@ class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate,
         guard let state = stateTxt.text , stateTxt.text != "" else {
             return
         }
+        guard let country = countryTxt.text , countryTxt.text != "" else {
+            return
+        }
         guard let zip = zipTxt.text , zipTxt.text != "" else {
             return
         }
         
         var files = [String: NSString]()
-        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, zip: zip, uid: userID, imageName: self.saved_image, images: files as NSDictionary)
+        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, country: country, zip: zip, uid: userID, imageName: self.saved_image, images: files as NSDictionary)
         
         let post = [
             "buildingName" : building.buildingName,
             "street" : building.street,
             "city" : building.city,
             "state" : building.state,
+            "country" : building.country,
             "zip" : building.zip,
             "uid" : building.uid,
             "id" : building.id,
@@ -213,6 +215,16 @@ class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate,
         imagePicker.delegate = self
         
         present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func readBundle(file:String) -> String
+    {
+        var res = ""
+        if let asset = NSDataAsset(name: file) ,
+            let string = String(data:asset.data, encoding: String.Encoding.utf8){
+            res = string
+        }
+        return res
     }
     
     func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {

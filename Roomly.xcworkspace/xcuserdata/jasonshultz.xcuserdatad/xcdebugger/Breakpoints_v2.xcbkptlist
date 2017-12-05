@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Roomly/Controllers/EditBuildingVC.swift"
-            timestampString = "534016462.221672"
+            timestampString = "534143258.470126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
-            landmarkName = "submitPressed(_:)"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
             <Locations>
                <Location
@@ -192,6 +192,70 @@
             startingLineNumber = "22"
             endingLineNumber = "22"
             landmarkName = "updateViews(item:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Controllers/AddBuildingVC.swift"
+            timestampString = "534143258.470795"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Roomly.AddBuildingVC.viewDidLoad() -&gt; ()"
+                  moduleName = "Roomly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Controllers/AddBuildingVC.swift"
+                  timestampString = "534139757.67141"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "6262">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (city: Swift.String, country: Swift.String, state: Swift.String, geoId: Swift.String) -&gt; Swift.String in Roomly.AddBuildingVC.viewDidLoad() -&gt; ()"
+                  moduleName = "Roomly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Controllers/AddBuildingVC.swift"
+                  timestampString = "534139757.674041"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "88">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Controllers/AddBuildingVC.swift"
+            timestampString = "534143258.471257"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "pickerView(_:didSelectRow:inComponent:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
