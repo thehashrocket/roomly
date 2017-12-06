@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,7 +34,7 @@
                             <rect key="frame" x="30" y="50" width="315" height="587"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Iwp-Pn-peY">
-                                    <rect key="frame" x="8" y="48" width="299" height="300"/>
+                                    <rect key="frame" x="8" y="48" width="299" height="292"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Building Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D08-LL-wlk">
                                             <rect key="frame" x="0.0" y="0.0" width="299" height="30"/>
@@ -86,33 +87,34 @@
                                                 <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="nfW-bb-7GI"/>
                                             </connections>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmH-xr-Itb">
-                                            <rect key="frame" x="0.0" y="270" width="299" height="30"/>
-                                            <state key="normal" title="Choose Photo"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmH-xr-Itb">
+                                            <rect key="frame" x="0.0" y="270" width="299" height="22"/>
+                                            <state key="normal" image="camera"/>
                                             <connections>
                                                 <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="p0U-eX-gc3"/>
                                             </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTs-GU-9SS">
-                                    <rect key="frame" x="258" y="549" width="49" height="30"/>
-                                    <state key="normal" title="Submit"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTs-GU-9SS">
+                                    <rect key="frame" x="279" y="551" width="28" height="28"/>
+                                    <state key="normal" image="add"/>
                                     <connections>
                                         <action selector="submitPressed:" destination="-1" eventType="touchUpInside" id="yH0-Fg-dnH"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HEk-0O-Jq7">
-                                    <rect key="frame" x="8" y="549" width="48" height="30"/>
-                                    <state key="normal" title="Cancel"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HEk-0O-Jq7">
+                                    <rect key="frame" x="8" y="551" width="28" height="28"/>
+                                    <state key="normal" image="cancel"/>
                                     <connections>
                                         <action selector="cancelPressed:" destination="-1" eventType="touchUpInside" id="p5M-e0-0dx"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BC2-Ij-43c">
-                                    <rect key="frame" x="135" y="549" width="45" height="30"/>
-                                    <state key="normal" title="Delete">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BC2-Ij-43c">
+                                    <rect key="frame" x="143.5" y="551" width="28" height="28"/>
+                                    <state key="normal" image="remove">
                                         <color key="titleColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleShadowColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="deletePressed:" destination="-1" eventType="touchUpInside" id="hQE-72-JL0"/>
@@ -186,6 +188,10 @@
         </view>
     </objects>
     <resources>
+        <image name="add" width="28" height="28"/>
+        <image name="camera" width="28" height="22"/>
+        <image name="cancel" width="28" height="28"/>
         <image name="closeButton" width="28" height="28"/>
+        <image name="remove" width="28" height="28"/>
     </resources>
 </document>

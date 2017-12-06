@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -89,16 +90,16 @@
                                         </textField>
                                     </subviews>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTA-SZ-kkK">
-                                    <rect key="frame" x="234" y="525" width="49" height="30"/>
-                                    <state key="normal" title="Submit"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTA-SZ-kkK">
+                                    <rect key="frame" x="255" y="527" width="28" height="28"/>
+                                    <state key="normal" image="add"/>
                                     <connections>
                                         <action selector="submitPressed:" destination="-1" eventType="touchUpInside" id="Z73-wy-iaY"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ug3-bB-KiH">
-                                    <rect key="frame" x="16" y="525" width="48" height="30"/>
-                                    <state key="normal" title="Cancel"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ug3-bB-KiH">
+                                    <rect key="frame" x="16" y="527" width="28" height="28"/>
+                                    <state key="normal" image="cancel"/>
                                     <connections>
                                         <action selector="cancelPressed:" destination="-1" eventType="touchUpInside" id="SwN-QL-GSA"/>
                                     </connections>
@@ -120,9 +121,9 @@
                                         <action selector="dismissPressed:" destination="-1" eventType="touchUpInside" id="9mS-Zm-F1a"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIr-WN-Tgw">
-                                    <rect key="frame" x="107" y="525" width="86" height="30"/>
-                                    <state key="normal" title="Add A Photo"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIr-WN-Tgw">
+                                    <rect key="frame" x="136" y="533" width="28" height="22"/>
+                                    <state key="normal" image="camera"/>
                                     <connections>
                                         <action selector="addPhotoPressed:" destination="-1" eventType="touchUpInside" id="hfx-ef-Bdv"/>
                                     </connections>
@@ -172,6 +173,9 @@
         </view>
     </objects>
     <resources>
+        <image name="add" width="28" height="28"/>
+        <image name="camera" width="28" height="22"/>
+        <image name="cancel" width="28" height="28"/>
         <image name="closeButton" width="28" height="28"/>
     </resources>
 </document>

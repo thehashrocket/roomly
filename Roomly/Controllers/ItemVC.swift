@@ -19,6 +19,8 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     let selected_room = DataService.instance.getSelectedRoom()
     var handle: AuthStateDidChangeListenerHandle?
     var saved_room_image = ""
+    var total_items = 0
+    var total_item_value = Double()
     
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
@@ -29,6 +31,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var itemsCollection: UICollectionView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var roomImage: UIImageView!
+    @IBOutlet weak var roomDetailsLabel: UILabel!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
@@ -97,6 +100,8 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                     let postDict = snapshot.value as? [String : AnyObject] ?? [:]
                     DataService.instance.resetItems()
                     
+                    self.total_items = postDict.count
+                    self.total_item_value = 0
                     postDict.forEach({ (arg) in
                         let (_, value) = arg
                         let dataChange = value as! [String: AnyObject]
@@ -106,8 +111,14 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         let itemDescription = dataChange["itemDescription"] as! String
                         let imageName = dataChange["imageName"] as! String
                         let purchaseAmount = ""
+                        print("1 self.total_item_value \(self.total_item_value)")
                         if let val = dataChange["purchaseAmount"] {
                             let purchaseAmount = dataChange["purchaseAmount"] as! String
+                            print("2 self.total_item_value \(self.total_item_value)")
+                            print("purchaseAmount \(purchaseAmount)")
+                            if let purchaseDate = (dataChange["purchaseAmount"]as? NSString)?.doubleValue {
+                                self.total_item_value = self.total_item_value + purchaseDate
+                            }
                         }
                         var purchaseDate = ""
                         if let val = dataChange["purchaseDate"] {
@@ -123,7 +134,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         self.items = DataService.instance.getItemsForRoom(forRoomId: self.selected_room)
                         
                         self.itemsCollection.reloadData()
-                        
+                        self.roomDetailsLabel.text = "There are \(self.total_items) totalling \(String(format: "$%.02f", self.total_item_value))"
                     })
                     self.spinner.stopAnimating()
                 }, withCancel: { (error) in

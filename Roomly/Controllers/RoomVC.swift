@@ -90,7 +90,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
 
     func initRooms(building: Building) {
-        print("building.id \(building.id)")
         navigationItem.title = building.buildingName! as String
         self.getRooms()
     }
@@ -117,7 +116,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func getRooms() {
         self.ref = Database.database().reference()
         guard let userID = Auth.auth().currentUser?.uid else { return }
-        print("self.selected_building \(self.selected_building)")
         self.ref.child("rooms").child(userID).child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
             self.spinner.startAnimating()
             let postDict = snapshot.value as? [String : AnyObject] ?? [:]

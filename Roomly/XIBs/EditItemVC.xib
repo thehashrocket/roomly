@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditItemVC" customModule="Roomly" customModuleProvider="target">
             <connections>
-                <outlet property="imagePicked" destination="E2y-Q7-9ve" id="Se6-gA-O6S"/>
                 <outlet property="itemDescriptionTxt" destination="waB-85-5Un" id="0vh-yc-yLA"/>
                 <outlet property="itemNameTxt" destination="yQQ-6X-BOm" id="7Hc-X6-eZQ"/>
                 <outlet property="purchaseAmountTxt" destination="wgG-dU-GBp" id="9Kc-mn-zhY"/>
@@ -32,7 +32,7 @@
                             <rect key="frame" x="30" y="50" width="315" height="587"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="of2-Lx-OxT">
-                                    <rect key="frame" x="8" y="56" width="299" height="165"/>
+                                    <rect key="frame" x="8" y="56" width="299" height="202"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yQQ-6X-BOm">
                                             <rect key="frame" x="0.0" y="0.0" width="299" height="30"/>
@@ -76,6 +76,13 @@
                                                 <action selector="textField:" destination="-1" eventType="editingDidEndOnExit" id="b78-2a-HZ0"/>
                                             </connections>
                                         </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ozv-71-zbN">
+                                            <rect key="frame" x="0.0" y="180" width="299" height="22"/>
+                                            <state key="normal" image="camera"/>
+                                            <connections>
+                                                <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="90H-Dx-Gxe"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="yQQ-6X-BOm" firstAttribute="leading" secondItem="of2-Lx-OxT" secondAttribute="leading" id="Efw-4C-TQJ"/>
@@ -84,16 +91,16 @@
                                         <constraint firstAttribute="trailing" secondItem="waB-85-5Un" secondAttribute="trailing" id="yz9-qi-tdX"/>
                                     </constraints>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaE-DI-PXT">
-                                    <rect key="frame" x="258" y="549" width="49" height="30"/>
-                                    <state key="normal" title="Submit"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaE-DI-PXT">
+                                    <rect key="frame" x="279" y="551" width="28" height="28"/>
+                                    <state key="normal" image="add"/>
                                     <connections>
                                         <action selector="submitPressed:" destination="-1" eventType="touchUpInside" id="fxh-BX-hgB"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H8p-xc-5mU">
-                                    <rect key="frame" x="8" y="549" width="48" height="30"/>
-                                    <state key="normal" title="Cancel"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H8p-xc-5mU">
+                                    <rect key="frame" x="8" y="551" width="28" height="28"/>
+                                    <state key="normal" image="cancel"/>
                                     <connections>
                                         <action selector="cancelPressed:" destination="-1" eventType="touchUpInside" id="0TX-sU-1lG"/>
                                     </connections>
@@ -119,21 +126,11 @@
                                         <action selector="closePressed:" destination="-1" eventType="touchUpInside" id="5iE-eL-DpC"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ozv-71-zbN">
-                                    <rect key="frame" x="114.5" y="228.5" width="86" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Add A Photo"/>
-                                    <connections>
-                                        <action selector="openCameraButton:" destination="-1" eventType="touchUpInside" id="90H-Dx-Gxe"/>
-                                    </connections>
-                                </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E2y-Q7-9ve">
-                                    <rect key="frame" x="30" y="267" width="255" height="275"/>
-                                </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdj-oM-Y7G">
-                                    <rect key="frame" x="134.5" y="549" width="45" height="30"/>
-                                    <state key="normal" title="Delete">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdj-oM-Y7G">
+                                    <rect key="frame" x="143" y="551" width="28" height="28"/>
+                                    <state key="normal" image="remove">
                                         <color key="titleColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleShadowColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="deletePressed:" destination="-1" eventType="touchUpInside" id="8GO-s9-Ksl"/>
@@ -147,17 +144,13 @@
                                 <constraint firstItem="Mdj-oM-Y7G" firstAttribute="centerX" secondItem="uws-1D-R8U" secondAttribute="centerX" id="EQ2-TC-aHq"/>
                                 <constraint firstAttribute="bottom" secondItem="Mdj-oM-Y7G" secondAttribute="bottom" constant="8" id="EVT-tD-OR3"/>
                                 <constraint firstItem="QxP-8V-Gr1" firstAttribute="top" secondItem="uws-1D-R8U" secondAttribute="top" constant="8" id="FLu-QG-xZb"/>
-                                <constraint firstItem="E2y-Q7-9ve" firstAttribute="leading" secondItem="uws-1D-R8U" secondAttribute="leading" constant="30" id="La7-hM-NEr"/>
                                 <constraint firstAttribute="trailing" secondItem="of2-Lx-OxT" secondAttribute="trailing" constant="8" id="OmK-J5-gfU"/>
                                 <constraint firstAttribute="trailing" secondItem="eaE-DI-PXT" secondAttribute="trailing" constant="8" id="R5x-n5-Hbi"/>
-                                <constraint firstAttribute="trailing" secondItem="E2y-Q7-9ve" secondAttribute="trailing" constant="30" id="SIg-i7-TsD"/>
                                 <constraint firstItem="of2-Lx-OxT" firstAttribute="leading" secondItem="uws-1D-R8U" secondAttribute="leading" constant="8" id="WId-kg-bmA"/>
-                                <constraint firstItem="E2y-Q7-9ve" firstAttribute="top" secondItem="of2-Lx-OxT" secondAttribute="bottom" constant="46" id="aFq-Y7-0EX"/>
                                 <constraint firstItem="QxP-8V-Gr1" firstAttribute="leading" secondItem="uws-1D-R8U" secondAttribute="leading" constant="8" id="bxz-8o-1PI"/>
                                 <constraint firstAttribute="bottom" secondItem="eaE-DI-PXT" secondAttribute="bottom" constant="8" id="c3W-1g-EL4"/>
                                 <constraint firstItem="C3j-Ez-Z7K" firstAttribute="top" secondItem="uws-1D-R8U" secondAttribute="top" constant="8" id="c7f-Ru-F56"/>
                                 <constraint firstAttribute="bottom" secondItem="H8p-xc-5mU" secondAttribute="bottom" constant="8" id="eFV-NY-xc5"/>
-                                <constraint firstItem="eaE-DI-PXT" firstAttribute="top" secondItem="E2y-Q7-9ve" secondAttribute="bottom" constant="7" id="hAV-1n-7J7"/>
                                 <constraint firstItem="of2-Lx-OxT" firstAttribute="top" secondItem="C3j-Ez-Z7K" secondAttribute="bottom" constant="20" id="kiS-mc-uzI"/>
                             </constraints>
                         </view>
@@ -189,6 +182,10 @@
         </view>
     </objects>
     <resources>
+        <image name="add" width="28" height="28"/>
+        <image name="camera" width="28" height="22"/>
+        <image name="cancel" width="28" height="28"/>
         <image name="closeButton" width="28" height="28"/>
+        <image name="remove" width="28" height="28"/>
     </resources>
 </document>

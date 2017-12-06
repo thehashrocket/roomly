@@ -33,9 +33,7 @@ class CloudStorage {
     }
     
     func loadTopImage(destination: String, saved_image: String, completion: @escaping (UIImage) -> Void) {
-        print("this destination " + destination)
         CloudData.instance.getImages(destination: destination) { (fire_images) in
-            print("destination " + destination)
             if (fire_images.count > 0) {
                 let image_key = fire_images[0]
                 let reference = "images/" + destination + "\(image_key)"

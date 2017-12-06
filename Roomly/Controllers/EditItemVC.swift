@@ -168,9 +168,7 @@ class EditItemVC: UIViewController, ImagePickerDelegate {
                     
                     let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
                     let image    = UIImage(contentsOfFile: imageURL.path)
-                    
-                    self.imagePicked.image = image
-                    
+                                        
                 }) { (error) in
                     print(error.localizedDescription)
                 }

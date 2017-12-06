@@ -31,7 +31,6 @@ class ShowItemVC: UIViewController {
     fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
 
     override func viewDidAppear(_ animated: Bool) {
-        print("i ran")
     }
     
     override func viewDidLoad() {
