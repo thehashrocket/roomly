@@ -50,7 +50,10 @@ class ShowItemVC: UIViewController {
                     if ((value) != nil) {
                         self.itemNameText.text = value?["itemName"] as? String
                         self.itemDescriptionText.text = value?["itemDescription"] as? String
-                        self.PurchaseAmountText.text = value?["purchaseAmount"] as? String
+//                        self.PurchaseAmountText.text = "\(String(format: "$%.02f", value?["purchaseAmount"] as! CVarArg))"
+                        var formatted_string = Double()
+                        formatted_string = (value?["purchaseAmount"] as! NSString).doubleValue
+                        self.PurchaseAmountText.text = (String(format: "$%.02f", formatted_string))                        
                         self.PurchaseDateText.text = value?["purchaseDate"] as? String
                         if ((value?["imageName"]) != nil) {
                             self.saved_image = (value?["imageName"] as? String)!

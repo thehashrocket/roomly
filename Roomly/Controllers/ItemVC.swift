@@ -111,11 +111,8 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         let itemDescription = dataChange["itemDescription"] as! String
                         let imageName = dataChange["imageName"] as! String
                         let purchaseAmount = ""
-                        print("1 self.total_item_value \(self.total_item_value)")
                         if let val = dataChange["purchaseAmount"] {
                             let purchaseAmount = dataChange["purchaseAmount"] as! String
-                            print("2 self.total_item_value \(self.total_item_value)")
-                            print("purchaseAmount \(purchaseAmount)")
                             if let purchaseDate = (dataChange["purchaseAmount"]as? NSString)?.doubleValue {
                                 self.total_item_value = self.total_item_value + purchaseDate
                             }
@@ -134,7 +131,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         self.items = DataService.instance.getItemsForRoom(forRoomId: self.selected_room)
                         
                         self.itemsCollection.reloadData()
-                        self.roomDetailsLabel.text = "There are \(self.total_items) totalling \(String(format: "$%.02f", self.total_item_value))"
+                        self.roomDetailsLabel.text = "There are \(self.total_items) item(s) totalling \(String(format: "$%.02f", self.total_item_value))"
                     })
                     self.spinner.stopAnimating()
                 }, withCancel: { (error) in

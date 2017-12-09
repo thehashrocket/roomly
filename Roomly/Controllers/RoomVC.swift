@@ -18,7 +18,8 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var saved_house_image = ""
     var ref: DatabaseReference!
     let selected_building = DataService.instance.getSelectedBuilding()
-    
+    var total_items = 0
+    var total_item_value = Double()
     
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
@@ -27,7 +28,9 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var roomsCollection: UICollectionView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var houseImage: UIImageView!
+    @IBOutlet weak var houseDetails: UILabel!
     
+    private(set) public var items = [Item]()
     private(set) public var rooms = [Room]()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,7 +54,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         super.viewDidLoad()
         roomsCollection.dataSource = self
         roomsCollection.delegate = self
-//        rooms = DataService.instance.getRooms()
         
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
@@ -71,7 +73,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                             self.houseImage.image = image
                         })
                     }
-                    
                 })
 
                 // User is signed in.
@@ -83,7 +84,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -113,6 +113,40 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         performSegue(withIdentifier: "ItemVC", sender: room)
     }
     
+    func getRoomItemValues(rooms: [Room], userID: String) {
+        var single_item = 0
+        var single_item_value = Double()
+        rooms.forEach { (room) in
+            self.ref.child("items").child(userID).child(room.id as String).observe(DataEventType.value, with: { (snapshot) in
+                self.spinner.startAnimating()
+                let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+                DataService.instance.resetItems()
+                
+                single_item = single_item + postDict.count
+                print("single_item: \(single_item)")
+                postDict.forEach({ (arg) in
+                    let (_, value) = arg
+                    let dataChange = value as! [String: AnyObject]
+                    
+                    _ = dataChange["id"] as! String
+                    if dataChange["purchaseAmount"] != nil {
+                        if let purchaseDate = (dataChange["purchaseAmount"]as? NSString)?.doubleValue {
+                            single_item_value = single_item_value + purchaseDate
+                        }
+                    }
+                    single_item = single_item + 1
+                    
+                })
+                self.houseDetails.text = "There are \(single_item) item(s) totalling \(String(format: "$%.02f", single_item_value))"
+            }, withCancel: { (error) in
+                print(error)
+            })
+//            self.total_items = self.total_items + single_item
+//            self.total_item_value = self.total_item_value + single_item_value
+        }
+    }
+    
+    // This gets all the Rooms In the Building.
     func getRooms() {
         self.ref = Database.database().reference()
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -132,9 +166,9 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 let buildingId = dataChange["buildingId"] as! String
                 let uid = dataChange["uid"] as! String
                 let room = Room(id: id, roomName: roomName, roomDescription: roomDescription, imageName: imageName, buildingId: buildingId, uid: uid)
-                
                 DataService.instance.setRoom(room: room)
                 self.rooms = DataService.instance.getRoomsForBuilding(forBuildingId: self.selected_building)
+                self.getRoomItemValues(rooms: self.rooms, userID: userID)
                 self.roomsCollection.reloadData()
                 self.spinner.stopAnimating()
             })
