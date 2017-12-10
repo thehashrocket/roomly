@@ -58,8 +58,10 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
                 guard let userID = Auth.auth().currentUser?.uid else { return }
+                let buildingRef = self.ref.child("buildings").child(userID)
+                buildingRef.keepSynced(true)
                 
-                self.ref.child("buildings").child(userID).child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
+                buildingRef.child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
                     
                     let value = snapshot.value as? NSDictionary
                     
@@ -123,7 +125,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 DataService.instance.resetItems()
                 
                 single_item = single_item + postDict.count
-                print("single_item: \(single_item)")
                 postDict.forEach({ (arg) in
                     let (_, value) = arg
                     let dataChange = value as! [String: AnyObject]
@@ -134,21 +135,20 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                             single_item_value = single_item_value + purchaseDate
                         }
                     }
-                    single_item = single_item + 1
+                    
                     
                 })
                 self.houseDetails.text = "There are \(single_item) item(s) totalling \(String(format: "$%.02f", single_item_value))"
             }, withCancel: { (error) in
                 print(error)
             })
-//            self.total_items = self.total_items + single_item
-//            self.total_item_value = self.total_item_value + single_item_value
         }
     }
     
     // This gets all the Rooms In the Building.
     func getRooms() {
         self.ref = Database.database().reference()
+        self.ref.keepSynced(true)
         guard let userID = Auth.auth().currentUser?.uid else { return }
         self.ref.child("rooms").child(userID).child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
             self.spinner.startAnimating()

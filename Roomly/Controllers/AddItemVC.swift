@@ -46,6 +46,7 @@ class AddItemVC: UIViewController, ImagePickerDelegate {
         spinner.stopAnimating()
         
         self.ref = Database.database().reference()
+        self.ref.keepSynced(true)
         
         // Do any additional setup after loading the view.
         

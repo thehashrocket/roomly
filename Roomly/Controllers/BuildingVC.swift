@@ -54,8 +54,12 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             self.ref = Database.database().reference()
             
             guard let userID = Auth.auth().currentUser?.uid else { return }
-            self.ref.child("buildings").child(userID).observe(DataEventType.value, with: { (snapshot) in
+            let buildingRef = self.ref.child("buildings").child(userID)
+            buildingRef.keepSynced(true)
+            
+            buildingRef.observe(DataEventType.value, with: { (snapshot) in
                 self.spinner.startAnimating()
+
                 
                 let postDict = snapshot.value as? [String : AnyObject] ?? [:]
                 

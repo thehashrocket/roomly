@@ -70,17 +70,19 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         itemsCollection.delegate = self
         
         self.ref = Database.database().reference()
-
+        
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
                 // User is signed in.
                 
                 guard let userID = Auth.auth().currentUser?.uid else { return }
+                let roomRef = self.ref.child("rooms").child(userID).child(self.selected_building as String).child(self.selected_room as String)
+                roomRef.keepSynced(true)
+                
                 // Get the Room in the building so we can get the image of the room.
-                self.ref.child("rooms").child(userID).child(self.selected_building as String).child(self.selected_room as String).observe(DataEventType.value, with: { (snapshot) in
-                    
-                    let value = snapshot.value as? NSDictionary
+                roomRef.observe(DataEventType.value, with: { (snapshot) in
 
+                    let value = snapshot.value as? NSDictionary
                     if ((value) != nil) {
                         self.saved_room_image = (value?["imageName"] as? String)!
                         let building_id = (value?["buildingId"] as? String)!
@@ -95,7 +97,10 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                     
                 })
                 
-                self.ref.child("items").child(userID).child(self.selected_room as String).observe(DataEventType.value, with: { (snapshot) in
+                let itemsRef = self.ref.child("items").child(userID).child(self.selected_room as String)
+                itemsRef.keepSynced(true)
+                
+                itemsRef.observe(DataEventType.value, with: { (snapshot) in
                     self.spinner.startAnimating()
                     let postDict = snapshot.value as? [String : AnyObject] ?? [:]
                     DataService.instance.resetItems()

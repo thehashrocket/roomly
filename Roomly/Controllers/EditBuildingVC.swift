@@ -173,6 +173,7 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
         selected_building = DataService.instance.getSelectedBuilding()
 
         self.ref = Database.database().reference()
+
         // Do any additional setup after loading the view.
         
         Auth.auth().addStateDidChangeListener() { auth, user in
@@ -180,8 +181,12 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
                 // User is signed in.
                 
                 let userID = Auth.auth().currentUser?.uid
-                self.ref.child("buildings").child(userID!).child(self.selected_building as String).observeSingleEvent(of: .value, with: { (snapshot) in
+                let buildingRef = self.ref.child("buildings").child(userID!)
+                buildingRef.keepSynced(true)
+                
+                buildingRef.child(self.selected_building as String).observeSingleEvent(of: .value, with: { (snapshot) in
                     // Get user value
+                    
                     let value = snapshot.value as? NSDictionary
                     
                     self.buildingNAme.text = value?["buildingName"] as! String

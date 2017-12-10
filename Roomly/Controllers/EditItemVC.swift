@@ -137,6 +137,7 @@ class EditItemVC: UIViewController, ImagePickerDelegate {
         selected_room = DataService.instance.getSelectedRoom()
         spinner.isHidden = true
         self.ref = Database.database().reference()
+        self.ref.keepSynced(true)
         
         // Do any additional setup after loading the view.
         

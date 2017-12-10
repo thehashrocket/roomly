@@ -102,7 +102,10 @@ class EditRoomVC: UIViewController, ImagePickerDelegate {
     @IBAction func deletePressed(_ sender: Any) {
         let userID = Auth.auth().currentUser?.uid
         self.ref = Database.database().reference()
-        self.ref.child("rooms").child(userID!).child(self.selected_building as String).child(self.selected_room as String).removeValue()
+        
+        let roomsRef = self.ref.child("rooms").child(userID!)
+        roomsRef.keepSynced(true)
+        roomsRef.child(self.selected_building as String).child(self.selected_room as String).removeValue()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC1 = storyboard.instantiateViewController(withIdentifier: "BuildingVC") as! BuildingVC
         let navController = UINavigationController(rootViewController: VC1) // Creating a navigation controller with VC1 at the root of the navigation stack.

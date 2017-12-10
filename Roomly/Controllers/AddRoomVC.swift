@@ -35,7 +35,7 @@ class AddRoomVC: UIViewController, ImagePickerDelegate  {
         selected_building = DataService.instance.getSelectedBuilding()
         spinner.isHidden = true
         self.ref = Database.database().reference()
-        // Do any additional setup after loading the view.
+        self.ref.keepSynced(true)
         
         if !FileManager.default.fileExists(atPath: IMAGE_DIRECTORY_PATH) {
             do {

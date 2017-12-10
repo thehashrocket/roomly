@@ -19,6 +19,7 @@ class CloudData {
     
     func addImagesToRecord(key: String, image: String, user_id: String, destination: String, second_key: String? = nil) {
         self.ref = Database.database().reference()
+        self.ref.keepSynced(true)
         let image_key = self.ref.child(destination).child(user_id).child(key).child("images").childByAutoId().key
         let childUpdates = ["\(image_key)": image]
         
@@ -35,6 +36,7 @@ class CloudData {
     func getImages(destination: String, completion: @escaping ([String]) -> Void) {
         var return_images = [String]()
         self.ref = Database.database().reference()
+        self.ref.keepSynced(true)
         self.ref.child(destination).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary

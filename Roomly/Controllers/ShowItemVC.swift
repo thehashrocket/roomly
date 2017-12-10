@@ -36,6 +36,7 @@ class ShowItemVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ref = Database.database().reference()
+        self.ref.keepSynced(true)
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
                 // User is signed in.
@@ -43,7 +44,10 @@ class ShowItemVC: UIViewController {
                 let item = DataService.instance.getSelectedItem() as String
                 let room = DataService.instance.getSelectedRoom() as String
                 
-                self.ref.child("items").child(userID!).child(room).child(item).observe(DataEventType.value, with: { (snapshot) in
+                let itemRef = self.ref.child("items").child(userID!).child(room).child(item)
+                itemRef.keepSynced(true)
+                
+                itemRef.observe(DataEventType.value, with: { (snapshot) in
                     self.spinner.startAnimating()
                     let value = snapshot.value as? NSDictionary
                     
