@@ -21,8 +21,6 @@ class CloudStorage {
         let storageRef = storage.reference()
         let islandRef = storageRef.child("\(reference)")
         
-        
-        
         islandRef.getData(maxSize: 1 * 2048 * 2048) { data, error in
             if let error = error {
                 // Uh-oh, an error occurred!
@@ -34,7 +32,6 @@ class CloudStorage {
                 completion(image!)
             }
         }
-        
     }
     
     func downloadImage(reference: String, image_key: String, completion: @escaping (UIImage) -> Void) {
@@ -57,8 +54,6 @@ class CloudStorage {
                 completion(image)
             })
         }
-
-        
     }
     
     func loadTopImage(destination: String, saved_image: String, completion: @escaping (UIImage) -> Void) {
@@ -113,13 +108,6 @@ class CloudStorage {
     
     func saveImageToDocumentDirectory(_ chosenImage: UIImage, image_key: String) -> String {
         
-//        let formatter = DateFormatter()
-//        // initially set the format based on your datepicker date
-//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//
-//        let date = formatter.string(from: NSDate() as Date).replacingOccurrences(of: " ", with: "_")
-//
-//        let filename = date.appending(".jpg")
         let filepath = IMAGE_DIRECTORY_PATH + "/".appending(image_key)
         let url = NSURL.fileURL(withPath: filepath)
         do {
