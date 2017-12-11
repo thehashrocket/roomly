@@ -89,6 +89,16 @@ class DataService {
         selected_room = room.id
     }
     
+    func checkIfImageDirectoryExists() {
+        if !FileManager.default.fileExists(atPath: IMAGE_DIRECTORY_PATH) {
+            do {
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: IMAGE_DIRECTORY_PATH), withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
     // filter worldData array by selected country.
     func filterWorldDataByCountry(data: [(city: String, country: String, state: String, geoId: String)], country: String) -> [String] {
         let filtered = data.filter { $0.country == country }

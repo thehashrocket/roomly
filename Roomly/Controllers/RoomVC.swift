@@ -135,8 +135,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                             single_item_value = single_item_value + purchaseDate
                         }
                     }
-                    
-                    
                 })
                 self.houseDetails.text = "There are \(single_item) item(s) totalling \(String(format: "$%.02f", single_item_value))"
             }, withCancel: { (error) in

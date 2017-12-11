@@ -87,7 +87,6 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         self.saved_room_image = (value?["imageName"] as? String)!
                         let building_id = (value?["buildingId"] as? String)!
                         let room_id = (value?["id"] as? String)!
-
                         let destination = "rooms/\(userID)/\(building_id)/\(room_id)/"
                         
                         CloudStorage.instance.loadTopImage(destination: destination, saved_image: self.saved_room_image, completion: { (image) in
@@ -134,7 +133,6 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         DataService.instance.setItem(item: item)
                         
                         self.items = DataService.instance.getItemsForRoom(forRoomId: self.selected_room)
-                        
                         self.itemsCollection.reloadData()
                         self.roomDetailsLabel.text = "There are \(self.total_items) item(s) totalling \(String(format: "$%.02f", self.total_item_value))"
                     })
