@@ -17,7 +17,6 @@ class CloudStorage {
     
     func downloadCloudImage(reference: String, image_key: String, completion: @escaping (UIImage) -> Void) {
         let storage = Storage.storage()
-        var filename = NSString()
         let storageRef = storage.reference()
         let islandRef = storageRef.child("\(reference)")
         
@@ -35,18 +34,9 @@ class CloudStorage {
     }
     
     func downloadImage(reference: String, image_key: String, completion: @escaping (UIImage) -> Void) {
-        let storage = Storage.storage()
-        var filename = NSString()
-        let storageRef = storage.reference()
-        let islandRef = storageRef.child("\(reference)")
-        
         DataService.instance.checkIfImageDirectoryExists()
-        
         let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(image_key as String)
-        print("imageURL: \(imageURL)")
-        
         let image = UIImage(contentsOfFile: imageURL.path)
-        
         if ((image) != nil) {
             completion(image!)
         } else {
@@ -71,6 +61,53 @@ class CloudStorage {
                     let image    = UIImage(contentsOfFile: imageURL.path)
                     completion(image!)
                 }
+            }
+        }
+    }
+    
+    func moveImage(origin: String, destination: String, new_room: String, user_id: String, item_id: String) -> Void {
+        DataService.instance.checkIfImageDirectoryExists()
+        CloudData.instance.getImages(destination: origin) { (fire_images) in
+            if (fire_images.count > 0) {
+                fire_images.forEach({ (fire_image) in
+                    let ref_origin = "images/" + destination + "/\(fire_image)"
+                    CloudStorage.instance.downloadImage(reference: ref_origin, image_key: fire_image, completion: { (image) in
+                        var filename = NSString()
+                        let storage = Storage.storage()
+                        let storageRef = storage.reference()
+                        var imagesRef = storageRef
+                        imagesRef = storageRef.child("images").child(destination).child("\(fire_image)")
+                        let resizedImage = self.resizeImage(image: image, targetSize: CGSize.init(width: 2048, height: 2048))
+                        var data = NSData()
+                        data = UIImageJPEGRepresentation(resizedImage, 0.8)! as NSData
+                        let metaData = StorageMetadata()
+                        metaData.contentType = "image/jpg"
+                        
+                        let uploadTask = imagesRef.putData(data as Data, metadata: metaData) { (metadata, error) in
+                            if let error = error {
+                                // Uh-oh, an error occurred!
+                                print("saveImageToFirebase: ")
+                                print(error)
+                            } else {
+                                print("uploaded file")
+                                filename = "\(fire_image)" as NSString
+                                CloudData.instance.addImagesToRecord(key: item_id, image: filename as String, user_id: user_id, destination: "items", second_key: new_room)
+                                let deleteRef = storageRef.child(ref_origin)
+                                deleteRef.delete { error in
+                                    if let error = error {
+                                        // Uh-oh, an error occurred!
+                                        print("deletion failed")
+                                        print(error)
+                                    } else {
+                                        // File deleted successfully
+                                        print("filed successfully deleted")
+                                    }
+                                }
+                            }
+                        }
+                    })
+                    
+                })
             }
         }
     }

@@ -13,23 +13,31 @@ import FirebaseDatabase
 import ImagePicker
 import Lightbox
 
-class EditItemVC: UIViewController, ImagePickerDelegate {
+class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Variables
-    var ref: DatabaseReference!
+    
+    var availableBuildingsDict = [Building]()
+    var availableBuildings = [(buildingId:String, buildingName:String)]()
+    var availableRoomsDict = [Room]()
+    var availableRooms = [(roomId:String, roomName:String, buildingId: String)]()
+    var datePicker = UIDatePicker()
+    var images: [UIImage] = []
     var imagesDirectoryPath:String!
+    var itemDescriptionText = ""
+    var itemNameText = ""
+    var purchaseAmountText = ""
+    var purchaseDateText = ""
+    var new_building = "" as NSString
+    var new_room = "" as NSString
+    var ref: DatabaseReference!
     var saved_image = ""
     var selected_building = "" as NSString
     var selected_item = "" as NSString
     var selected_room = "" as NSString
-    var itemNameText = ""
-    var itemDescriptionText = ""
-    var purchaseDateText = ""
-    var purchaseAmountText = ""
-    var datePicker = UIDatePicker()
     var toolBar = UIToolbar()
     var textField = UITextField()
-    var images: [UIImage] = []
+    var userID = ""
     
     // Outlets
     @IBOutlet weak var itemNameTxt: UITextField!
@@ -38,6 +46,8 @@ class EditItemVC: UIViewController, ImagePickerDelegate {
     @IBOutlet weak var purchaseDateTxt: UITextField!
     @IBOutlet weak var imagePicked: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var locatedInBuildingTxt: UITextField!
+    @IBOutlet weak var locatedInRoomTxt: UITextField!
     
     // Actions
     @IBAction func textField(_ sender: AnyObject) {
@@ -87,7 +97,24 @@ class EditItemVC: UIViewController, ImagePickerDelegate {
             return
         }
         
-        let item = Item(id: key, itemName: itemNameText, itemDescription: itemDescriptionText, imageName: self.saved_image, purchaseAmount: purchaseAmountText, purchaseDate: purchaseDateText as String, roomId: selected_room as String, uid: userID)
+        let origin = "/items/\(userID)/\(self.selected_room)/\(key)"
+        var destination:String = "/items/\(userID)/\(self.selected_room)/\(key)"
+        var room_id = selected_room
+        
+        // I am checking to see if a new room is being chosen. If the new_room doesn't match selected_room then I know that they are moving items
+        if ((self.new_room !== "" as NSString) && (self.new_room !== self.selected_room as NSString)) {
+            // they are moving rooms
+            
+            let new_destination = "/items/\(userID)/\(self.new_room)/\(key)"
+            
+            room_id = new_room
+            destination = new_destination
+            
+        } else {
+            // they are not moving rooms.
+        }
+        
+        let item = Item(id: key, itemName: itemNameText, itemDescription: itemDescriptionText, imageName: self.saved_image, purchaseAmount: purchaseAmountText, purchaseDate: purchaseDateText as String, roomId: room_id as String, uid: userID)
         
         let post = [
             "itemName" : item.itemName,
@@ -100,12 +127,34 @@ class EditItemVC: UIViewController, ImagePickerDelegate {
             "id" : item.id,
             ]
         
-        let childUpdates = ["/items/\(userID)/\(selected_room)/\(key)": post]
-        self.ref.updateChildValues(childUpdates)
+        let childUpdates = [destination: post]
         
-        self.images.forEach { (image) in
-            CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "items", second_key: item.roomId as! String)
+        self.ref.updateChildValues(childUpdates) { (error, snapshot) in
+            if (error != nil) {
+                print("update of item failed")
+            } else {
+                if ((self.new_room !== "" as NSString) && (self.new_room !== self.selected_room as NSString)) {
+                    CloudStorage.instance.moveImage(origin: origin, destination: destination, new_room: self.new_room as String, user_id: userID, item_id: key)
+                    
+                    let originRef = self.ref.child(origin)
+                    originRef.removeValue { error, _ in
+                        if ((error) != nil) {
+                            print("deleting item: ")
+                            print(error!)
+                        }
+                    }
+                }
+                
+                self.images.forEach { (image) in
+                    CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "items", second_key: item.roomId! as String)
+                }
+//                if ((self.new_room !== "" as NSString) && (self.new_room !== self.selected_room as NSString)) {
+//                    self.performSegue(withIdentifier: "ItemVC", sender: item)
+//                }
+            }
         }
+        
+        
         
         spinner.stopAnimating()
         spinner.isHidden = true
@@ -125,13 +174,32 @@ class EditItemVC: UIViewController, ImagePickerDelegate {
 
         self.present(navController, animated:true, completion: nil)
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let showItemVC = segue.destination as? ItemVC {
+            let barBtn = UIBarButtonItem()
+            barBtn.title = ""
+            navigationItem.backBarButtonItem = barBtn
+            assert(sender as? Item != nil)
+        }
     }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        let buildingPicker = UIPickerView()
+        let roomPicker = UIPickerView()
+        
+        locatedInBuildingTxt.inputView = buildingPicker
+        locatedInRoomTxt.inputView = roomPicker
+        
+        buildingPicker.delegate = self
+        roomPicker.delegate = self
+        
         selected_building = DataService.instance.getSelectedBuilding()
         selected_item = DataService.instance.getSelectedItem()
         selected_room = DataService.instance.getSelectedRoom()
@@ -157,6 +225,7 @@ class EditItemVC: UIViewController, ImagePickerDelegate {
             if user != nil {
                 // User is signed in.
                 let userID = Auth.auth().currentUser?.uid
+                self.userID = userID!
                 self.ref.child("items").child(userID!).child(self.selected_room as String).child(self.selected_item as String).observeSingleEvent(of: .value, with: { (snapshot) in
                     // Get user value
                     let value = snapshot.value as? NSDictionary
@@ -173,6 +242,33 @@ class EditItemVC: UIViewController, ImagePickerDelegate {
                 }) { (error) in
                     print(error.localizedDescription)
                 }
+                // Get name and id of currently assigned Building
+                self.ref.child("buildings").child(userID!).child(self.selected_building as String).observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    self.locatedInBuildingTxt.text = value?["buildingName"] as? String
+                    self.new_building = (value?["id"] as? NSString)!
+                })
+                // Get name and id of currently assigned Room
+                self.ref.child("rooms").child(userID!).child(self.selected_building as String).child(self.selected_room as String).observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    self.locatedInRoomTxt.text  = value?["roomName"] as? String
+                    self.new_room = (value?["id"] as? NSString)!
+                })
+                
+                CloudData.instance.getAllBuildings(userID: userID!, completion: { (buildings) in
+                    self.availableBuildingsDict = buildings
+                    self.availableBuildingsDict.forEach({ (building) in
+                        self.availableBuildings.append((buildingId: building.id as String, buildingName: building.buildingName as String))
+                    })
+                    
+                })
+                
+                CloudData.instance.getAllRooms(userID: userID!, buildingId: self.selected_building as String, completion: { (rooms) in
+                    self.availableRoomsDict = rooms
+                    self.availableRoomsDict.forEach({ (room) in
+                        self.availableRooms.append((roomId: room.id as String, roomName: room.roomName as String, buildingId: room.buildingId as String))
+                    })
+                })
                 
             } else {
                 // TODO: Segue to WelcomeVC here.
@@ -258,6 +354,51 @@ class EditItemVC: UIViewController, ImagePickerDelegate {
     
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
         imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if locatedInBuildingTxt.isFirstResponder{
+            return self.availableBuildings.count
+        } else {
+            return self.availableRooms.count
+        }
+    }
+    
+    func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if locatedInBuildingTxt.isFirstResponder{
+            self.new_building = self.availableBuildings[row].buildingId as NSString
+            return self.availableBuildings[row].buildingName
+        } else {
+            self.new_room = self.availableRooms[row].roomId as NSString
+            return self.availableRooms[row].roomName
+        }
+    }
+    
+    func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if locatedInBuildingTxt.isFirstResponder{
+            self.locatedInBuildingTxt.text = availableBuildings[row].buildingName
+            self.new_building = availableBuildings[row].buildingId as NSString
+            self.availableRoomsDict = [Room]()
+            CloudData.instance.getAllRooms(userID: self.userID, buildingId: availableBuildings[row].buildingId as String, completion: { (rooms) in
+                self.availableRoomsDict = rooms
+                self.availableRooms = [(roomId:String, roomName:String, buildingId: String)]()
+                self.availableRoomsDict.forEach({ (room) in
+                    self.availableRooms.append((roomId: room.id as String, roomName: room.roomName as String, buildingId: room.buildingId as String))
+                })
+            })
+            
+//            self.citiesArray = DataService.instance.filterWorldDataByState(data: worldArray, state: statesArray[row])
+//            stateTxt.text = statesArray[row]
+        } else {
+            self.locatedInRoomTxt.text = availableRooms[row].roomName
+            self.new_room = availableRooms[row].roomId as NSString
+//            self.statesArray = DataService.instance.filterWorldDataByCountry(data: worldArray, country: countriesArray[row])
+//            countryTxt.text = countriesArray[row]
+        }
     }
 
 }
