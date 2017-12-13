@@ -143,25 +143,43 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
                             print(error!)
                         }
                     }
+                    
+                    self.images.forEach { (image) in
+                        CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "items", second_key: item.roomId! as String)
+                    }
+                    
+                } else {
+                    self.images.forEach { (image) in
+                        CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "items", second_key: item.roomId! as String)
+                    }
                 }
                 
-                self.images.forEach { (image) in
-                    CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "items", second_key: item.roomId! as String)
-                }
-//                if ((self.new_room !== "" as NSString) && (self.new_room !== self.selected_room as NSString)) {
-//                    self.performSegue(withIdentifier: "ItemVC", sender: item)
-//                }
+                CloudData.instance.getBuildingById(userId: userID, buildingId: self.selected_building as String, completion: { (building) in
+                    print(building)
+                    DataService.instance.setSelectedBuilding(building: building)
+                    CloudData.instance.getRoomById(userId: userID, buildingId: self.selected_building as String, roomId: self.selected_room as String, completion: { (room) in
+                        print(room)
+                        DataService.instance.setSelectedRoom(room: room)
+                        DataService.instance.updateItem(new_item: item)
+                        DataService.instance.setSelectedItem(item: item)
+                        
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let VC1 = storyboard.instantiateViewController(withIdentifier: "BuildingVC") as! BuildingVC
+                        let navController = UINavigationController(rootViewController: VC1) // Creating a navigation controller with VC1 at the root of the navigation stack.
+                        self.present(navController, animated:true, completion: nil)
+//                        self.navigationController?.popToRootViewController(animated: true)
+                    })
+                })
+                
             }
         }
-        
-        
-        
+
         spinner.stopAnimating()
         spinner.isHidden = true
         
-        DataService.instance.updateItem(new_item: item)
+//        DataService.instance.updateItem(new_item: item)
         
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func deletePressed(_ sender: Any) {
@@ -171,7 +189,6 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC1 = storyboard.instantiateViewController(withIdentifier: "BuildingVC") as! BuildingVC
         let navController = UINavigationController(rootViewController: VC1) // Creating a navigation controller with VC1 at the root of the navigation stack.
-
         self.present(navController, animated:true, completion: nil)
     }
     
@@ -226,18 +243,20 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
                 // User is signed in.
                 let userID = Auth.auth().currentUser?.uid
                 self.userID = userID!
-                self.ref.child("items").child(userID!).child(self.selected_room as String).child(self.selected_item as String).observeSingleEvent(of: .value, with: { (snapshot) in
+                self.ref.child("items").child(userID!).child(self.selected_room as String).child(self.selected_item as String).observe(DataEventType.value, with: { (snapshot) in
                     // Get user value
                     let value = snapshot.value as? NSDictionary
                     
-                    self.itemNameTxt.text = value?["itemName"] as? String
-                    self.itemDescriptionTxt.text = value?["itemDescription"] as? String
-                    self.purchaseAmountTxt.text = value?["purchaseAmount"] as? String
-                    self.purchaseDateTxt.text = value?["purchaseDate"] as? String
-                    self.saved_image = value?["imageName"] as! String
-                    
-                    let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
-                    let image    = UIImage(contentsOfFile: imageURL.path)
+                    if (value != nil) {
+                        self.itemNameTxt.text = value?["itemName"] as? String
+                        self.itemDescriptionTxt.text = value?["itemDescription"] as? String
+                        self.purchaseAmountTxt.text = value?["purchaseAmount"] as? String
+                        self.purchaseDateTxt.text = value?["purchaseDate"] as? String
+                        self.saved_image = (value?["imageName"] as? String)!
+                        
+                        let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
+                        let image    = UIImage(contentsOfFile: imageURL.path)
+                    }
                                         
                 }) { (error) in
                     print(error.localizedDescription)
@@ -390,14 +409,9 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
                     self.availableRooms.append((roomId: room.id as String, roomName: room.roomName as String, buildingId: room.buildingId as String))
                 })
             })
-            
-//            self.citiesArray = DataService.instance.filterWorldDataByState(data: worldArray, state: statesArray[row])
-//            stateTxt.text = statesArray[row]
         } else {
             self.locatedInRoomTxt.text = availableRooms[row].roomName
             self.new_room = availableRooms[row].roomId as NSString
-//            self.statesArray = DataService.instance.filterWorldDataByCountry(data: worldArray, country: countriesArray[row])
-//            countryTxt.text = countriesArray[row]
         }
     }
 

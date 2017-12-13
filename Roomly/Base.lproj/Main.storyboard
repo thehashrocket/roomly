@@ -15,7 +15,7 @@
             <objects>
                 <viewController storyboardIdentifier="BuildingVC" title="Buildings" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="BuildingVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="4Gn-NR-iBB">
@@ -121,7 +121,7 @@
             <objects>
                 <viewController id="Gi5-Yw-KRF" customClass="NewUserVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wRr-3N-ZYn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create A New Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekp-EY-t9g">
@@ -158,7 +158,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8t-dJ-TLU">
-                                <rect key="frame" x="187.5" y="368" width="0.0" height="67"/>
+                                <rect key="frame" x="187.5" y="366" width="0.0" height="67"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="67" id="DIs-EY-sSW"/>
                                 </constraints>
@@ -167,7 +167,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="17O-xR-NUB">
-                                <rect key="frame" x="169.5" y="283" width="37" height="37"/>
+                                <rect key="frame" x="169.5" y="281" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="0.097683005140000001" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ciU-r9-7hS">
@@ -219,7 +219,7 @@
             <objects>
                 <viewController id="udY-0G-xfT" customClass="ExistingUserVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cMb-Pk-ab6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gnh-bh-hKC">
@@ -241,7 +241,7 @@
                                 </connections>
                             </textField>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="isE-fO-lFa">
-                                <rect key="frame" x="169" y="283" width="37" height="37"/>
+                                <rect key="frame" x="169" y="281" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="0.097683005140000001" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login As An Existing User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pK8-ia-oYA">
@@ -258,7 +258,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIX-RB-fJ4">
-                                <rect key="frame" x="187.5" y="371.5" width="0.0" height="60"/>
+                                <rect key="frame" x="187.5" y="369.5" width="0.0" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="jN2-ni-7n7"/>
                                 </constraints>
@@ -335,7 +335,7 @@
             <objects>
                 <viewController title="Rooms" id="5WK-ow-VBi" customClass="RoomVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Ca-Qu-TpD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="house1" translatesAutoresizingMaskIntoConstraints="NO" id="bAN-7p-oUv">
@@ -693,7 +693,7 @@
                 <navigationController title="Roomly" automaticallyAdjustsScrollViewInsets="NO" id="aLg-v0-0T5" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" backIndicatorImage="icons8-back-50" id="byI-wJ-i3u">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
