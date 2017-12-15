@@ -13,6 +13,9 @@ PODS:
   - BoringSSL/Interface (9.0)
   - Cache (4.0.2):
     - SwiftHash (~> 2.0.0)
+  - Crashlytics (3.9.3):
+    - Fabric (~> 1.7.2)
+  - Fabric (1.7.2)
   - FBSDKCoreKit (4.27.1):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.27.1):
@@ -152,6 +155,8 @@ PODS:
     - TwitterCore (>= 3.0.1)
 
 DEPENDENCIES:
+  - Crashlytics (~> 3.9.3)
+  - Fabric (~> 1.7.2)
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
@@ -167,6 +172,8 @@ SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   BoringSSL: 19083b821ef3ae0f758fae15482e183003b1e265
   Cache: 363b6899cee63c82ccbd291e64a6c202abc17a88
+  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
+  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
   FBSDKCoreKit: 03365dad5d790249196ffad8be4f6d8a2d98f932
   FBSDKLoginKit: 66ff53b73cffd967ab773e32fac39e90a60e6d46
   Firebase: 83283761a1ef6dc9846e03d08059f51421afbd65
@@ -198,6 +205,6 @@ SPEC CHECKSUMS:
   TwitterCore: 6856288a1c25e5281363250681f33b42fce1da42
   TwitterKit: 313bf02baee8427f7649b3640169178e5a8b5a99
 
-PODFILE CHECKSUM: 2d9da4cf8759ecc24776e2aeb697c801bb1aeb64
+PODFILE CHECKSUM: 3f8bb8307cf6a43c7834889266ac0d47954c3207
 
 COCOAPODS: 1.2.0

@@ -18,5 +18,8 @@ target 'Roomly' do
   pod 'Hue'
   pod 'ImagePicker'
   pod 'Lightbox'
+  # Pods for PodTest
+  pod 'Fabric', '~> 1.7.2'
+  pod 'Crashlytics', '~> 3.9.3'
 
 end
