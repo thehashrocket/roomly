@@ -114,6 +114,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         let itemName = dataChange["itemName"] as! String
                         let itemDescription = dataChange["itemDescription"] as! String
                         let imageName = dataChange["imageName"] as! String
+                        let images = dataChange["images"] as! NSDictionary
                         let purchaseAmount = ""
                         if let val = dataChange["purchaseAmount"] {
                             let purchaseAmount = dataChange["purchaseAmount"] as! String
@@ -128,7 +129,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         let roomId = dataChange["roomId"] as! String
                         let uid = dataChange["uid"] as! String
                         
-                        let item = Item(id: id, itemName: itemName, itemDescription: itemDescription, imageName: imageName, purchaseAmount: purchaseAmount, purchaseDate: purchaseDate, roomId: roomId, uid: uid)
+                        let item = Item(id: id, itemName: itemName, itemDescription: itemDescription, imageName: imageName, images: images, purchaseAmount: purchaseAmount, purchaseDate: purchaseDate, roomId: roomId, uid: uid)
                         
                         DataService.instance.setItem(item: item)
                         

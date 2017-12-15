@@ -22,8 +22,10 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
     var availableRoomsDict = [Room]()
     var availableRooms = [(roomId:String, roomName:String, buildingId: String)]()
     var datePicker = UIDatePicker()
+    var imageDictionary = NSDictionary()
     var images: [UIImage] = []
     var imagesDirectoryPath:String!
+    var item = Item(id: "", itemName: "", itemDescription: "", imageName: "", images: NSDictionary(), purchaseAmount: "", purchaseDate: "", roomId: "", uid: "")
     var itemDescriptionText = ""
     var itemNameText = ""
     var purchaseAmountText = ""
@@ -114,18 +116,19 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
             // they are not moving rooms.
         }
         
-        let item = Item(id: key, itemName: itemNameText, itemDescription: itemDescriptionText, imageName: self.saved_image, purchaseAmount: purchaseAmountText, purchaseDate: purchaseDateText as String, roomId: room_id as String, uid: userID)
+        let item = Item(id: key, itemName: itemNameText, itemDescription: itemDescriptionText, imageName: self.saved_image, images: self.imageDictionary, purchaseAmount: purchaseAmountText, purchaseDate: purchaseDateText as String, roomId: room_id as String, uid: userID)
         
         let post = [
             "itemName" : item.itemName,
             "itemDescription" : item.itemDescription,
             "imageName": item.imageName,
+            "images": item.images,
             "purchaseAmount" : item.purchaseAmount,
             "purchaseDate" : item.purchaseDate,
             "roomId" : item.roomId,
             "uid" : item.uid,
             "id" : item.id,
-            ]
+            ] as [String : Any]
         
         let childUpdates = [destination: post]
         
@@ -253,7 +256,7 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
                         self.purchaseAmountTxt.text = value?["purchaseAmount"] as? String
                         self.purchaseDateTxt.text = value?["purchaseDate"] as? String
                         self.saved_image = (value?["imageName"] as? String)!
-                        
+                        self.imageDictionary = (value?["images"] as? NSDictionary)!
                         let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
                         let image    = UIImage(contentsOfFile: imageURL.path)
                     }

@@ -18,12 +18,12 @@ class CloudStorage {
     func downloadCloudImage(reference: String, image_key: String, completion: @escaping (UIImage) -> Void) {
         let storage = Storage.storage()
         let storageRef = storage.reference()
-        let islandRef = storageRef.child("\(reference)")
+        let islandRef = storageRef.child("\(reference)/\(image_key)")
         
         islandRef.getData(maxSize: 1 * 2048 * 2048) { data, error in
             if let error = error {
                 // Uh-oh, an error occurred!
-                print("downloadImage: ")
+                print("downloadCloudImage: ")
                 print(error)
             } else {
                 let image = UIImage(data: data!)
@@ -50,7 +50,7 @@ class CloudStorage {
         CloudData.instance.getImages(destination: destination) { (fire_images) in
             if (fire_images.count > 0) {
                 let image_key = fire_images[0]
-                let reference = "images/" + destination + "\(image_key)"
+                let reference = "images/" + destination
                 
                 CloudStorage.instance.downloadImage(reference: reference, image_key: image_key, completion: { (image) in
                     completion(image)

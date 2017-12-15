@@ -123,12 +123,13 @@ class CloudData {
                 let itemName = value?["roomName"] as! String
                 let itemDescription = value?["roomDescription"] as! String
                 let imageName = value?["imageName"] as! String
+                let images = value?["images"] as! NSDictionary
                 let purchaseAmount = value?["purchaseAmount"] as! String
                 let purchaseDate = value?["purchaseDate"] as! String
                 let roomId = value?["roomId"] as! String
                 let uid = value?["uid"] as! String
                 
-                let item = Item(id: id, itemName: itemName, itemDescription: itemDescription, imageName: imageName, purchaseAmount: purchaseAmount, purchaseDate: purchaseDate, roomId: roomId, uid: uid)
+                let item = Item(id: id, itemName: itemName, itemDescription: itemDescription, imageName: imageName, images: images, purchaseAmount: purchaseAmount, purchaseDate: purchaseDate, roomId: roomId, uid: uid)
                 
                 completion(item)
             }

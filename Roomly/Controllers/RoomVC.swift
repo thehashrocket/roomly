@@ -18,6 +18,8 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var saved_house_image = ""
     var ref: DatabaseReference!
     let selected_building = DataService.instance.getSelectedBuilding()
+    var slideShowDictionary = NSDictionary()
+    var slideShowImages = [UIImage]()
     var total_items = 0
     var total_item_value = Double()
     
@@ -29,6 +31,8 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var houseImage: UIImageView!
     @IBOutlet weak var houseDetails: UILabel!
+    @IBOutlet weak var slideShowView: UIView!
+    
     
     private(set) public var items = [Item]()
     private(set) public var rooms = [Room]()
@@ -69,11 +73,29 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         let building_id = value?["id"] as! String
                         let saved_image = value?["imageName"] as! String
                         let user_id = userID as! String
-                        let destination = "buildings/\(user_id)/\(building_id)/"
+                        let destination = "/images/buildings/\(userID)/\(building_id)/"
+                        let slideShowDictionary = value?["images"] as? NSDictionary
+                        self.slideShowImages.removeAll()
+                        if ((slideShowDictionary) != nil) {
+                            let total = slideShowDictionary?.count
+                            var count = 0
+                            
+                            slideShowDictionary?.forEach({ (_,value) in
+
+                                CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
+                                    self.slideShowImages.append(image)
+                                })
+                                count = count + 1
+                                if (count == total) {
+                                    print("count \(count)")
+                                    print("total \(total)")
+                                    print("here")
+                                    NotificationCenter.default.post(name: SlideShowVC.notificationName, object: nil, userInfo:["images": self.slideShowImages])
+                                }
+                            })
+                            
+                        }
                         
-                        CloudStorage.instance.loadTopImage(destination: destination, saved_image: saved_image, completion: { (image) in
-                            self.houseImage.image = image
-                        })
                     }
                 })
 
@@ -120,7 +142,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         var single_item_value = Double()
         rooms.forEach { (room) in
             self.ref.child("items").child(userID).child(room.id as String).observe(DataEventType.value, with: { (snapshot) in
-                self.spinner.startAnimating()
+//                self.spinner.startAnimating()
                 let postDict = snapshot.value as? [String : AnyObject] ?? [:]
                 DataService.instance.resetItems()
                 
@@ -129,7 +151,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                     let (_, value) = arg
                     let dataChange = value as! [String: AnyObject]
                     
-                    _ = dataChange["id"] as! String
+                    _ = dataChange["id"] as? String
                     if dataChange["purchaseAmount"] != nil {
                         if let purchaseDate = (dataChange["purchaseAmount"]as? NSString)?.doubleValue {
                             single_item_value = single_item_value + purchaseDate
@@ -184,6 +206,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             assert(sender as? Room != nil)
             itemVC.initItems(room: sender as! Room)
         }
+        
     }
     
     // Actions

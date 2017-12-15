@@ -29,6 +29,11 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>FSPagerView.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
 		<key>FirebaseUI-FirebaseAuthUI.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -83,6 +88,16 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>20</integer>
+		</dict>
+		<key>ImageSlideshow-ImageSlideshow.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>22</integer>
+		</dict>
+		<key>ImageSlideshow.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
 		</dict>
 		<key>Imaginary.xcscheme</key>
 		<dict>

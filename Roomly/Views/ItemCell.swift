@@ -24,7 +24,7 @@ class ItemCell: UICollectionViewCell {
             CloudData.instance.getImages(destination: destination) { (fire_images) in
                 if (fire_images.count > 0) {
                     let image_key = fire_images[0]
-                    let reference = "images/items/\(user_id)/\(room_id)/\(item_id)/\(image_key)"
+                    let reference = "images/items/\(user_id)/\(room_id)/\(item_id)/"
                     CloudStorage.instance.downloadImage(reference: reference, image_key: image_key, completion: { (image) in
                         self.itemImage.image = image
                     })

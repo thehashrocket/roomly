@@ -124,18 +124,19 @@ class AddItemVC: UIViewController, ImagePickerDelegate {
             return
         }
         
-        let item = Item(id: key, itemName: itemNameText, itemDescription: itemDescriptionText, imageName: self.saved_image, purchaseAmount: purchaseAmountText, purchaseDate: purchaseDateText as String, roomId: selected_room as String, uid: userID)
+        let item = Item(id: key, itemName: itemNameText, itemDescription: itemDescriptionText, imageName: self.saved_image, images: NSDictionary(), purchaseAmount: purchaseAmountText, purchaseDate: purchaseDateText as String, roomId: selected_room as String, uid: userID)
         
         let post = [
             "itemName" : item.itemName,
             "itemDescription" : item.itemDescription,
             "imageName": item.imageName,
+            "images": item.images,
             "purchaseAmount" : item.purchaseAmount,
             "purchaseDate" : item.purchaseDate,
             "roomId" : item.roomId,
             "uid" : item.uid,
             "id" : item.id,
-            ]
+            ] as [String : Any]
         
         let childUpdates = ["/items/\(userID)/\(selected_room)/\(key)": post]
         self.ref.updateChildValues(childUpdates)

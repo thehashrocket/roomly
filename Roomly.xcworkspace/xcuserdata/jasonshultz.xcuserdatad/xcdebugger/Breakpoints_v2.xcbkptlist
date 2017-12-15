@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Roomly/Controllers/EditItemVC.swift"
-            timestampString = "534875595.155674"
+            timestampString = "534995340.645138"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "submitPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Roomly/Services/CloudData.swift"
-            timestampString = "534875595.156383"
+            timestampString = "534995340.645206"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "95"
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Roomly/Controllers/EditItemVC.swift"
-            timestampString = "534875595.156448"
+            timestampString = "534995340.645256"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "submitPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,12 +58,380 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Roomly/Controllers/ItemVC.swift"
-            timestampString = "534874711.506684"
+            timestampString = "534995340.645303"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
             endingLineNumber = "57"
             landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Controllers/RoomVC.swift"
+            timestampString = "534921755.853374"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Controllers/RoomVC.swift"
+            timestampString = "534921755.853438"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Any, Any) -&gt; () in closure #1 (__ObjC.DataSnapshot) -&gt; () in closure #1 (__ObjC.Auth, Swift.Optional&lt;__ObjC.User&gt;) -&gt; () in Roomly.RoomVC.viewDidLoad() -&gt; ()"
+                  moduleName = "Roomly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Controllers/RoomVC.swift"
+                  timestampString = "534912088.88928"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "722">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__ObjC.UIImage) -&gt; () in closure #1 (Any, Any) -&gt; () in closure #1 (__ObjC.DataSnapshot) -&gt; () in closure #1 (__ObjC.Auth, Swift.Optional&lt;__ObjC.User&gt;) -&gt; () in Roomly.RoomVC.viewDidLoad() -&gt; ()"
+                  moduleName = "Roomly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Controllers/RoomVC.swift"
+                  timestampString = "534912088.892118"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "21">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Controllers/RoomVC.swift"
+            timestampString = "534921755.853491"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Services/CloudStorage.swift"
+            timestampString = "534995340.645394"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "downloadImage(reference:image_key:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Services/CloudStorage.swift"
+            timestampString = "534995340.645853"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "downloadImage(reference:image_key:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Roomly.CloudStorage.downloadImage(reference: Swift.String, image_key: Swift.String, completion: (__ObjC.UIImage) -&gt; ()) -&gt; ()"
+                  moduleName = "Roomly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Services/CloudStorage.swift"
+                  timestampString = "534991344.369836"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "678">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__ObjC.UIImage) -&gt; () in Roomly.CloudStorage.downloadImage(reference: Swift.String, image_key: Swift.String, completion: (__ObjC.UIImage) -&gt; ()) -&gt; ()"
+                  moduleName = "Roomly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Services/CloudStorage.swift"
+                  timestampString = "534991344.372663"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "22">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Services/CloudStorage.swift"
+            timestampString = "534995340.646222"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "downloadImage(reference:image_key:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Controllers/RoomVC.swift"
+            timestampString = "534921755.853705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Any, Any) -&gt; () in closure #1 (__ObjC.DataSnapshot) -&gt; () in closure #1 (__ObjC.Auth, Swift.Optional&lt;__ObjC.User&gt;) -&gt; () in Roomly.RoomVC.viewDidLoad() -&gt; ()"
+                  moduleName = "Roomly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Controllers/RoomVC.swift"
+                  timestampString = "534916940.775918"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "179">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__ObjC.UIImage) -&gt; () in closure #1 (Any, Any) -&gt; () in closure #1 (__ObjC.DataSnapshot) -&gt; () in closure #1 (__ObjC.Auth, Swift.Optional&lt;__ObjC.User&gt;) -&gt; () in Roomly.RoomVC.viewDidLoad() -&gt; ()"
+                  moduleName = "Roomly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Controllers/RoomVC.swift"
+                  timestampString = "534916940.77896"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "21">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Services/CloudStorage.swift"
+            timestampString = "534995340.64663"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "downloadImage(reference:image_key:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Services/CloudStorage.swift"
+            timestampString = "534995340.647116"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "downloadImage(reference:image_key:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Services/CloudStorage.swift"
+            timestampString = "534995340.647461"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "downloadCloudImage(reference:image_key:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Roomly.CloudStorage.downloadCloudImage(reference: Swift.String, image_key: Swift.String, completion: (__ObjC.UIImage) -&gt; ()) -&gt; ()"
+                  moduleName = "Roomly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Services/CloudStorage.swift"
+                  timestampString = "534917984.374137"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "836">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Roomly.CloudStorage.downloadCloudImage(reference: Swift.String, image_key: Swift.String, completion: (__ObjC.UIImage) -&gt; ()) -&gt; ()"
+                  moduleName = "Roomly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonshultz/Projects/Miracle%20Pills/Roomly/Roomly/Roomly/Services/CloudStorage.swift"
+                  timestampString = "534917984.377667"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "61">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Services/CloudStorage.swift"
+            timestampString = "534995340.647796"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "downloadCloudImage(reference:image_key:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Services/CloudStorage.swift"
+            timestampString = "534995340.64814"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "downloadCloudImage(reference:image_key:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Services/CloudStorage.swift"
+            timestampString = "534995340.648476"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "downloadImage(reference:image_key:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Controllers/EditItemVC.swift"
+            timestampString = "534995340.648829"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "submitPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Controllers/EditItemVC.swift"
+            timestampString = "534995340.648888"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "submitPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
