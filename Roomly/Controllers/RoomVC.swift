@@ -81,15 +81,11 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                             var count = 0
                             
                             slideShowDictionary?.forEach({ (_,value) in
-
                                 CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
                                     self.slideShowImages.append(image)
                                 })
                                 count = count + 1
                                 if (count == total) {
-                                    print("count \(count)")
-                                    print("total \(total)")
-                                    print("here")
                                     NotificationCenter.default.post(name: SlideShowVC.notificationName, object: nil, userInfo:["images": self.slideShowImages])
                                 }
                             })
@@ -158,7 +154,11 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         }
                     }
                 })
-                self.houseDetails.text = "There are \(single_item) item(s) totalling \(String(format: "$%.02f", single_item_value))"
+                if (single_item > 0) {
+                    self.houseDetails.text = "There are \(single_item) item(s) totalling \(String(format: "$%.02f", single_item_value))"
+                } else {
+                    self.houseDetails.text = "There are no items."
+                }
             }, withCancel: { (error) in
                 print(error)
             })
@@ -192,6 +192,12 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.roomsCollection.reloadData()
                 self.spinner.stopAnimating()
             })
+            
+            print("rooms.count \(self.rooms.count)")
+            if (self.rooms.count == 0) {
+                self.houseDetails.text = "There are no rooms or items."
+            }
+            
         }, withCancel: { (error) in
             print("getRooms: ")
             print(error)
@@ -200,6 +206,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let itemVC = segue.destination as? ItemVC {
+            NotificationCenter.default.removeObserver(SlideShowVC.notificationName)
             let barBtn = UIBarButtonItem()
             barBtn.title = ""
             navigationItem.backBarButtonItem = barBtn

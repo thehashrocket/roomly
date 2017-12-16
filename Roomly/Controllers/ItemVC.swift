@@ -19,6 +19,8 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     let selected_room = DataService.instance.getSelectedRoom()
     var handle: AuthStateDidChangeListenerHandle?
     var saved_room_image = ""
+    var slideShowDictionary = NSDictionary()
+    var slideShowImages = [UIImage]()
     var total_items = 0
     var total_item_value = Double()
     
@@ -30,7 +32,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     // Outlets
     @IBOutlet weak var itemsCollection: UICollectionView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    @IBOutlet weak var roomImage: UIImageView!
+
     @IBOutlet weak var roomDetailsLabel: UILabel!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -89,9 +91,27 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         let room_id = (value?["id"] as? String)!
                         let destination = "rooms/\(userID)/\(building_id)/\(room_id)/"
                         
-                        CloudStorage.instance.loadTopImage(destination: destination, saved_image: self.saved_room_image, completion: { (image) in
-                            self.roomImage.image = image
-                        })
+                        let slideShowDictionary = value?["images"] as? NSDictionary
+                        self.slideShowImages.removeAll()
+                        if ((slideShowDictionary) != nil) {
+                            let total = slideShowDictionary?.count
+                            var count = 0
+                            
+                            slideShowDictionary?.forEach({ (_,value) in
+                                CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
+                                    self.slideShowImages.append(image)
+                                })
+                                count = count + 1
+                                if (count == total) {
+                                    NotificationCenter.default.post(name: SlideShowVC.notificationName, object: nil, userInfo:["images": self.slideShowImages])
+                                }
+                            })
+                            
+                        } else {
+                            
+                        }
+                        
+                        
                     }
                     
                 })
@@ -110,11 +130,15 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         let (_, value) = arg
                         let dataChange = value as! [String: AnyObject]
                         
+                        let images = NSDictionary()
                         let id = dataChange["id"] as! String
                         let itemName = dataChange["itemName"] as! String
                         let itemDescription = dataChange["itemDescription"] as! String
                         let imageName = dataChange["imageName"] as! String
-                        let images = dataChange["images"] as! NSDictionary
+                        if ((dataChange["images"]) != nil) {
+                           let images = dataChange["images"] as? NSDictionary
+                        }
+                        
                         let purchaseAmount = ""
                         if let val = dataChange["purchaseAmount"] {
                             let purchaseAmount = dataChange["purchaseAmount"] as! String
@@ -167,6 +191,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let showItemVC = segue.destination as? ShowItemVC {
+            NotificationCenter.default.removeObserver(SlideShowVC.notificationName)
             let barBtn = UIBarButtonItem()
             barBtn.title = ""
             navigationItem.backBarButtonItem = barBtn

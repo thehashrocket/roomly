@@ -18,19 +18,25 @@ class ShowItemVC: UIViewController {
     var selected_item = ""
     var selected_room = ""
     var saved_image = ""
+    var slideShowDictionary = NSDictionary()
+    var slideShowImages = [UIImage]()
 
     // Outlets
     @IBOutlet weak var itemNameText: UILabel!
     @IBOutlet weak var itemDescriptionText: UILabel!
     @IBOutlet weak var PurchaseAmountText: UILabel!
     @IBOutlet weak var PurchaseDateText: UILabel!
-    @IBOutlet weak var imagePicked: UIImageView!
+
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
 
     override func viewDidAppear(_ animated: Bool) {
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(SlideShowVC.notificationName)
     }
     
     override func viewDidLoad() {
@@ -69,9 +75,25 @@ class ShowItemVC: UIViewController {
                         let user_id = value?["uid"] as! String
                         let destination = "items/\(user_id)/\(room_id)/\(item_id)/"
                         
-                        CloudStorage.instance.loadTopImage(destination: destination, saved_image: self.saved_image, completion: { (image) in
-                            self.imagePicked.image = image
-                        })
+                        let slideShowDictionary = value?["images"] as? NSDictionary
+                        self.slideShowImages.removeAll()
+                        if ((slideShowDictionary) != nil) {
+                            let total = slideShowDictionary?.count
+                            var count = 0
+                            
+                            slideShowDictionary?.forEach({ (_,value) in
+                                CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
+                                    self.slideShowImages.append(image)
+                                })
+                                count = count + 1
+                                if (count == total) {
+                                    NotificationCenter.default.post(name: SlideShowVC.notificationName, object: nil, userInfo:["images": self.slideShowImages])
+                                }
+                            })
+                            
+                        } else {
+                            
+                        }
                     }
                     
                     self.navigationItem.title = value?["itemName"] as? String

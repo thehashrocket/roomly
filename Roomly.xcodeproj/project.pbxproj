@@ -50,6 +50,7 @@
 		DEBB7B021FC27DE800427CDD /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBB7B011FC27DE800427CDD /* RoundedButton.swift */; };
 		DECA78C31FD25EDD000BE029 /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA78C21FD25EDD000BE029 /* CloudStorage.swift */; };
 		DECA78C51FD27DAC000BE029 /* CloudData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA78C41FD27DAC000BE029 /* CloudData.swift */; };
+		DEF087731FE590C400988F67 /* SlideShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF087721FE590C400988F67 /* SlideShowCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +101,7 @@
 		DEBB7B011FC27DE800427CDD /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		DECA78C21FD25EDD000BE029 /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		DECA78C41FD27DAC000BE029 /* CloudData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudData.swift; sourceTree = "<group>"; };
+		DEF087721FE590C400988F67 /* SlideShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideShowCell.swift; sourceTree = "<group>"; };
 		DEF11B721FCBAFDE004D538A /* Roomly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Roomly.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -211,6 +213,7 @@
 				DE0E6B901FC9DF690066E071 /* ItemCell.swift */,
 				DE81C4A81F8C568400674274 /* RoomCell.swift */,
 				DEBB7B011FC27DE800427CDD /* RoundedButton.swift */,
+				DEF087721FE590C400988F67 /* SlideShowCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				DE17CEE91F85BB8700CA83A9 /* Room.swift in Sources */,
 				DE0E6B981FCA8E680066E071 /* EditRoomVC.swift in Sources */,
 				DE6D86F31FCD0B880068F7D7 /* UITabBarVC.swift in Sources */,
+				DEF087731FE590C400988F67 /* SlideShowCell.swift in Sources */,
 				DE0E6B9E1FCAB0860066E071 /* EditItemVC.swift in Sources */,
 				DE6D86F71FCD0CEF0068F7D7 /* NewUserVC.swift in Sources */,
 			);

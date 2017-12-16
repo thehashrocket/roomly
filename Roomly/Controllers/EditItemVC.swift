@@ -256,7 +256,10 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
                         self.purchaseAmountTxt.text = value?["purchaseAmount"] as? String
                         self.purchaseDateTxt.text = value?["purchaseDate"] as? String
                         self.saved_image = (value?["imageName"] as? String)!
-                        self.imageDictionary = (value?["images"] as? NSDictionary)!
+                        if ((value?["images"] ) != nil) {
+                            self.imageDictionary = (value?["images"] as? NSDictionary)!
+                        }
+                        
                         let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
                         let image    = UIImage(contentsOfFile: imageURL.path)
                     }
