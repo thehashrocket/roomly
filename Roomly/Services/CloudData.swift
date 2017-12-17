@@ -76,12 +76,13 @@ class CloudData {
                 let dataChange = value as! [String: AnyObject]
                 
                 let id = dataChange["id"] as? String
+                let images = dataChange["images"] as! NSDictionary
                 let roomName = dataChange["roomName"] as? String
                 let roomDescription = dataChange["roomDescription"] as? String
                 let buildingId = dataChange["buildingId"] as? String
                 let uid = dataChange["uid"] as? String
                 
-                let room = Room(id: id!, roomName: roomName!, roomDescription: roomDescription!, imageName: "", buildingId: buildingId!, uid: uid!)
+                let room = Room(id: id!, roomName: roomName!, roomDescription: roomDescription!, imageName: "", images: images, buildingId: buildingId!, uid: uid!)
                 
                 rooms.append(room)
             })
@@ -165,13 +166,14 @@ class CloudData {
             let value = snapshot.value as? NSDictionary
             if ((value) != nil) {
                 let id = value?["id"] as! String
+                let images = value?["images"] as! NSDictionary
                 let roomName = value?["roomName"] as! String
                 let roomDescription = value?["roomDescription"] as! String
                 let imageName = value?["imageName"] as! String
                 let buildingId = value?["buildingId"] as! String
                 let uid = value?["uid"] as! String
                 
-                let room = Room(id: id, roomName: roomName, roomDescription: roomDescription, imageName: imageName, buildingId: buildingId, uid: uid)
+                let room = Room(id: id, roomName: roomName, roomDescription: roomDescription, imageName: imageName, images: images, buildingId: buildingId, uid: uid)
                 
                 completion(room)
             }

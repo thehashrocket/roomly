@@ -18,6 +18,7 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
     // Variables
     var ref: DatabaseReference!
     var images: [UIImage] = []
+    var imageDictionary = NSDictionary()
     var imagesDirectoryPath:String!
     var saved_image = ""
     var selected_building = "" as NSString
@@ -76,7 +77,7 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
         }
         let files = NSDictionary()
         
-        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, country: country, zip: zip, uid: userID, imageName: self.saved_image, images: files)
+        let building = Building(id: key, buildingName: name, street: street, city: city, state: state, country: country, zip: zip, uid: userID, imageName: self.saved_image, images: self.imageDictionary)
         
         let post = [
             "buildingName" : building.buildingName,
@@ -88,7 +89,7 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
             "uid" : building.uid,
             "id" : building.id,
             "imageName": building.imageName,
-            "files": files
+            "images": building.images
             ] as [String : Any]
         
         let childUpdates = ["/buildings/\(userID)/\(key)": post]
@@ -196,6 +197,7 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
                     self.stateTxt.text = value?["state"] as! String
                     self.zipTxt.text = value?["zip"] as! String
                     self.saved_image = value?["imageName"] as! String
+                    self.imageDictionary = (value?["images"] as? NSDictionary)!
                     
                     let building_id = value?["id"] as! String
                     let user_id = userID as! String

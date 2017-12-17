@@ -85,16 +85,17 @@ class AddRoomVC: UIViewController, ImagePickerDelegate  {
             return
         }
         
-        let room = Room(id: key, roomName: roomNameText, roomDescription: roomDescriptionText, imageName: self.saved_image, buildingId: selected_building as String, uid: userID)
+        let room = Room(id: key, roomName: roomNameText, roomDescription: roomDescriptionText, imageName: self.saved_image, images: NSDictionary(), buildingId: selected_building as String, uid: userID)
         
         let post = [
             "roomName" : room.roomName,
             "roomDescription" : room.roomDescription,
             "imageName": room.imageName,
+            "images": room.images,
             "buildingId" : room.buildingId,
             "uid" : room.uid,
             "id" : room.id,
-        ]
+        ] as [String : Any]
         
         let childUpdates = ["/rooms/\(userID)/\(selected_building)/\(key)": post]
         self.ref.updateChildValues(childUpdates)

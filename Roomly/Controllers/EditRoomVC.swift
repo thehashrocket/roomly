@@ -17,6 +17,7 @@ class EditRoomVC: UIViewController, ImagePickerDelegate {
     
     // Variables
     var ref: DatabaseReference!
+    var imageDictionary = NSDictionary()
     var imagesDirectoryPath:String!
     var saved_image = ""
     var selected_building = "" as NSString
@@ -62,16 +63,17 @@ class EditRoomVC: UIViewController, ImagePickerDelegate {
             return
         }
         
-        let room = Room(id: key, roomName: roomNameText, roomDescription: roomDescriptionText, imageName: self.saved_image, buildingId: selected_building as String, uid: userID)
+        let room = Room(id: key, roomName: roomNameText, roomDescription: roomDescriptionText, imageName: self.saved_image, images: self.imageDictionary, buildingId: selected_building as String, uid: userID)
         
         let post = [
             "roomName" : room.roomName,
             "roomDescription" : room.roomDescription,
             "imageName": room.imageName,
+            "images": room.images,
             "buildingId" : room.buildingId,
             "uid" : room.uid,
             "id" : room.id,
-            ]
+            ] as [String : Any]
         
         let childUpdates = ["/rooms/\(userID)/\(selected_building)/\(key)": post]
         self.ref.updateChildValues(childUpdates)
@@ -145,6 +147,8 @@ class EditRoomVC: UIViewController, ImagePickerDelegate {
                     self.roomNameTxt.text = value?["roomName"] as? String
                     self.roomDescriptionTxt.text = value?["roomDescription"] as? String
                     self.saved_image = value?["imageName"] as! String
+                    self.imageDictionary = (value?["images"] as? NSDictionary)!
+                    
                     let room_id = value?["id"] as! String
                     
                     let building_id = value?["id"] as! String

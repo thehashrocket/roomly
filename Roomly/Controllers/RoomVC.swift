@@ -58,6 +58,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         super.viewDidLoad()
         roomsCollection.dataSource = self
         roomsCollection.delegate = self
+    self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
@@ -179,12 +180,20 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 let dataChange = value as! [String: AnyObject]
                 
                 let id = dataChange["id"] as! String
+                
+                var images = NSDictionary()
+                if ((dataChange["images"]) != nil) {
+                    images = dataChange["images"] as! NSDictionary
+                } else {
+
+                }
+                
                 let roomName = dataChange["roomName"] as! String
                 let roomDescription = dataChange["roomDescription"] as! String
                 let imageName = dataChange["imageName"] as! String
                 let buildingId = dataChange["buildingId"] as! String
                 let uid = dataChange["uid"] as! String
-                let room = Room(id: id, roomName: roomName, roomDescription: roomDescription, imageName: imageName, buildingId: buildingId, uid: uid)
+                let room = Room(id: id, roomName: roomName, roomDescription: roomDescription, imageName: imageName, images: images, buildingId: buildingId, uid: uid)
                 DataService.instance.setRoom(room: room)
                 self.rooms = DataService.instance.getRoomsForBuilding(forBuildingId: self.selected_building)
                 self.getRoomItemValues(rooms: self.rooms, userID: userID)
@@ -207,7 +216,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             NotificationCenter.default.removeObserver(SlideShowVC.notificationName)
             let barBtn = UIBarButtonItem()
             barBtn.title = ""
-            navigationItem.backBarButtonItem = barBtn
             assert(sender as? Room != nil)
             itemVC.initItems(room: sender as! Room)
         }
@@ -227,4 +235,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         present(editBuilding, animated: true, completion: nil)
     }
 
+    
+    
 }

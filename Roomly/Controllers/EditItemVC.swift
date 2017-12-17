@@ -203,7 +203,6 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
         if let showItemVC = segue.destination as? ItemVC {
             let barBtn = UIBarButtonItem()
             barBtn.title = ""
-            navigationItem.backBarButtonItem = barBtn
             assert(sender as? Item != nil)
         }
     }

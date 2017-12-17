@@ -194,7 +194,6 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             NotificationCenter.default.removeObserver(SlideShowVC.notificationName)
             let barBtn = UIBarButtonItem()
             barBtn.title = ""
-            navigationItem.backBarButtonItem = barBtn
             assert(sender as? Item != nil)
         }
     }

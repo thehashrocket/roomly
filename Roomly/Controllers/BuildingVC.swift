@@ -160,7 +160,6 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         if let roomVC = segue.destination as? RoomVC {
             let barBtn = UIBarButtonItem()
             barBtn.title = ""
-            navigationItem.backBarButtonItem = barBtn
             assert(sender as? Building != nil)
             roomVC.initRooms(building: sender as! Building)
         }

@@ -413,6 +413,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="QNb-N0-ZeL" firstAttribute="top" secondItem="osX-GD-jsg" secondAttribute="top" constant="30" id="1GR-cf-g4U"/>
                             <constraint firstItem="XTi-vs-2g0" firstAttribute="leading" secondItem="UiW-L2-RNr" secondAttribute="leading" id="Dfj-Mr-z5c"/>
@@ -597,7 +598,7 @@
             </objects>
             <point key="canvasLocation" x="2061.5999999999999" y="33.733133433283363"/>
         </scene>
-        <!--Item-->
+        <!--Title-->
         <scene sceneID="4DZ-YI-oru">
             <objects>
                 <viewController id="T9X-IR-T23" customClass="ShowItemVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
@@ -678,10 +679,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tZl-sZ-HKH"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Item" id="GCd-Kt-jbc">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="2hh-M1-NiJ">
+                    <navigationItem key="navigationItem" title="Title" id="tw2-FS-RH6">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="SOV-n1-XHh">
                             <connections>
-                                <action selector="editItemPressed:" destination="T9X-IR-T23" id="4EV-JU-kpc"/>
+                                <action selector="editItemPressed:" destination="T9X-IR-T23" id="cnV-zn-COD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -703,7 +704,7 @@
             <objects>
                 <navigationController title="Roomly" automaticallyAdjustsScrollViewInsets="NO" id="aLg-v0-0T5" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" backIndicatorImage="icons8-back-50" id="byI-wJ-i3u">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="byI-wJ-i3u">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -914,14 +915,13 @@
     <resources>
         <image name="add" width="28" height="28"/>
         <image name="house1" width="736" height="539"/>
-        <image name="icons8-back-50" width="50" height="50"/>
         <image name="lamp" width="1400" height="1400"/>
         <image name="livingroom1" width="980" height="735"/>
         <image name="login" width="25" height="25"/>
         <image name="new_account" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gXI-Dz-Dfl"/>
-        <segue reference="0VA-gb-n8x"/>
+        <segue reference="9v3-vP-9Wq"/>
+        <segue reference="Weo-1L-sl7"/>
     </inferredMetricsTieBreakers>
 </document>
