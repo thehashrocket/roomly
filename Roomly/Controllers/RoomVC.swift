@@ -142,11 +142,10 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 let postDict = snapshot.value as? [String : AnyObject] ?? [:]
                 DataService.instance.resetItems()
                 
-                single_item = single_item + postDict.count
                 postDict.forEach({ (arg) in
                     let (_, value) = arg
                     let dataChange = value as! [String: AnyObject]
-                    
+                    single_item = single_item + 1
                     _ = dataChange["id"] as? String
                     if dataChange["purchaseAmount"] != nil {
                         if let purchaseDate = (dataChange["purchaseAmount"]as? NSString)?.doubleValue {
@@ -193,7 +192,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.spinner.stopAnimating()
             })
             
-            print("rooms.count \(self.rooms.count)")
             if (self.rooms.count == 0) {
                 self.houseDetails.text = "There are no rooms or items."
             }

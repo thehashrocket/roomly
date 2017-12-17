@@ -32,6 +32,9 @@ PODS:
   - Firebase/Firestore (4.3.0):
     - Firebase/Core
     - FirebaseFirestore (= 0.8.0)
+  - Firebase/Performance (4.3.0):
+    - Firebase/Core
+    - FirebasePerformance (= 1.0.6)
   - Firebase/Storage (4.3.0):
     - Firebase/Core
     - FirebaseStorage (= 2.0.2)
@@ -59,6 +62,13 @@ PODS:
     - leveldb-library (~> 1.18)
     - Protobuf (~> 3.1)
   - FirebaseInstanceID (2.0.4)
+  - FirebasePerformance (1.0.6):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - GTMSessionFetcher/Core (~> 1.1)
+    - Protobuf (~> 3.1)
   - FirebaseStorage (2.0.2):
     - FirebaseAnalytics (~> 4.0)
     - FirebaseCore (~> 4.0)
@@ -102,6 +112,8 @@ PODS:
   - GoogleToolboxForMac/DebugUtils (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/Defines (2.1.3)
+  - GoogleToolboxForMac/Logger (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/NSData+zlib (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3):
@@ -159,6 +171,7 @@ DEPENDENCIES:
   - Fabric (~> 1.7.2)
   - Firebase/Core
   - Firebase/Database
+  - Firebase/Performance
   - Firebase/Storage
   - FirebaseUI
   - FirebaseUI/Auth
@@ -183,6 +196,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 607284a103e961d7f5863ee603cab5e85f443bd6
   FirebaseFirestore: 8e2fd99a621ae6fc6acfac3bdea824fe9d9c128d
   FirebaseInstanceID: 70c2b877e9338971b2429ea5a4293df6961aa44e
+  FirebasePerformance: fa032c27e229eb8c1a8638918793fe2e47465205
   FirebaseStorage: 0cca42d9b889a0227c3a50121f45a4469fc9eb27
   FirebaseUI: 023eb0713ee36464d7afaeeae2dbefac6e897d5d
   GoogleSignIn: 8c599fc10d25b2af86a3f82fd9631e863f2b1400
@@ -205,6 +219,6 @@ SPEC CHECKSUMS:
   TwitterCore: 6856288a1c25e5281363250681f33b42fce1da42
   TwitterKit: 313bf02baee8427f7649b3640169178e5a8b5a99
 
-PODFILE CHECKSUM: 3f8bb8307cf6a43c7834889266ac0d47954c3207
+PODFILE CHECKSUM: 161c67c68298e93e20d72c14696429e44b26eef4
 
 COCOAPODS: 1.2.0

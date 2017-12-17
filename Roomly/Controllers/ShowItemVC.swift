@@ -73,7 +73,7 @@ class ShowItemVC: UIViewController {
                         let room_id = value?["roomId"] as! String
                         let item_id = value?["id"] as! String
                         let user_id = value?["uid"] as! String
-                        let destination = "items/\(user_id)/\(room_id)/\(item_id)/"
+                        let destination = "/images/items/\(user_id)/\(room_id)/\(item_id)/"
                         
                         let slideShowDictionary = value?["images"] as? NSDictionary
                         self.slideShowImages.removeAll()

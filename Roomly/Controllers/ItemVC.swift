@@ -89,7 +89,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         self.saved_room_image = (value?["imageName"] as? String)!
                         let building_id = (value?["buildingId"] as? String)!
                         let room_id = (value?["id"] as? String)!
-                        let destination = "rooms/\(userID)/\(building_id)/\(room_id)/"
+                        let destination = "/images/rooms/\(userID)/\(building_id)/\(room_id)/"
                         
                         let slideShowDictionary = value?["images"] as? NSDictionary
                         self.slideShowImages.removeAll()

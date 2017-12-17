@@ -70,6 +70,8 @@ class ExistingUserVC: UIViewController {
             
             if (error != nil) {
                 self.errorLabel.text = error?.localizedDescription
+            } else {
+                self.errorLabel.text = "Your password reset request has been processed. Please check your email."
             }
         }
     }

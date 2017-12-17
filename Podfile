@@ -9,12 +9,14 @@ target 'Roomly' do
 
   # Pods for Roomly
   pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Performance'
   pod 'Firebase/Storage'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI'
   pod 'FirebaseUI/Facebook'
   pod 'FirebaseUI/Phone'
-  pod 'Firebase/Database'
+  
   pod 'Hue'
   pod 'ImagePicker'
   pod 'Lightbox'
