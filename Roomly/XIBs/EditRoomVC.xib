@@ -59,15 +59,19 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fvk-cx-gUd">
-                                    <rect key="frame" x="279" y="551" width="28" height="28"/>
-                                    <state key="normal" image="add"/>
+                                    <rect key="frame" x="274" y="545" width="33" height="34"/>
+                                    <state key="normal" title="Add">
+                                        <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
                                     <connections>
                                         <action selector="submitPicked:" destination="-1" eventType="touchUpInside" id="Lnn-MW-z2q"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBm-iT-2cm">
-                                    <rect key="frame" x="8" y="551" width="28" height="28"/>
-                                    <state key="normal" image="cancel"/>
+                                    <rect key="frame" x="8" y="545" width="56" height="34"/>
+                                    <state key="normal" title="Cancel">
+                                        <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
                                     <connections>
                                         <action selector="cancelPicked:" destination="-1" eventType="touchUpInside" id="tdW-2h-poV"/>
                                     </connections>
@@ -90,8 +94,8 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eva-Z2-iUq">
-                                    <rect key="frame" x="143" y="551" width="28" height="28"/>
-                                    <state key="normal" image="remove">
+                                    <rect key="frame" x="130.5" y="545" width="53" height="34"/>
+                                    <state key="normal" title="Delete">
                                         <color key="titleColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="titleShadowColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
@@ -149,10 +153,7 @@
         </view>
     </objects>
     <resources>
-        <image name="add" width="28" height="28"/>
         <image name="camera" width="28" height="22"/>
-        <image name="cancel" width="28" height="28"/>
         <image name="closeButton" width="28" height="28"/>
-        <image name="remove" width="28" height="28"/>
     </resources>
 </document>

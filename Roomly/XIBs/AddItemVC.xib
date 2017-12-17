@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -86,15 +85,19 @@
                                     </constraints>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQR-du-nDz">
-                                    <rect key="frame" x="279" y="551" width="28" height="28"/>
-                                    <state key="normal" image="add"/>
+                                    <rect key="frame" x="274" y="545" width="33" height="34"/>
+                                    <state key="normal" title="Add">
+                                        <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
                                     <connections>
                                         <action selector="submitPicked:" destination="-1" eventType="touchUpInside" id="oNg-Zp-5JS"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1w-c4-089">
-                                    <rect key="frame" x="8" y="551" width="28" height="28"/>
-                                    <state key="normal" image="cancel"/>
+                                    <rect key="frame" x="8" y="545" width="56" height="34"/>
+                                    <state key="normal" title="Cancel">
+                                        <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
                                     <connections>
                                         <action selector="cancelPicked:" destination="-1" eventType="touchUpInside" id="7G8-as-CE7"/>
                                     </connections>
@@ -173,9 +176,7 @@
         </view>
     </objects>
     <resources>
-        <image name="add" width="28" height="28"/>
         <image name="camera" width="28" height="22"/>
-        <image name="cancel" width="28" height="28"/>
         <image name="closeButton" width="28" height="28"/>
     </resources>
 </document>

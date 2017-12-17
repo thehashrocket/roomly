@@ -90,15 +90,19 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTA-SZ-kkK">
-                                    <rect key="frame" x="255" y="527" width="28" height="28"/>
-                                    <state key="normal" image="add"/>
+                                    <rect key="frame" x="250" y="521" width="33" height="34"/>
+                                    <state key="normal" title="Add">
+                                        <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
                                     <connections>
                                         <action selector="submitPressed:" destination="-1" eventType="touchUpInside" id="Z73-wy-iaY"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ug3-bB-KiH">
-                                    <rect key="frame" x="16" y="527" width="28" height="28"/>
-                                    <state key="normal" image="cancel"/>
+                                    <rect key="frame" x="16" y="521" width="56" height="34"/>
+                                    <state key="normal" title="Cancel">
+                                        <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
                                     <connections>
                                         <action selector="cancelPressed:" destination="-1" eventType="touchUpInside" id="SwN-QL-GSA"/>
                                     </connections>
@@ -172,9 +176,7 @@
         </view>
     </objects>
     <resources>
-        <image name="add" width="28" height="28"/>
         <image name="camera" width="28" height="22"/>
-        <image name="cancel" width="28" height="28"/>
         <image name="closeButton" width="28" height="28"/>
     </resources>
 </document>
