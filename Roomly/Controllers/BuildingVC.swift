@@ -136,12 +136,6 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         performSegue(withIdentifier: "RoomVC", sender: building)
     }
     
-    @IBAction func addBuildingPressed(_ sender: Any) {
-        let addBuilding = AddBuildingVC()
-        addBuilding.modalPresentationStyle = .custom
-        present(addBuilding, animated: true, completion: nil)
-    }
-    
     @IBAction func loginBtnPressed(_ sender: Any) {
         if Auth.auth().currentUser != nil {
             do {
@@ -164,5 +158,10 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             roomVC.initRooms(building: sender as! Building)
         }
     }
+    
+    @IBAction func addBuildingBtn(_ sender: Any) {
+        performSegue(withIdentifier: "addBuildingVC", sender: self)
+    }
+    
 }
 

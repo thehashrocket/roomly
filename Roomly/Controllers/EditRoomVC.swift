@@ -28,7 +28,7 @@ class EditRoomVC: UIViewController, ImagePickerDelegate {
     
     
     // Outlets
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
+
     @IBOutlet weak var roomNameTxt: UITextField!
     @IBOutlet weak var roomDescriptionTxt: UITextField!
     @IBOutlet weak var imagePicked: UIImageView!
@@ -39,17 +39,11 @@ class EditRoomVC: UIViewController, ImagePickerDelegate {
         self.view.endEditing(true);
     }
     
-    @IBAction func closePicked(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func cancelPicked(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "roomsVC", sender: self)
     }
     
     @IBAction func submitPicked(_ sender: Any) {
-        spinner.startAnimating()
-        spinner.isHidden = false
         
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
@@ -82,9 +76,7 @@ class EditRoomVC: UIViewController, ImagePickerDelegate {
             CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "rooms", second_key: room.buildingId as! String)
         }
         
-        spinner.stopAnimating()
-        spinner.isHidden = true
-        self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "roomsVC", sender: self)
         
     }
     
@@ -108,11 +100,7 @@ class EditRoomVC: UIViewController, ImagePickerDelegate {
         let roomsRef = self.ref.child("rooms").child(userID!)
         roomsRef.keepSynced(true)
         roomsRef.child(self.selected_building as String).child(self.selected_room as String).removeValue()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let VC1 = storyboard.instantiateViewController(withIdentifier: "BuildingVC") as! BuildingVC
-        let navController = UINavigationController(rootViewController: VC1) // Creating a navigation controller with VC1 at the root of the navigation stack.
-
-        self.present(navController, animated:true, completion: nil)
+        performSegue(withIdentifier: "roomsVC", sender: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -123,7 +111,7 @@ class EditRoomVC: UIViewController, ImagePickerDelegate {
         super.viewDidLoad()
         selected_building = DataService.instance.getSelectedBuilding()
         selected_room = DataService.instance.getSelectedRoom()
-        spinner.isHidden = true
+
         self.ref = Database.database().reference()
         
         // Do any additional setup after loading the view.
@@ -147,7 +135,12 @@ class EditRoomVC: UIViewController, ImagePickerDelegate {
                     self.roomNameTxt.text = value?["roomName"] as? String
                     self.roomDescriptionTxt.text = value?["roomDescription"] as? String
                     self.saved_image = value?["imageName"] as! String
-                    self.imageDictionary = (value?["images"] as? NSDictionary)!
+                    if ((value?["images"]) != nil) {
+                        self.imageDictionary = (value?["images"] as? NSDictionary)!
+                    } else {
+                        self.imageDictionary = NSDictionary()
+                    }
+                    
                     
                     let room_id = value?["id"] as! String
                     

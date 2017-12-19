@@ -28,7 +28,6 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
     var countriesArray = [(String)]()
     
     // Outlets
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var buildingNAme: UITextField!
     @IBOutlet weak var streetTxt: UITextField!
     @IBOutlet weak var cityTxt: UITextField!
@@ -41,17 +40,11 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
         self.view.endEditing(true);
     }
     
-    @IBAction func closePressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func cancelPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "buildingsVC", sender: self)
     }
     
     @IBAction func submitPressed(_ sender: Any) {
-        spinner.startAnimating()
-        spinner.isHidden = false
         
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
@@ -99,10 +92,7 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
             CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "buildings")
         }
         
-        spinner.stopAnimating()
-        spinner.hidesWhenStopped = true
-        spinner.isHidden = true
-        self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "buildingsVC", sender: self)
     }
     
     @IBAction func openCameraButton(_ sender: Any) {
@@ -123,11 +113,7 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
         self.ref = Database.database().reference()
         self.ref.child("buildings").child(userID!).child(self.selected_building as String).removeValue()
 
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let VC1 = storyboard.instantiateViewController(withIdentifier: "BuildingVC") as! BuildingVC
-        let navController = UINavigationController(rootViewController: VC1) // Creating a navigation controller with VC1 at the root of the navigation stack.
-
-        self.present(navController, animated:true, completion: nil)
+        performSegue(withIdentifier: "buildingsVC", sender: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -136,8 +122,6 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        spinner.stopAnimating()
-        spinner.isHidden = true
         let cityPicker = UIPickerView()
         let countryPicker = UIPickerView()
         let statePicker = UIPickerView()

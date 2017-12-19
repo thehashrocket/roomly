@@ -56,9 +56,10 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.ref = Database.database().reference()
         roomsCollection.dataSource = self
         roomsCollection.delegate = self
-    self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
@@ -224,9 +225,9 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     // Actions
     @IBAction func addRoomPressed(_ sender: Any) {
-        let addRoom = AddRoomVC()
-        addRoom.modalPresentationStyle = .custom
-        present(addRoom, animated: true, completion: nil)
+//        let addRoom = AddRoomVC()
+//        addRoom.modalPresentationStyle = .custom
+//        present(addRoom, animated: true, completion: nil)
     }
     
     @IBAction func editBuildingPressed(_ sender: Any) {

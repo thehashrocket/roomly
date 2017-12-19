@@ -47,7 +47,6 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
     @IBOutlet weak var purchaseAmountTxt: UITextField!
     @IBOutlet weak var purchaseDateTxt: UITextField!
     @IBOutlet weak var imagePicked: UIImageView!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var locatedInBuildingTxt: UITextField!
     @IBOutlet weak var locatedInRoomTxt: UITextField!
     
@@ -73,11 +72,9 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
     }
     
     @IBAction func cancelPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "showItemVC", sender: self)
     }
     @IBAction func submitPressed(_ sender: Any) {
-        spinner.startAnimating()
-        spinner.isHidden = false
         
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
@@ -166,19 +163,12 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
                         DataService.instance.updateItem(new_item: item)
                         DataService.instance.setSelectedItem(item: item)
                         
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let VC1 = storyboard.instantiateViewController(withIdentifier: "BuildingVC") as! BuildingVC
-                        let navController = UINavigationController(rootViewController: VC1) // Creating a navigation controller with VC1 at the root of the navigation stack.
-                        self.present(navController, animated:true, completion: nil)
-//                        self.navigationController?.popToRootViewController(animated: true)
+                        self.performSegue(withIdentifier: "showItemsVC", sender: self)
                     })
                 })
                 
             }
         }
-
-        spinner.stopAnimating()
-        spinner.isHidden = true
         
 //        DataService.instance.updateItem(new_item: item)
         
@@ -189,22 +179,11 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
         let userID = Auth.auth().currentUser?.uid
         self.ref = Database.database().reference()
         self.ref.child("items").child(userID!).child(self.selected_room as String).child(self.selected_item as String).removeValue()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let VC1 = storyboard.instantiateViewController(withIdentifier: "BuildingVC") as! BuildingVC
-        let navController = UINavigationController(rootViewController: VC1) // Creating a navigation controller with VC1 at the root of the navigation stack.
-        self.present(navController, animated:true, completion: nil)
+        performSegue(withIdentifier: "showItemsVC", sender: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let showItemVC = segue.destination as? ItemVC {
-            let barBtn = UIBarButtonItem()
-            barBtn.title = ""
-            assert(sender as? Item != nil)
-        }
     }
     
     override func viewDidLoad() {
@@ -222,7 +201,7 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
         selected_building = DataService.instance.getSelectedBuilding()
         selected_item = DataService.instance.getSelectedItem()
         selected_room = DataService.instance.getSelectedRoom()
-        spinner.isHidden = true
+
         self.ref = Database.database().reference()
         self.ref.keepSynced(true)
         

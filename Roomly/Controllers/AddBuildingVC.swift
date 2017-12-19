@@ -34,11 +34,9 @@ class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate,
     @IBOutlet weak var stateTxt: UITextField!
     @IBOutlet weak var countryTxt: UITextField!
     @IBOutlet weak var zipTxt: UITextField!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        spinner.isHidden = true
         let cityPicker = UIPickerView()
         let countryPicker = UIPickerView()
         let statePicker = UIPickerView()
@@ -137,12 +135,10 @@ class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate,
     }
     
     @IBAction func cancelPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "buildingsVC", sender: self)
     }
     
     @IBAction func submitPressed(_ sender: Any) {
-        spinner.startAnimating()
-        spinner.isHidden = false
         
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
@@ -190,9 +186,7 @@ class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate,
             CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "buildings")
         }
         
-        spinner.stopAnimating()
-        spinner.isHidden = true
-        self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "buildingsVC", sender: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

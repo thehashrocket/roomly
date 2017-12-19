@@ -11,6 +11,7 @@ import UIKit
 class ItemCell: UICollectionViewCell {
     
     @IBOutlet weak var itemImage: UIImageView!
+    @IBOutlet weak var itemNameTxt: UILabel!
     
     func updateViews(item: Item) {
         if (item.id != "") {
@@ -18,6 +19,7 @@ class ItemCell: UICollectionViewCell {
             let user_id = item.uid! as String
             let room_id  = item.roomId! as String
             let item_id = item.id! as String
+            itemNameTxt.text = item.itemName as String?
             
             let destination = "items/\(user_id)/\(room_id)/\(item_id)/"
             

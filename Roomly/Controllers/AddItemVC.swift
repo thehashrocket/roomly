@@ -33,7 +33,6 @@ class AddItemVC: UIViewController, ImagePickerDelegate {
     @IBOutlet weak var itemName: UITextField!
     @IBOutlet weak var itemDescription: UITextField!
     @IBOutlet weak var imagePicked: UIImageView!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var purchaseDate: UITextField!
     @IBOutlet weak var purchaseAmount: UITextField!
     @IBOutlet weak var stackView: UIStackView!
@@ -42,8 +41,6 @@ class AddItemVC: UIViewController, ImagePickerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         selected_room = DataService.instance.getSelectedRoom()
-        spinner.isHidden = true
-        spinner.stopAnimating()
         
         self.ref = Database.database().reference()
         self.ref.keepSynced(true)
@@ -93,16 +90,14 @@ class AddItemVC: UIViewController, ImagePickerDelegate {
     }
     
     @IBAction func closePicked(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "showItemsVC", sender: self)
     }
     
     @IBAction func cancelPicked(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "showItemsVC", sender: self)
     }
     
     @IBAction func submitPicked(_ sender: Any) {
-        spinner.startAnimating()
-        spinner.isHidden = false
         
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
@@ -145,9 +140,7 @@ class AddItemVC: UIViewController, ImagePickerDelegate {
             CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "items", second_key: item.roomId as! String)
         }
         
-        spinner.stopAnimating()
-        spinner.isHidden = true
-        self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "showItemsVC", sender: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

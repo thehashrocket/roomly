@@ -11,12 +11,14 @@ import UIKit
 class RoomCell: UICollectionViewCell {
     
     @IBOutlet weak var roomImage: UIImageView!
+    @IBOutlet weak var roomNameTxt: UILabel!
     
     func updateViews(room: Room) {
         
         let user_id = room.uid as String
         let room_id  = room.id as String
         let building_id = room.buildingId as String
+        roomNameTxt.text = room.roomName as String?
         
         let destination = "rooms/\(user_id)/\(building_id)/\(room_id)/"
         

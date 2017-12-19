@@ -33,7 +33,6 @@ class AddRoomVC: UIViewController, ImagePickerDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         selected_building = DataService.instance.getSelectedBuilding()
-        spinner.isHidden = true
         self.ref = Database.database().reference()
         self.ref.keepSynced(true)
         
@@ -65,13 +64,7 @@ class AddRoomVC: UIViewController, ImagePickerDelegate  {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func cancelPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func submitPicked(_ sender: Any) {
-        spinner.startAnimating()
-        spinner.isHidden = false
         
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
@@ -103,13 +96,7 @@ class AddRoomVC: UIViewController, ImagePickerDelegate  {
         self.images.forEach { (image) in
             CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "rooms", second_key: room.buildingId as! String)
         }
-        spinner.stopAnimating()
-        spinner.isHidden = true
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func closePressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "roomsVC", sender: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -126,7 +113,6 @@ class AddRoomVC: UIViewController, ImagePickerDelegate  {
         
         let imagePicker = ImagePickerController(configuration: config)
         imagePicker.delegate = self
-        
         present(imagePicker, animated: true, completion: nil)
     }
     
