@@ -86,6 +86,20 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         return RoomCell()
     }
     
+    func collectionview(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var numOfColumns:CGFloat = 3
+        
+        if UIScreen.main.bounds.width > 320 {
+            numOfColumns = 4
+        }
+        
+        let spaceBetweenCells:CGFloat = 10
+        let padding:CGFloat = 40
+        let cellDimension = ((collectionView.bounds.width - padding) - (numOfColumns - 1) * spaceBetweenCells) / numOfColumns
+        
+        return CGSize(width: cellDimension, height: cellDimension)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let room = rooms[indexPath.row]
         DataService.instance.setSelectedRoom(room: room)
@@ -236,15 +250,11 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 
     
     @IBAction func addRoomPressed(_ sender: Any) {
-//        let addRoom = AddRoomVC()
-//        addRoom.modalPresentationStyle = .custom
-//        present(addRoom, animated: true, completion: nil)
+
     }
     
     @IBAction func editBuildingPressed(_ sender: Any) {
-//        let editBuilding = EditBuildingVC()
-//        editBuilding.modalPresentationStyle = .custom
-//        present(editBuilding, animated: true, completion: nil)
+
     }
 
     
