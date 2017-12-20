@@ -104,7 +104,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Add Building" image="add" id="tEv-iJ-5QP">
                             <connections>
                                 <action selector="addBuildingBtn:" destination="BYZ-38-t0r" id="331-CV-25D"/>
-                                <segue destination="6zT-5R-2Fe" kind="show" identifier="addBuildingVC" id="pQZ-GX-wL9"/>
+                                <segue destination="6zT-5R-2Fe" kind="presentation" identifier="addBuildingVC" id="pQZ-GX-wL9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -229,7 +229,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="mzj-Kg-MrS">
-                                <rect key="frame" x="10" y="60" width="355" height="75"/>
+                                <rect key="frame" x="10" y="80" width="355" height="75"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jsr-ES-UUX">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
@@ -256,7 +256,7 @@
                                 <viewLayoutGuide key="safeArea" id="iKm-0Z-RgS"/>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r1k-gi-cH2">
-                                <rect key="frame" x="332" y="559" width="33" height="34"/>
+                                <rect key="frame" x="332" y="623" width="33" height="34"/>
                                 <state key="normal" title="Add">
                                     <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -265,22 +265,23 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pVD-yu-5py">
-                                <rect key="frame" x="10" y="559" width="56" height="34"/>
+                                <rect key="frame" x="10" y="623" width="56" height="34"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="cancelPressed:" destination="iKl-Q9-L9q" eventType="touchUpInside" id="8M9-ar-p9s"/>
                                     <segue destination="5WK-ow-VBi" kind="show" identifier="roomsVC" id="ESQ-V7-k59"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add A Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2A-ZX-u6z">
-                                <rect key="frame" x="10" y="10" width="95" height="20.5"/>
+                                <rect key="frame" x="10" y="30" width="95" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pNE-aW-w9v">
-                                <rect key="frame" x="173" y="571" width="28" height="22"/>
+                                <rect key="frame" x="173" y="635" width="28" height="22"/>
                                 <state key="normal" image="camera"/>
                                 <connections>
                                     <action selector="addPhotoPressed:" destination="iKl-Q9-L9q" eventType="touchUpInside" id="tZe-o0-YSR"/>
@@ -306,9 +307,12 @@
                     <connections>
                         <outlet property="roomDescription" destination="rXh-pz-uRm" id="Miv-rh-bXM"/>
                         <outlet property="roomName" destination="Jsr-ES-UUX" id="PPW-DB-nJm"/>
+                        <segue destination="RJe-dA-BTo" kind="unwind" identifier="unwindToBuildingVC" unwindAction="unwindToBuildingVCWithSegue:" id="dsj-lu-1rb"/>
+                        <segue destination="RJe-dA-BTo" kind="unwind" identifier="unwindToRoomsVC" unwindAction="unwindToRoomsVCWithSegue:" id="jmb-be-rhc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="And-9P-aSS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="RJe-dA-BTo" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1190" y="-1047"/>
         </scene>
@@ -317,11 +321,11 @@
             <objects>
                 <viewController id="Yuf-DG-l3i" customClass="EditRoomVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oNm-2z-6Ib">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NcL-d7-Kb1">
-                                <rect key="frame" x="325" y="559" width="40" height="34"/>
+                                <rect key="frame" x="325" y="623" width="40" height="34"/>
                                 <state key="normal" title="Save">
                                     <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -330,19 +334,22 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJX-C3-FHB">
-                                <rect key="frame" x="10" y="559" width="56" height="34"/>
+                                <rect key="frame" x="10" y="623" width="56" height="34"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="cancelPicked:" destination="Yuf-DG-l3i" eventType="touchUpInside" id="5CD-V7-aPD"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3I-pw-WOb">
-                                <rect key="frame" x="10" y="10" width="78" height="20.5"/>
+                                <rect key="frame" x="10" y="30" width="78" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bz5-dv-wGA">
-                                <rect key="frame" x="161" y="559" width="53" height="34"/>
+                                <rect key="frame" x="161" y="623" width="53" height="34"/>
                                 <state key="normal" title="Delete">
                                     <color key="titleColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -352,7 +359,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="jYH-8B-m3N">
-                                <rect key="frame" x="10" y="60" width="355" height="112"/>
+                                <rect key="frame" x="10" y="80" width="355" height="112"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Room Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xvH-yG-zP9">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
@@ -403,9 +410,13 @@
                         <outlet property="roomDescriptionTxt" destination="Oju-BM-c1U" id="0ji-yt-tuM"/>
                         <outlet property="roomNameTxt" destination="xvH-yG-zP9" id="Mu5-7g-ewB"/>
                         <segue destination="5WK-ow-VBi" kind="show" identifier="roomsVC" id="KMU-YZ-vrG"/>
+                        <segue destination="6hm-XM-mCi" kind="show" identifier="showItemsVC" id="HTV-5p-wrH"/>
+                        <segue destination="juO-NO-SVR" kind="unwind" identifier="unwindToItemsVC" unwindAction="unwindToItemsVCWithSegue:" id="QpS-gm-WNb"/>
+                        <segue destination="juO-NO-SVR" kind="unwind" identifier="unwindToRoomsVC" unwindAction="unwindToRoomsVCWithSegue:" id="oeM-8b-7t8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LwR-Wt-W5j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="juO-NO-SVR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2062" y="791"/>
         </scene>
@@ -642,13 +653,13 @@
                             <barButtonItem image="add" style="plain" id="KIf-hO-7TM">
                                 <connections>
                                     <action selector="addRoomPressed:" destination="5WK-ow-VBi" id="cUm-BZ-Dok"/>
-                                    <segue destination="iKl-Q9-L9q" kind="show" identifier="addRoomVC" id="aPP-e4-YO4"/>
+                                    <segue destination="iKl-Q9-L9q" kind="presentation" identifier="addRoomVC" id="aPP-e4-YO4"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem style="plain" systemItem="edit" id="laZ-lQ-z8F">
                                 <connections>
                                     <action selector="editBuildingPressed:" destination="5WK-ow-VBi" id="cQf-a3-1Tb"/>
-                                    <segue destination="kuV-Yt-sAU" kind="show" id="6dO-MZ-XQh"/>
+                                    <segue destination="kuV-Yt-sAU" kind="presentation" id="6dO-MZ-XQh"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -784,13 +795,13 @@
                             <barButtonItem image="add" id="LU6-Ev-zn9">
                                 <connections>
                                     <action selector="addItemPressed:" destination="6hm-XM-mCi" id="cqk-8r-4xa"/>
-                                    <segue destination="Ic4-b7-Duf" kind="show" identifier="addItemVC" id="ZQm-9d-das"/>
+                                    <segue destination="Ic4-b7-Duf" kind="presentation" identifier="addItemVC" id="ZQm-9d-das"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="edit" id="pso-bj-Gf1">
                                 <connections>
                                     <action selector="editPressed:" destination="6hm-XM-mCi" id="yfM-0c-Mbd"/>
-                                    <segue destination="Yuf-DG-l3i" kind="show" identifier="editRoomVC" id="Nv9-Iu-21z"/>
+                                    <segue destination="Yuf-DG-l3i" kind="presentation" identifier="editRoomVC" id="Nv9-Iu-21z"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -820,7 +831,7 @@
             <objects>
                 <viewController id="T9X-IR-T23" userLabel="Show Item" customClass="ShowItemVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YNY-Kf-hOl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lLv-YA-JRp">
@@ -829,7 +840,7 @@
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4c1-17-XXt">
-                                <rect key="frame" x="8" y="270" width="136" height="97"/>
+                                <rect key="frame" x="8" y="250" width="136" height="97"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmi-7A-j1E">
                                         <rect key="frame" x="0.0" y="0.0" width="83" height="20.5"/>
@@ -858,7 +869,7 @@
                                 </subviews>
                             </stackView>
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cd8-5V-Isw">
-                                <rect key="frame" x="0.0" y="200" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="180" width="375" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ITEM DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZ1-hR-w2r">
                                         <rect key="frame" x="8" y="10" width="109" height="21"/>
@@ -900,7 +911,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="SOV-n1-XHh">
                             <connections>
                                 <action selector="editItemPressed:" destination="T9X-IR-T23" id="cnV-zn-COD"/>
-                                <segue destination="Ksv-oi-tyd" kind="show" identifier="editItemVC" id="dmb-p2-7bt"/>
+                                <segue destination="Ksv-oi-tyd" kind="presentation" identifier="editItemVC" id="dmb-p2-7bt"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1068,9 +1079,12 @@
                         <outlet property="purchaseDateTxt" destination="6GY-h3-ZiE" id="D0l-LJ-YwG"/>
                         <segue destination="T9X-IR-T23" kind="show" identifier="showItemVC" id="LYX-VL-rDC"/>
                         <segue destination="6hm-XM-mCi" kind="show" identifier="showItemsVC" id="l1k-rZ-c0S"/>
+                        <segue destination="d1n-bQ-UZj" kind="unwind" identifier="unwindToItemsVC" unwindAction="unwindToItemsVCWithSegue:" id="ezr-aZ-Vbv"/>
+                        <segue destination="d1n-bQ-UZj" kind="unwind" identifier="unwindToShowItemVC" unwindAction="unwindToShowItemVCWithSegue:" id="X3n-ZL-HqD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWl-ha-uFM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="d1n-bQ-UZj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2862" y="790"/>
         </scene>
@@ -1105,11 +1119,11 @@
             <objects>
                 <viewController id="6zT-5R-2Fe" customClass="AddBuildingVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G9B-Md-3Da">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="JhN-Yb-9FT">
-                                <rect key="frame" x="10" y="90.5" width="355" height="255"/>
+                                <rect key="frame" x="10" y="110.5" width="355" height="255"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Building Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mqh-KQ-nN9">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
@@ -1156,7 +1170,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFu-ef-kO4">
-                                <rect key="frame" x="10" y="559" width="56" height="34"/>
+                                <rect key="frame" x="10" y="623" width="56" height="34"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -1165,20 +1179,20 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add A Building" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnZ-lY-f7e">
-                                <rect key="frame" x="10" y="10" width="112" height="20.5"/>
+                                <rect key="frame" x="10" y="30" width="112" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6C-sZ-EN5">
-                                <rect key="frame" x="173.5" y="571" width="28" height="22"/>
+                                <rect key="frame" x="173.5" y="635" width="28" height="22"/>
                                 <state key="normal" image="camera"/>
                                 <connections>
                                     <action selector="addPhotoPressed:" destination="6zT-5R-2Fe" eventType="touchUpInside" id="wfe-zf-Uln"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FU-lA-ini">
-                                <rect key="frame" x="332" y="559" width="33" height="34"/>
+                                <rect key="frame" x="332" y="623" width="33" height="34"/>
                                 <state key="normal" title="Add">
                                     <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -1211,9 +1225,11 @@
                         <outlet property="streetTxt" destination="JcH-2H-IHS" id="pE2-y6-CZv"/>
                         <outlet property="zipTxt" destination="FqK-os-srn" id="hyV-LJ-55j"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="buildingsVC" id="CJB-jL-JBm"/>
+                        <segue destination="J9c-em-iTg" kind="unwind" identifier="unwindtoBuildingVC" unwindAction="unwindToBuildingVCWithSegue:" id="315-pM-btN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XWm-AJ-Y0w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="J9c-em-iTg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="292" y="-1048"/>
         </scene>
@@ -1222,11 +1238,11 @@
             <objects>
                 <viewController id="kuV-Yt-sAU" customClass="EditBuildingVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cBH-f0-Asn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="SaA-lJ-3e6">
-                                <rect key="frame" x="10" y="90.5" width="355" height="292"/>
+                                <rect key="frame" x="10" y="110.5" width="355" height="292"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Building Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c18-4j-kzg">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
@@ -1274,7 +1290,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxY-01-K2g">
-                                <rect key="frame" x="10" y="559" width="56" height="34"/>
+                                <rect key="frame" x="10" y="623" width="56" height="34"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -1283,7 +1299,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFX-P0-PhZ">
-                                <rect key="frame" x="161" y="559" width="53" height="34"/>
+                                <rect key="frame" x="161" y="623" width="53" height="34"/>
                                 <state key="normal" title="Delete">
                                     <color key="titleColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="1" green="0.31589259460000002" blue="0.18010711760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1293,13 +1309,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Building" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGU-CU-ZDf">
-                                <rect key="frame" x="10" y="10" width="95.5" height="20.5"/>
+                                <rect key="frame" x="10" y="30" width="95.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bz6-2X-fxm">
-                                <rect key="frame" x="325" y="559" width="40" height="34"/>
+                                <rect key="frame" x="325" y="623" width="40" height="34"/>
                                 <state key="normal" title="Save">
                                     <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -1332,9 +1348,13 @@
                         <outlet property="streetTxt" destination="bLX-QY-jWP" id="u6x-1r-PcP"/>
                         <outlet property="zipTxt" destination="Q99-hG-Blb" id="BhG-b4-aic"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="buildingsVC" id="GDT-Y1-p8T"/>
+                        <segue destination="5WK-ow-VBi" kind="show" identifier="showRoomsVC" id="7sr-mU-l0D"/>
+                        <segue destination="u2m-c9-vHE" kind="unwind" identifier="unwindToBuildingVC" unwindAction="unwindToBuildingVCWithSegue:" id="d2k-EJ-Iz6"/>
+                        <segue destination="u2m-c9-vHE" kind="unwind" identifier="unwindToRoomsVC" unwindAction="unwindToRoomsVCWithSegue:" id="SkY-Y0-3Ts"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Trg-m2-RKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="u2m-c9-vHE" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1190" y="790"/>
         </scene>
@@ -1409,7 +1429,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="INW-IU-Q0A">
-                                <rect key="frame" x="10" y="90.5" width="355" height="165"/>
+                                <rect key="frame" x="10" y="110.5" width="355" height="165"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y1E-3q-iqJ">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
@@ -1450,7 +1470,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="db0-Ts-bKZ">
-                                <rect key="frame" x="332" y="559" width="33" height="34"/>
+                                <rect key="frame" x="332" y="623" width="33" height="34"/>
                                 <state key="normal" title="Add">
                                     <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -1459,7 +1479,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyW-9l-7dg">
-                                <rect key="frame" x="10" y="559" width="56" height="34"/>
+                                <rect key="frame" x="10" y="623" width="56" height="34"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -1468,7 +1488,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add A Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOj-g9-DjP">
-                                <rect key="frame" x="10" y="10" width="95" height="20.5"/>
+                                <rect key="frame" x="10" y="30" width="95" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="95" id="fWR-PT-MJY"/>
                                     <constraint firstAttribute="height" constant="20.5" id="g86-Rc-d8w"/>
@@ -1478,7 +1498,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XA9-RA-SyF">
-                                <rect key="frame" x="173" y="571" width="28" height="22"/>
+                                <rect key="frame" x="173" y="635" width="28" height="22"/>
                                 <state key="normal" image="camera"/>
                                 <connections>
                                     <action selector="openCameraButton:" destination="Ic4-b7-Duf" eventType="touchUpInside" id="xyt-D1-c0x"/>
@@ -1507,9 +1527,12 @@
                         <outlet property="purchaseAmount" destination="Ugg-ti-hVM" id="lBb-co-0PX"/>
                         <outlet property="purchaseDate" destination="7RJ-k2-MNJ" id="4TO-Pk-bv6"/>
                         <segue destination="6hm-XM-mCi" kind="show" identifier="showItemsVC" id="l1j-8f-ayD"/>
+                        <segue destination="ndu-mR-39O" kind="unwind" identifier="unwindToItemsVC" unwindAction="unwindToItemsVCWithSegue:" id="Vif-ox-c4t"/>
+                        <segue destination="ndu-mR-39O" kind="unwind" identifier="unwindToRoomsVC" unwindAction="unwindToRoomsVCWithSegue:" id="DPV-IL-cfR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VPR-Ct-cfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ndu-mR-39O" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2062" y="-1048"/>
         </scene>
@@ -1648,9 +1671,10 @@
         <image name="new_account" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LYX-VL-rDC"/>
-        <segue reference="l1j-8f-ayD"/>
-        <segue reference="ESQ-V7-k59"/>
+        <segue reference="6dO-MZ-XQh"/>
+        <segue reference="dz3-Td-iw0"/>
+        <segue reference="gXI-Dz-Dfl"/>
+        <segue reference="fBe-6f-TsH"/>
         <segue reference="GDT-Y1-p8T"/>
     </inferredMetricsTieBreakers>
 </document>

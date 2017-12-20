@@ -60,6 +60,11 @@ class AddRoomVC: UIViewController, ImagePickerDelegate  {
         self.view.endEditing(true);
     }
     
+    @IBAction func cancelPressed(_ sender: Any) {
+        performSegue(withIdentifier: "unwindToRoomsVC", sender: self)
+    }
+    
+    
     @IBAction func dismissPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -96,7 +101,7 @@ class AddRoomVC: UIViewController, ImagePickerDelegate  {
         self.images.forEach { (image) in
             CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "rooms", second_key: room.buildingId as! String)
         }
-        performSegue(withIdentifier: "roomsVC", sender: self)
+        performSegue(withIdentifier: "unwindToRoomsVC", sender: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

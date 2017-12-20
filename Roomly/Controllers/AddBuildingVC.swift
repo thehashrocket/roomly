@@ -135,7 +135,7 @@ class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate,
     }
     
     @IBAction func cancelPressed(_ sender: Any) {
-        performSegue(withIdentifier: "buildingsVC", sender: self)
+        performSegue(withIdentifier: "unwindtoBuildingVC", sender: self)
     }
     
     @IBAction func submitPressed(_ sender: Any) {
@@ -186,7 +186,7 @@ class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate,
             CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "buildings")
         }
         
-        performSegue(withIdentifier: "buildingsVC", sender: self)
+        performSegue(withIdentifier: "unwindtoBuildingVC", sender: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -40,7 +40,7 @@ class EditRoomVC: UIViewController, ImagePickerDelegate {
     }
     
     @IBAction func cancelPicked(_ sender: Any) {
-        performSegue(withIdentifier: "roomsVC", sender: self)
+        performSegue(withIdentifier: "unwindToItemsVC", sender: self)
     }
     
     @IBAction func submitPicked(_ sender: Any) {
@@ -76,7 +76,7 @@ class EditRoomVC: UIViewController, ImagePickerDelegate {
             CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "rooms", second_key: room.buildingId as! String)
         }
         
-        performSegue(withIdentifier: "roomsVC", sender: self)
+        performSegue(withIdentifier: "unwindToItemsVC", sender: self)
         
     }
     
@@ -99,8 +99,16 @@ class EditRoomVC: UIViewController, ImagePickerDelegate {
         
         let roomsRef = self.ref.child("rooms").child(userID!)
         roomsRef.keepSynced(true)
-        roomsRef.child(self.selected_building as String).child(self.selected_room as String).removeValue()
-        performSegue(withIdentifier: "roomsVC", sender: self)
+        roomsRef.child(self.selected_building as String).child(self.selected_room as String).removeValue { (error, _) in
+            if (error == nil) {
+                print("delete Room")
+                self.performSegue(withIdentifier: "unwindToRoomsVC", sender: self)
+            } else {
+                print("deleting room: ")
+                print(error!)
+            }
+        }
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

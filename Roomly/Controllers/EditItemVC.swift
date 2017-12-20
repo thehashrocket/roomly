@@ -72,7 +72,7 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
     }
     
     @IBAction func cancelPressed(_ sender: Any) {
-        performSegue(withIdentifier: "showItemVC", sender: self)
+        performSegue(withIdentifier: "unwindToShowItemVC", sender: self)
     }
     @IBAction func submitPressed(_ sender: Any) {
         
@@ -163,7 +163,7 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
                         DataService.instance.updateItem(new_item: item)
                         DataService.instance.setSelectedItem(item: item)
                         
-                        self.performSegue(withIdentifier: "showItemsVC", sender: self)
+                        self.performSegue(withIdentifier: "unwindToShowItemVC", sender: self)
                     })
                 })
                 
@@ -179,7 +179,7 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
         let userID = Auth.auth().currentUser?.uid
         self.ref = Database.database().reference()
         self.ref.child("items").child(userID!).child(self.selected_room as String).child(self.selected_item as String).removeValue()
-        performSegue(withIdentifier: "showItemsVC", sender: self)
+        performSegue(withIdentifier: "unwindToItemsVC", sender: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

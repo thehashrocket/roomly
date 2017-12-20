@@ -37,6 +37,16 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     private(set) public var items = [Item]()
     private(set) public var rooms = [Room]()
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let itemVC = segue.destination as? ItemVC {
+            NotificationCenter.default.removeObserver(SlideShowVC.notificationName)
+            let barBtn = UIBarButtonItem()
+            barBtn.title = ""
+            assert(sender as? Room != nil)
+            itemVC.initItems(room: sender as! Room)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         
         handle = Auth.auth().addStateDidChangeListener() { auth, user in
@@ -46,74 +56,21 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.roomsCollection.reloadData()
             } else {
                 DataService.instance.resetBuildings()
+                DataService.instance.resetRooms()
                 self.roomsCollection.reloadData()
                 print("No user is signed in.")
             }
         }
-        
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.ref = Database.database().reference()
-        roomsCollection.dataSource = self
-        roomsCollection.delegate = self
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        
-        Auth.auth().addStateDidChangeListener() { auth, user in
-            if user != nil {
-                guard let userID = Auth.auth().currentUser?.uid else { return }
-                let buildingRef = self.ref.child("buildings").child(userID)
-                buildingRef.keepSynced(true)
-                
-                buildingRef.child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
-                    
-                    let value = snapshot.value as? NSDictionary
-                    
-                    if ((value) != nil) {
-                        let building_id = value?["id"] as! String
-                        let saved_image = value?["imageName"] as! String
-                        let user_id = userID as! String
-                        let destination = "/images/buildings/\(userID)/\(building_id)/"
-                        let slideShowDictionary = value?["images"] as? NSDictionary
-                        self.slideShowImages.removeAll()
-                        if ((slideShowDictionary) != nil) {
-                            let total = slideShowDictionary?.count
-                            var count = 0
-                            
-                            slideShowDictionary?.forEach({ (_,value) in
-                                CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
-                                    self.slideShowImages.append(image)
-                                })
-                                count = count + 1
-                                if (count == total) {
-                                    NotificationCenter.default.post(name: SlideShowVC.notificationName, object: nil, userInfo:["images": self.slideShowImages])
-                                }
-                            })
-                            
-                        }
-                        
-                    }
-                })
-
-                // User is signed in.
-                self.getRooms()
-            } else {
-                // TODO: Segue to WelcomeVC here.
-                print("No user is signed in.")
-            }
-        }
+        loadData()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    func initRooms(building: Building) {
-        navigationItem.title = building.buildingName! as String
-        self.getRooms()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -168,6 +125,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     // This gets all the Rooms In the Building.
     func getRooms() {
+        DataService.instance.resetRooms()
         self.ref = Database.database().reference()
         self.ref.keepSynced(true)
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -212,18 +170,71 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         })
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let itemVC = segue.destination as? ItemVC {
-            NotificationCenter.default.removeObserver(SlideShowVC.notificationName)
-            let barBtn = UIBarButtonItem()
-            barBtn.title = ""
-            assert(sender as? Room != nil)
-            itemVC.initItems(room: sender as! Room)
-        }
+    func initRooms(building: Building) {
+        navigationItem.title = building.buildingName! as String
+        self.getRooms()
+    }
+    
+    func loadData() {
+        self.ref = Database.database().reference()
+        roomsCollection.dataSource = self
+        roomsCollection.delegate = self
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         
+        Auth.auth().addStateDidChangeListener() { auth, user in
+            if user != nil {
+                guard let userID = Auth.auth().currentUser?.uid else { return }
+                let buildingRef = self.ref.child("buildings").child(userID)
+                buildingRef.keepSynced(true)
+                
+                buildingRef.child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
+                    
+                    let value = snapshot.value as? NSDictionary
+                    
+                    if ((value) != nil) {
+                        let building_id = value?["id"] as! String
+                        let saved_image = value?["imageName"] as! String
+                        let user_id = userID as! String
+                        let destination = "/images/buildings/\(userID)/\(building_id)/"
+                        let slideShowDictionary = value?["images"] as? NSDictionary
+                        self.slideShowImages.removeAll()
+                        if ((slideShowDictionary) != nil) {
+                            let total = slideShowDictionary?.count
+                            var count = 0
+                            
+                            slideShowDictionary?.forEach({ (_,value) in
+                                CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
+                                    self.slideShowImages.append(image)
+                                })
+                                count = count + 1
+                                if (count == total) {
+                                    NotificationCenter.default.post(name: SlideShowVC.notificationName, object: nil, userInfo:["images": self.slideShowImages])
+                                }
+                            })
+                            CloudData.instance.getBuildingById(userId: user_id, buildingId: building_id, completion: { (building) in
+                                self.title = building.buildingName as String
+                                self.roomsCollection.reloadData()
+                            })
+                        }
+                    }
+                })
+                
+                // User is signed in.
+                self.getRooms()
+            } else {
+                // TODO: Segue to WelcomeVC here.
+                print("No user is signed in.")
+            }
+        }
     }
     
     // Actions
+    
+    @IBAction func unwindToRoomsVC(segue:UIStoryboardSegue) {
+        loadData()
+    }
+
+    
     @IBAction func addRoomPressed(_ sender: Any) {
 //        let addRoom = AddRoomVC()
 //        addRoom.modalPresentationStyle = .custom
@@ -231,9 +242,9 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     @IBAction func editBuildingPressed(_ sender: Any) {
-        let editBuilding = EditBuildingVC()
-        editBuilding.modalPresentationStyle = .custom
-        present(editBuilding, animated: true, completion: nil)
+//        let editBuilding = EditBuildingVC()
+//        editBuilding.modalPresentationStyle = .custom
+//        present(editBuilding, animated: true, completion: nil)
     }
 
     

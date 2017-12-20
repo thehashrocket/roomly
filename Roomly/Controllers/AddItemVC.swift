@@ -90,11 +90,11 @@ class AddItemVC: UIViewController, ImagePickerDelegate {
     }
     
     @IBAction func closePicked(_ sender: Any) {
-        performSegue(withIdentifier: "showItemsVC", sender: self)
+        performSegue(withIdentifier: "unwindToItemsVC", sender: self)
     }
     
     @IBAction func cancelPicked(_ sender: Any) {
-        performSegue(withIdentifier: "showItemsVC", sender: self)
+        performSegue(withIdentifier: "unwindToItemsVC", sender: self)
     }
     
     @IBAction func submitPicked(_ sender: Any) {
@@ -140,7 +140,7 @@ class AddItemVC: UIViewController, ImagePickerDelegate {
             CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "items", second_key: item.roomId as! String)
         }
         
-        performSegue(withIdentifier: "showItemsVC", sender: self)
+        performSegue(withIdentifier: "unwindToItemsVC", sender: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

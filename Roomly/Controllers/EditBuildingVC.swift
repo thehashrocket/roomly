@@ -41,7 +41,7 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
     }
     
     @IBAction func cancelPressed(_ sender: Any) {
-        performSegue(withIdentifier: "buildingsVC", sender: self)
+        performSegue(withIdentifier: "unwindToRoomsVC", sender: self)
     }
     
     @IBAction func submitPressed(_ sender: Any) {
@@ -92,7 +92,7 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
             CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "buildings")
         }
         
-        performSegue(withIdentifier: "buildingsVC", sender: self)
+        performSegue(withIdentifier: "unwindToRoomsVC", sender: self)
     }
     
     @IBAction func openCameraButton(_ sender: Any) {
@@ -113,7 +113,7 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
         self.ref = Database.database().reference()
         self.ref.child("buildings").child(userID!).child(self.selected_building as String).removeValue()
 
-        performSegue(withIdentifier: "buildingsVC", sender: self)
+        performSegue(withIdentifier: "unwindToBuildingVC", sender: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

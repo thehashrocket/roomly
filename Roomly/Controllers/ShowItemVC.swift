@@ -31,6 +31,11 @@ class ShowItemVC: UIViewController {
     
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 
     override func viewDidAppear(_ animated: Bool) {
     }
@@ -41,6 +46,10 @@ class ShowItemVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
+    }
+
+    func loadData() {
         self.ref = Database.database().reference()
         self.ref.keepSynced(true)
         Auth.auth().addStateDidChangeListener() { auth, user in
@@ -59,11 +68,12 @@ class ShowItemVC: UIViewController {
                     
                     if ((value) != nil) {
                         self.itemNameText.text = value?["itemName"] as? String
+                        self.title = value?["itemName"] as? String
                         self.itemDescriptionText.text = value?["itemDescription"] as? String
-//                        self.PurchaseAmountText.text = "\(String(format: "$%.02f", value?["purchaseAmount"] as! CVarArg))"
+                        //                        self.PurchaseAmountText.text = "\(String(format: "$%.02f", value?["purchaseAmount"] as! CVarArg))"
                         var formatted_string = Double()
                         formatted_string = (value?["purchaseAmount"] as! NSString).doubleValue
-                        self.PurchaseAmountText.text = (String(format: "$%.02f", formatted_string))                        
+                        self.PurchaseAmountText.text = (String(format: "$%.02f", formatted_string))
                         self.PurchaseDateText.text = value?["purchaseDate"] as? String
                         if ((value?["imageName"]) != nil) {
                             self.saved_image = (value?["imageName"] as? String)!
@@ -108,19 +118,17 @@ class ShowItemVC: UIViewController {
                 print("No user is signed in.")
             }
         }
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // Actions
+    @IBAction func unwindToShowItemVC(segue:UIStoryboardSegue) {
+        loadData()
+    }
+    
     @IBAction func editItemPressed(_ sender: Any) {
-        let editItem = EditItemVC()
-        editItem.modalPresentationStyle = .custom
-        present(editItem, animated: true, completion: nil)
+//        let editItem = EditItemVC()
+//        editItem.modalPresentationStyle = .custom
+//        present(editItem, animated: true, completion: nil)
     }
     
 }

@@ -48,10 +48,27 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         return ItemCell()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let showItemVC = segue.destination as? ShowItemVC {
+            NotificationCenter.default.removeObserver(SlideShowVC.notificationName)
+            let barBtn = UIBarButtonItem()
+            barBtn.title = ""
+            assert(sender as? Item != nil)
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
-        
         handle = Auth.auth().addStateDidChangeListener() { auth, user in
-            
             if user != nil {
                 // User is signed in.
                 self.itemsCollection.reloadData()
@@ -61,13 +78,21 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 print("No user is signed in.")
             }
         }
-        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = items[indexPath.row]
+        DataService.instance.setSelectedItem(item: item)
+        performSegue(withIdentifier: "ShowItemVC", sender: item)
+    }
+    
+    func initItems(room: Room) {
+        items = DataService.instance.getItemsForRoom(forRoomId: room.id)
+        navigationItem.title = room.roomName! as String
+    }
+    
+    func loadData() {
         itemsCollection.dataSource = self
         itemsCollection.delegate = self
         
@@ -83,7 +108,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 
                 // Get the Room in the building so we can get the image of the room.
                 roomRef.observe(DataEventType.value, with: { (snapshot) in
-
+                    
                     let value = snapshot.value as? NSDictionary
                     if ((value) != nil) {
                         self.saved_room_image = (value?["imageName"] as? String)!
@@ -107,11 +132,13 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                                 }
                             })
                             
+                            CloudData.instance.getRoomById(userId: userID, buildingId: building_id, roomId: room_id, completion: { (room) in
+                                self.title = room.roomName as String
+                            })
+                            
                         } else {
                             
                         }
-                        
-                        
                     }
                     
                 })
@@ -136,7 +163,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         let itemDescription = dataChange["itemDescription"] as! String
                         let imageName = dataChange["imageName"] as! String
                         if ((dataChange["images"]) != nil) {
-                           let images = dataChange["images"] as? NSDictionary
+                            let images = dataChange["images"] as? NSDictionary
                         }
                         
                         let purchaseAmount = ""
@@ -172,44 +199,22 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             }
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = items[indexPath.row]
-        DataService.instance.setSelectedItem(item: item)
-        performSegue(withIdentifier: "ShowItemVC", sender: item)
-    }
-    
-    func initItems(room: Room) {
-        items = DataService.instance.getItemsForRoom(forRoomId: room.id)
-        navigationItem.title = room.roomName! as String
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let showItemVC = segue.destination as? ShowItemVC {
-            NotificationCenter.default.removeObserver(SlideShowVC.notificationName)
-            let barBtn = UIBarButtonItem()
-            barBtn.title = ""
-            assert(sender as? Item != nil)
-        }
-    }
     
     // Actions
+    @IBAction func unwindToItemsVC(segue:UIStoryboardSegue) {
+        loadData()
+    }
     
     @IBAction func addItemPressed(_ sender: Any) {
-        let addItem = AddItemVC()
-        addItem.modalPresentationStyle = .custom
-        present(addItem, animated: true, completion: nil)
+//        let addItem = AddItemVC()
+//        addItem.modalPresentationStyle = .custom
+//        present(addItem, animated: true, completion: nil)
     }
     
     @IBAction func editPressed(_ sender: Any) {
-        let editRoom = EditRoomVC()
-        editRoom.modalPresentationStyle = .custom
-        present(editRoom, animated: true, completion: nil)
+//        let editRoom = EditRoomVC()
+//        editRoom.modalPresentationStyle = .custom
+//        present(editRoom, animated: true, completion: nil)
     }
     
     
