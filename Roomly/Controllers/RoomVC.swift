@@ -53,7 +53,8 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             
             if user != nil {
                 // User is signed in.
-                self.roomsCollection.reloadData()
+                self.loadData()
+//                self.roomsCollection.reloadData()
             } else {
                 DataService.instance.resetBuildings()
                 DataService.instance.resetRooms()

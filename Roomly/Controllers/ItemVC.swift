@@ -78,6 +78,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("in view did load")
         loadData()
     }
     
@@ -85,7 +86,9 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         handle = Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
                 // User is signed in.
-                self.itemsCollection.reloadData()
+                print("in view will appear")
+                self.loadData()
+//                self.itemsCollection.reloadData()
             } else {
                 DataService.instance.resetBuildings()
                 self.itemsCollection.reloadData()
@@ -167,6 +170,9 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                     
                     self.total_items = postDict.count
                     self.total_item_value = 0
+                    if (postDict.count == 0) {
+                        self.roomDetailsLabel.text = "There are no items in this room."
+                    }
                     postDict.forEach({ (arg) in
                         let (_, value) = arg
                         let dataChange = value as! [String: AnyObject]

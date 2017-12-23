@@ -55,7 +55,7 @@ class ExistingUserVC: UIViewController {
             self.spinner.stopAnimating()
             if (user != nil) {
                 self.errorLabel.text = user?.email
-                self.performSegue(withIdentifier: "BuildingsVC", sender: nil)
+                self.performSegue(withIdentifier: "BuildingsVC", sender: self)
             }
             
             if (error != nil) {

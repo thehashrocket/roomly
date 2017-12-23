@@ -47,7 +47,7 @@ class NewUserVC: UIViewController {
             Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
                 
                 if (user != nil) {
-                    self.performSegue(withIdentifier: "BuildingsVC", sender: nil)
+                    self.performSegue(withIdentifier: "BuildingsVC", sender: self)
                 }
                 
                 if (error != nil) {

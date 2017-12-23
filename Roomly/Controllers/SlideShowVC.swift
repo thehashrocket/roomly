@@ -109,14 +109,6 @@ class SlideShowVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     func reloadCollectionView() {
         self.slideShowCollection.reloadData()
         
-        // Invalidating timer for safety reasons
-//        self.timer?.invalidate()
-        
-        // Below, for each 3.5 seconds MyViewController's 'autoScrollImageSlider' would be fired
-//        self.timer = Timer.scheduledTimer(timeInterval: 3.5, target: self, selector: #selector(SlideShowVC.autoScrollImageSlider), userInfo: nil, repeats: true)
-        
-        //This will register the timer to the main run loop
-//        RunLoop.main.add(self.timer!, forMode: .commonModes)
     }
 
     override func didReceiveMemoryWarning() {
