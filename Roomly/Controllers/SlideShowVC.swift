@@ -27,6 +27,8 @@ class SlideShowVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        self.datasource = []
+        self.slideShowCollection.reloadData()
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -107,7 +109,7 @@ class SlideShowVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     
     //After you've received data from server or you are ready with the datasource, call this method. Magic!
     func reloadCollectionView() {
-        self.slideShowCollection.reloadData()
+        
         
     }
 
@@ -118,9 +120,11 @@ class SlideShowVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     
     @objc func onNotification(notification:Notification)
     {
+        print("i am here")
         if ((notification.userInfo!["images"]) != nil) {
+            print("i am in the if")
             self.datasource = notification.userInfo!["images"] as? [UIImage]
-            self.reloadCollectionView()
+            self.slideShowCollection.reloadData()
         }
     }
 

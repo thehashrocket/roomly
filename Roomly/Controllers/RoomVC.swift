@@ -26,16 +26,15 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     fileprivate(set) var auth:Auth?
     fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
     
+    private(set) public var items = [Item]()
+    private(set) public var rooms = [Room]()
+    
     // Outlets
     @IBOutlet weak var roomsCollection: UICollectionView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var houseImage: UIImageView!
     @IBOutlet weak var houseDetails: UILabel!
-    @IBOutlet weak var slideShowView: UIView!
-    
-    
-    private(set) public var items = [Item]()
-    private(set) public var rooms = [Room]()
+    @IBOutlet weak var slideShowCollection: UICollectionView!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let itemVC = segue.destination as? ItemVC {
@@ -50,7 +49,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func viewWillAppear(_ animated: Bool) {
         
         handle = Auth.auth().addStateDidChangeListener() { auth, user in
-            
             if user != nil {
                 // User is signed in.
                 self.loadData()
@@ -66,6 +64,16 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        roomsCollection.dataSource = self
+        roomsCollection.delegate = self
+        
+        slideShowCollection.dataSource = self
+        slideShowCollection.delegate = self
+        
+        self.view.addSubview(roomsCollection)
+        self.view.addSubview(slideShowCollection)
+        
         loadData()
     }
     
@@ -75,10 +83,27 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return rooms.count
+        
+        if collectionView == self.slideShowCollection {
+            return self.slideShowImages.count // Replace with count of your data for collectionViewA
+        }
+        
+        return rooms.count // Replace with count of your data for collectionViewB
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if collectionView == self.slideShowCollection {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SlideShowCell", for: indexPath) as? SlideShowCell {
+                let image = self.slideShowImages[indexPath.row]
+                cell.updateView(image: image)
+                return cell
+            }
+            return SlideShowCell()
+        }
+        
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RoomCell", for: indexPath) as? RoomCell {
             let room = rooms[indexPath.row]
             cell.updateViews(room: room)
@@ -87,24 +112,29 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         return RoomCell()
     }
     
-    func collectionview(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var numOfColumns:CGFloat = 3
-        
-        if UIScreen.main.bounds.width > 320 {
-            numOfColumns = 4
-        }
-        
-        let spaceBetweenCells:CGFloat = 10
-        let padding:CGFloat = 40
-        let cellDimension = ((collectionView.bounds.width - padding) - (numOfColumns - 1) * spaceBetweenCells) / numOfColumns
-        
-        return CGSize(width: cellDimension, height: cellDimension)
-    }
+//    func collectionview(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
+//
+//        indexPath: IndexPath) -> CGSize {
+//        var numOfColumns:CGFloat = 3
+//
+//        if UIScreen.main.bounds.width > 320 {
+//            numOfColumns = 4
+//        }
+//
+//        let spaceBetweenCells:CGFloat = 10
+//        let padding:CGFloat = 40
+//        let cellDimension = ((collectionView.bounds.width - padding) - (numOfColumns - 1) * spaceBetweenCells) / numOfColumns
+//
+//        return CGSize(width: cellDimension, height: cellDimension)
+//    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let room = rooms[indexPath.row]
-        DataService.instance.setSelectedRoom(room: room)
-        performSegue(withIdentifier: "ItemVC", sender: room)
+        
+        if collectionView == self.roomsCollection {
+            let room = rooms[indexPath.row]
+            DataService.instance.setSelectedRoom(room: room)
+            performSegue(withIdentifier: "ItemVC", sender: room)
+        }
     }
     
     func getRoomItemValues(rooms: [Room], userID: String) {
@@ -192,9 +222,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func loadData() {
         self.ref = Database.database().reference()
-        roomsCollection.dataSource = self
-        roomsCollection.delegate = self
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+       self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
@@ -220,11 +248,8 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                             slideShowDictionary?.forEach({ (_,value) in
                                 CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
                                     self.slideShowImages.append(image)
+                                    self.slideShowCollection.reloadData()
                                 })
-                                count = count + 1
-                                if (count == total) {
-                                    NotificationCenter.default.post(name: SlideShowVC.notificationName, object: nil, userInfo:["images": self.slideShowImages])
-                                }
                             })
                             CloudData.instance.getBuildingById(userId: user_id, buildingId: building_id, completion: { (building) in
                                 self.title = building.buildingName as String

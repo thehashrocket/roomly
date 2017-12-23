@@ -31,35 +31,34 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     // Outlets
     @IBOutlet weak var itemsCollection: UICollectionView!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
-
+    @IBOutlet weak var slideShowCollection: UICollectionView!
     @IBOutlet weak var roomDetailsLabel: UILabel!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == self.slideShowCollection {
+            return self.slideShowImages.count
+        }
         return items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if collectionView == self.slideShowCollection {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SlideShowCell", for: indexPath) as? SlideShowCell {
+                let image = self.slideShowImages[indexPath.row]
+                cell.updateView(image: image)
+                return cell
+            }
+            return SlideShowCell()
+        }
+        
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemCell", for: indexPath) as? ItemCell {
             let item = items[indexPath.row]
             cell.updateViews(item: item)
             return cell
         }
         return ItemCell()
-    }
-    
-    func collectionview(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var numOfColumns:CGFloat = 3
         
-        if UIScreen.main.bounds.width > 320 {
-            numOfColumns = 4
-        }
-        
-        let spaceBetweenCells:CGFloat = 10
-        let padding:CGFloat = 40
-        let cellDimension = ((collectionView.bounds.width - padding) - (numOfColumns - 1) * spaceBetweenCells) / numOfColumns
-        
-        return CGSize(width: cellDimension, height: cellDimension)
     }
     
     override func didReceiveMemoryWarning() {
@@ -78,7 +77,13 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("in view did load")
+        itemsCollection.dataSource = self
+        itemsCollection.delegate = self
+        slideShowCollection.dataSource = self
+        slideShowCollection.delegate = self
+        
+        self.view.addSubview(itemsCollection)
+        self.view.addSubview(itemsCollection)
         loadData()
     }
     
@@ -99,9 +104,11 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = items[indexPath.row]
-        DataService.instance.setSelectedItem(item: item)
-        performSegue(withIdentifier: "ShowItemVC", sender: item)
+        if collectionView == self.itemsCollection {
+            let item = items[indexPath.row]
+            DataService.instance.setSelectedItem(item: item)
+            performSegue(withIdentifier: "ShowItemVC", sender: item)
+        }
     }
     
     func initItems(room: Room) {
@@ -110,8 +117,6 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func loadData() {
-        itemsCollection.dataSource = self
-        itemsCollection.delegate = self
         
         self.ref = Database.database().reference()
         
@@ -137,16 +142,12 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         self.slideShowImages.removeAll()
                         if ((slideShowDictionary) != nil) {
                             let total = slideShowDictionary?.count
-                            var count = 0
                             
                             slideShowDictionary?.forEach({ (_,value) in
                                 CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
                                     self.slideShowImages.append(image)
+                                    self.slideShowCollection.reloadData()
                                 })
-                                count = count + 1
-                                if (count == total) {
-                                    NotificationCenter.default.post(name: SlideShowVC.notificationName, object: nil, userInfo:["images": self.slideShowImages])
-                                }
                             })
                             
                             CloudData.instance.getRoomById(userId: userID, buildingId: building_id, roomId: room_id, completion: { (room) in
@@ -164,7 +165,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 itemsRef.keepSynced(true)
                 
                 itemsRef.observe(DataEventType.value, with: { (snapshot) in
-                    self.spinner.startAnimating()
+
                     let postDict = snapshot.value as? [String : AnyObject] ?? [:]
                     DataService.instance.resetItems()
                     
@@ -208,7 +209,6 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         self.itemsCollection.reloadData()
                         self.roomDetailsLabel.text = "There are \(self.total_items) item(s) totalling \(String(format: "$%.02f", self.total_item_value))"
                     })
-                    self.spinner.stopAnimating()
                 }, withCancel: { (error) in
                     print(error)
                 })

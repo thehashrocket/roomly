@@ -11,7 +11,21 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-class ShowItemVC: UIViewController {
+class ShowItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.slideShowImages.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SlideShowCell", for: indexPath) as? SlideShowCell {
+            let image = self.slideShowImages[indexPath.row]
+            cell.updateView(image: image)
+            return cell
+        }
+        return SlideShowCell()
+    }
+    
     
     // Variables
     var ref: DatabaseReference!
@@ -26,7 +40,8 @@ class ShowItemVC: UIViewController {
     @IBOutlet weak var itemDescriptionText: UILabel!
     @IBOutlet weak var PurchaseAmountText: UILabel!
     @IBOutlet weak var PurchaseDateText: UILabel!
-
+    @IBOutlet weak var slideShowCollection: UICollectionView!
+    
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     fileprivate(set) var auth:Auth?
@@ -46,6 +61,8 @@ class ShowItemVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        slideShowCollection.dataSource = self
+        slideShowCollection.delegate = self
         loadData()
     }
 
@@ -94,11 +111,8 @@ class ShowItemVC: UIViewController {
                             slideShowDictionary?.forEach({ (_,value) in
                                 CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
                                     self.slideShowImages.append(image)
+                                    self.slideShowCollection.reloadData()
                                 })
-                                count = count + 1
-                                if (count == total) {
-                                    NotificationCenter.default.post(name: SlideShowVC.notificationName, object: nil, userInfo:["images": self.slideShowImages])
-                                }
                             })
                             
                         } else {
