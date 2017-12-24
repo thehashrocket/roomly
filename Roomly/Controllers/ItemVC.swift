@@ -84,23 +84,21 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         self.view.addSubview(itemsCollection)
         self.view.addSubview(itemsCollection)
-        loadData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        handle = Auth.auth().addStateDidChangeListener() { auth, user in
-            if user != nil {
-                // User is signed in.
-                print("in view will appear")
-                self.loadData()
-//                self.itemsCollection.reloadData()
-            } else {
-                DataService.instance.resetBuildings()
-                self.itemsCollection.reloadData()
-                print("No user is signed in.")
-            }
+        self.slideShowImages = [UIImage]()
+        items = [Item]()
+        
+        if Auth.auth().currentUser != nil {
+            // User is signed in.
+            print("in view will appear")
+            self.loadData()
+            items = []
+            self.itemsCollection.reloadData()
+        } else {
+            DataService.instance.resetBuildings()
+            
+            self.itemsCollection.reloadData()
+            print("No user is signed in.")
         }
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -120,104 +118,96 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         self.ref = Database.database().reference()
         
-        Auth.auth().addStateDidChangeListener() { auth, user in
-            if user != nil {
-                // User is signed in.
+            // User is signed in.
+            
+            guard let userID = Auth.auth().currentUser?.uid else { return }
+            let roomRef = self.ref.child("rooms").child(userID).child(self.selected_building as String).child(self.selected_room as String)
+            roomRef.keepSynced(true)
+            
+            // Get the Room in the building so we can get the image of the room.
+            roomRef.observe(DataEventType.value, with: { (snapshot) in
                 
-                guard let userID = Auth.auth().currentUser?.uid else { return }
-                let roomRef = self.ref.child("rooms").child(userID).child(self.selected_building as String).child(self.selected_room as String)
-                roomRef.keepSynced(true)
-                
-                // Get the Room in the building so we can get the image of the room.
-                roomRef.observe(DataEventType.value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if ((value) != nil) {
+                    self.saved_room_image = (value?["imageName"] as? String)!
+                    let building_id = (value?["buildingId"] as? String)!
+                    let room_id = (value?["id"] as? String)!
+                    let destination = "/images/rooms/\(userID)/\(building_id)/\(room_id)/"
                     
-                    let value = snapshot.value as? NSDictionary
-                    if ((value) != nil) {
-                        self.saved_room_image = (value?["imageName"] as? String)!
-                        let building_id = (value?["buildingId"] as? String)!
-                        let room_id = (value?["id"] as? String)!
-                        let destination = "/images/rooms/\(userID)/\(building_id)/\(room_id)/"
+                    let slideShowDictionary = value?["images"] as? NSDictionary
+                    self.slideShowImages = [UIImage]()
+                    if ((slideShowDictionary) != nil) {
+                        let total = slideShowDictionary?.count
                         
-                        let slideShowDictionary = value?["images"] as? NSDictionary
-                        self.slideShowImages.removeAll()
-                        if ((slideShowDictionary) != nil) {
-                            let total = slideShowDictionary?.count
-                            
-                            slideShowDictionary?.forEach({ (_,value) in
-                                CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
-                                    self.slideShowImages.append(image)
-                                    self.slideShowCollection.reloadData()
-                                })
+                        slideShowDictionary?.forEach({ (_,value) in
+                            CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
+                                self.slideShowImages.append(image)
+                                self.slideShowCollection.reloadData()
                             })
-                            
-                            CloudData.instance.getRoomById(userId: userID, buildingId: building_id, roomId: room_id, completion: { (room) in
-                                self.title = room.roomName as String
-                            })
-                            
-                        } else {
-                            
-                        }
+                        })
+                        
+                        CloudData.instance.getRoomById(userId: userID, buildingId: building_id, roomId: room_id, completion: { (room) in
+                            self.title = room.roomName as String
+                        })
+                        
+                    } else {
+                        
+                    }
+                }
+                
+            })
+            
+            let itemsRef = self.ref.child("items").child(userID).child(self.selected_room as String)
+            itemsRef.keepSynced(true)
+            
+            itemsRef.observe(DataEventType.value, with: { (snapshot) in
+                
+                let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+                DataService.instance.resetItems()
+                
+                self.total_items = postDict.count
+                self.total_item_value = 0
+                if (postDict.count == 0) {
+                    self.roomDetailsLabel.text = "There are no items in this room."
+                }
+                postDict.forEach({ (arg) in
+                    let (_, value) = arg
+                    let dataChange = value as! [String: AnyObject]
+                    
+                    let images = NSDictionary()
+                    let id = dataChange["id"] as! String
+                    let itemName = dataChange["itemName"] as! String
+                    let itemDescription = dataChange["itemDescription"] as! String
+                    let imageName = dataChange["imageName"] as! String
+                    if ((dataChange["images"]) != nil) {
+                        let images = dataChange["images"] as? NSDictionary
                     }
                     
-                })
-                
-                let itemsRef = self.ref.child("items").child(userID).child(self.selected_room as String)
-                itemsRef.keepSynced(true)
-                
-                itemsRef.observe(DataEventType.value, with: { (snapshot) in
-
-                    let postDict = snapshot.value as? [String : AnyObject] ?? [:]
-                    DataService.instance.resetItems()
-                    
-                    self.total_items = postDict.count
-                    self.total_item_value = 0
-                    if (postDict.count == 0) {
-                        self.roomDetailsLabel.text = "There are no items in this room."
+                    let purchaseAmount = ""
+                    if let val = dataChange["purchaseAmount"] {
+                        let purchaseAmount = dataChange["purchaseAmount"] as! String
+                        if let purchaseDate = (dataChange["purchaseAmount"]as? NSString)?.doubleValue {
+                            self.total_item_value = self.total_item_value + purchaseDate
+                        }
                     }
-                    postDict.forEach({ (arg) in
-                        let (_, value) = arg
-                        let dataChange = value as! [String: AnyObject]
-                        
-                        let images = NSDictionary()
-                        let id = dataChange["id"] as! String
-                        let itemName = dataChange["itemName"] as! String
-                        let itemDescription = dataChange["itemDescription"] as! String
-                        let imageName = dataChange["imageName"] as! String
-                        if ((dataChange["images"]) != nil) {
-                            let images = dataChange["images"] as? NSDictionary
-                        }
-                        
-                        let purchaseAmount = ""
-                        if let val = dataChange["purchaseAmount"] {
-                            let purchaseAmount = dataChange["purchaseAmount"] as! String
-                            if let purchaseDate = (dataChange["purchaseAmount"]as? NSString)?.doubleValue {
-                                self.total_item_value = self.total_item_value + purchaseDate
-                            }
-                        }
-                        var purchaseDate = ""
-                        if let val = dataChange["purchaseDate"] {
-                            let purchaseDate = dataChange["purchaseDate"] as! String
-                        }
-                        let roomId = dataChange["roomId"] as! String
-                        let uid = dataChange["uid"] as! String
-                        
-                        let item = Item(id: id, itemName: itemName, itemDescription: itemDescription, imageName: imageName, images: images, purchaseAmount: purchaseAmount, purchaseDate: purchaseDate, roomId: roomId, uid: uid)
-                        
-                        DataService.instance.setItem(item: item)
-                        
-                        self.items = DataService.instance.getItemsForRoom(forRoomId: self.selected_room)
-                        self.itemsCollection.reloadData()
-                        self.roomDetailsLabel.text = "There are \(self.total_items) item(s) totalling \(String(format: "$%.02f", self.total_item_value))"
-                    })
-                }, withCancel: { (error) in
-                    print(error)
+                    var purchaseDate = ""
+                    if let val = dataChange["purchaseDate"] {
+                        let purchaseDate = dataChange["purchaseDate"] as! String
+                    }
+                    let roomId = dataChange["roomId"] as! String
+                    let uid = dataChange["uid"] as! String
+                    
+                    let item = Item(id: id, itemName: itemName, itemDescription: itemDescription, imageName: imageName, images: images, purchaseAmount: purchaseAmount, purchaseDate: purchaseDate, roomId: roomId, uid: uid)
+                    
+                    DataService.instance.setItem(item: item)
+                    
+                    self.items = DataService.instance.getItemsForRoom(forRoomId: self.selected_room)
+                    self.itemsCollection.reloadData()
+                    self.roomDetailsLabel.text = "There are \(self.total_items) item(s) totalling \(String(format: "$%.02f", self.total_item_value))"
                 })
-                
-            } else {
-                // TODO: Segue to WelcomeVC here.
-                print("No user is signed in.")
-            }
-        }
+            }, withCancel: { (error) in
+                print(error)
+            })
     }
     
     // Actions

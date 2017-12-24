@@ -31,7 +31,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     // Outlets
     @IBOutlet weak var roomsCollection: UICollectionView!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var houseImage: UIImageView!
     @IBOutlet weak var houseDetails: UILabel!
     @IBOutlet weak var slideShowCollection: UICollectionView!
@@ -48,18 +47,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func viewWillAppear(_ animated: Bool) {
         
-        handle = Auth.auth().addStateDidChangeListener() { auth, user in
-            if user != nil {
-                // User is signed in.
-                self.loadData()
-//                self.roomsCollection.reloadData()
-            } else {
-                DataService.instance.resetBuildings()
-                DataService.instance.resetRooms()
-                self.roomsCollection.reloadData()
-                print("No user is signed in.")
-            }
-        }
+        
     }
     
     override func viewDidLoad() {
@@ -74,7 +62,15 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         self.view.addSubview(roomsCollection)
         self.view.addSubview(slideShowCollection)
         
-        loadData()
+        if Auth.auth().currentUser != nil {
+            // User is signed in.
+            self.loadData()
+        } else {
+            DataService.instance.resetBuildings()
+            DataService.instance.resetRooms()
+            self.roomsCollection.reloadData()
+            print("No user is signed in.")
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,14 +79,10 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         if collectionView == self.slideShowCollection {
             return self.slideShowImages.count // Replace with count of your data for collectionViewA
         }
-        
         return rooms.count // Replace with count of your data for collectionViewB
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -142,7 +134,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         var single_item_value = Double()
         rooms.forEach { (room) in
             self.ref.child("items").child(userID).child(room.id as String).observe(DataEventType.value, with: { (snapshot) in
-//                self.spinner.startAnimating()
                 let postDict = snapshot.value as? [String : AnyObject] ?? [:]
                 DataService.instance.resetItems()
                 
@@ -174,8 +165,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         self.ref = Database.database().reference()
         self.ref.keepSynced(true)
         guard let userID = Auth.auth().currentUser?.uid else { return }
-        self.ref.child("rooms").child(userID).child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
-            self.spinner.startAnimating()
+        self.ref.child("rooms").child(userID).child(self.selected_building as String).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             let postDict = snapshot.value as? [String : AnyObject] ?? [:]
             DataService.instance.resetRooms()
             
@@ -189,7 +179,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 if ((dataChange["images"]) != nil) {
                     images = dataChange["images"] as! NSDictionary
                 } else {
-
+                    
                 }
                 
                 let roomName = dataChange["roomName"] as! String
@@ -202,17 +192,15 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.rooms = DataService.instance.getRoomsForBuilding(forBuildingId: self.selected_building)
                 self.getRoomItemValues(rooms: self.rooms, userID: userID)
                 self.roomsCollection.reloadData()
-                self.spinner.stopAnimating()
             })
             
             if (self.rooms.count == 0) {
                 self.houseDetails.text = "There are no rooms or items."
             }
-            
-        }, withCancel: { (error) in
+        }) { (error) in
             print("getRooms: ")
             print(error)
-        })
+        }
     }
     
     func initRooms(building: Building) {
@@ -222,50 +210,51 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func loadData() {
         self.ref = Database.database().reference()
-       self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let buildingRef = self.ref.child("buildings").child(userID)
+        buildingRef.keepSynced(true)
         
-        Auth.auth().addStateDidChangeListener() { auth, user in
-            if user != nil {
-                guard let userID = Auth.auth().currentUser?.uid else { return }
-                let buildingRef = self.ref.child("buildings").child(userID)
-                buildingRef.keepSynced(true)
+        buildingRef.child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
+            
+            let value = snapshot.value as? NSDictionary
+            
+            if ((value) != nil) {
+                let building_id = value?["id"] as! String
+                let saved_image = value?["imageName"] as! String
+                let user_id = userID as! String
+                let destination = "/images/buildings/\(userID)/\(building_id)/"
+                let slideShowDictionary = value?["images"] as? NSDictionary
                 
-                buildingRef.child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
-                    
-                    let value = snapshot.value as? NSDictionary
-                    
-                    if ((value) != nil) {
-                        let building_id = value?["id"] as! String
-                        let saved_image = value?["imageName"] as! String
-                        let user_id = userID as! String
-                        let destination = "/images/buildings/\(userID)/\(building_id)/"
-                        let slideShowDictionary = value?["images"] as? NSDictionary
-                        self.slideShowImages.removeAll()
-                        if ((slideShowDictionary) != nil) {
-                            let total = slideShowDictionary?.count
-                            var count = 0
-                            
-                            slideShowDictionary?.forEach({ (_,value) in
+                if ((slideShowDictionary) != nil) {
+                    self.slideShowImages = [UIImage]()
+                    self.slideShowCollection.reloadData()
+                    var last_value = ""
+                    slideShowDictionary?.forEach({ (_,value) in
+                        print("are they different? \(last_value != (value as! String))")
+                            if (last_value != value as! String) {
+                                print("count: \(self.slideShowImages.count)")
+                                print("last_value \(last_value)")
+                                print("value \(value)")
+                                last_value = value as! String
                                 CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
                                     self.slideShowImages.append(image)
                                     self.slideShowCollection.reloadData()
                                 })
-                            })
-                            CloudData.instance.getBuildingById(userId: user_id, buildingId: building_id, completion: { (building) in
-                                self.title = building.buildingName as String
-                                self.roomsCollection.reloadData()
-                            })
-                        }
-                    }
-                })
-                
-                // User is signed in.
-                self.getRooms()
-            } else {
-                // TODO: Segue to WelcomeVC here.
-                print("No user is signed in.")
+                                
+                            }
+                    })
+                    
+                    CloudData.instance.getBuildingById(userId: user_id, buildingId: building_id, completion: { (building) in
+                        self.title = building.buildingName as String
+                        self.roomsCollection.reloadData()
+                    })
+                }
             }
-        }
+        })
+        
+        // User is signed in.
+        self.getRooms()
     }
     
     // Actions

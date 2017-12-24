@@ -101,7 +101,7 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
         var room_id = selected_room
         
         // I am checking to see if a new room is being chosen. If the new_room doesn't match selected_room then I know that they are moving items
-        if ((self.new_room !== "" as NSString) && (self.new_room !== self.selected_room as NSString)) {
+        if ((self.new_room as String != self.selected_room as String)) {
             // they are moving rooms
             
             let new_destination = "/items/\(userID)/\(self.new_room)/\(key)"
@@ -133,7 +133,12 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
             if (error != nil) {
                 print("update of item failed")
             } else {
-                if ((self.new_room !== "" as NSString) && (self.new_room !== self.selected_room as NSString)) {
+                // We are changing rooms
+                print("do they match: ")
+                print("new room \(self.new_room)")
+                print("old room \(self.selected_room)")
+                print(self.new_room as String != self.selected_room as String)
+                if ((self.new_room as String != self.selected_room as String)) {
                     CloudStorage.instance.moveImage(origin: origin, destination: destination, new_room: self.new_room as String, user_id: userID, item_id: key)
                     
                     let originRef = self.ref.child(origin)
@@ -148,22 +153,27 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
                         CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "items", second_key: item.roomId! as String)
                     }
                     
-                } else {
+                } else { // We are not changing rooms.
                     self.images.forEach { (image) in
                         CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "items", second_key: item.roomId! as String)
                     }
                 }
                 
                 CloudData.instance.getBuildingById(userId: userID, buildingId: self.selected_building as String, completion: { (building) in
-                    print(building)
+
                     DataService.instance.setSelectedBuilding(building: building)
                     CloudData.instance.getRoomById(userId: userID, buildingId: self.selected_building as String, roomId: self.selected_room as String, completion: { (room) in
-                        print(room)
                         DataService.instance.setSelectedRoom(room: room)
                         DataService.instance.updateItem(new_item: item)
                         DataService.instance.setSelectedItem(item: item)
                         
-                        self.performSegue(withIdentifier: "unwindToShowItemVC", sender: self)
+                        if ((self.new_room as String != self.selected_room as String)) {
+                            self.performSegue(withIdentifier: "unwindToItemsVC", sender: self)
+
+                        } else {
+                            self.performSegue(withIdentifier: "unwindToShowItemVC", sender: self)
+
+                        }
                     })
                 })
                 

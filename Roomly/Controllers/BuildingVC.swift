@@ -21,18 +21,15 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         
-        handle = Auth.auth().addStateDidChangeListener() { auth, user in
-            
-            if let user = user {
-                // User is signed in.
-                self.loginBtn.title = "Logout"
-                self.buildingTable.reloadData()
-            } else {
-                DataService.instance.resetBuildings()
-                self.buildingTable.reloadData()
-                self.loginBtn.title = "Login"
-                print("No user is signed in.")
-            }
+        if Auth.auth().currentUser != nil {
+            // User is signed in.
+            self.loginBtn.title = "Logout"
+            self.buildingTable.reloadData()
+        } else {
+            DataService.instance.resetBuildings()
+            self.buildingTable.reloadData()
+            self.loginBtn.title = "Login"
+            print("No user is signed in.")
         }
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -101,7 +98,7 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // [START remove_auth_listener]
-        Auth.auth().removeStateDidChangeListener(handle!)
+//        Auth.auth().removeStateDidChangeListener(handle!)
         // [END remove_auth_listener]
     }
     

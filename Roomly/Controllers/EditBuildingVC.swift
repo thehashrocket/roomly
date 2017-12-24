@@ -181,7 +181,10 @@ class EditBuildingVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegat
                     self.stateTxt.text = value?["state"] as! String
                     self.zipTxt.text = value?["zip"] as! String
                     self.saved_image = value?["imageName"] as! String
-                    self.imageDictionary = (value?["images"] as? NSDictionary)!
+                    if ((value?["images"]) != nil) {
+                        self.imageDictionary = (value?["images"] as? NSDictionary)!
+                    }
+                    
                     
                     let building_id = value?["id"] as! String
                     let user_id = userID as! String

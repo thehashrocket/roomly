@@ -55,10 +55,6 @@ class ShowItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     override func viewDidAppear(_ animated: Bool) {
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(SlideShowVC.notificationName)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         slideShowCollection.dataSource = self
@@ -69,8 +65,8 @@ class ShowItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     func loadData() {
         self.ref = Database.database().reference()
         self.ref.keepSynced(true)
-        Auth.auth().addStateDidChangeListener() { auth, user in
-            if user != nil {
+
+            if Auth.auth().currentUser != nil {
                 // User is signed in.
                 let userID = Auth.auth().currentUser?.uid
                 let item = DataService.instance.getSelectedItem() as String
@@ -89,7 +85,7 @@ class ShowItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                         self.itemDescriptionText.text = value?["itemDescription"] as? String
                         //                        self.PurchaseAmountText.text = "\(String(format: "$%.02f", value?["purchaseAmount"] as! CVarArg))"
                         var formatted_string = Double()
-                        formatted_string = (value?["purchaseAmount"] as! NSString).doubleValue
+                        formatted_string = ((value?["purchaseAmount"] as? NSString)?.doubleValue)!
                         self.PurchaseAmountText.text = (String(format: "$%.02f", formatted_string))
                         self.PurchaseDateText.text = value?["purchaseDate"] as? String
                         if ((value?["imageName"]) != nil) {
@@ -131,7 +127,7 @@ class ShowItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 // TODO: Segue to WelcomeVC here.
                 print("No user is signed in.")
             }
-        }
+
     }
     
     // Actions
