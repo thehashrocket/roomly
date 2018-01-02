@@ -212,7 +212,7 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     // Actions
     @IBAction func unwindToItemsVC(segue:UIStoryboardSegue) {
-        loadData()
+
     }
     
     @IBAction func addItemPressed(_ sender: Any) {

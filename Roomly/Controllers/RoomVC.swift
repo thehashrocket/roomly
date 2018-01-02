@@ -260,7 +260,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     // Actions
     
     @IBAction func unwindToRoomsVC(segue:UIStoryboardSegue) {
-        loadData()
+
     }
 
     
