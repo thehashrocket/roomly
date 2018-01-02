@@ -229,20 +229,11 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 if ((slideShowDictionary) != nil) {
                     self.slideShowImages = [UIImage]()
                     self.slideShowCollection.reloadData()
-                    var last_value = ""
                     slideShowDictionary?.forEach({ (_,value) in
-                        print("are they different? \(last_value != (value as! String))")
-                            if (last_value != value as! String) {
-                                print("count: \(self.slideShowImages.count)")
-                                print("last_value \(last_value)")
-                                print("value \(value)")
-                                last_value = value as! String
-                                CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
-                                    self.slideShowImages.append(image)
-                                    self.slideShowCollection.reloadData()
-                                })
-                                
-                            }
+                        CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
+                            self.slideShowImages.append(image)
+                            self.slideShowCollection.reloadData()
+                        })
                     })
                     
                     CloudData.instance.getBuildingById(userId: user_id, buildingId: building_id, completion: { (building) in

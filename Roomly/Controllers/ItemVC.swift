@@ -89,7 +89,6 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         if Auth.auth().currentUser != nil {
             // User is signed in.
-            print("in view will appear")
             self.loadData()
             items = []
             self.itemsCollection.reloadData()

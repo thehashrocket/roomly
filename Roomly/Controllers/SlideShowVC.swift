@@ -120,9 +120,7 @@ class SlideShowVC: UIViewController, UICollectionViewDelegate, UICollectionViewD
     
     @objc func onNotification(notification:Notification)
     {
-        print("i am here")
         if ((notification.userInfo!["images"]) != nil) {
-            print("i am in the if")
             self.datasource = notification.userInfo!["images"] as? [UIImage]
             self.slideShowCollection.reloadData()
         }

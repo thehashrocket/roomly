@@ -28,6 +28,8 @@
 		DE17CEED1F85C98900CA83A9 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE17CEEC1F85C98900CA83A9 /* DataService.swift */; };
 		DE17CEF01F85CB2300CA83A9 /* BuildingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE17CEEF1F85CB2300CA83A9 /* BuildingCell.swift */; };
 		DE35F2351FC6809F0025ADAC /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE35F2341FC6809F0025ADAC /* UserDataService.swift */; };
+		DE3A62DC1FFC2CDA00AFF62D /* RoomlyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3A62DB1FFC2CDA00AFF62D /* RoomlyUITests.swift */; };
+		DE3A62E41FFC2DB400AFF62D /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3A62E31FFC2DB400AFF62D /* SnapshotHelper.swift */; };
 		DE6D28711FCF89AD00545237 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6D28701FCF89AD00545237 /* ViewControllerExtension.swift */; };
 		DE6D86F31FCD0B880068F7D7 /* UITabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6D86F21FCD0B880068F7D7 /* UITabBarVC.swift */; };
 		DE6D86F51FCD0CDD0068F7D7 /* ExistingUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6D86F41FCD0CDD0068F7D7 /* ExistingUserVC.swift */; };
@@ -46,6 +48,16 @@
 		DECA78C51FD27DAC000BE029 /* CloudData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA78C41FD27DAC000BE029 /* CloudData.swift */; };
 		DEF087731FE590C400988F67 /* SlideShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF087721FE590C400988F67 /* SlideShowCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DE3A62DE1FFC2CDA00AFF62D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE17CEC31F85BA7200CA83A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE17CECA1F85BA7200CA83A9;
+			remoteInfo = Roomly;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5395318FED6D1547B8F91888 /* Pods-Roomly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Roomly.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Roomly/Pods-Roomly.debug.xcconfig"; sourceTree = "<group>"; };
@@ -73,6 +85,10 @@
 		DE17CEEC1F85C98900CA83A9 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		DE17CEEF1F85CB2300CA83A9 /* BuildingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCell.swift; sourceTree = "<group>"; };
 		DE35F2341FC6809F0025ADAC /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
+		DE3A62D91FFC2CDA00AFF62D /* RoomlyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoomlyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE3A62DB1FFC2CDA00AFF62D /* RoomlyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomlyUITests.swift; sourceTree = "<group>"; };
+		DE3A62DD1FFC2CDA00AFF62D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE3A62E31FFC2DB400AFF62D /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		DE6D28701FCF89AD00545237 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		DE6D86F21FCD0B880068F7D7 /* UITabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarVC.swift; sourceTree = "<group>"; };
 		DE6D86F41FCD0CDD0068F7D7 /* ExistingUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistingUserVC.swift; sourceTree = "<group>"; };
@@ -102,6 +118,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DE3A62D61FFC2CDA00AFF62D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -127,6 +150,7 @@
 			children = (
 				DE0A25771FB6ACDE005CC671 /* GoogleService-Info.plist */,
 				DE17CECD1F85BA7200CA83A9 /* Roomly */,
+				DE3A62DA1FFC2CDA00AFF62D /* RoomlyUITests */,
 				DE17CECC1F85BA7200CA83A9 /* Products */,
 				382EC4325AC5A88A080CF0E0 /* Pods */,
 				1C6DBD94568C3F80442FF617 /* Frameworks */,
@@ -137,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				DE17CECB1F85BA7200CA83A9 /* Roomly.app */,
+				DE3A62D91FFC2CDA00AFF62D /* RoomlyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -217,6 +242,16 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		DE3A62DA1FFC2CDA00AFF62D /* RoomlyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DE3A62DB1FFC2CDA00AFF62D /* RoomlyUITests.swift */,
+				DE3A62E31FFC2DB400AFF62D /* SnapshotHelper.swift */,
+				DE3A62DD1FFC2CDA00AFF62D /* Info.plist */,
+			);
+			path = RoomlyUITests;
+			sourceTree = "<group>";
+		};
 		DE8B0CF41FC72A5000AF32BA /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,13 +292,31 @@
 			productReference = DE17CECB1F85BA7200CA83A9 /* Roomly.app */;
 			productType = "com.apple.product-type.application";
 		};
+		DE3A62D81FFC2CDA00AFF62D /* RoomlyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE3A62E21FFC2CDA00AFF62D /* Build configuration list for PBXNativeTarget "RoomlyUITests" */;
+			buildPhases = (
+				DE3A62D51FFC2CDA00AFF62D /* Sources */,
+				DE3A62D61FFC2CDA00AFF62D /* Frameworks */,
+				DE3A62D71FFC2CDA00AFF62D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE3A62DF1FFC2CDA00AFF62D /* PBXTargetDependency */,
+			);
+			name = RoomlyUITests;
+			productName = RoomlyUITests;
+			productReference = DE3A62D91FFC2CDA00AFF62D /* RoomlyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		DE17CEC31F85BA7200CA83A9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Chaos Elevators, Inc.";
 				TargetAttributes = {
@@ -275,6 +328,11 @@
 								enabled = 1;
 							};
 						};
+					};
+					DE3A62D81FFC2CDA00AFF62D = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = DE17CECA1F85BA7200CA83A9;
 					};
 				};
 			};
@@ -292,6 +350,7 @@
 			projectRoot = "";
 			targets = (
 				DE17CECA1F85BA7200CA83A9 /* Roomly */,
+				DE3A62D81FFC2CDA00AFF62D /* RoomlyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -305,6 +364,13 @@
 				DE0A25781FB6ACDE005CC671 /* GoogleService-Info.plist in Resources */,
 				DE17CED91F85BA7200CA83A9 /* Assets.xcassets in Resources */,
 				DE17CED41F85BA7200CA83A9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE3A62D71FFC2CDA00AFF62D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,7 +465,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DE3A62D51FFC2CDA00AFF62D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE3A62DC1FFC2CDA00AFF62D /* RoomlyUITests.swift in Sources */,
+				DE3A62E41FFC2DB400AFF62D /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DE3A62DF1FFC2CDA00AFF62D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE17CECA1F85BA7200CA83A9 /* Roomly */;
+			targetProxy = DE3A62DE1FFC2CDA00AFF62D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		DE17CED21F85BA7200CA83A9 /* Main.storyboard */ = {
@@ -567,6 +650,38 @@
 			};
 			name = Release;
 		};
+		DE3A62E01FFC2CDA00AFF62D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7QKXT44X7G;
+				INFOPLIST_FILE = RoomlyUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaoselevators.RoomlyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Roomly;
+			};
+			name = Debug;
+		};
+		DE3A62E11FFC2CDA00AFF62D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7QKXT44X7G;
+				INFOPLIST_FILE = RoomlyUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaoselevators.RoomlyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Roomly;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -584,6 +699,15 @@
 			buildConfigurations = (
 				DE17CEE11F85BA7200CA83A9 /* Debug */,
 				DE17CEE21F85BA7200CA83A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE3A62E21FFC2CDA00AFF62D /* Build configuration list for PBXNativeTarget "RoomlyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE3A62E01FFC2CDA00AFF62D /* Debug */,
+				DE3A62E11FFC2CDA00AFF62D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
