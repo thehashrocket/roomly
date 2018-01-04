@@ -83,7 +83,6 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         slideShowCollection.delegate = self
         
         self.view.addSubview(itemsCollection)
-        self.view.addSubview(itemsCollection)
         self.slideShowImages = [UIImage]()
         items = [Item]()
         

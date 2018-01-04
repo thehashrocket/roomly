@@ -165,7 +165,8 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         self.ref = Database.database().reference()
         self.ref.keepSynced(true)
         guard let userID = Auth.auth().currentUser?.uid else { return }
-        self.ref.child("rooms").child(userID).child(self.selected_building as String).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+        
+        self.ref.child("rooms").child(userID).child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
             let postDict = snapshot.value as? [String : AnyObject] ?? [:]
             DataService.instance.resetRooms()
             
@@ -201,6 +202,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             print("getRooms: ")
             print(error)
         }
+        
     }
     
     func initRooms(building: Building) {

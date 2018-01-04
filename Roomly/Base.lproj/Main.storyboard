@@ -12,7 +12,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue-Bold</string>
+            <string>HelveticaNeue</string>
         </array>
     </customFonts>
     <scenes>
@@ -128,7 +128,7 @@
             <objects>
                 <viewController id="Gi5-Yw-KRF" customClass="NewUserVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wRr-3N-ZYn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create A New Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekp-EY-t9g">
@@ -564,40 +564,42 @@
                                 <rect key="frame" x="10" y="250" width="355" height="353"/>
                                 <color key="backgroundColor" red="0.0" green="0.58824040030000002" blue="0.87071397569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="4Jm-kI-FrJ">
-                                    <size key="itemSize" width="125" height="125"/>
+                                    <size key="itemSize" width="105" height="145"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RoomCell" id="Wct-f8-tgI" customClass="RoomCell" customModule="Roomly" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="105" height="145"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="105" height="145"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="livingroom1" translatesAutoresizingMaskIntoConstraints="NO" id="4xe-nF-tUX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="105" id="UR2-s2-uAH"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YwZ-74-GzB">
-                                                    <rect key="frame" x="7" y="83" width="110" height="42"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YwZ-74-GzB">
+                                                    <rect key="frame" x="7" y="103" width="67" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="42" id="BnG-in-dQN"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="highlightedColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </label>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="4xe-nF-tUX" firstAttribute="leading" secondItem="Wct-f8-tgI" secondAttribute="leading" id="Au7-XX-32o"/>
-                                            <constraint firstAttribute="trailing" secondItem="YwZ-74-GzB" secondAttribute="trailing" constant="8" id="JWV-Oa-skK"/>
+                                            <constraint firstAttribute="bottom" secondItem="YwZ-74-GzB" secondAttribute="bottom" id="IcE-Mm-8st"/>
+                                            <constraint firstItem="YwZ-74-GzB" firstAttribute="leading" secondItem="Wct-f8-tgI" secondAttribute="leading" constant="7" id="Nsi-Zh-aXn"/>
                                             <constraint firstAttribute="bottom" secondItem="YwZ-74-GzB" secondAttribute="bottom" id="d3b-IF-keR"/>
                                             <constraint firstItem="YwZ-74-GzB" firstAttribute="leading" secondItem="Wct-f8-tgI" secondAttribute="leading" constant="7" id="ivF-7s-ZoD"/>
-                                            <constraint firstAttribute="bottom" secondItem="4xe-nF-tUX" secondAttribute="bottom" id="iyR-kd-AHK"/>
                                             <constraint firstItem="4xe-nF-tUX" firstAttribute="top" secondItem="Wct-f8-tgI" secondAttribute="top" id="nS8-9D-iso"/>
                                             <constraint firstAttribute="trailing" secondItem="4xe-nF-tUX" secondAttribute="trailing" id="uyu-qA-uFu"/>
                                         </constraints>
@@ -715,49 +717,51 @@
             <objects>
                 <viewController title="Items" id="6hm-XM-mCi" customClass="ItemVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xdo-HU-h2U">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eJP-CD-6cS">
                                 <rect key="frame" x="8" y="265" width="375" height="330"/>
                                 <color key="backgroundColor" red="0.0" green="0.58824040030000002" blue="0.87071397569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="tSB-O6-02o">
-                                    <size key="itemSize" width="125" height="125"/>
+                                    <size key="itemSize" width="105" height="145"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ItemCell" id="VRC-wQ-eKp" customClass="ItemCell" customModule="Roomly" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="105" height="145"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="105" height="145"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lamp" translatesAutoresizingMaskIntoConstraints="NO" id="T3h-t6-AxN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="105" id="kkj-Gh-Hdl"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lf9-Ha-5BX">
-                                                    <rect key="frame" x="7" y="83" width="110" height="42"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lf9-Ha-5BX">
+                                                    <rect key="frame" x="7" y="103" width="67" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="42" id="xGk-B2-TCZ"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </label>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="Lf9-Ha-5BX" secondAttribute="trailing" constant="8" id="Btf-2f-bnh"/>
                                             <constraint firstItem="T3h-t6-AxN" firstAttribute="leading" secondItem="VRC-wQ-eKp" secondAttribute="leading" id="KGz-cZ-6X2"/>
                                             <constraint firstAttribute="bottom" secondItem="Lf9-Ha-5BX" secondAttribute="bottom" id="MBK-uK-5u8"/>
                                             <constraint firstItem="Lf9-Ha-5BX" firstAttribute="leading" secondItem="VRC-wQ-eKp" secondAttribute="leading" constant="7" id="U1J-df-C7I"/>
                                             <constraint firstItem="T3h-t6-AxN" firstAttribute="top" secondItem="VRC-wQ-eKp" secondAttribute="top" id="V8c-hJ-mhu"/>
-                                            <constraint firstAttribute="bottom" secondItem="T3h-t6-AxN" secondAttribute="bottom" id="XQX-i3-Ioo"/>
+                                            <constraint firstAttribute="bottom" secondItem="Lf9-Ha-5BX" secondAttribute="bottom" id="cPl-XD-AB2"/>
                                             <constraint firstAttribute="trailing" secondItem="T3h-t6-AxN" secondAttribute="trailing" id="cbt-kr-sMo"/>
+                                            <constraint firstItem="Lf9-Ha-5BX" firstAttribute="leading" secondItem="VRC-wQ-eKp" secondAttribute="leading" constant="7" id="qet-Wz-llB"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="itemImage" destination="T3h-t6-AxN" id="bYy-Bs-dDQ"/>
@@ -863,7 +867,7 @@
             <objects>
                 <viewController id="T9X-IR-T23" userLabel="Show Item" customClass="ShowItemVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YNY-Kf-hOl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lLv-YA-JRp">
@@ -872,7 +876,7 @@
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4c1-17-XXt">
-                                <rect key="frame" x="8" y="270" width="136" height="97"/>
+                                <rect key="frame" x="8" y="250" width="136" height="97"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmi-7A-j1E">
                                         <rect key="frame" x="0.0" y="0.0" width="83" height="20.5"/>
@@ -901,7 +905,7 @@
                                 </subviews>
                             </stackView>
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cd8-5V-Isw">
-                                <rect key="frame" x="0.0" y="200" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="180" width="375" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ITEM DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZ1-hR-w2r">
                                         <rect key="frame" x="8" y="10" width="109" height="21"/>
@@ -917,7 +921,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zLp-1T-xts">
-                                <rect key="frame" x="0.0" y="20" width="375" height="220"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                 <color key="backgroundColor" red="0.0" green="0.58824040030000002" blue="0.87071397569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="220" id="2lW-IJ-NFV"/>
@@ -1546,8 +1550,9 @@
         <image name="new_account" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LYX-VL-rDC"/>
-        <segue reference="l1k-rZ-c0S"/>
+        <segue reference="aPP-e4-YO4"/>
+        <segue reference="dz3-Td-iw0"/>
+        <segue reference="gXI-Dz-Dfl"/>
         <segue reference="ESQ-V7-k59"/>
         <segue reference="Ohr-mU-aZy"/>
     </inferredMetricsTieBreakers>

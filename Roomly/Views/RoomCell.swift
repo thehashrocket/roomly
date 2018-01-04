@@ -20,6 +20,10 @@ class RoomCell: UICollectionViewCell {
         let building_id = room.buildingId as String
         roomNameTxt.text = room.roomName as String?
         
+        roomImage.clipsToBounds = true
+        roomImage.layer.borderWidth = 2
+        roomImage.layer.borderColor = UIColor.white.cgColor
+        
         let destination = "rooms/\(user_id)/\(building_id)/\(room_id)/"
         
         CloudData.instance.getImages(destination: destination) { (fire_images) in

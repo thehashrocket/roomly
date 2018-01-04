@@ -21,6 +21,11 @@ class ItemCell: UICollectionViewCell {
             let item_id = item.id! as String
             itemNameTxt.text = item.itemName as String?
             
+//            itemImage.layer.cornerRadius = itemImage.frame.size.width / 2
+            itemImage.clipsToBounds = true
+            itemImage.layer.borderWidth = 2
+            itemImage.layer.borderColor = UIColor.white.cgColor
+            
             let destination = "items/\(user_id)/\(room_id)/\(item_id)/"
             
             CloudData.instance.getImages(destination: destination) { (fire_images) in
