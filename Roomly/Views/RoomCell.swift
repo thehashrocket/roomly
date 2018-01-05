@@ -20,6 +20,7 @@ class RoomCell: UICollectionViewCell {
         let building_id = room.buildingId as String
         roomNameTxt.text = room.roomName as String?
         
+        roomImage.layer.cornerRadius = 5
         roomImage.clipsToBounds = true
         roomImage.layer.borderWidth = 2
         roomImage.layer.borderColor = UIColor.white.cgColor

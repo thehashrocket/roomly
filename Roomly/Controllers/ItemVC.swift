@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     // Variables
     var ref: DatabaseReference!
@@ -59,6 +59,14 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         }
         return ItemCell()
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == self.slideShowCollection {
+            return CGSize(width: self.slideShowCollection.frame.width, height: self.slideShowCollection.frame.height)
+        }
+        
+        return CGSize(width: self.itemsCollection.frame.width * 0.3, height: self.itemsCollection.frame.width * 0.3)
     }
     
     override func didReceiveMemoryWarning() {

@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     // Variables
     var handle: AuthStateDidChangeListenerHandle?
@@ -104,21 +104,13 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         return RoomCell()
     }
     
-//    func collectionview(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
-//
-//        indexPath: IndexPath) -> CGSize {
-//        var numOfColumns:CGFloat = 3
-//
-//        if UIScreen.main.bounds.width > 320 {
-//            numOfColumns = 4
-//        }
-//
-//        let spaceBetweenCells:CGFloat = 10
-//        let padding:CGFloat = 40
-//        let cellDimension = ((collectionView.bounds.width - padding) - (numOfColumns - 1) * spaceBetweenCells) / numOfColumns
-//
-//        return CGSize(width: cellDimension, height: cellDimension)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == self.slideShowCollection {
+            return CGSize(width: self.slideShowCollection.frame.width, height: self.slideShowCollection.frame.height)
+        }
+        
+        return CGSize(width: self.roomsCollection.frame.width * 0.3, height: self.roomsCollection.frame.width * 0.3)
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         

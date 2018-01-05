@@ -21,7 +21,7 @@ class ItemCell: UICollectionViewCell {
             let item_id = item.id! as String
             itemNameTxt.text = item.itemName as String?
             
-//            itemImage.layer.cornerRadius = itemImage.frame.size.width / 2
+            itemImage.layer.cornerRadius = 5
             itemImage.clipsToBounds = true
             itemImage.layer.borderWidth = 2
             itemImage.layer.borderColor = UIColor.white.cgColor
