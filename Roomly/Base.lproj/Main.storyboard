@@ -271,7 +271,7 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r1k-gi-cH2" customClass="RoundedButton" customModule="Roomly" customModuleProvider="target">
                                 <rect key="frame" x="315" y="623" width="50" height="34"/>
-                                <color key="backgroundColor" red="0.2901960784" green="0.30196078430000001" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="u5V-lg-b1F"/>
                                 </constraints>
@@ -358,7 +358,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NcL-d7-Kb1" customClass="RoundedButton" customModule="Roomly" customModuleProvider="target">
                                 <rect key="frame" x="310" y="623" width="55" height="34"/>
-                                <color key="backgroundColor" red="0.2901960784" green="0.30196078430000001" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="55" id="9ns-sg-dGj"/>
                                 </constraints>
@@ -510,7 +510,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQd-uy-bTc" customClass="RoundedButton" customModule="Roomly" customModuleProvider="target">
                                 <rect key="frame" x="100" y="231" width="55" height="30"/>
-                                <color key="backgroundColor" red="0.2901960784" green="0.30196078430000001" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="55" id="RjO-Q7-f3B"/>
                                 </constraints>
@@ -1114,7 +1114,7 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diO-ZP-lCl" customClass="RoundedButton" customModule="Roomly" customModuleProvider="target">
                                 <rect key="frame" x="310" y="623" width="55" height="34"/>
-                                <color key="backgroundColor" red="0.2901960784" green="0.30196078430000001" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="55" id="Aha-TG-pMP"/>
                                 </constraints>
@@ -1352,7 +1352,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FU-lA-ini" customClass="RoundedButton" customModule="Roomly" customModuleProvider="target">
                                 <rect key="frame" x="315" y="623" width="50" height="34"/>
-                                <color key="backgroundColor" red="0.2901960784" green="0.30196078430000001" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="ZFo-BB-BV8"/>
                                 </constraints>
@@ -1497,7 +1497,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bz6-2X-fxm" customClass="RoundedButton" customModule="Roomly" customModuleProvider="target">
                                 <rect key="frame" x="310" y="623" width="55" height="34"/>
-                                <color key="backgroundColor" red="0.2901960784" green="0.30196078430000001" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="55" id="D1w-jK-9rb"/>
                                 </constraints>
@@ -1597,7 +1597,7 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="db0-Ts-bKZ" customClass="RoundedButton" customModule="Roomly" customModuleProvider="target">
                                 <rect key="frame" x="315" y="623" width="50" height="34"/>
-                                <color key="backgroundColor" red="0.2901960784" green="0.30196078430000001" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="fDX-LK-a4l"/>
                                 </constraints>
@@ -1692,8 +1692,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LYX-VL-rDC"/>
-        <segue reference="HTV-5p-wrH"/>
-        <segue reference="KMU-YZ-vrG"/>
-        <segue reference="Ohr-mU-aZy"/>
+        <segue reference="l1j-8f-ayD"/>
+        <segue reference="ESQ-V7-k59"/>
+        <segue reference="0VA-gb-n8x"/>
     </inferredMetricsTieBreakers>
 </document>
