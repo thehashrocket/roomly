@@ -1368,6 +1368,10 @@
                                     <action selector="submitPressed:" destination="6zT-5R-2Fe" eventType="touchUpInside" id="VPa-fn-f7c"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f7V-Px-yMI">
+                                <rect key="frame" x="67" y="373" width="240" height="242"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1389,6 +1393,7 @@
                         <outlet property="buildingNameTxt" destination="mqh-KQ-nN9" id="Mbx-CE-JHq"/>
                         <outlet property="cityTxt" destination="nnE-IM-mpl" id="L69-OD-oL8"/>
                         <outlet property="countryTxt" destination="FD1-WG-REc" id="Rm5-FD-7PV"/>
+                        <outlet property="imgProfile" destination="f7V-Px-yMI" id="U6d-zO-hED"/>
                         <outlet property="stateTxt" destination="XSA-bm-Gug" id="ohz-F4-C4i"/>
                         <outlet property="streetTxt" destination="JcH-2H-IHS" id="pE2-y6-CZv"/>
                         <outlet property="zipTxt" destination="FqK-os-srn" id="hyV-LJ-55j"/>
@@ -1694,6 +1699,6 @@
         <segue reference="LYX-VL-rDC"/>
         <segue reference="l1j-8f-ayD"/>
         <segue reference="ESQ-V7-k59"/>
-        <segue reference="0VA-gb-n8x"/>
+        <segue reference="CJB-jL-JBm"/>
     </inferredMetricsTieBreakers>
 </document>

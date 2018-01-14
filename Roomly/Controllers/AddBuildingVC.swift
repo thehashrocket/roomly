@@ -13,7 +13,8 @@ import FirebaseDatabase
 import ImagePicker
 import Lightbox
 
-class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class AddBuildingVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource,
+UINavigationControllerDelegate {
     
     // Variables
     let storage = Storage.storage()
@@ -25,6 +26,13 @@ class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate,
     var citiesArray = [(String)]()
     var statesArray = [(String)]()
     var countriesArray = [(String)]()
+    
+    static let shared = CameraHandler()
+    
+    fileprivate var currentVC: UIViewController!
+    
+    //MARK: Internal Properties
+    var imagePickedBlock: ((UIImage) -> Void)?
 
     
     // Outlets
@@ -34,6 +42,10 @@ class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate,
     @IBOutlet weak var stateTxt: UITextField!
     @IBOutlet weak var countryTxt: UITextField!
     @IBOutlet weak var zipTxt: UITextField!
+    
+    
+    @IBOutlet weak var imgProfile: UIImageView!
+    var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,16 +211,13 @@ class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate,
     }
     
     @IBAction func addPhotoPressed(_ sender: Any) {
-        var config = Configuration()
-        config.doneButtonTitle = "Finish"
-        config.noImagesTitle = "Sorry! There are no images here!"
-        config.recordLocation = false
-        config.allowVideoSelection = true
         
-        let imagePicker = ImagePickerController(configuration: config)
-        imagePicker.delegate = self
-        
-        present(imagePicker, animated: true, completion: nil)
+        CameraHandler.shared.showActionSheet(vc: self)
+        CameraHandler.shared.imagePickedBlock = { (image) in
+            self.images.append(image)
+            print(self.images)
+        }
+
     }
     
     func readBundle(file:String) -> String
@@ -221,23 +230,5 @@ class AddBuildingVC: UIViewController, UITextFieldDelegate, ImagePickerDelegate,
         return res
     }
     
-    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        guard images.count > 0 else { return }
-        
-        let lightboxImages = images.map {
-            return LightboxImage(image: $0)
-        }
-        
-        let lightbox = LightboxController(images: lightboxImages, startIndex: 0)
-        imagePicker.present(lightbox, animated: true, completion: nil)
-    }
-    
-    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        self.images = images
-        imagePicker.dismiss(animated: true, completion: nil)
-    }
-    
-    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
-        imagePicker.dismiss(animated: true, completion: nil)
-    }
+
 }

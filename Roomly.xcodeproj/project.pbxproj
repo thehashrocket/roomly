@@ -30,6 +30,7 @@
 		DE35F2351FC6809F0025ADAC /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE35F2341FC6809F0025ADAC /* UserDataService.swift */; };
 		DE3A62DC1FFC2CDA00AFF62D /* RoomlyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3A62DB1FFC2CDA00AFF62D /* RoomlyUITests.swift */; };
 		DE3A62E41FFC2DB400AFF62D /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3A62E31FFC2DB400AFF62D /* SnapshotHelper.swift */; };
+		DE61887B200B144E00A0050E /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE61887A200B144E00A0050E /* CameraHandler.swift */; };
 		DE6D28711FCF89AD00545237 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6D28701FCF89AD00545237 /* ViewControllerExtension.swift */; };
 		DE6D86F31FCD0B880068F7D7 /* UITabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6D86F21FCD0B880068F7D7 /* UITabBarVC.swift */; };
 		DE6D86F51FCD0CDD0068F7D7 /* ExistingUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6D86F41FCD0CDD0068F7D7 /* ExistingUserVC.swift */; };
@@ -89,6 +90,7 @@
 		DE3A62DB1FFC2CDA00AFF62D /* RoomlyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomlyUITests.swift; sourceTree = "<group>"; };
 		DE3A62DD1FFC2CDA00AFF62D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE3A62E31FFC2DB400AFF62D /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
+		DE61887A200B144E00A0050E /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
 		DE6D28701FCF89AD00545237 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		DE6D86F21FCD0B880068F7D7 /* UITabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarVC.swift; sourceTree = "<group>"; };
 		DE6D86F41FCD0CDD0068F7D7 /* ExistingUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistingUserVC.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				DE8B0CF61FC7E7FB00AF32BA /* Constants.swift */,
 				DE8B0D001FC8C57000AF32BA /* Photos.swift */,
 				DE6D28701FCF89AD00545237 /* ViewControllerExtension.swift */,
+				DE61887A200B144E00A0050E /* CameraHandler.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				DE8B0D011FC8C57000AF32BA /* Photos.swift in Sources */,
 				DE35F2351FC6809F0025ADAC /* UserDataService.swift in Sources */,
 				DE17CEF01F85CB2300CA83A9 /* BuildingCell.swift in Sources */,
+				DE61887B200B144E00A0050E /* CameraHandler.swift in Sources */,
 				DE17CECF1F85BA7200CA83A9 /* AppDelegate.swift in Sources */,
 				DE17CEE71F85BB7B00CA83A9 /* Building.swift in Sources */,
 				DE6D28711FCF89AD00545237 /* ViewControllerExtension.swift in Sources */,
