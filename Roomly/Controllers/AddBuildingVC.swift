@@ -14,7 +14,7 @@ import ImagePicker
 import Lightbox
 
 class AddBuildingVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource,
-UINavigationControllerDelegate {
+UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     // Variables
     let storage = Storage.storage()
@@ -27,10 +27,9 @@ UINavigationControllerDelegate {
     var statesArray = [(String)]()
     var countriesArray = [(String)]()
     
+    // Needed for Camera / Photo Gallery
     static let shared = CameraHandler()
-    
     fileprivate var currentVC: UIViewController!
-    
     //MARK: Internal Properties
     var imagePickedBlock: ((UIImage) -> Void)?
 
@@ -42,6 +41,7 @@ UINavigationControllerDelegate {
     @IBOutlet weak var stateTxt: UITextField!
     @IBOutlet weak var countryTxt: UITextField!
     @IBOutlet weak var zipTxt: UITextField!
+    @IBOutlet weak var pendingImagesCollection: UICollectionView!
     
     
     @IBOutlet weak var imgProfile: UIImageView!
@@ -59,6 +59,8 @@ UINavigationControllerDelegate {
         countryPicker.delegate = self
         statePicker.delegate = self
         
+        pendingImagesCollection.dataSource = self
+        pendingImagesCollection.delegate = self
         
         let textFile = readBundle(file: "world-cities")
         let lineArray = textFile.components(separatedBy: "\n") // Separating Lines
@@ -197,7 +199,6 @@ UINavigationControllerDelegate {
         self.images.forEach { (image) in
             CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "buildings")
         }
-        
         performSegue(withIdentifier: "unwindtoBuildingVC", sender: self)
     }
     
@@ -211,13 +212,11 @@ UINavigationControllerDelegate {
     }
     
     @IBAction func addPhotoPressed(_ sender: Any) {
-        
         CameraHandler.shared.showActionSheet(vc: self)
         CameraHandler.shared.imagePickedBlock = { (image) in
             self.images.append(image)
-            print(self.images)
+            self.pendingImagesCollection.reloadData()
         }
-
     }
     
     func readBundle(file:String) -> String
@@ -229,6 +228,18 @@ UINavigationControllerDelegate {
         }
         return res
     }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.images.count
+    }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EditImageCell", for: indexPath) as? EditImageCell {
+            let image = self.images[indexPath.row]
+            cell.updateViews(image: image)
+            return cell
+        }
+        return EditImageCell()
+    }
 
 }

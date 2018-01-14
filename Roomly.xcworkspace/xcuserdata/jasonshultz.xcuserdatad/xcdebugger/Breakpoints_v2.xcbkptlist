@@ -426,7 +426,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Roomly/Controllers/RoomVC.swift"
-            timestampString = "536820274.587822"
+            timestampString = "537639871.647604"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "245"
@@ -538,7 +538,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Roomly/Controllers/RoomVC.swift"
-            timestampString = "536820274.587998"
+            timestampString = "537639871.647711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "200"
@@ -624,6 +624,22 @@
             startingLineNumber = "144"
             endingLineNumber = "144"
             landmarkName = "submitPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Roomly/Controllers/AddBuildingVC.swift"
+            timestampString = "537640528.1415451"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "cancelPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

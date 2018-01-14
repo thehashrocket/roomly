@@ -10,10 +10,8 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
-import ImagePicker
-import Lightbox
 
-class AddItemVC: UIViewController, ImagePickerDelegate {
+class AddItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     // Variables
     var ref: DatabaseReference!
@@ -29,6 +27,12 @@ class AddItemVC: UIViewController, ImagePickerDelegate {
     var textField = UITextField()
     var images: [UIImage] = []
     
+    // Needed for Camera / Photo Gallery
+    static let shared = CameraHandler()
+    fileprivate var currentVC: UIViewController!
+    //MARK: Internal Properties
+    var imagePickedBlock: ((UIImage) -> Void)?
+    
     // Outlets
     @IBOutlet weak var itemName: UITextField!
     @IBOutlet weak var itemDescription: UITextField!
@@ -36,6 +40,7 @@ class AddItemVC: UIViewController, ImagePickerDelegate {
     @IBOutlet weak var purchaseDate: UITextField!
     @IBOutlet weak var purchaseAmount: UITextField!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var pendingImagesCollection: UICollectionView!
     
     
     override func viewDidLoad() {
@@ -44,6 +49,9 @@ class AddItemVC: UIViewController, ImagePickerDelegate {
         
         self.ref = Database.database().reference()
         self.ref.keepSynced(true)
+        
+        pendingImagesCollection.dataSource = self
+        pendingImagesCollection.delegate = self
         
         // Do any additional setup after loading the view.
         
@@ -77,20 +85,11 @@ class AddItemVC: UIViewController, ImagePickerDelegate {
     }
     
     @IBAction func openCameraButton(_ sender: Any) {
-        var config = Configuration()
-        config.doneButtonTitle = "Finish"
-        config.noImagesTitle = "Sorry! There are no images here!"
-        config.recordLocation = false
-        config.allowVideoSelection = true
-        
-        let imagePicker = ImagePickerController(configuration: config)
-        imagePicker.delegate = self
-        
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
-    @IBAction func closePicked(_ sender: Any) {
-        performSegue(withIdentifier: "unwindToItemsVC", sender: self)
+        CameraHandler.shared.showActionSheet(vc: self)
+        CameraHandler.shared.imagePickedBlock = { (image) in
+            self.images.append(image)
+            self.pendingImagesCollection.reloadData()
+        }
     }
     
     @IBAction func cancelPicked(_ sender: Any) {
@@ -197,28 +196,18 @@ class AddItemVC: UIViewController, ImagePickerDelegate {
         purchaseDate.resignFirstResponder()
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("image count \(self.images.count)")
+        return self.images.count
+    }
     
-    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        guard images.count > 0 else { return }
-        
-        let lightboxImages = images.map {
-            return LightboxImage(image: $0)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EditImageCell", for: indexPath) as? EditImageCell {
+            let image = self.images[indexPath.row]
+            cell.updateViews(image: image)
+            return cell
         }
-        
-        let lightbox = LightboxController(images: lightboxImages, startIndex: 0)
-        imagePicker.present(lightbox, animated: true, completion: nil)
+        return EditImageCell()
     }
-    
-    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        self.images = images
-        imagePicker.dismiss(animated: true, completion: nil)
-    }
-    
-    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
-        imagePicker.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    
 
 }

@@ -10,10 +10,8 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
-import ImagePicker
-import Lightbox
 
-class AddRoomVC: UIViewController, ImagePickerDelegate  {
+class AddRoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
     
     var ref: DatabaseReference!
     var imagesDirectoryPath:String!
@@ -23,11 +21,18 @@ class AddRoomVC: UIViewController, ImagePickerDelegate  {
     var roomDescriptionText = ""
     var images: [UIImage] = []
     
+    // Needed for Camera / Photo Gallery
+    static let shared = CameraHandler()
+    fileprivate var currentVC: UIViewController!
+    //MARK: Internal Properties
+    var imagePickedBlock: ((UIImage) -> Void)?
+    
     // Outlets
     @IBOutlet weak var roomName: UITextField!
     @IBOutlet weak var roomDescription: UITextField!
     @IBOutlet weak var imagePicked: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var pendingImagesCollection: UICollectionView!
     
 
     override func viewDidLoad() {
@@ -35,6 +40,8 @@ class AddRoomVC: UIViewController, ImagePickerDelegate  {
         selected_building = DataService.instance.getSelectedBuilding()
         self.ref = Database.database().reference()
         self.ref.keepSynced(true)
+        pendingImagesCollection.dataSource = self
+        pendingImagesCollection.delegate = self
         
         if !FileManager.default.fileExists(atPath: IMAGE_DIRECTORY_PATH) {
             do {
@@ -62,11 +69,6 @@ class AddRoomVC: UIViewController, ImagePickerDelegate  {
     
     @IBAction func cancelPressed(_ sender: Any) {
         performSegue(withIdentifier: "unwindToRoomsVC", sender: self)
-    }
-    
-    
-    @IBAction func dismissPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func submitPicked(_ sender: Any) {
@@ -110,35 +112,25 @@ class AddRoomVC: UIViewController, ImagePickerDelegate  {
     }
     
     @IBAction func addPhotoPressed(_ sender: Any) {
-        var config = Configuration()
-        config.doneButtonTitle = "Finish"
-        config.noImagesTitle = "Sorry! There are no images here!"
-        config.recordLocation = false
-        config.allowVideoSelection = true
-        
-        let imagePicker = ImagePickerController(configuration: config)
-        imagePicker.delegate = self
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
-    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        guard images.count > 0 else { return }
-        
-        let lightboxImages = images.map {
-            return LightboxImage(image: $0)
+        CameraHandler.shared.showActionSheet(vc: self)
+        CameraHandler.shared.imagePickedBlock = { (image) in
+            self.images.append(image)
+            self.pendingImagesCollection.reloadData()
         }
-        
-        let lightbox = LightboxController(images: lightboxImages, startIndex: 0)
-        imagePicker.present(lightbox, animated: true, completion: nil)
     }
     
-    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        self.images = images
-        imagePicker.dismiss(animated: true, completion: nil)
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("image count \(self.images.count)")
+        return self.images.count
     }
     
-    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
-        imagePicker.dismiss(animated: true, completion: nil)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EditImageCell", for: indexPath) as? EditImageCell {
+            let image = self.images[indexPath.row]
+            cell.updateViews(image: image)
+            return cell
+        }
+        return EditImageCell()
     }
 
 }

@@ -47,6 +47,7 @@
 		DEBB7B021FC27DE800427CDD /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBB7B011FC27DE800427CDD /* RoundedButton.swift */; };
 		DECA78C31FD25EDD000BE029 /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA78C21FD25EDD000BE029 /* CloudStorage.swift */; };
 		DECA78C51FD27DAC000BE029 /* CloudData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA78C41FD27DAC000BE029 /* CloudData.swift */; };
+		DECEC108200BB4E100F2C12D /* EditImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECEC107200BB4E100F2C12D /* EditImageCell.swift */; };
 		DEF087731FE590C400988F67 /* SlideShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF087721FE590C400988F67 /* SlideShowCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +108,7 @@
 		DEBB7B011FC27DE800427CDD /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		DECA78C21FD25EDD000BE029 /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		DECA78C41FD27DAC000BE029 /* CloudData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudData.swift; sourceTree = "<group>"; };
+		DECEC107200BB4E100F2C12D /* EditImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditImageCell.swift; sourceTree = "<group>"; };
 		DEF087721FE590C400988F67 /* SlideShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideShowCell.swift; sourceTree = "<group>"; };
 		DEF11B721FCBAFDE004D538A /* Roomly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Roomly.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				DE17CEEF1F85CB2300CA83A9 /* BuildingCell.swift */,
+				DECEC107200BB4E100F2C12D /* EditImageCell.swift */,
 				DEBB7AFF1FC250A700427CDD /* GradientView.swift */,
 				DE0E6B901FC9DF690066E071 /* ItemCell.swift */,
 				DE81C4A81F8C568400674274 /* RoomCell.swift */,
@@ -446,6 +449,7 @@
 				DE35F2351FC6809F0025ADAC /* UserDataService.swift in Sources */,
 				DE17CEF01F85CB2300CA83A9 /* BuildingCell.swift in Sources */,
 				DE61887B200B144E00A0050E /* CameraHandler.swift in Sources */,
+				DECEC108200BB4E100F2C12D /* EditImageCell.swift in Sources */,
 				DE17CECF1F85BA7200CA83A9 /* AppDelegate.swift in Sources */,
 				DE17CEE71F85BB7B00CA83A9 /* Building.swift in Sources */,
 				DE6D28711FCF89AD00545237 /* ViewControllerExtension.swift in Sources */,
