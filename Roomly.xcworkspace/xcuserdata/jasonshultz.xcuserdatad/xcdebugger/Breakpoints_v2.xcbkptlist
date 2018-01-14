@@ -634,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Roomly/Controllers/AddBuildingVC.swift"
-            timestampString = "537640528.1415451"
+            timestampString = "537642609.075973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "cancelPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>

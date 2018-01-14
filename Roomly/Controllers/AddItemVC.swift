@@ -142,6 +142,11 @@ class AddItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         performSegue(withIdentifier: "unwindToItemsVC", sender: self)
     }
     
+    func deletePhoto(indexPath: Int) {
+        self.images.remove(at: indexPath)
+        self.pendingImagesCollection.reloadData()
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
@@ -157,6 +162,15 @@ class AddItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     func createDatePicker() {
         datePicker.datePickerMode = .date
         datePicker.addTarget(self, action: #selector(self.datePickerValueChanged(datePicker:)), for: .valueChanged)
+    }
+    
+    func showActionSheet(indexPath: Int) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+            self.deletePhoto(indexPath: indexPath)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
     @objc func datePickerValueChanged(datePicker: UIDatePicker) {
@@ -197,7 +211,6 @@ class AddItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("image count \(self.images.count)")
         return self.images.count
     }
     
@@ -209,5 +222,8 @@ class AddItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         }
         return EditImageCell()
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        showActionSheet(indexPath: indexPath.row)
+    }
 }

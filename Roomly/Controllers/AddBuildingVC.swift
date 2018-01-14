@@ -43,10 +43,6 @@ UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var zipTxt: UITextField!
     @IBOutlet weak var pendingImagesCollection: UICollectionView!
     
-    
-    @IBOutlet weak var imgProfile: UIImageView!
-    var imagePicker = UIImagePickerController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let cityPicker = UIPickerView()
@@ -144,10 +140,6 @@ UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSo
         self.view.endEditing(true);
     }
     
-    @IBAction func dismissPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func cancelPressed(_ sender: Any) {
         performSegue(withIdentifier: "unwindtoBuildingVC", sender: self)
     }
@@ -206,6 +198,16 @@ UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSo
         self.view.endEditing(true)
     }
     
+    func showActionSheet(indexPath: Int) {
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+            self.deletePhoto(indexPath: indexPath)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
@@ -217,6 +219,11 @@ UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSo
             self.images.append(image)
             self.pendingImagesCollection.reloadData()
         }
+    }
+    
+    func deletePhoto(indexPath: Int) {
+        self.images.remove(at: indexPath)
+        self.pendingImagesCollection.reloadData()
     }
     
     func readBundle(file:String) -> String
@@ -242,4 +249,7 @@ UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSo
         return EditImageCell()
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        showActionSheet(indexPath: indexPath.row)
+    }
 }
