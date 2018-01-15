@@ -10,10 +10,8 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
-import ImagePicker
-import Lightbox
 
-class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class EditItemVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
     
     // Variables
     
@@ -46,9 +44,9 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
     @IBOutlet weak var itemDescriptionTxt: UITextField!
     @IBOutlet weak var purchaseAmountTxt: UITextField!
     @IBOutlet weak var purchaseDateTxt: UITextField!
-    @IBOutlet weak var imagePicked: UIImageView!
     @IBOutlet weak var locatedInBuildingTxt: UITextField!
     @IBOutlet weak var locatedInRoomTxt: UITextField!
+    @IBOutlet weak var editImagesCollection: UICollectionView!
     
     // Actions
     @IBAction func textField(_ sender: AnyObject) {
@@ -56,16 +54,13 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
     }
     
     @IBAction func openCameraButton(_ sender: Any) {
-        var config = Configuration()
-        config.doneButtonTitle = "Finish"
-        config.noImagesTitle = "Sorry! There are no images here!"
-        config.recordLocation = false
-        config.allowVideoSelection = true
-        
-        let imagePicker = ImagePickerController(configuration: config)
-        imagePicker.delegate = self
-        
-        present(imagePicker, animated: true, completion: nil)
+        CameraHandler.shared.showActionSheet(vc: self)
+        CameraHandler.shared.imagePickedBlock = { (image) in
+            let key = self.selected_item as String
+            guard let userID = Auth.auth().currentUser?.uid else { return }
+            CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "items")
+            self.editImagesCollection.reloadData()
+        }
     }
     @IBAction func closePressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -179,10 +174,6 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
                 
             }
         }
-        
-//        DataService.instance.updateItem(new_item: item)
-        
-//        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func deletePressed(_ sender: Any) {
@@ -201,6 +192,8 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
         super.viewDidLoad()
         let buildingPicker = UIPickerView()
         let roomPicker = UIPickerView()
+        editImagesCollection.dataSource = self
+        editImagesCollection.delegate = self
         
         locatedInBuildingTxt.inputView = buildingPicker
         locatedInRoomTxt.inputView = roomPicker
@@ -246,6 +239,7 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
                         self.saved_image = (value?["imageName"] as? String)!
                         if ((value?["images"] ) != nil) {
                             self.imageDictionary = (value?["images"] as? NSDictionary)!
+                            self.editImagesCollection.reloadData()
                         }
                         
                         let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(value?["imageName"] as! String)
@@ -349,26 +343,6 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
         purchaseDateTxt.resignFirstResponder()
     }
     
-    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        guard images.count > 0 else { return }
-        
-        let lightboxImages = images.map {
-            return LightboxImage(image: $0)
-        }
-        
-        let lightbox = LightboxController(images: lightboxImages, startIndex: 0)
-        imagePicker.present(lightbox, animated: true, completion: nil)
-    }
-    
-    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        self.images = images
-        imagePicker.dismiss(animated: true, completion: nil)
-    }
-    
-    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
-        imagePicker.dismiss(animated: true, completion: nil)
-    }
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -407,6 +381,39 @@ class EditItemVC: UIViewController, ImagePickerDelegate, UIPickerViewDelegate, U
             self.locatedInRoomTxt.text = availableRooms[row].roomName
             self.new_room = availableRooms[row].roomId as NSString
         }
+    }
+    
+    func showActionSheet(indexPath: Int) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+            self.deletePhoto(indexPath: indexPath)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.imageDictionary.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DeleteImageCell", for: indexPath) as? DeleteImageCell {
+            let userID = Auth.auth().currentUser?.uid
+            
+            let image = Array(self.imageDictionary)[indexPath.row]
+            cell.updateViews(image: image, image_category: "items", category_key_1: self.selected_room as! String, user_id: userID!, category_key_2: self.selected_item as! String)
+            return cell
+        }
+        return EditImageCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        showActionSheet(indexPath: indexPath.row)
+    }
+    
+    func deletePhoto(indexPath: Int) {
+        self.images.remove(at: indexPath)
+        self.editImagesCollection.reloadData()
     }
 
 }

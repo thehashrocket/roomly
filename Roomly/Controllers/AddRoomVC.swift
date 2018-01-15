@@ -30,8 +30,6 @@ class AddRoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     // Outlets
     @IBOutlet weak var roomName: UITextField!
     @IBOutlet weak var roomDescription: UITextField!
-    @IBOutlet weak var imagePicked: UIImageView!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var pendingImagesCollection: UICollectionView!
     
 
