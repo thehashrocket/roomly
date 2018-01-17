@@ -31,8 +31,12 @@ class RoomCell: UICollectionViewCell {
             if (fire_images.count > 0) {
                 let image_key = fire_images[0]
                 let reference = "images/rooms/\(user_id)/\(building_id)/\(room_id)/"
-                CloudStorage.instance.downloadImage(reference: reference, image_key: image_key, completion: { (image) in
-                    self.roomImage.image = image
+                CloudStorage.instance.downloadImage(reference: reference, image_key: image_key, completion: { (image, error) in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        self.roomImage.image = image
+                    }
                 })
             } else {
                 if (room.imageName != "") {

@@ -99,7 +99,6 @@ class EditBuildingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let key = self.selected_building as String
             guard let userID = Auth.auth().currentUser?.uid else { return }
             CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "buildings")
-            self.editImagesCollection.reloadData()
         }
     }
     
@@ -167,9 +166,9 @@ class EditBuildingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 let buildingRef = self.ref.child("buildings").child(userID!)
                 buildingRef.keepSynced(true)
                 
-                buildingRef.child(self.selected_building as String).observeSingleEvent(of: .value, with: { (snapshot) in
+                buildingRef.child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
                     // Get user value
-                    
+                    print("relaoding")
                     let value = snapshot.value as? NSDictionary
                     
                     self.buildingNAme.text = value?["buildingName"] as! String
@@ -188,9 +187,10 @@ class EditBuildingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                     let user_id = userID as! String
                     let destination = "buildings/\(user_id)/\(self.building_id)/"
 
-                }) { (error) in
+                }, withCancel: { (error) in
                     print(error.localizedDescription)
-                }
+                })
+                
             } else {
                 // TODO: Segue to WelcomeVC here.
                 print("No user is signed in.")

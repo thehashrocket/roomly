@@ -15,7 +15,7 @@ class CloudStorage {
     
     static let instance = CloudStorage()
     
-    func downloadCloudImage(reference: String, image_key: String, completion: @escaping (UIImage) -> Void) {
+    func downloadCloudImage(reference: String, image_key: String, completion: @escaping (UIImage?, Error?) -> Void) {
         let storage = Storage.storage()
         let storageRef = storage.reference()
         let islandRef = storageRef.child("\(reference)/\(image_key)")
@@ -25,41 +25,52 @@ class CloudStorage {
                 // Uh-oh, an error occurred!
                 print("downloadCloudImage: ")
                 print(error)
+                completion(nil, error)
             } else {
                 let image = UIImage(data: data!)
                 CloudStorage.instance.saveImageToDocumentDirectory(image!, image_key: image_key)
-                completion(image!)
+                completion(image!, nil)
             }
         }
     }
     
-    func downloadImage(reference: String, image_key: String, completion: @escaping (UIImage) -> Void) {
+    func downloadImage(reference: String, image_key: String, completion: @escaping (UIImage?, Error?) -> Void) {
         DataService.instance.checkIfImageDirectoryExists()
         let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(image_key as String)
         let image = UIImage(contentsOfFile: imageURL.path)
         if ((image) != nil) {
-            completion(image!)
+            completion(image!, nil)
         } else {
-            let image = CloudStorage.instance.downloadCloudImage(reference: reference, image_key: image_key, completion: { (image) in
-                completion(image)
+            let image = CloudStorage.instance.downloadCloudImage(reference: reference, image_key: image_key, completion: { (image, error) in
+                if let error = error {
+                    print("i am in error")
+                    completion(nil, error)
+                } else {
+                    completion(image, nil)
+                }
             })
         }
     }
     
-    func loadTopImage(destination: String, saved_image: String, completion: @escaping (UIImage) -> Void) {
+    func loadTopImage(destination: String, saved_image: String, completion: @escaping (UIImage?, Error?) -> Void) {
         CloudData.instance.getImages(destination: destination) { (fire_images) in
             if (fire_images.count > 0) {
                 let image_key = fire_images[0]
                 let reference = "images/" + destination
                 
-                CloudStorage.instance.downloadImage(reference: reference, image_key: image_key, completion: { (image) in
-                    completion(image)
+                CloudStorage.instance.downloadImage(reference: reference, image_key: image_key, completion: { (image, error) in
+                    if let error = error {
+                        completion(nil, error)
+                        
+                    } else {
+                        completion(image, nil)
+                    }
                 })
             } else {
                 if (saved_image != "") {
                     let imageURL = URL(fileURLWithPath: IMAGE_DIRECTORY_PATH).appendingPathComponent(saved_image as String)
                     let image    = UIImage(contentsOfFile: imageURL.path)
-                    completion(image!)
+                    completion(image!, nil)
                 }
             }
         }
@@ -71,13 +82,13 @@ class CloudStorage {
             if (fire_images.count > 0) {
                 fire_images.forEach({ (fire_image) in
                     let ref_origin = "images/" + destination + "/\(fire_image)"
-                    CloudStorage.instance.downloadImage(reference: ref_origin, image_key: fire_image, completion: { (image) in
+                    CloudStorage.instance.downloadImage(reference: ref_origin, image_key: fire_image, completion: { (image, error) in
                         var filename = NSString()
                         let storage = Storage.storage()
                         let storageRef = storage.reference()
                         var imagesRef = storageRef
                         imagesRef = storageRef.child("images").child(destination).child("\(fire_image)")
-                        let resizedImage = self.resizeImage(image: image, targetSize: CGSize.init(width: 2048, height: 2048))
+                        let resizedImage = self.resizeImage(image: image!, targetSize: CGSize.init(width: 2048, height: 2048))
                         var data = NSData()
                         data = UIImageJPEGRepresentation(resizedImage, 0.8)! as NSData
                         let metaData = StorageMetadata()

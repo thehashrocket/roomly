@@ -58,8 +58,7 @@ class EditItemVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         CameraHandler.shared.imagePickedBlock = { (image) in
             let key = self.selected_item as String
             guard let userID = Auth.auth().currentUser?.uid else { return }
-            CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "items")
-            self.editImagesCollection.reloadData()
+            CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "items", second_key: self.selected_room as String)
         }
     }
     @IBAction func closePressed(_ sender: Any) {

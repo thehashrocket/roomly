@@ -223,10 +223,16 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 if ((slideShowDictionary) != nil) {
                     self.slideShowImages = [UIImage]()
                     self.slideShowCollection.reloadData()
-                    slideShowDictionary?.forEach({ (_,value) in
-                        CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image) in
-                            self.slideShowImages.append(image)
-                            self.slideShowCollection.reloadData()
+                    slideShowDictionary?.forEach({ (arg) in
+                        
+                        let (_, value) = arg
+                        CloudStorage.instance.downloadImage(reference: destination, image_key: value as! String, completion: { (image, error)  in
+                            if let error = error {
+                                print(error)
+                            } else {
+                                self.slideShowImages.append(image!)
+                                self.slideShowCollection.reloadData()
+                            }
                         })
                     })
                     

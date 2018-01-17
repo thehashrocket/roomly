@@ -82,8 +82,7 @@ class EditRoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         CameraHandler.shared.imagePickedBlock = { (image) in
             let key = self.selected_room as String
             guard let userID = Auth.auth().currentUser?.uid else { return }
-            CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "rooms")
-            self.editImagesCollection.reloadData()
+            CloudStorage.instance.saveImageToFirebase(key: key, image: image, user_id: userID, destination: "rooms", second_key: self.selected_building as String)
         }
     }
     
@@ -132,7 +131,7 @@ class EditRoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
             if user != nil {
                 // User is signed in.
                 let userID = Auth.auth().currentUser?.uid
-                self.ref.child("rooms").child(userID!).child(self.selected_building as String).child(self.selected_room as String).observeSingleEvent(of: .value, with: { (snapshot) in
+                self.ref.child("rooms").child(userID!).child(self.selected_building as String).child(self.selected_room as String).observe(DataEventType.value, with: { (snapshot) in
                     // Get user value
                     let value = snapshot.value as? NSDictionary
                     
