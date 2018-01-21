@@ -23,9 +23,11 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         if Auth.auth().currentUser != nil {
             // User is signed in.
+            self.addBuildingBtn.isEnabled = true
             self.loginBtn.title = "Logout"
             self.buildingTable.reloadData()
         } else {
+            self.addBuildingBtn.isEnabled = false
             DataService.instance.resetBuildings()
             self.buildingTable.reloadData()
             self.loginBtn.title = "Login"
@@ -112,7 +114,8 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var loginBtn: UIBarButtonItem!
     @IBOutlet weak var buildingTable: UITableView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-
+    @IBOutlet weak var addBuildingBtn: UIBarButtonItem!
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataService.instance.getBuildings().count
     }

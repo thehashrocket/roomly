@@ -224,7 +224,9 @@ class ItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     // Actions
     @IBAction func unwindToItemsVC(segue:UIStoryboardSegue) {
-
+        self.loadData()
+        items = []
+        self.itemsCollection.reloadData()
     }
     
     @IBAction func addItemPressed(_ sender: Any) {

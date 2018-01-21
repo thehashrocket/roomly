@@ -47,7 +47,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func viewWillAppear(_ animated: Bool) {
         
-        
     }
     
     override func viewDidLoad() {
@@ -82,6 +81,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         if collectionView == self.slideShowCollection {
             return self.slideShowImages.count // Replace with count of your data for collectionViewA
         }
+        print("rooms.count \(rooms.count)")
         return rooms.count // Replace with count of your data for collectionViewB
     }
     
@@ -153,7 +153,12 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     // This gets all the Rooms In the Building.
     func getRooms() {
+        print("getting rooms")
+        print(rooms)
         DataService.instance.resetRooms()
+        if (rooms.count > 0) {
+            self.roomsCollection.reloadData()
+        }
         self.ref = Database.database().reference()
         self.ref.keepSynced(true)
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -161,7 +166,7 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         self.ref.child("rooms").child(userID).child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
             let postDict = snapshot.value as? [String : AnyObject] ?? [:]
             DataService.instance.resetRooms()
-            
+            print ("in this part")
             postDict.forEach({ (arg) in
                 let (_, value) = arg
                 let dataChange = value as! [String: AnyObject]
@@ -251,7 +256,8 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     // Actions
     
     @IBAction func unwindToRoomsVC(segue:UIStoryboardSegue) {
-
+        self.rooms = [Room]()
+        self.loadData()
     }
 
     

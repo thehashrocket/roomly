@@ -138,7 +138,10 @@ class EditRoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                     
                     self.roomNameTxt.text = value?["roomName"] as? String
                     self.roomDescriptionTxt.text = value?["roomDescription"] as? String
-                    self.saved_image = value?["imageName"] as! String
+                    if ((value?["imageName"]) != nil) {
+                        self.saved_image = value?["imageName"] as! String
+                    }
+                    
                     if ((value?["images"]) != nil) {
                         self.imageDictionary = (value?["images"] as? NSDictionary)!
                         self.editImagesCollection.reloadData()
@@ -147,10 +150,14 @@ class EditRoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
                         self.editImagesCollection.reloadData()
                     }
                     
-                    
-                    let room_id = value?["id"] as! String
-                    
-                    let building_id = value?["id"] as! String
+                    var room_id = ""
+                    if ((value?["id"]) != nil) {
+                        room_id = value?["id"] as! String
+                    }
+                    var building_id = ""
+                    if ((value?["id"]) != nil) {
+                        building_id = value?["id"] as! String
+                    }
                     let user_id = userID as! String
                     let destination = "rooms/\(user_id)/\(building_id)/\(room_id)/"
                     

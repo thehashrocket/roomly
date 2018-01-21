@@ -74,7 +74,7 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MEa-1A-qkl">
                                 <rect key="frame" x="0.0" y="559" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="About" id="4CX-6Q-v2z"/>
+                                    <barButtonItem enabled="NO" title="About" id="4CX-6Q-v2z"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="5Pq-lp-MjB"/>
                                     <barButtonItem title="Login" id="ZJH-rf-Gul">
                                         <connections>
@@ -112,6 +112,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="aboutBtn" destination="4CX-6Q-v2z" id="bn4-EI-iEg"/>
+                        <outlet property="addBuildingBtn" destination="tEv-iJ-5QP" id="prn-fA-0qz"/>
                         <outlet property="buildingTable" destination="S1p-EF-LiW" id="cwl-ha-eSd"/>
                         <outlet property="loginBtn" destination="ZJH-rf-Gul" id="Jaw-13-Xew"/>
                         <outlet property="spinner" destination="4Gn-NR-iBB" id="eNU-Ml-yPk"/>
@@ -728,7 +729,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="livingroom1" translatesAutoresizingMaskIntoConstraints="NO" id="4xe-nF-tUX">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product-image-coming-soon" translatesAutoresizingMaskIntoConstraints="NO" id="4xe-nF-tUX">
                                                     <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="105" id="UR2-s2-uAH"/>
@@ -885,7 +886,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lamp" translatesAutoresizingMaskIntoConstraints="NO" id="T3h-t6-AxN">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product-image-coming-soon" translatesAutoresizingMaskIntoConstraints="NO" id="T3h-t6-AxN">
                                                     <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="105" id="kkj-Gh-Hdl"/>
@@ -1012,7 +1013,7 @@
             <objects>
                 <viewController id="T9X-IR-T23" userLabel="Show Item" customClass="ShowItemVC" customModule="Roomly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YNY-Kf-hOl" customClass="GradientView" customModule="Roomly" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lLv-YA-JRp">
@@ -1021,7 +1022,7 @@
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4c1-17-XXt">
-                                <rect key="frame" x="8" y="270" width="136" height="97"/>
+                                <rect key="frame" x="8" y="250" width="136" height="97"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmi-7A-j1E">
                                         <rect key="frame" x="0.0" y="0.0" width="83" height="20.5"/>
@@ -1050,7 +1051,7 @@
                                 </subviews>
                             </stackView>
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cd8-5V-Isw">
-                                <rect key="frame" x="0.0" y="200" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="180" width="375" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ITEM DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZ1-hR-w2r">
                                         <rect key="frame" x="8" y="10" width="109" height="21"/>
@@ -1066,7 +1067,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zLp-1T-xts">
-                                <rect key="frame" x="0.0" y="20" width="375" height="220"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                 <color key="backgroundColor" red="0.0" green="0.58824040030000002" blue="0.87071397569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="220" id="2lW-IJ-NFV"/>
@@ -1925,15 +1926,14 @@
         <image name="add" width="28" height="28"/>
         <image name="camera" width="28" height="22"/>
         <image name="house1" width="736" height="539"/>
-        <image name="lamp" width="1400" height="1400"/>
-        <image name="livingroom1" width="980" height="735"/>
         <image name="login" width="25" height="25"/>
         <image name="new_account" width="25" height="25"/>
+        <image name="product-image-coming-soon" width="1200" height="1200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LYX-VL-rDC"/>
-        <segue reference="l1k-rZ-c0S"/>
-        <segue reference="7sr-mU-l0D"/>
+        <segue reference="dz3-Td-iw0"/>
+        <segue reference="gXI-Dz-Dfl"/>
+        <segue reference="fBe-6f-TsH"/>
         <segue reference="GDT-Y1-p8T"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -169,22 +169,26 @@ class EditBuildingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 
                 buildingRef.child(self.selected_building as String).observe(DataEventType.value, with: { (snapshot) in
                     // Get user value
-                    print("relaoding")
                     let value = snapshot.value as? NSDictionary
                     
-                    self.buildingNAme.text = value?["buildingName"] as! String
-                    self.streetTxt.text = value?["street"] as! String
-                    self.cityTxt.text = value?["city"] as! String
-                    self.countryTxt.text = value?["country"] as! String
-                    self.stateTxt.text = value?["state"] as! String
-                    self.zipTxt.text = value?["zip"] as! String
-                    self.saved_image = value?["imageName"] as! String
+                    self.buildingNAme.text = value?["buildingName"] as? String
+                    self.streetTxt.text = value?["street"] as? String
+                    self.cityTxt.text = value?["city"] as? String
+                    self.countryTxt.text = value?["country"] as? String
+                    self.stateTxt.text = value?["state"] as? String
+                    self.zipTxt.text = value?["zip"] as? String
+                    if ((value?["imageName"]) != nil) {
+                        self.saved_image = value!["imageName"] as! String
+                    }
+                    
                     if ((value?["images"]) != nil) {
                         self.imageDictionary = (value?["images"] as? NSDictionary)!
                         self.editImagesCollection.reloadData()
                     }
+                    if ((value?["id"]) != nil) {
+                        self.building_id = value?["id"] as! String
+                    }
                     
-                    self.building_id = value?["id"] as! String
                     let user_id = userID as! String
                     let destination = "buildings/\(user_id)/\(self.building_id)/"
 
