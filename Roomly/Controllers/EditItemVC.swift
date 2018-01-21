@@ -411,8 +411,22 @@ class EditItemVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     func deletePhoto(indexPath: Int) {
-        self.images.remove(at: indexPath)
-        self.editImagesCollection.reloadData()
+        let image:(key: Any, value: Any) = Array(self.imageDictionary)[indexPath]
+        print(image.value)
+        let userID = Auth.auth().currentUser?.uid
+        self.ref = Database.database().reference()
+        self.ref.child("items").child(userID!).child(self.selected_room as String).child(self.selected_item as String).child("images").child(image.key as! String).removeValue()
+        
+        let storageRef = Storage.storage().reference()
+        storageRef.child("images").child("items").child(userID!).child(self.selected_room as String).child(self.selected_item as String).child(image.value as! String).delete { (error) in
+            
+            if let error = error {
+                print("error occurred")
+                print(error.localizedDescription)
+            } else {
+                print("success")
+            }
+        }
     }
 
 }

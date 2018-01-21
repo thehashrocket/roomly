@@ -13,8 +13,6 @@ class EditImageCell: UICollectionViewCell {
     @IBOutlet weak var editImage: UIImageView!
     
     func updateViews(image: UIImage) {
-        print(image)
-        print("here")
         editImage.layer.cornerRadius = 5
         editImage.clipsToBounds = true
         editImage.layer.borderWidth = 2

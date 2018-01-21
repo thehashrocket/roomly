@@ -12,5 +12,4 @@ import Foundation
 
 // Directory Constants
 
-// Create a new path for the new images folder
 let IMAGE_DIRECTORY_PATH = NSHomeDirectory().appending("/Documents/Roomly")

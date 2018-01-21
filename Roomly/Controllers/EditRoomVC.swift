@@ -17,6 +17,7 @@ class EditRoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     var ref: DatabaseReference!
     var imageDictionary = NSDictionary()
     var imagesDirectoryPath:String!
+    var image_name = ""
     var saved_image = ""
     var selected_building = "" as NSString
     var selected_room = "" as NSString
@@ -205,8 +206,22 @@ class EditRoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     }
     
     func deletePhoto(indexPath: Int) {
-        self.images.remove(at: indexPath)
-        self.editImagesCollection.reloadData()
+        let image:(key: Any, value: Any) = Array(self.imageDictionary)[indexPath]
+        print(image.value)
+        let userID = Auth.auth().currentUser?.uid
+        self.ref = Database.database().reference()
+        self.ref.child("rooms").child(userID!).child(self.selected_building as String).child(self.selected_room as String).child("images").child(image.key as! String).removeValue()
+
+        let storageRef = Storage.storage().reference()
+        storageRef.child("images").child("rooms").child(userID!).child(self.selected_building as String).child(self.selected_room as String).child(image.value as! String).delete { (error) in
+            
+            if let error = error {
+                print("error occurred")
+                print(error.localizedDescription)
+            } else {
+                print("success")
+            }
+        }
     }
 
 }

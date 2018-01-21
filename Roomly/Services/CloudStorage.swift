@@ -15,6 +15,10 @@ class CloudStorage {
     
     static let instance = CloudStorage()
     
+    func deleteCloudImage(reference: String, image:(key: Any, value: Any), completion: @escaping (UIImage?, Error?) -> Void) {
+        
+    }
+    
     func downloadCloudImage(reference: String, image_key: String, completion: @escaping (UIImage?, Error?) -> Void) {
         let storage = Storage.storage()
         let storageRef = storage.reference()

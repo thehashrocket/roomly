@@ -19,6 +19,7 @@ class EditBuildingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var images: [UIImage] = []
     var imageDictionary = NSDictionary()
     var imagesDirectoryPath:String!
+    var image_name = ""
     var saved_image = ""
     var selected_building = "" as NSString
     var worldArray = [(city: String, country: String, state: String, geoId: String)]()
@@ -291,8 +292,23 @@ class EditBuildingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func deletePhoto(indexPath: Int) {
-        self.images.remove(at: indexPath)
-        self.editImagesCollection.reloadData()
+        let image:(key: Any, value: Any) = Array(self.imageDictionary)[indexPath]
+        print(image.value)
+        let userID = Auth.auth().currentUser?.uid
+        self.ref = Database.database().reference()
+        self.ref.child("buildings").child(userID!).child(self.selected_building as String).child("images").child(image.key as! String).removeValue()
+        
+        let storageRef = Storage.storage().reference()
+        storageRef.child("images").child("buildings").child(userID!).child(self.selected_building as String).child(image.value as! String).delete { (error) in
+            
+            if let error = error {
+                print("error occurred")
+                print(error.localizedDescription)
+            } else {
+                print("success")
+            }
+            
+        }
     }
 
 }

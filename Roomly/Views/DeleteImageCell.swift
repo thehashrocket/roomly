@@ -34,14 +34,14 @@ class DeleteImageCell: UICollectionViewCell {
                         CloudStorage.instance.downloadImage(reference: image_destination, image_key: image.value as! String, completion: { (found_image, error) in
                             if let error = error {
                                 print("i am in the error again.")
+                                let image = UIImage(named: "product-image-coming-soon")
+                                self.editImage.image = image
                             } else {
-                                print(found_image)
                                 self.editImage.image = found_image
                             }
                         })
                         
                     } else {
-                        print(image)
                         self.editImage.image = found_image
                     }
                 })
