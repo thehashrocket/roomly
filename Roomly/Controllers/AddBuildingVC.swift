@@ -201,6 +201,9 @@ UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSo
     func showActionSheet(indexPath: Int) {
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.popoverPresentationController?.sourceView = self.view
+        actionSheet.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+        actionSheet.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
         actionSheet.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (alert:UIAlertAction!) -> Void in
             self.deletePhoto(indexPath: indexPath)
         }))

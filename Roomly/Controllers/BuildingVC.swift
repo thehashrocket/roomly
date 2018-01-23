@@ -161,7 +161,10 @@ class BuildingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // Actions
     
-    @IBAction func unwindToBuildingVC(segue:UIStoryboardSegue) { }
+    @IBAction func unwindToBuildingVC(segue:UIStoryboardSegue) {
+        DataService.instance.resetBuildings()
+        self.buildingTable.reloadData()
+    }
     
     @IBAction func addBuildingBtn(_ sender: Any) {
         performSegue(withIdentifier: "addBuildingVC", sender: self)

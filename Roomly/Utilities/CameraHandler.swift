@@ -41,6 +41,9 @@ class CameraHandler: NSObject{
     func showActionSheet(vc: UIViewController) {
         currentVC = vc
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.popoverPresentationController?.sourceView = vc.view
+        actionSheet.popoverPresentationController?.sourceRect = CGRect(x: vc.view.bounds.midX, y: vc.view.bounds.midY, width: 0, height: 0)
+        actionSheet.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
         
         actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (alert:UIAlertAction!) -> Void in
             self.camera()
