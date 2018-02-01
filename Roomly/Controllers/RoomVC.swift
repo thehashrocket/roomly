@@ -153,8 +153,6 @@ class RoomVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     // This gets all the Rooms In the Building.
     func getRooms() {
-        print("getting rooms")
-        print(rooms)
         DataService.instance.resetRooms()
         if (rooms.count > 0) {
             self.roomsCollection.reloadData()

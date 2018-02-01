@@ -128,10 +128,10 @@ class EditItemVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
                 print("update of item failed")
             } else {
                 // We are changing rooms
-                print("do they match: ")
-                print("new room \(self.new_room)")
-                print("old room \(self.selected_room)")
-                print(self.new_room as String != self.selected_room as String)
+//                print("do they match: ")
+//                print("new room \(self.new_room)")
+//                print("old room \(self.selected_room)")
+//                print(self.new_room as String != self.selected_room as String)
                 if ((self.new_room as String != self.selected_room as String)) {
                     CloudStorage.instance.moveImage(origin: origin, destination: destination, new_room: self.new_room as String, user_id: userID, item_id: key)
                     
